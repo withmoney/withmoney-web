@@ -1,25 +1,61 @@
-import React from 'react';
+import React, { Fragment } from 'react';
+import * as UserApi from '../api/User';
+import BoxForm from '../components/BoxForm';
+import FieldInput from '../components/FieldInput';
+import FieldButton from '../components/FieldButton';
 
-const Login = () => (
-  <div className="login">
-    <h1 className="login__title">withmoney</h1>
-    <form className="login__form">
-      <h3 className="login__subtitle">Log in</h3>
-      <div className="field">
-        <input type="text" className="field__input" />
-      </div>
-      <div className="field">
-        <input type="password" className="field__input" />
-      </div>
-      <div className="field">
-        <button type="submit" className="button">Log in</button>
-      </div>
-      <div className="login__footer">
-        <span>Do not have an account?</span>
-        <a href="#">Signup</a>
-      </div>
-    </form>
-  </div>
-);
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleChange = this.handleChange.bind(this);
+    this.onSave = this.onSave.bind(this);
+
+    this.state = {
+      email: '',
+      password: '',
+    };
+  }
+
+  onSave(event) {
+    event.preventDefault();
+    console.log(this.state);
+
+
+    UserApi.login(this.state).then(console.log);
+  }
+
+  handleChange({ target }) {
+    this.setState({
+      [target.id]: target.value,
+    });
+  }
+
+
+  render() {
+    return (
+      <BoxForm
+        title="withmoney"
+        subtitle="Log in"
+        onSubmit={this.onSave}
+        fields={(
+          <Fragment>
+            <FieldInput id="email" onChange={this.handleChange} />
+            <FieldInput id="password" type="password" onChange={this.handleChange} />
+            <FieldButton type="submit">
+              Log in
+            </FieldButton>
+          </Fragment>
+        )}
+        footer={(
+          <Fragment>
+            <span>Do not have an account?</span>
+            <a href="#">Signup</a>
+          </Fragment>
+        )}
+      />
+    );
+  }
+}
 
 export default Login;
