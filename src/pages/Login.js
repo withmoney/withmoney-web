@@ -1,8 +1,13 @@
 import React, { Fragment } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import * as UserApi from '../api/User';
+import * as UserAction from '../store/modules/User';
 import BoxForm from '../components/BoxForm';
 import FieldInput from '../components/FieldInput';
 import FieldButton from '../components/FieldButton';
+
+console.log(UserAction);
 
 class Login extends React.Component {
   constructor(props) {
@@ -17,12 +22,27 @@ class Login extends React.Component {
     };
   }
 
-  onSave(event) {
+  async onSave(event) {
     event.preventDefault();
-    console.log(this.state);
+    const { actions } = this.props;
+    try {
 
+      const { data } = await UserApi.login(this.state);
 
-    UserApi.login(this.state).then(console.log);
+      if (data.success) {
+        window.localStorage.setItem('token', data.token);
+        window.localStorage.setItem('user', JSON.stringify(data.payload));
+
+        actions.setUser({
+          token: data.token,
+          data: data.payload,
+        });
+      } else {
+        console.log('User not finded.');
+      }
+    } catch (e) {
+      console.log('User not finded.');
+    }
   }
 
   handleChange({ target }) {
@@ -33,6 +53,7 @@ class Login extends React.Component {
 
 
   render() {
+    console.log(this.props)
     return (
       <BoxForm
         title="withmoney"
@@ -58,4 +79,10 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapStateToProps = ({ user }) => ({ user });
+
+const mapDispatchToProps = dispatch => ({
+  actions: bindActionCreators(UserAction, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
