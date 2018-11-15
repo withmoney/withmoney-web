@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as UserApi from '../api/User';
-import * as UserAction from '../store/modules/User';
+import * as UserAction from '../store/modules/user';
 import BoxForm from '../components/BoxForm';
 import FieldInput from '../components/FieldInput';
 import FieldButton from '../components/FieldButton';
