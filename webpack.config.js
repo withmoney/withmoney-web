@@ -3,6 +3,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+
+const webpack = require('webpack');
 
 const devMode = process.env.NODE_ENV !== 'production';
 
@@ -29,14 +32,14 @@ function resolve(dir) {
 }
 
 module.exports = {
-  entry: resolve('src/main.js'),
+  mode: 'development',
+  entry: [
+    'webpack-hot-middleware/client?path=__webpack_hmr&reload=true',
+    resolve('src/main.js'),
+  ],
   output: {
     path: resolve('dist'),
     filename: 'js/[name].[hash].js',
-  },
-  devServer: {
-    contentBase: resolve('dist'),
-    historyApiFallback: true,
   },
   module: {
     rules: [
@@ -44,8 +47,18 @@ module.exports = {
         test: /\.scss$/,
         use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+            },
+          },
         ],
       },
       {
@@ -65,6 +78,10 @@ module.exports = {
     CleanWebpackPluginConfig,
     CopyWebpackPluginConfig,
     HtmlWebpackPluginConfig,
+    new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new FriendlyErrorsWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: devMode ? '[name].css' : '[name].[hash].css',
       chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
