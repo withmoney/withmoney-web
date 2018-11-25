@@ -23,7 +23,7 @@ class Login extends React.Component {
 
   async onSave(event) {
     event.preventDefault();
-    const { actions } = this.props;
+    const { actions, history } = this.props;
 
     try {
       const { data } = await UserApi.login(this.state);
@@ -36,6 +36,8 @@ class Login extends React.Component {
           token: data.token,
           data: data.payload,
         });
+
+        history.push('/');
       } else {
         console.log('User not finded.');
       }
