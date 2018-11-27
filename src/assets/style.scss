@@ -1,12 +1,12 @@
-$red: red;
-
 @import './button';
 @import './field';
 @import './form';
 @import './login';
+@import './header';
+@import './dashboard';
 
 body {
-  background-color: #525252;
+  background-color: #fff;
   height: 100vh;
   font-family: 'Roboto', sans-serif;
 }
