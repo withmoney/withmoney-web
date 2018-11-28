@@ -1,4 +1,5 @@
 import React from 'react';
+import TableTransactions from '../components/TableTransactions';
 
 const Header = () => (
   <div className="header">
@@ -14,9 +15,10 @@ const Header = () => (
   </div>
 );
 
+
 const Content = () => (
   <div className="page-content">
-    content
+    <TableTransactions />
   </div>
 );
 
