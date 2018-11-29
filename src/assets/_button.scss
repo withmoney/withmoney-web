@@ -18,3 +18,20 @@
     color: white;
   }
 }
+
+.button-rounded {
+  background-color: #1C791A;
+  color: white;
+  padding: 11px 19px;
+  border-radius: 20px;
+  cursor: pointer;
+
+  &:focus,
+  &:hover {
+    background-color: darken(#1C791A, 7%);
+  }
+
+  &:active {
+    background-color: darken(#1C791A, 15%);
+  }
+}

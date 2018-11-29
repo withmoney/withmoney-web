@@ -1,4 +1,5 @@
 import React from 'react';
+import ButtonRounded from './ButtonRounded';
 
 const TableTransactions = () => (
   <div className="table-transactions">
@@ -14,10 +15,55 @@ const TableTransactions = () => (
       </div>
     </div>
     <div className="table-transactions__header">
-      header
+      <div className="table-transactions__header-col">Date</div>
+      <div className="table-transactions__header-col">Name</div>
+      <div className="table-transactions__header-col">Category</div>
+      <div className="table-transactions__header-col">Value</div>
+      <div className="table-transactions__header-col">Is Paid?</div>
+    </div>
+    <div className="table-transactions__body">
+      <div className="table-transactions__row">
+        <div className="table-transactions__col">08/11</div>
+        <div className="table-transactions__col">Transaction Name</div>
+        <div className="table-transactions__col">Category Name</div>
+        <div className="table-transactions__col">$ 5,000.00</div>
+        <div className="table-transactions__col">
+          <input type="checkbox" />
+        </div>
+      </div>
+      <div className="table-transactions__row">
+        <div className="table-transactions__col">08/11</div>
+        <div className="table-transactions__col">Transaction Name</div>
+        <div className="table-transactions__col">Category Name</div>
+        <div className="table-transactions__col">$ 5,000.00</div>
+        <div className="table-transactions__col">
+          <input type="checkbox" />
+        </div>
+      </div>
+      <div className="table-transactions__row">
+        <div className="table-transactions__col">08/11</div>
+        <div className="table-transactions__col">Transaction Name</div>
+        <div className="table-transactions__col">Category Name</div>
+        <div className="table-transactions__col">$ 5,000.00</div>
+        <div className="table-transactions__col">
+          <input type="checkbox" />
+        </div>
+      </div>
+      <div className="table-transactions__action">
+        <ButtonRounded>Add Transaction</ButtonRounded>
+      </div>
     </div>
     <div className="table-transactions__footer">
-      footer
+      <div className="table-transactions__labels">
+        <div className="table-transactions__label">All Outs</div>
+        <div className="table-transactions__label">All In</div>
+        <div className="table-transactions__label">Total</div>
+      </div>
+      <div className="table-transactions__values">
+        <div className="table-transactions__value">$ 5,000.12</div>
+        <div className="table-transactions__value">$ 5,000.12</div>
+        <div className="table-transactions__value">$ 5,000.12</div>
+      </div>
     </div>
   </div>
 );
