@@ -7,7 +7,7 @@
   "author": "David Costa <davidcostadev@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "export NODE_ENV=development && webpack-dev-server --inline --open --mode=development",
+    "dev": "export NODE_ENV=development && node server.js",
     "start": "npm run build && http=server ./dist",
     "build": "export NODE_ENV=production && webpack --mode production",
     "test": "jest --coverage",
@@ -20,6 +20,7 @@
     "@babel/preset-react": "^7.0.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^0.1.19",
     "copy-webpack-plugin": "^4.6.0",
@@ -46,12 +47,15 @@
     "webpack": "^4.24.0",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10",
+    "webpack-dotenv-plugin": "^2.1.0",
     "webpack-hot-middleware": "^2.24.3"
   },
   "dependencies": {
     "axios": "^0.18.0",
     "babel-jest": "^23.6.0",
     "localStorage": "^1.0.4",
+    "classnames": "^2.2.6",
+    "moment": "^2.22.2",
     "prop-types": "^15.6.2",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",

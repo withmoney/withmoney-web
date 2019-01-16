@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
+const DotenvPlugin = require('webpack-dotenv-plugin');
 
 const webpack = require('webpack');
 
@@ -40,6 +41,7 @@ module.exports = {
   output: {
     path: resolve('dist'),
     filename: 'js/[name].[hash].js',
+    publicPath: '/',
   },
   module: {
     rules: [
@@ -78,6 +80,10 @@ module.exports = {
     CleanWebpackPluginConfig,
     CopyWebpackPluginConfig,
     HtmlWebpackPluginConfig,
+    new DotenvPlugin({
+      sample: './.env.example',
+      path: './.env',
+    }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
