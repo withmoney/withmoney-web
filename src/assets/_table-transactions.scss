@@ -1,0 +1,149 @@
+%col {
+  padding: 15px 12px;
+  flex: 1;
+}
+
+.table-transactions {
+  &__tabs {
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__header {
+    display: flex;
+  }
+  &__row {
+    display: flex;
+    border-bottom: 1px solid #D7D7D7;
+
+    background-color: #FFFFFF;
+
+    &:nth-child(even) {
+      background-color: #F5F5F5;
+    }
+  }
+  &__action {
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  &__header-col {
+    @extend %col;
+    background-color: #F1F1F1;
+
+    &:nth-child(even) {
+      background-color: #ECECEC;
+    }
+  }
+  &__col {
+    @extend %col;
+  }
+  &__footer {
+    background-color: #C4C4C4;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  &__labels,
+  &__values {
+    display: flex;
+    flex-direction: column;
+    line-height: 25px;
+  }
+  &__values {
+    margin-left: 15px;
+  }
+  &__label {
+    font-weight: bold;
+  }
+  &__value {
+    font-size: 22px;
+  }
+  &__value,
+  &__label {
+    padding-bottom: 5px;
+  }
+}
+
+.tab-in-out {
+  &__tab {
+    border-width: 0;
+    margin-top: 5px;
+    padding: 10px 0;
+    font-size: 14px;
+    width: 80px;
+    max-width: 100%;
+    font-weight: bold;
+    background-color: #C3C1C1;
+    color: black;
+    cursor: pointer;
+
+    &:focus,
+    &:hover {
+      background-color: darken(#C3C1C1, 10%);
+    }
+    &:active {
+      background-color: darken(#C3C1C1, 15%);
+    }
+
+    &--in-actived {
+      color: white;
+      background-color: #30B84E;
+
+      &:focus,
+      &:hover {
+        background-color: darken(#30B84E, 10%);
+      }
+      &:hover {
+        background-color: darken(#30B84E, 15%);
+      }
+    }
+    &--out-actived {
+      color: white;
+      background-color: #911B1B;
+
+      &:focus,
+      &:hover {
+        background-color: darken(#911B1B, 10%);
+      }
+      &:hover {
+        background-color: darken(#911B1B, 15%);
+      }
+    }
+  }
+}
+
+.tab-months {
+  display: flex;
+
+  &__navigation {
+    background-color: #EAEAEA;
+    color: black;
+    font-size: 16px;
+    width: 130px;
+    cursor: pointer;
+    border-width: 0;
+    padding: 7px 0;
+
+    &:focus,
+    &:hover {
+      background-color: darken(#EAEAEA, 10%);
+    }
+    &:active {
+      background-color: darken(#EAEAEA, 15%);
+    }
+  }
+  &__current {
+    width: 130px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #EAEAEA;
+    color: black;
+  }
+}

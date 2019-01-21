@@ -1,0 +1,20 @@
+.page-wrapper {
+  display: flex;
+  background-color: white;
+  max-width: 1170px;
+  margin-top: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.page-content {
+  flex: 1;
+}
+
+.page-sidebar {
+  margin-left: 15px;
+  width: 235px;
+  max-width: 100%;
+}

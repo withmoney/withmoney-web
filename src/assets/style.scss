@@ -1,12 +1,16 @@
-$red: red;
-
 @import './button';
 @import './field';
 @import './form';
 @import './login';
+@import './header';
+@import './dashboard';
+@import './table-transactions';
+@import './account-total';
+@import './inout-percent';
+@import './percent-bar';
 
 body {
-  background-color: #525252;
+  background-color: #fff;
   height: 100vh;
   font-family: 'Roboto', sans-serif;
 }

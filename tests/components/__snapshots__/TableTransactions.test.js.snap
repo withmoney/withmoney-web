@@ -1,0 +1,306 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TableTransactions should render table with list of transactions 1`] = `
+<div
+  className="table-transactions"
+>
+  <div
+    className="table-transactions__tabs"
+  >
+    <div
+      className="tab-in-out"
+    >
+      <button
+        className="tab-in-out__tab tab-in-out__tab--in-actived"
+        onClick={[Function]}
+        type="button"
+      >
+        In
+      </button>
+      <button
+        className="tab-in-out__tab"
+        onClick={[Function]}
+        type="button"
+      >
+        Out
+      </button>
+    </div>
+    <div
+      className="tab-months"
+    >
+      <button
+        className="tab-months__navigation"
+        onClick={[Function]}
+        type="button"
+      >
+        December 18
+      </button>
+      <span
+        className="tab-months__current"
+      >
+        January 19
+      </span>
+      <button
+        className="tab-months__navigation"
+        onClick={[Function]}
+        type="button"
+      >
+        February 19
+      </button>
+    </div>
+  </div>
+  <div
+    className="table-transactions__header"
+  >
+    <div
+      className="table-transactions__header-col"
+    >
+      Date
+    </div>
+    <div
+      className="table-transactions__header-col"
+    >
+      Name
+    </div>
+    <div
+      className="table-transactions__header-col"
+    >
+      Category
+    </div>
+    <div
+      className="table-transactions__header-col"
+    >
+      Value
+    </div>
+    <div
+      className="table-transactions__header-col"
+    >
+      Is Paid?
+    </div>
+  </div>
+  <div
+    className="table-transactions__body"
+  >
+    <div
+      className="table-transactions__row"
+    >
+      <div
+        className="table-transactions__col"
+      >
+        2018-08-01 20:80
+      </div>
+      <div
+        className="table-transactions__col"
+      >
+        Name
+      </div>
+      <div
+        className="table-transactions__col"
+      >
+        1
+      </div>
+      <div
+        className="table-transactions__col"
+      >
+        0.00
+      </div>
+      <div
+        className="table-transactions__col"
+      >
+        <input
+          type="checkbox"
+        />
+      </div>
+    </div>
+    <div
+      className="table-transactions__action"
+    >
+      <button
+        className="button-rounded"
+        type="button"
+      >
+        Add Transaction
+      </button>
+    </div>
+  </div>
+  <div
+    className="table-transactions__footer"
+  >
+    <div
+      className="table-transactions__labels"
+    >
+      <div
+        className="table-transactions__label"
+      >
+        All Outs
+      </div>
+      <div
+        className="table-transactions__label"
+      >
+        All In
+      </div>
+      <div
+        className="table-transactions__label"
+      >
+        Total
+      </div>
+    </div>
+    <div
+      className="table-transactions__values"
+    >
+      <div
+        className="table-transactions__value"
+      >
+        $ 5,000.12
+      </div>
+      <div
+        className="table-transactions__value"
+      >
+        $ 5,000.12
+      </div>
+      <div
+        className="table-transactions__value"
+      >
+        $ 5,000.12
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`TableTransactions should render with any one transaction entity 1`] = `
+<div
+  className="table-transactions"
+>
+  <div
+    className="table-transactions__tabs"
+  >
+    <div
+      className="tab-in-out"
+    >
+      <button
+        className="tab-in-out__tab tab-in-out__tab--in-actived"
+        onClick={[Function]}
+        type="button"
+      >
+        In
+      </button>
+      <button
+        className="tab-in-out__tab"
+        onClick={[Function]}
+        type="button"
+      >
+        Out
+      </button>
+    </div>
+    <div
+      className="tab-months"
+    >
+      <button
+        className="tab-months__navigation"
+        onClick={[Function]}
+        type="button"
+      >
+        December 18
+      </button>
+      <span
+        className="tab-months__current"
+      >
+        January 19
+      </span>
+      <button
+        className="tab-months__navigation"
+        onClick={[Function]}
+        type="button"
+      >
+        February 19
+      </button>
+    </div>
+  </div>
+  <div
+    className="table-transactions__header"
+  >
+    <div
+      className="table-transactions__header-col"
+    >
+      Date
+    </div>
+    <div
+      className="table-transactions__header-col"
+    >
+      Name
+    </div>
+    <div
+      className="table-transactions__header-col"
+    >
+      Category
+    </div>
+    <div
+      className="table-transactions__header-col"
+    >
+      Value
+    </div>
+    <div
+      className="table-transactions__header-col"
+    >
+      Is Paid?
+    </div>
+  </div>
+  <div
+    className="table-transactions__body"
+  >
+    <div
+      className="table-transactions__action"
+    >
+      <button
+        className="button-rounded"
+        type="button"
+      >
+        Add Transaction
+      </button>
+    </div>
+  </div>
+  <div
+    className="table-transactions__footer"
+  >
+    <div
+      className="table-transactions__labels"
+    >
+      <div
+        className="table-transactions__label"
+      >
+        All Outs
+      </div>
+      <div
+        className="table-transactions__label"
+      >
+        All In
+      </div>
+      <div
+        className="table-transactions__label"
+      >
+        Total
+      </div>
+    </div>
+    <div
+      className="table-transactions__values"
+    >
+      <div
+        className="table-transactions__value"
+      >
+        $ 5,000.12
+      </div>
+      <div
+        className="table-transactions__value"
+      >
+        $ 5,000.12
+      </div>
+      <div
+        className="table-transactions__value"
+      >
+        $ 5,000.12
+      </div>
+    </div>
+  </div>
+</div>
+`;

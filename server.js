@@ -8,7 +8,7 @@ const compiler = webpack(config);
 const app = express();
 
 app.use(require('webpack-dev-middleware')(compiler, {
-  noInfo: false,
+  noInfo: true,
   log: false,
   hot: true,
   quiet: true,
