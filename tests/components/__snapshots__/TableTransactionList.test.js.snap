@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TableTransactionList should render null when dont have any transaction 1`] = `null`;
+
+exports[`TableTransactionList should render table with list of transactions 1`] = `
+<div
+  className="table-transactions__row"
+>
+  <div
+    className="table-transactions__col"
+  >
+    2018-08-01 20:80
+  </div>
+  <div
+    className="table-transactions__col"
+  >
+    Name
+  </div>
+  <div
+    className="table-transactions__col"
+  >
+    1
+  </div>
+  <div
+    className="table-transactions__col"
+  >
+    0.00
+  </div>
+  <div
+    className="table-transactions__col"
+  >
+    <input
+      type="checkbox"
+    />
+  </div>
+</div>
+`;
