@@ -12,6 +12,7 @@ exports[`TableTransactions should render table with list of transactions 1`] = `
     >
       <button
         className="tab-in-out__tab tab-in-out__tab--in-actived"
+        id="tab-in"
         onClick={[Function]}
         type="button"
       >
@@ -19,6 +20,7 @@ exports[`TableTransactions should render table with list of transactions 1`] = `
       </button>
       <button
         className="tab-in-out__tab"
+        id="tab-out"
         onClick={[Function]}
         type="button"
       >
@@ -180,6 +182,7 @@ exports[`TableTransactions should render with any one transaction entity 1`] = `
     >
       <button
         className="tab-in-out__tab tab-in-out__tab--in-actived"
+        id="tab-in"
         onClick={[Function]}
         type="button"
       >
@@ -187,6 +190,7 @@ exports[`TableTransactions should render with any one transaction entity 1`] = `
       </button>
       <button
         className="tab-in-out__tab"
+        id="tab-out"
         onClick={[Function]}
         type="button"
       >

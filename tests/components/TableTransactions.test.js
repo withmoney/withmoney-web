@@ -1,5 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
+import { configure, mount } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -8,6 +10,8 @@ import * as Transactions from '../../src/api/Transactions';
 
 const mockStore = configureStore([thunk]);
 
+configure({ adapter: new Adapter() });
+
 const setup = (Component, store) => (props = {}) => (
   <Provider store={store}>
     <Component {...props} />
@@ -15,7 +19,7 @@ const setup = (Component, store) => (props = {}) => (
 );
 
 jest.mock('../../src/api/Transactions', () => ({
-  list: jest.fn(),
+  list: jest.fn().mockResolvedValue(true),
 }));
 
 describe('TableTransactions', () => {
@@ -60,7 +64,7 @@ describe('TableTransactions', () => {
               transactionDate: '2018-08-01 20:80',
               CategoryId: 1,
               value: '0.00',
-            }
+            },
           ],
         },
       }),
@@ -69,5 +73,19 @@ describe('TableTransactions', () => {
     const wrapper = renderer.create(ComponentWithData());
 
     expect(wrapper.toJSON()).toMatchSnapshot();
+  });
+
+  it('should call fetch list on componentDidMount', () => {
+    const wrapper = mount(Component());
+
+    expect(Transactions.list).toBeCalledWith({ type: 'in' });
+
+    wrapper.find('#tab-out').simulate('click');
+
+    expect(Transactions.list).toBeCalledWith({ type: 'out' });
+
+    wrapper.find('#tab-in').simulate('click');
+
+    expect(Transactions.list).toBeCalledWith({ type: 'in' });
   });
 });
