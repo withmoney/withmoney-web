@@ -50,13 +50,18 @@ class TableTransactions extends React.Component {
 
   async getTransactions() {
     const { actions } = this.props;
+    const { type } = this.state;
 
-    await actions.transactions.list();
+    const query = { type };
+
+    await actions.transactions.list(query);
   }
 
   changeTab(typeTab, type) {
     this.setState({
       [typeTab]: type,
+    }, () => {
+      this.getTransactions();
     });
   }
 
@@ -75,6 +80,7 @@ class TableTransactions extends React.Component {
           <div className="tab-in-out">
             <button
               type="button"
+              id="tab-in"
               className={classname(
                 'tab-in-out__tab',
                 { 'tab-in-out__tab--in-actived': type === 'in' },
@@ -85,6 +91,7 @@ class TableTransactions extends React.Component {
             </button>
             <button
               type="button"
+              id="tab-out"
               className={classname(
                 'tab-in-out__tab',
                 { 'tab-in-out__tab--out-actived': type === 'out' },

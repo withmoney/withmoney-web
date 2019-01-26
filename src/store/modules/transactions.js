@@ -38,10 +38,10 @@ const onRequest = () => ({
   },
 });
 
-export const list = () => (dispatch) => {
+export const list = query => (dispatch) => {
   dispatch(onRequest());
 
-  return Transactions.list()
+  return Transactions.list(query)
     .then(({ data }) => dispatch(onSuccess(data)))
     .catch(error => dispatch(onFail(error)));
 };

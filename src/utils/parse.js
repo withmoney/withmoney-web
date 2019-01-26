@@ -1,4 +1,12 @@
-/* eslint-disable import/prefer-default-export */
+import qs from 'querystring';
+
+export const mountQuery = (url, query = {}) => {
+  if (Object.keys(query).length) {
+    return `${url}?${qs.stringify(query)}`;
+  }
+
+  return url;
+};
 
 const logout = () => {
   if (localStorage.getItem('token')) {
