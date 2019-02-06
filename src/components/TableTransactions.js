@@ -16,11 +16,13 @@ class TableTransactions extends React.Component {
     this.onNextMonth = this.onNextMonth.bind(this);
     this.onPreviousMonth = this.onPreviousMonth.bind(this);
 
+    const currentMoment = moment();
+
     this.state = {
       type: 'in',
-      currentMonth: moment(),
-      previousMonth: moment().subtract(1, 'month'),
-      nextMonth: moment().add(1, 'month'),
+      currentMonth: currentMoment,
+      previousMonth: moment(currentMoment).subtract(1, 'month'),
+      nextMonth: moment(currentMoment).add(1, 'month'),
     };
   }
 
@@ -35,6 +37,8 @@ class TableTransactions extends React.Component {
       currentMonth: moment(currentMonth.add(1, 'month')),
       previousMonth: moment(currentMonth.subtract(1, 'month')),
       nextMonth: moment(currentMonth.add(2, 'month')),
+    }, () => {
+      this.getTransactions();
     });
   }
 
@@ -45,14 +49,27 @@ class TableTransactions extends React.Component {
       currentMonth: moment(currentMonth.subtract(1, 'month')),
       previousMonth: moment(currentMonth.subtract(1, 'month')),
       nextMonth: moment(currentMonth.add(2, 'month')),
+    }, () => {
+      this.getTransactions();
     });
   }
 
   async getTransactions() {
     const { actions } = this.props;
-    const { type } = this.state;
+    const { type, currentMonth } = this.state;
 
-    const query = { type };
+    const start = moment(currentMonth).startOf('month').toISOString();
+    const end = moment(currentMonth).endOf('month').toISOString();
+
+    const query = {
+      batch: 'Categories',
+      order: 'transactionDate.asc',
+      type,
+      transactionDate: [
+        start,
+        end,
+      ].join(','),
+    };
 
     await actions.transactions.list(query);
   }
