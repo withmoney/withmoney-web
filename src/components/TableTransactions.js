@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import classname from 'classnames';
 import PropTypes from 'prop-types';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import ButtonRounded from './ButtonRounded';
 import * as TransactionsActions from '../store/modules/transactions';
 import TransactionsList from './TableTransactionList';
@@ -16,13 +16,13 @@ class TableTransactions extends React.Component {
     this.onNextMonth = this.onNextMonth.bind(this);
     this.onPreviousMonth = this.onPreviousMonth.bind(this);
 
-    const currentMoment = moment();
+    const currentMoment = moment.tz('UTC');
 
     this.state = {
       type: 'in',
       currentMonth: currentMoment,
-      previousMonth: moment(currentMoment).subtract(1, 'month'),
-      nextMonth: moment(currentMoment).add(1, 'month'),
+      previousMonth: currentMoment.clone().subtract(1, 'month'),
+      nextMonth: currentMoment.clone().add(1, 'month'),
     };
   }
 

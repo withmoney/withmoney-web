@@ -30,7 +30,7 @@ describe('TableTransactions', () => {
   beforeAll(() => {
     Component = setup(TableTransactions, mockStore({}));
     now = Date.now;
-    Date.now = () => 1532473578215;
+    Date.now = () => 1548860400000;
   });
 
   afterAll(() => {
@@ -38,7 +38,6 @@ describe('TableTransactions', () => {
   });
 
   it('should render with any one transaction entity', () => {
-    Date.now = () => 1548860400000;
     Transactions.list.mockResolvedValueOnce({
       data: [],
     });
@@ -85,12 +84,13 @@ describe('TableTransactions', () => {
   });
 
   it('should call fetch list on componentDidMount', () => {
+    Date.now = () => 1532473578215;
     const wrapper = mount(Component());
 
     expect(Transactions.list).toBeCalledWith({
       batch: 'Categories',
       order: 'transactionDate.asc',
-      transactionDate: '2019-01-01T03:00:00.000Z,2019-02-01T02:59:59.999Z',
+      transactionDate: '2018-07-01T00:00:00.000Z,2018-07-31T23:59:59.999Z',
       type: 'in',
     });
 
@@ -99,7 +99,7 @@ describe('TableTransactions', () => {
     expect(Transactions.list).toBeCalledWith({
       batch: 'Categories',
       order: 'transactionDate.asc',
-      transactionDate: '2019-01-01T03:00:00.000Z,2019-02-01T02:59:59.999Z',
+      transactionDate: '2018-07-01T00:00:00.000Z,2018-07-31T23:59:59.999Z',
       type: 'out',
     });
 
@@ -108,7 +108,7 @@ describe('TableTransactions', () => {
     expect(Transactions.list).toBeCalledWith({
       batch: 'Categories',
       order: 'transactionDate.asc',
-      transactionDate: '2019-01-01T03:00:00.000Z,2019-02-01T02:59:59.999Z',
+      transactionDate: '2018-07-01T00:00:00.000Z,2018-07-31T23:59:59.999Z',
       type: 'in',
     });
   });
