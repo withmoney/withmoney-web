@@ -8,13 +8,28 @@ import ButtonRounded from './ButtonRounded';
 import * as TransactionsActions from '../store/modules/transactions';
 import TransactionsList from './TableTransactionList';
 
+const ButtonNavigation = ({ onClick, direction, month }) => (
+  <button
+    type="button"
+    className="tab-months__navigation"
+    onClick={onClick(direction)}
+  >
+    {month.format('MMMM YY')}
+  </button>
+);
+
+ButtonNavigation.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  direction: PropTypes.string.isRequired,
+  month: PropTypes.any.isRequired,
+};
+
 class TableTransactions extends React.Component {
   constructor(props) {
     super(props);
 
     this.changeTab = this.changeTab.bind(this);
-    this.onNextMonth = this.onNextMonth.bind(this);
-    this.onPreviousMonth = this.onPreviousMonth.bind(this);
+    this.onNavigate = this.onNavigate.bind(this);
 
     const currentMoment = moment.tz('UTC');
 
@@ -30,28 +45,27 @@ class TableTransactions extends React.Component {
     this.getTransactions();
   }
 
-  onNextMonth() {
-    const { currentMonth } = this.state;
+  onNavigate(direction) {
+    return () => {
+      const { currentMonth } = this.state;
+      let newState;
 
-    this.setState({
-      currentMonth: moment(currentMonth.add(1, 'month')),
-      previousMonth: moment(currentMonth.subtract(1, 'month')),
-      nextMonth: moment(currentMonth.add(2, 'month')),
-    }, () => {
-      this.getTransactions();
-    });
-  }
+      if (direction === 'next') {
+        newState = {
+          previousMonth: currentMonth,
+          currentMonth: currentMonth.clone().add(1, 'month'),
+          nextMonth: currentMonth.clone().add(2, 'month'),
+        };
+      } else {
+        newState = {
+          previousMonth: currentMonth.clone().subtract(2, 'month'),
+          currentMonth: currentMonth.clone().subtract(1, 'month'),
+          nextMonth: currentMonth,
+        };
+      }
 
-  onPreviousMonth() {
-    const { currentMonth } = this.state;
-
-    this.setState({
-      currentMonth: moment(currentMonth.subtract(1, 'month')),
-      previousMonth: moment(currentMonth.subtract(1, 'month')),
-      nextMonth: moment(currentMonth.add(2, 'month')),
-    }, () => {
-      this.getTransactions();
-    });
+      this.setState(newState, this.getTransactions);
+    };
   }
 
   async getTransactions() {
@@ -77,9 +91,7 @@ class TableTransactions extends React.Component {
   changeTab(typeTab, type) {
     this.setState({
       [typeTab]: type,
-    }, () => {
-      this.getTransactions();
-    });
+    }, this.getTransactions);
   }
 
   render() {
@@ -119,9 +131,9 @@ class TableTransactions extends React.Component {
             </button>
           </div>
           <div className="tab-months">
-            <button type="button" className="tab-months__navigation" onClick={this.onPreviousMonth}>{previousMonth.format('MMMM YY')}</button>
+            <ButtonNavigation onClick={this.onNavigate} direction="previous" month={previousMonth} />
             <span className="tab-months__current">{currentMonth.format('MMMM YY')}</span>
-            <button type="button" className="tab-months__navigation" onClick={this.onNextMonth}>{nextMonth.format('MMMM YY')}</button>
+            <ButtonNavigation onClick={this.onNavigate} direction="next" month={nextMonth} />
           </div>
         </div>
         <div className="table-transactions__header">
