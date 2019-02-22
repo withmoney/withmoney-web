@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import React from 'react';
 import renderer from 'react-test-renderer';
 import { configure, mount } from 'enzyme';
@@ -23,10 +24,17 @@ jest.mock('../../src/api/Transactions', () => ({
 }));
 
 describe('TableTransactions', () => {
+  let now;
   let Component;
 
   beforeAll(() => {
     Component = setup(TableTransactions, mockStore({}));
+    now = Date.now;
+    Date.now = () => 1548860400000;
+  });
+
+  afterAll(() => {
+    Date.now = now;
   });
 
   it('should render with any one transaction entity', () => {
@@ -76,16 +84,32 @@ describe('TableTransactions', () => {
   });
 
   it('should call fetch list on componentDidMount', () => {
+    Date.now = () => 1532473578215;
     const wrapper = mount(Component());
 
-    expect(Transactions.list).toBeCalledWith({ type: 'in' });
+    expect(Transactions.list).toBeCalledWith({
+      batch: 'Categories',
+      order: 'transactionDate.asc',
+      transactionDate: '2018-07-01T00:00:00.000Z,2018-07-31T23:59:59.999Z',
+      type: 'in',
+    });
 
     wrapper.find('#tab-out').simulate('click');
 
-    expect(Transactions.list).toBeCalledWith({ type: 'out' });
+    expect(Transactions.list).toBeCalledWith({
+      batch: 'Categories',
+      order: 'transactionDate.asc',
+      transactionDate: '2018-07-01T00:00:00.000Z,2018-07-31T23:59:59.999Z',
+      type: 'out',
+    });
 
     wrapper.find('#tab-in').simulate('click');
 
-    expect(Transactions.list).toBeCalledWith({ type: 'in' });
+    expect(Transactions.list).toBeCalledWith({
+      batch: 'Categories',
+      order: 'transactionDate.asc',
+      transactionDate: '2018-07-01T00:00:00.000Z,2018-07-31T23:59:59.999Z',
+      type: 'in',
+    });
   });
 });
