@@ -41,6 +41,10 @@
   }
   &__col {
     @extend %col;
+
+    &--is-editing {
+      padding: 12px 0px 12px 9px;
+    }
   }
   &__footer {
     background-color: #C4C4C4;
