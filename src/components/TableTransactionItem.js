@@ -82,6 +82,7 @@ class TransactionsItem extends React.Component {
 
   render() {
     const { isEditing, formData } = this.state;
+    const { transaction: { isLoading } } = this.props;
     const classCol = classnames(
       'table-transactions__col',
       { 'table-transactions__col--is-editing': isEditing },
@@ -105,6 +106,7 @@ class TransactionsItem extends React.Component {
               name={field.name}
               className="table-transactions__input"
               defaultValue={formData[field.name]}
+              disabled={isLoading}
               onChange={this.handleInput}
             />
           </div>
@@ -115,8 +117,9 @@ class TransactionsItem extends React.Component {
               type="button"
               onClick={this.save}
               medium
+              isLoading={isLoading}
             >
-            Save
+              Save
             </ButtonRounded>
           </div>
         </If>

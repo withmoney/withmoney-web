@@ -69,7 +69,7 @@ export default (state = init, { type, payload }) => {
         ...state,
         isLoading: false,
         data: state.data.map(item => (
-          item.id === payload.id ? ({ ...item, isEditing: false, ...payload.data }) : item
+          item.id === payload.id ? ({ ...item, isLoading: false, ...payload.data }) : item
         )),
       };
     case TRANSACTION_FAIL:
@@ -80,7 +80,7 @@ export default (state = init, { type, payload }) => {
           isLoading: false,
           message: payload.message,
           data: state.data.map(item => (
-            item.id === payload.id ? ({ ...item, isEditing: false }) : item
+            item.id === payload.id ? ({ ...item, isLoading: false }) : item
           )),
         };
       }
@@ -96,7 +96,7 @@ export default (state = init, { type, payload }) => {
           ...state,
           isLoading: true,
           data: state.data.map(item => (
-            item.id === payload.id ? ({ ...item, isEditing: true }) : item
+            item.id === payload.id ? ({ ...item, isLoading: true }) : item
           )),
         };
       }
