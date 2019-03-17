@@ -55,6 +55,9 @@ export const put = data => (dispatch) => {
     .catch(error => dispatch(onFail({ id: data.id, message: error.message, method: 'put' })));
 };
 
+const findAndChange = (data, id, newData) => data.map(item => (
+  item.id === id ? { ...item, ...newData } : item
+));
 
 export default (state = init, { type, payload }) => {
   switch (type) {
@@ -79,9 +82,7 @@ export default (state = init, { type, payload }) => {
           isError: true,
           isLoading: false,
           message: payload.message,
-          data: state.data.map(item => (
-            item.id === payload.id ? ({ ...item, isLoading: false }) : item
-          )),
+          data: findAndChange(state.data, payload.id, { isLoading: false }),
         };
       }
       return {
@@ -95,9 +96,7 @@ export default (state = init, { type, payload }) => {
         return {
           ...state,
           isLoading: true,
-          data: state.data.map(item => (
-            item.id === payload.id ? ({ ...item, isLoading: true }) : item
-          )),
+          data: findAndChange(state.data, payload.id, { isLoading: true }),
         };
       }
       return {
