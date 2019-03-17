@@ -80,37 +80,12 @@ class TransactionsItem extends React.Component {
     });
   }
 
-  render() {
-    const { isEditing, formData } = this.state;
+  renderAction(classCol) {
+    const { isEditing } = this.state;
     const { transaction: { isLoading } } = this.props;
-    const classCol = classnames(
-      'table-transactions__col',
-      { 'table-transactions__col--is-editing': isEditing },
-    );
 
     return (
-      <div
-        className={classnames(
-          'table-transactions__row',
-          { 'table-transactions__row--is-editing': isEditing },
-        )}
-        onDoubleClick={this.onDoubleClick}
-      >
-        {this.fields.map(field => (
-          <div
-            key={field.name}
-            className={classCol}
-          >
-            <InputInline
-              isEditing={isEditing}
-              name={field.name}
-              className="table-transactions__input"
-              defaultValue={formData[field.name]}
-              disabled={isLoading}
-              onChange={this.handleInput}
-            />
-          </div>
-        ))}
+      <>
         <If condition={isEditing}>
           <div className={classCol}>
             <ButtonRounded
@@ -128,6 +103,38 @@ class TransactionsItem extends React.Component {
             <input type="checkbox" />
           </div>
         </If>
+      </>
+    )
+  }
+
+  render() {
+    const { isEditing, formData } = this.state;
+    const { transaction: { isLoading } } = this.props;
+    const classCol = classnames('table-transactions__col',
+      { 'table-transactions__col--is-editing': isEditing });
+
+    return (
+      <div
+        className={classnames('table-transactions__row',
+          { 'table-transactions__row--is-editing': isEditing })}
+        onDoubleClick={this.onDoubleClick}
+      >
+        {this.fields.map(field => (
+          <div
+            key={field.name}
+            className={classCol}
+          >
+            <InputInline
+              isEditing={isEditing}
+              name={field.name}
+              className="table-transactions__input"
+              defaultValue={formData[field.name]}
+              disabled={isLoading}
+              onChange={this.handleInput}
+            />
+          </div>
+        ))}
+        {this.renderAction(classCol)}
       </div>
     );
   }
