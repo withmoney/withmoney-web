@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import * as TransactionsActions from '../store/modules/transactions';
 import InputInline from './InputInline';
 import If from './render-utils/If';
+import ButtonRounded from './ButtonRounded';
 
 class TransactionsItem extends React.Component {
   constructor(props) {
@@ -74,7 +75,6 @@ class TransactionsItem extends React.Component {
       });
     }
 
-
     this.setState({
       isEditing: !isEditing,
     });
@@ -88,7 +88,13 @@ class TransactionsItem extends React.Component {
     );
 
     return (
-      <div className="table-transactions__row" onDoubleClick={this.onDoubleClick}>
+      <div
+        className={classnames(
+          'table-transactions__row',
+          { 'table-transactions__row--is-editing': isEditing },
+        )}
+        onDoubleClick={this.onDoubleClick}
+      >
         {this.fields.map(field => (
           <div
             key={field.name}
@@ -97,6 +103,7 @@ class TransactionsItem extends React.Component {
             <InputInline
               isEditing={isEditing}
               name={field.name}
+              className="table-transactions__input"
               defaultValue={formData[field.name]}
               onChange={this.handleInput}
             />
@@ -104,7 +111,13 @@ class TransactionsItem extends React.Component {
         ))}
         <If condition={isEditing}>
           <div className={classCol}>
-            <button type="button" onClick={this.save}>Save</button>
+            <ButtonRounded
+              type="button"
+              onClick={this.save}
+              medium
+            >
+            Save
+            </ButtonRounded>
           </div>
         </If>
         <If condition={!isEditing}>
