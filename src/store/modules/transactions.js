@@ -1,42 +1,43 @@
 import * as Transactions from '../../api/Transactions';
 
-const USER_SUCCESS = 'user/success';
-const USER_REQUEST = 'user/request';
-const USER_FAIL = 'user/fail';
+const TRANSACTION_SUCCESS = 'transaction/success';
+const TRANSACTION_SUCCESS_PUT = 'transaction/success_put';
+const TRANSACTION_REQUEST = 'transaction/request';
+const TRANSACTION_FAIL = 'transaction/fail';
 
 const init = {
-  data: [],
   isLoading: false,
   isError: false,
-  error: {},
+  message: '',
+  data: [],
 };
 
 const onSuccess = ({ data }) => ({
-  type: USER_SUCCESS,
+  type: TRANSACTION_SUCCESS,
   payload: {
     data,
     isLoading: false,
   },
 });
 
-const onFail = error => ({
-  type: USER_FAIL,
+const onSuccessPut = (id, { data }) => ({
+  type: TRANSACTION_SUCCESS_PUT,
   payload: {
-    error,
-    isLoading: false,
-    isError: true,
+    id,
+    data,
   },
 });
 
-const onRequest = () => ({
-  type: USER_REQUEST,
+const onFail = ({ id, message, method }) => ({
+  type: TRANSACTION_FAIL,
   payload: {
-    isLoading: true,
-    isError: false,
-    error: {},
-    data: [],
+    id,
+    message,
+    method,
   },
 });
+
+const onRequest = (payload = {}) => ({ type: TRANSACTION_REQUEST, payload });
 
 export const list = query => (dispatch) => {
   dispatch(onRequest());
@@ -46,15 +47,62 @@ export const list = query => (dispatch) => {
     .catch(error => dispatch(onFail(error)));
 };
 
+export const put = data => (dispatch) => {
+  dispatch(onRequest(data));
+
+  return Transactions.put(data.id, data)
+    .then(response => dispatch(onSuccessPut(data.id, response)))
+    .catch(error => dispatch(onFail({ id: data.id, message: error.message, method: 'put' })));
+};
+
+const findAndChange = (data, id, newData) => data.map(item => (
+  item.id === id ? { ...item, ...newData } : item
+));
 
 export default (state = init, { type, payload }) => {
   switch (type) {
-    case USER_SUCCESS:
-      return payload;
-    case USER_FAIL:
-      return payload;
-    case USER_REQUEST:
-      return payload;
+    case TRANSACTION_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        data: payload.data,
+      };
+    case TRANSACTION_SUCCESS_PUT:
+      return {
+        ...state,
+        isLoading: false,
+        data: state.data.map(item => (
+          item.id === payload.id ? ({ ...item, isLoading: false, ...payload.data }) : item
+        )),
+      };
+    case TRANSACTION_FAIL:
+      if (typeof payload.id !== 'undefined' && payload.method === 'put') {
+        return {
+          ...state,
+          isError: true,
+          isLoading: false,
+          message: payload.message,
+          data: findAndChange(state.data, payload.id, { isLoading: false }),
+        };
+      }
+      return {
+        ...state,
+        isError: true,
+        isLoading: false,
+        message: payload.message,
+      };
+    case TRANSACTION_REQUEST:
+      if (typeof payload.id !== 'undefined') {
+        return {
+          ...state,
+          isLoading: true,
+          data: findAndChange(state.data, payload.id, { isLoading: true }),
+        };
+      }
+      return {
+        ...state,
+        isLoading: true,
+      };
     default:
       return state;
   }

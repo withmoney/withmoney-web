@@ -3,6 +3,7 @@ import * as Transactions from '../../src/api/Transactions';
 
 jest.mock('../../src/api/fetch', () => ({
   get: jest.fn().mockResolvedValue({ hello: 'world' }),
+  put: jest.fn().mockResolvedValue({ hello: 'world' }),
 }));
 
 describe('Transactions Api', () => {
@@ -14,12 +15,19 @@ describe('Transactions Api', () => {
     expect(fetch.get).toBeCalledWith('transactions');
   });
 
-
-  it('should list return a mock data', async () => {
+  it('should get return a mock data', async () => {
     const response = await Transactions.get(99);
 
     expect(response).toEqual({ hello: 'world' });
 
     expect(fetch.get).toBeCalledWith('transactions/99');
+  });
+
+  it('should put return a mock data', async () => {
+    const response = await Transactions.put(99, { one: 'two' });
+
+    expect(response).toEqual({ hello: 'world' });
+
+    expect(fetch.put).toBeCalledWith('transactions/99', { one: 'two' });
   });
 });

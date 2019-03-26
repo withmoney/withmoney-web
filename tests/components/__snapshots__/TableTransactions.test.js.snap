@@ -85,6 +85,7 @@ exports[`TableTransactions should render table with list of transactions 1`] = `
   >
     <div
       className="table-transactions__row"
+      onDoubleClick={[Function]}
     >
       <div
         className="table-transactions__col"
@@ -119,6 +120,7 @@ exports[`TableTransactions should render table with list of transactions 1`] = `
     >
       <button
         className="button-rounded"
+        disabled={false}
         type="button"
       >
         Add Transaction
@@ -258,6 +260,7 @@ exports[`TableTransactions should render with any one transaction entity 1`] = `
     >
       <button
         className="button-rounded"
+        disabled={false}
         type="button"
       >
         Add Transaction

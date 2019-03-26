@@ -35,4 +35,18 @@
   &:active {
     background-color: darken(#1C791A, 15%);
   }
+
+  &--medium {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  .spin {
+    width: 17px;
+    transform: translate(0px, 1px) scale(2);
+  }
 }

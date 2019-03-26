@@ -5,6 +5,7 @@ exports[`TableTransactionList should render null when dont have any transaction 
 exports[`TableTransactionList should render table with list of transactions 1`] = `
 <div
   className="table-transactions__row"
+  onDoubleClick={[Function]}
 >
   <div
     className="table-transactions__col"
