@@ -18,18 +18,10 @@ class TransactionsItem extends React.Component {
     this.save = this.save.bind(this);
 
     this.fields = [
-      {
-        name: 'transactionDate',
-      },
-      {
-        name: 'name',
-      },
-      {
-        name: 'CategoryId',
-      },
-      {
-        name: 'value',
-      },
+      { name: 'transactionDate' },
+      { name: 'name' },
+      { name: 'CategoryId' },
+      { name: 'value' },
     ];
 
     this.state = {
@@ -57,8 +49,11 @@ class TransactionsItem extends React.Component {
   }
 
   async save() {
+    const { formData } = this.state;
+    const { actions: { transaction } } = this.props;
+
     try {
-      await this.props.actions.transaction.put(this.state.formData);
+      await transaction.put(formData);
 
       this.toggleEditing();
     } catch (error) {
@@ -68,11 +63,10 @@ class TransactionsItem extends React.Component {
 
   toggleEditing() {
     const { isEditing } = this.state;
+    const { transaction: formData } = this.props;
 
     if (!isEditing) {
-      this.setState({
-        formData: this.props.transaction,
-      });
+      this.setState({ formData });
     }
 
     this.setState({
@@ -104,7 +98,7 @@ class TransactionsItem extends React.Component {
           </div>
         </If>
       </>
-    )
+    );
   }
 
   render() {
@@ -141,13 +135,25 @@ class TransactionsItem extends React.Component {
 }
 
 TransactionsItem.propTypes = {
+  actions: PropTypes.shape({
+    transaction: PropTypes.shape({
+      put: PropTypes.func.isRequired,
+    }).isRequired,
+  }).isRequired,
   transaction: PropTypes.shape({
     id: PropTypes.number,
     transactionDate: PropTypes.string,
     name: PropTypes.string,
     CategoryId: PropTypes.number,
     value: PropTypes.string,
-  }).isRequired,
+    isLoading: PropTypes.bool,
+  }),
+};
+
+TransactionsItem.defaultProps = {
+  transaction: {
+    isLoading: false,
+  },
 };
 
 const mapDispachToProps = dispatch => ({

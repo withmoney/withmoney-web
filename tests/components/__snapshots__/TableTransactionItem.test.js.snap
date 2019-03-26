@@ -1,0 +1,211 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TableTransactionItem should render a static row with transaction 1`] = `
+<div
+  className="table-transactions__row"
+  onDoubleClick={[Function]}
+>
+  <div
+    className="table-transactions__col"
+  >
+    2019-05-31
+  </div>
+  <div
+    className="table-transactions__col"
+  >
+    Name
+  </div>
+  <div
+    className="table-transactions__col"
+  >
+    4
+  </div>
+  <div
+    className="table-transactions__col"
+  >
+    40.5
+  </div>
+  <div
+    className="table-transactions__col"
+  >
+    <input
+      type="checkbox"
+    />
+  </div>
+</div>
+`;
+
+exports[`TableTransactionItem should render table in mode edition 1`] = `
+<Provider
+  store={
+    Object {
+      "clearActions": [Function],
+      "dispatch": [Function],
+      "getActions": [Function],
+      "getState": [Function],
+      "replaceReducer": [Function],
+      "subscribe": [Function],
+    }
+  }
+>
+  <Connect(TransactionsItem)
+    transaction={
+      Object {
+        "CategoryId": 1,
+        "id": 99,
+        "name": "Name",
+        "transactionDate": "2018-08-01 20:80",
+        "value": "0.00",
+      }
+    }
+  >
+    <TransactionsItem
+      actions={
+        Object {
+          "transaction": Object {
+            "default": [Function],
+            "list": [Function],
+            "put": [Function],
+          },
+        }
+      }
+      transaction={
+        Object {
+          "CategoryId": 1,
+          "id": 99,
+          "name": "Name",
+          "transactionDate": "2018-08-01 20:80",
+          "value": "0.00",
+        }
+      }
+    >
+      <div
+        className="table-transactions__row table-transactions__row--is-editing"
+        onDoubleClick={[Function]}
+      >
+        <div
+          className="table-transactions__col table-transactions__col--is-editing"
+          key="transactionDate"
+        >
+          <InputInline
+            className="table-transactions__input"
+            defaultValue="2018-08-01 20:80"
+            isEditing={true}
+            isHTML={false}
+            name="transactionDate"
+            onChange={[Function]}
+            type="text"
+          >
+            <input
+              className="table-transactions__input"
+              defaultValue="2018-08-01 20:80"
+              name="transactionDate"
+              onChange={[Function]}
+              type="text"
+            />
+          </InputInline>
+        </div>
+        <div
+          className="table-transactions__col table-transactions__col--is-editing"
+          key="name"
+        >
+          <InputInline
+            className="table-transactions__input"
+            defaultValue="Name"
+            isEditing={true}
+            isHTML={false}
+            name="name"
+            onChange={[Function]}
+            type="text"
+          >
+            <input
+              className="table-transactions__input"
+              defaultValue="Name"
+              name="name"
+              onChange={[Function]}
+              type="text"
+            />
+          </InputInline>
+        </div>
+        <div
+          className="table-transactions__col table-transactions__col--is-editing"
+          key="CategoryId"
+        >
+          <InputInline
+            className="table-transactions__input"
+            defaultValue={1}
+            isEditing={true}
+            isHTML={false}
+            name="CategoryId"
+            onChange={[Function]}
+            type="text"
+          >
+            <input
+              className="table-transactions__input"
+              defaultValue={1}
+              name="CategoryId"
+              onChange={[Function]}
+              type="text"
+            />
+          </InputInline>
+        </div>
+        <div
+          className="table-transactions__col table-transactions__col--is-editing"
+          key="value"
+        >
+          <InputInline
+            className="table-transactions__input"
+            defaultValue="0.00"
+            isEditing={true}
+            isHTML={false}
+            name="value"
+            onChange={[Function]}
+            type="text"
+          >
+            <input
+              className="table-transactions__input"
+              defaultValue="0.00"
+              name="value"
+              onChange={[Function]}
+              type="text"
+            />
+          </InputInline>
+        </div>
+        <If
+          condition={true}
+        >
+          <div
+            className="table-transactions__col table-transactions__col--is-editing"
+          >
+            <ButtonRounded
+              isLoading={false}
+              medium={true}
+              onClick={[Function]}
+              type="button"
+            >
+              <button
+                className="button-rounded button-rounded--medium"
+                disabled={false}
+                onClick={[Function]}
+                type="button"
+              >
+                <If
+                  condition={false}
+                />
+                <If
+                  condition={true}
+                >
+                  Save
+                </If>
+              </button>
+            </ButtonRounded>
+          </div>
+        </If>
+        <If
+          condition={false}
+        />
+      </div>
+    </TransactionsItem>
+  </Connect(TransactionsItem)>
+</Provider>
+`;

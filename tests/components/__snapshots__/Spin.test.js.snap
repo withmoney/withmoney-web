@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Spin should render spin black 1`] = `
+<img
+  alt="spin"
+  className="spin"
+  src="/static/img/spin-black.svg"
+/>
+`;
+
+exports[`Spin should render spin white 1`] = `
+<img
+  alt="spin"
+  className="spin"
+  src="/static/img/spin-white.svg"
+/>
+`;
