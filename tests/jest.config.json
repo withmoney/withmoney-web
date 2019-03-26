@@ -1,5 +1,6 @@
 {
   "coverageDirectory": "<rootDir>/coverage",
+  "collectCoverage": true,
   "coveragePathIgnorePatterns": [
     "/node_modules/",
     "/coverage/",
@@ -9,12 +10,19 @@
     "test-framework-setup.js",
     "jest.config.json"
   ],
+  "collectCoverageFrom": [
+    "<rootDir>/src/**/*.{js,jsx}"
+  ],
+  "snapshotSerializers": ["enzyme-to-json/serializer"],
   "setupFiles": [
     "<rootDir>/tests/test-framework-setup.js"
   ],
   "rootDir": "../",
   "testMatch": [
     "<rootDir>/tests/**/?(*.)test.{js,jsx}"
-  ]
+  ],
+  "transform": {
+    "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
+  }
 }
 
