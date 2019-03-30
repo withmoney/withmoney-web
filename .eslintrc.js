@@ -1,25 +1,19 @@
 module.exports = {
   parser: 'babel-eslint',
-  plugins: ['react'],
-  extends: ['airbnb'],
-  env: { 'es6': true },
+  plugins: ['react', 'prettier'],
+  extends: ['airbnb', 'prettier'],
   rules: {
-    'arrow-body-style': ['error', 'as-needed'],
-    'react/jsx-filename-extension': [1, { 'extensions': ['.js', '.jsx'] }],
-    'jsx-a11y/anchor-is-valid': 'off',
-    'react/forbid-prop-types': 'off',
-    'import/no-unresolved': 'off',
-    'import/no-extraneous-dependencies': 'off',
+    'react/forbid-prop-types': ['error', { forbid: ['object', 'array'] }],
+    'react/jsx-filename-extension': ['error', { extensions: ['.js', '.jsx'] }],
+    'prettier/prettier': ['error'],
   },
   settings: {
-    'import/resolver': 'webpack'
+    'import/resolver': 'webpack',
   },
   env: {
     browser: true,
     node: true,
     es6: true,
-    amd: true,
-    mocha: true,
-    jest: true
-  }
+    jest: true,
+  },
 };
