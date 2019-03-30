@@ -1,8 +1,7 @@
 /* eslint-disable prefer-destructuring */
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { configure, mount } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import { mount } from 'enzyme';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -10,14 +9,6 @@ import TableTransactions from '../../src/components/TableTransactions';
 import * as Transactions from '../../src/api/Transactions';
 
 const mockStore = configureStore([thunk]);
-
-configure({ adapter: new Adapter() });
-
-const setup = (Component, store) => (props = {}) => (
-  <Provider store={store}>
-    <Component {...props} />
-  </Provider>
-);
 
 jest.mock('../../src/api/Transactions', () => ({
   list: jest.fn().mockResolvedValue(true),
@@ -28,7 +19,7 @@ describe('TableTransactions', () => {
   let Component;
 
   beforeAll(() => {
-    Component = setup(TableTransactions, mockStore({}));
+    Component = global.withRedux(mockStore({}), TableTransactions);
     now = Date.now;
     Date.now = () => 1548860400000;
   });
@@ -60,8 +51,7 @@ describe('TableTransactions', () => {
       ],
     });
 
-    const ComponentWithData = setup(
-      TableTransactions,
+    const ComponentWithData = global.withRedux(
       mockStore({
         transactions: {
           isLoading: false,
@@ -76,6 +66,7 @@ describe('TableTransactions', () => {
           ],
         },
       }),
+      TableTransactions,
     );
 
     const wrapper = renderer.create(ComponentWithData());
