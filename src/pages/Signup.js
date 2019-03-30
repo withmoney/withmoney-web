@@ -48,8 +48,8 @@ class Signup extends React.Component {
     });
   }
 
-  render() {
-    const fields = (
+  renderFields() {
+    return (
       <Fragment>
         <FieldInput id="name" onChange={this.handleChange} placeholder="name" />
         <FieldInput id="email" onChange={this.handleChange} placeholder="email" />
@@ -68,21 +68,25 @@ class Signup extends React.Component {
         <FieldButton type="submit">Sign Up</FieldButton>
       </Fragment>
     );
+  }
 
-    const footer = (
+  renderFooter() {
+    return (
       <Fragment>
         <span>Do not have an account?</span>
         <Link to="/login">Log In</Link>
       </Fragment>
     );
+  }
 
+  render() {
     return (
       <BoxForm
         title="withmoney"
         subtitle="Sign Up"
         onSubmit={this.onSave}
-        fields={fields}
-        footer={footer}
+        fields={this.fields}
+        footer={this.footer}
       />
     );
   }
