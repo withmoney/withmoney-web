@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InOutPercent should render a component correctly 1`] = `
+<div
+  className="inout-percent"
+>
+  <div
+    className="inout-percent__type"
+  >
+    <div
+      className="inout-percent__info"
+    >
+      <div
+        className="inout-percent__total"
+      >
+        Total In: $ 5,000.00
+      </div>
+      <div
+        className="inout-percent__done"
+      >
+        $450.34
+      </div>
+    </div>
+    <div
+      className="percent-bar percent-bar--in"
+    >
+      <div
+        className="percent-bar__progress percent-bar__progress--in"
+        style={
+          Object {
+            "width": "33%",
+          }
+        }
+      />
+    </div>
+  </div>
+  <div
+    className="inout-percent__type"
+  >
+    <div
+      className="inout-percent__info"
+    >
+      <div
+        className="inout-percent__total"
+      >
+        Total In: $ 5,000.00
+      </div>
+      <div
+        className="inout-percent__done"
+      >
+        $450.34
+      </div>
+    </div>
+    <div
+      className="percent-bar percent-bar--out"
+    >
+      <div
+        className="percent-bar__progress percent-bar__progress--out"
+        style={
+          Object {
+            "width": "80%",
+          }
+        }
+      />
+    </div>
+  </div>
+</div>
+`;
