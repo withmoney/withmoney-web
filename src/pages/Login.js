@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as UserApi from '../api/User';
 import * as UserAction from '../store/modules/user';
 import BoxForm from '../components/BoxForm';
@@ -9,6 +10,15 @@ import FieldInput from '../components/FieldInput';
 import FieldButton from '../components/FieldButton';
 
 class Login extends React.Component {
+  static propTypes = {
+    actions: PropTypes.shape({
+      setUser: PropTypes.func.isRequired,
+    }).isRequired,
+    history: PropTypes.shape({
+      push: PropTypes.func.isRequired,
+    }).isRequired,
+  };
+
   constructor(props) {
     super(props);
 
@@ -53,24 +63,28 @@ class Login extends React.Component {
   }
 
   render() {
+    const fields = (
+      <Fragment>
+        <FieldInput id="email" onChange={this.handleChange} />
+        <FieldInput id="password" type="password" onChange={this.handleChange} />
+        <FieldButton type="submit">Log in</FieldButton>
+      </Fragment>
+    );
+
+    const footer = (
+      <Fragment>
+        <span>Do not have an account?</span>
+        <Link to="/signup">Sign Up</Link>
+      </Fragment>
+    );
+
     return (
       <BoxForm
         title="withmoney"
         subtitle="Log in"
         onSubmit={this.onSave}
-        fields={(
-          <Fragment>
-            <FieldInput id="email" onChange={this.handleChange} />
-            <FieldInput id="password" type="password" onChange={this.handleChange} />
-            <FieldButton type="submit">Log in</FieldButton>
-          </Fragment>
-        )}
-        footer={(
-          <Fragment>
-            <span>Do not have an account?</span>
-            <Link to="/signup">Sign Up</Link>
-          </Fragment>
-        )}
+        fields={fields}
+        footer={footer}
       />
     );
   }
@@ -82,4 +96,7 @@ const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(UserAction, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Login);

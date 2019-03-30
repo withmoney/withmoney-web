@@ -1,12 +1,12 @@
 .page-wrapper {
   display: flex;
-  background-color: white;
   max-width: 1170px;
   margin-top: 60px;
-  margin-left: auto;
   margin-right: auto;
-  padding-left: 15px;
+  margin-left: auto;
   padding-right: 15px;
+  padding-left: 15px;
+  background-color: white;
 }
 
 .page-content {
@@ -14,7 +14,7 @@
 }
 
 .page-sidebar {
-  margin-left: 15px;
   width: 235px;
   max-width: 100%;
+  margin-left: 15px;
 }

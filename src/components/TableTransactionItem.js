@@ -50,7 +50,9 @@ class TransactionsItem extends React.Component {
 
   async save() {
     const { formData } = this.state;
-    const { actions: { transaction } } = this.props;
+    const {
+      actions: { transaction },
+    } = this.props;
 
     try {
       await transaction.put(formData);
@@ -76,18 +78,15 @@ class TransactionsItem extends React.Component {
 
   renderAction(classCol) {
     const { isEditing } = this.state;
-    const { transaction: { isLoading } } = this.props;
+    const {
+      transaction: { isLoading },
+    } = this.props;
 
     return (
       <>
         <If condition={isEditing}>
           <div className={classCol}>
-            <ButtonRounded
-              type="button"
-              onClick={this.save}
-              medium
-              isLoading={isLoading}
-            >
+            <ButtonRounded type="button" onClick={this.save} medium isLoading={isLoading}>
               Save
             </ButtonRounded>
           </div>
@@ -103,21 +102,22 @@ class TransactionsItem extends React.Component {
 
   render() {
     const { isEditing, formData } = this.state;
-    const { transaction: { isLoading } } = this.props;
-    const classCol = classnames('table-transactions__col',
-      { 'table-transactions__col--is-editing': isEditing });
+    const {
+      transaction: { isLoading },
+    } = this.props;
+    const classCol = classnames('table-transactions__col', {
+      'table-transactions__col--is-editing': isEditing,
+    });
 
     return (
       <div
-        className={classnames('table-transactions__row',
-          { 'table-transactions__row--is-editing': isEditing })}
+        className={classnames('table-transactions__row', {
+          'table-transactions__row--is-editing': isEditing,
+        })}
         onDoubleClick={this.onDoubleClick}
       >
         {this.fields.map(field => (
-          <div
-            key={field.name}
-            className={classCol}
-          >
+          <div key={field.name} className={classCol}>
             <InputInline
               isEditing={isEditing}
               name={field.name}
@@ -162,4 +162,7 @@ const mapDispachToProps = dispatch => ({
   },
 });
 
-export default connect(null, mapDispachToProps)(TransactionsItem);
+export default connect(
+  null,
+  mapDispachToProps,
+)(TransactionsItem);

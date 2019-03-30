@@ -9,7 +9,7 @@ describe('TableTransactionList', () => {
   let Component;
 
   beforeAll(() => {
-    Component = setup(TableTransactionList);
+    Component = global.setup(TableTransactionList);
   });
 
   it('should render null when dont have any transaction', () => {
@@ -22,7 +22,7 @@ describe('TableTransactionList', () => {
     const mockStore = configureStore([thunk]);
     const store = mockStore({});
 
-    const wrapper = renderer.create((
+    const wrapper = renderer.create(
       <Provider store={store}>
         {Component({
           list: [
@@ -35,8 +35,8 @@ describe('TableTransactionList', () => {
             },
           ],
         })}
-      </Provider>
-    ));
+      </Provider>,
+    );
 
     expect(wrapper.toJSON()).toMatchSnapshot();
   });

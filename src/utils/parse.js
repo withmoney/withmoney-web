@@ -17,12 +17,13 @@ const logout = () => {
   }
 };
 
-export const catchInvalidToken = fetch => fetch.catch((err) => {
-  if (typeof err.response !== 'undefined') {
-    if (err.response.data.message === 'Invalid auth token provided.') {
-      logout();
+export const catchInvalidToken = fetch =>
+  fetch.catch(err => {
+    if (typeof err.response !== 'undefined') {
+      if (err.response.data.message === 'Invalid auth token provided.') {
+        logout();
+      }
     }
-  }
 
-  throw err;
-});
+    throw err;
+  });

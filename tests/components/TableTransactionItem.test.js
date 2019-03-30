@@ -1,9 +1,7 @@
-import React from 'react';
 import renderer from 'react-test-renderer';
-import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import TableTransactionItem from '../../src/components/TableTransactionItem';
 import * as Transactions from '../../src/api/Transactions';
 
@@ -21,30 +19,34 @@ describe('TableTransactionItem', () => {
   });
 
   it('should render a static row with transaction', () => {
-    const wrapper = renderer.create(Component({
-      transaction: {
-        id: 55,
-        transactionDate: '2019-05-31',
-        name: 'Name',
-        CategoryId: 4,
-        value: '40.5',
-        isLoading: false,
-      },
-    }));
+    const wrapper = renderer.create(
+      Component({
+        transaction: {
+          id: 55,
+          transactionDate: '2019-05-31',
+          name: 'Name',
+          CategoryId: 4,
+          value: '40.5',
+          isLoading: false,
+        },
+      }),
+    );
 
     expect(wrapper.toJSON()).toMatchSnapshot();
   });
 
-  it('Should edit transaction and quite when click on save button', (done) => {
-    const wrapper = mount(Component({
-      transaction: {
-        id: 55,
-        transactionDate: '2019-05-31',
-        name: 'Name',
-        CategoryId: 4,
-        value: '40.5',
-      },
-    }));
+  it('Should edit transaction and quite when click on save button', done => {
+    const wrapper = mount(
+      Component({
+        transaction: {
+          id: 55,
+          transactionDate: '2019-05-31',
+          name: 'Name',
+          CategoryId: 4,
+          value: '40.5',
+        },
+      }),
+    );
 
     expect(wrapper.find('TransactionsItem').state().isEditing).toBe(false);
 
@@ -52,7 +54,9 @@ describe('TableTransactionItem', () => {
 
     expect(wrapper.find('TransactionsItem').state().isEditing).toBe(true);
 
-    wrapper.find('input[name="name"]').simulate('change', { target: { name: 'name', value: 'Name New' } });
+    wrapper
+      .find('input[name="name"]')
+      .simulate('change', { target: { name: 'name', value: 'Name New' } });
 
     wrapper.find('button').simulate('click');
 

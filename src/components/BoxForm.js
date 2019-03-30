@@ -1,21 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const BoxForm = ({
-  title,
-  subtitle,
-  fields,
-  footer,
-  onSubmit,
-}) => (
+const BoxForm = ({ title, subtitle, fields, footer, onSubmit }) => (
   <div className="box-form">
     <h1 className="box-form__title">{title}</h1>
     <form className="box-form__form" onSubmit={onSubmit}>
       <h3 className="box-form__subtitle">{subtitle}</h3>
       {fields}
-      <div className="box-form__footer">
-        {footer}
-      </div>
+      <div className="box-form__footer">{footer}</div>
     </form>
   </div>
 );

@@ -39,7 +39,7 @@ const onFail = ({ id, message, method }) => ({
 
 const onRequest = (payload = {}) => ({ type: TRANSACTION_REQUEST, payload });
 
-export const list = query => (dispatch) => {
+export const list = query => dispatch => {
   dispatch(onRequest());
 
   return Transactions.list(query)
@@ -47,7 +47,7 @@ export const list = query => (dispatch) => {
     .catch(error => dispatch(onFail(error)));
 };
 
-export const put = data => (dispatch) => {
+export const put = data => dispatch => {
   dispatch(onRequest(data));
 
   return Transactions.put(data.id, data)
@@ -55,9 +55,8 @@ export const put = data => (dispatch) => {
     .catch(error => dispatch(onFail({ id: data.id, message: error.message, method: 'put' })));
 };
 
-const findAndChange = (data, id, newData) => data.map(item => (
-  item.id === id ? { ...item, ...newData } : item
-));
+const findAndChange = (data, id, newData) =>
+  data.map(item => (item.id === id ? { ...item, ...newData } : item));
 
 export default (state = init, { type, payload }) => {
   switch (type) {
@@ -71,9 +70,9 @@ export default (state = init, { type, payload }) => {
       return {
         ...state,
         isLoading: false,
-        data: state.data.map(item => (
-          item.id === payload.id ? ({ ...item, isLoading: false, ...payload.data }) : item
-        )),
+        data: state.data.map(item =>
+          item.id === payload.id ? { ...item, isLoading: false, ...payload.data } : item,
+        ),
       };
     case TRANSACTION_FAIL:
       if (typeof payload.id !== 'undefined' && payload.method === 'put') {

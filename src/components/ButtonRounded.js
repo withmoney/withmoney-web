@@ -4,12 +4,7 @@ import classnames from 'classnames';
 import Spin from './Spin';
 import If from './render-utils/If';
 
-const ButtonRounded = ({
-  children,
-  medium,
-  isLoading,
-  ...otherProps
-}) => (
+const ButtonRounded = ({ children, medium, isLoading, ...otherProps }) => (
   <button
     type="button"
     disabled={isLoading}
@@ -21,9 +16,7 @@ const ButtonRounded = ({
     <If condition={isLoading}>
       <Spin white />
     </If>
-    <If condition={!isLoading}>
-      {children}
-    </If>
+    <If condition={!isLoading}>{children}</If>
   </button>
 );
 

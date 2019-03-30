@@ -1,39 +1,44 @@
 %col {
-  padding: 15px 12px;
   flex: 1;
+  padding: 15px 12px;
 }
 
 .table-transactions {
   &__tabs {
-    padding-left: 5px;
-    padding-right: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-right: 5px;
+    padding-left: 5px;
   }
+
   &__header {
     display: flex;
   }
+
   &__row {
     display: flex;
-    border-bottom: 1px solid #D7D7D7;
 
     background-color: #FFFFFF;
+    border-bottom: 1px solid #D7D7D7;
 
     &:nth-child(even) {
       background-color: #F5F5F5;
     }
+
     &--is-editing {
-      background-color: #ececec;
+      background-color: #ECECEC;
     }
   }
+
   &__action {
     display: flex;
     justify-content: center;
-    background-color: white;
     padding-top: 5px;
     padding-bottom: 5px;
+    background-color: white;
   }
+
   &__header-col {
     @extend %col;
     background-color: #F1F1F1;
@@ -42,6 +47,7 @@
       background-color: #ECECEC;
     }
   }
+
   &__col {
     @extend %col;
     display: flex;
@@ -50,34 +56,41 @@
       padding: 5px;
     }
   }
+
   &__input {
-    padding: 9px 0px 9px 6px;
     display: block;
-    border-radius: 3px;
-    border: 1px solid #d7d7d7;
     width: 100%;
+    padding: 9px 0px 9px 6px;
+    border: 1px solid #D7D7D7;
+    border-radius: 3px;
   }
+
   &__footer {
-    background-color: #C4C4C4;
-    padding: 15px 30px;
     display: flex;
     justify-content: flex-end;
+    padding: 15px 30px;
+    background-color: #C4C4C4;
   }
+
   &__labels,
   &__values {
     display: flex;
     flex-direction: column;
     line-height: 25px;
   }
+
   &__values {
     margin-left: 15px;
   }
+
   &__label {
     font-weight: bold;
   }
+
   &__value {
     font-size: 22px;
   }
+
   &__value,
   &__label {
     padding-bottom: 5px;
@@ -86,21 +99,22 @@
 
 .tab-in-out {
   &__tab {
-    border-width: 0;
-    margin-top: 5px;
-    padding: 10px 0;
-    font-size: 14px;
     width: 80px;
     max-width: 100%;
-    font-weight: bold;
-    background-color: #C3C1C1;
+    margin-top: 5px;
+    padding: 10px 0;
     color: black;
+    font-weight: bold;
+    font-size: 14px;
+    background-color: #C3C1C1;
+    border-width: 0;
     cursor: pointer;
 
     &:focus,
     &:hover {
       background-color: darken(#C3C1C1, 10%);
     }
+
     &:active {
       background-color: darken(#C3C1C1, 15%);
     }
@@ -113,10 +127,12 @@
       &:hover {
         background-color: darken(#30B84E, 10%);
       }
+
       &:hover {
         background-color: darken(#30B84E, 15%);
       }
     }
+
     &--out-actived {
       color: white;
       background-color: #911B1B;
@@ -125,6 +141,7 @@
       &:hover {
         background-color: darken(#911B1B, 10%);
       }
+
       &:hover {
         background-color: darken(#911B1B, 15%);
       }
@@ -136,29 +153,31 @@
   display: flex;
 
   &__navigation {
-    background-color: #EAEAEA;
+    width: 130px;
+    padding: 7px 0;
     color: black;
     font-size: 16px;
-    width: 130px;
-    cursor: pointer;
+    background-color: #EAEAEA;
     border-width: 0;
-    padding: 7px 0;
+    cursor: pointer;
 
     &:focus,
     &:hover {
       background-color: darken(#EAEAEA, 10%);
     }
+
     &:active {
       background-color: darken(#EAEAEA, 15%);
     }
   }
+
   &__current {
-    width: 130px;
     display: inline-flex;
     justify-content: center;
     align-items: center;
+    width: 130px;
+    color: black;
     background-color: white;
     border: 1px solid #EAEAEA;
-    color: black;
   }
 }

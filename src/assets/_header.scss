@@ -1,25 +1,26 @@
 .header {
-  background-color: #525252;
   padding-top: 23px;
   padding-bottom: 23px;
+  background-color: #525252;
 
   &__container {
     max-width: 1170px;
     margin: auto;
-    padding-left: 15px;
     padding-right: 15px;
+    padding-left: 15px;
   }
+
   &__row {
     display: flex;
     justify-content: space-between;
   }
+
   &__title {
     color: white;
-    font-size: 24px;
     font-weight: bold;
+    font-size: 24px;
   }
 }
-
 
 .menu-user {
   display: flex;
@@ -29,9 +30,10 @@
     width: 25px;
     height: 25px;
   }
+
   &__name {
     margin-right: 15px;
-    font-size: 16px;
     color: white;
+    font-size: 16px;
   }
 }

@@ -1,19 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const InputInline = ({
-  isEditing,
-  defaultValue,
-  isHTML,
-  ...othersProps
-}) => (
-  isEditing ? (
-    <input
-      defaultValue={defaultValue}
-      {...othersProps}
-    />
-  ) : defaultValue
-);
+const InputInline = ({ isEditing, defaultValue, isHTML, ...othersProps }) =>
+  isEditing ? <input defaultValue={defaultValue} {...othersProps} /> : defaultValue;
 
 InputInline.propTypes = {
   type: PropTypes.string,
