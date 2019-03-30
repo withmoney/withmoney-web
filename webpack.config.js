@@ -25,7 +25,7 @@ const CopyWebpackPluginConfig = new CopyWebpackPlugin([
   },
 ]);
 
-const CleanWebpackPluginConfig = new CleanWebpackPlugin(['dist']);
+const CleanWebpackPluginConfig = new CleanWebpackPlugin();
 
 
 function resolve(dir) {

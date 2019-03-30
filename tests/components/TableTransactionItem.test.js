@@ -2,15 +2,12 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
-import { mount } from 'enzyme';
 import thunk from 'redux-thunk';
-import toJson from 'enzyme-to-json';
+import { mount, shallow } from 'enzyme';
 import TableTransactionItem from '../../src/components/TableTransactionItem';
-import * as TransactionsApi from '../../src/api/Transactions';
+import * as Transactions from '../../src/api/Transactions';
 
-const setup = Component => (props = {}) => (
-  <Component {...props} />
-);
+const mockStore = configureStore([thunk]);
 
 jest.mock('../../src/api/Transactions', () => ({
   put: jest.fn().mockResolvedValue({}),
@@ -20,77 +17,56 @@ describe('TableTransactionItem', () => {
   let Component;
 
   beforeAll(() => {
-    Component = setup(TableTransactionItem);
+    Component = global.withRedux(mockStore({}), TableTransactionItem);
   });
 
   it('should render a static row with transaction', () => {
-    const mockStore = configureStore([thunk]);
-    const store = mockStore({});
-    const wrapper = renderer.create((
-      <Provider store={store}>
-        {Component({
-          transaction: {
-            id: 55,
-            transactionDate: '2019-05-31',
-            name: 'Name',
-            CategoryId: 4,
-            value: '40.5',
-            isLoading: false,
-          },
-        })}
-      </Provider>
-    ));
+    const wrapper = renderer.create(Component({
+      transaction: {
+        id: 55,
+        transactionDate: '2019-05-31',
+        name: 'Name',
+        CategoryId: 4,
+        value: '40.5',
+        isLoading: false,
+      },
+    }));
 
     expect(wrapper.toJSON()).toMatchSnapshot();
   });
 
-  it('should render table in mode edition', () => {
-    const mockStore = configureStore([thunk]);
-    const store = mockStore({});
+  it('Should edit transaction and quite when click on save button', (done) => {
+    const wrapper = mount(Component({
+      transaction: {
+        id: 55,
+        transactionDate: '2019-05-31',
+        name: 'Name',
+        CategoryId: 4,
+        value: '40.5',
+      },
+    }));
 
-    const wrapper = mount((
-      <Provider store={store}>
-        {Component({
-          transaction: {
-            id: 99,
-            name: 'Name',
-            transactionDate: '2018-08-01 20:80',
-            CategoryId: 1,
-            value: '0.00',
-          },
-        })}
-      </Provider>
-    ));
+    expect(wrapper.find('TransactionsItem').state().isEditing).toBe(false);
 
-    wrapper.find('.table-transactions__row').simulate('dblclick');
+    wrapper.find('.table-transactions__row').simulate('doubleclick');
 
-    expect(toJson(wrapper)).toMatchSnapshot();
-  });
+    expect(wrapper.find('TransactionsItem').state().isEditing).toBe(true);
 
-  it('should call save with finish editing', () => {
-    const mockStore = configureStore([thunk]);
-    const store = mockStore({});
+    wrapper.find('input[name="name"]').simulate('change', { target: { name: 'name', value: 'Name New' } });
 
-    const wrapper = mount((
-      <Provider store={store}>
-        {Component({
-          transaction: {
-            id: 99,
-            name: 'Name',
-            transactionDate: '2018-08-01 20:80',
-            CategoryId: 1,
-            value: '0.00',
-          },
-        })}
-      </Provider>
-    ));
-
-    wrapper.find('.table-transactions__row').simulate('dblclick');
-    wrapper.find('input[name="name"]').simulate('change', { target: { name: 'name', value: 'Name new' } });
     wrapper.find('button').simulate('click');
 
-    expect(TransactionsApi.put).toBeCalledWith(99, {
-      CategoryId: 1, id: 99, name: 'Name new', transactionDate: '2018-08-01 20:80', value: '0.00',
+    expect(Transactions.put).toBeCalledWith(55, {
+      id: 55,
+      transactionDate: '2019-05-31',
+      name: 'Name New',
+      CategoryId: 4,
+      value: '40.5',
+    });
+
+    setImmediate(() => {
+      expect(wrapper.find('TransactionsItem').state().isEditing).toBe(false);
+      done();
     });
   });
 });

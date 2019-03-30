@@ -5,10 +5,6 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import TableTransactionList from '../../src/components/TableTransactionList';
 
-const setup = Component => (props = {}) => (
-  <Component {...props} />
-);
-
 describe('TableTransactionList', () => {
   let Component;
 
