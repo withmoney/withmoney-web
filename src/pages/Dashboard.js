@@ -8,6 +8,7 @@ import AccountTotal from 'components/AccountTotal';
 const Dashboard = () => (
   <div className="page">
     <Helmet>
+      <title>Dashboard</title>
       <body className="page-dashboard" />
     </Helmet>
     <HeaderPage />

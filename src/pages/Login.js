@@ -82,6 +82,7 @@ class Login extends React.Component {
     return (
       <>
         <Helmet>
+          <title>Login</title>
           <body className="page-login" />
         </Helmet>
         <BoxForm
