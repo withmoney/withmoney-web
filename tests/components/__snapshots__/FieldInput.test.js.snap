@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FieldInput should render a component correctly 1`] = `
+<div
+  className="field"
+>
+  <input
+    className="field__input"
+    id="input-id"
+    name="input-id"
+    type="text"
+  />
+</div>
+`;

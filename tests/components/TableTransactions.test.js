@@ -1,8 +1,6 @@
 /* eslint-disable prefer-destructuring */
-import React from 'react';
 import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
-import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import TableTransactions from '../../src/components/TableTransactions';

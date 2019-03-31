@@ -12,7 +12,6 @@ export const cleanUser = () => ({
   type: CLEAN_USER,
 });
 
-
 export default (state = init, { type, payload }) => {
   switch (type) {
     case SET_USER:

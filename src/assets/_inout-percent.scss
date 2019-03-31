@@ -1,15 +1,16 @@
 .inout-percent {
-  background-color: #ECECEC;
   padding: 8px;
   font-size: 14px;
+  background-color: #ECECEC;
 
   &__info {
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
   }
+
   &__type {
-    &+& {
+    & + & {
       margin-top: 15px;
     }
   }

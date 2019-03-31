@@ -5,9 +5,7 @@ const EnzymeAdapter = require('enzyme-adapter-react-16');
 
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
-const setup = Component => (props = {}) => (
-  <Component {...props} />
-);
+const setup = Component => (props = {}) => <Component {...props} />;
 
 const withRedux = (store, Component) => (props = {}) => (
   <Provider store={store}>

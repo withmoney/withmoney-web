@@ -1,12 +1,13 @@
 .percent-bar {
-  height: 7px;
-  background-color: white;
   display: flex;
   align-items: stretch;
+  height: 7px;
+  background-color: white;
 
   &--in {
     border: 1px solid #1C791A;
   }
+
   &--out {
     border: 1px solid #911B1B;
   }
@@ -15,6 +16,7 @@
     &--in {
       background-color: #75DC8C;
     }
+
     &--out {
       background-color: #D22A2A;
     }

@@ -9,11 +9,7 @@ import * as TransactionsActions from '../store/modules/transactions';
 import TransactionsList from './TableTransactionList';
 
 const ButtonNavigation = ({ onClick, direction, month }) => (
-  <button
-    type="button"
-    className="tab-months__navigation"
-    onClick={onClick(direction)}
-  >
+  <button type="button" className="tab-months__navigation" onClick={onClick(direction)}>
     {month.format('MMMM YY')}
   </button>
 );
@@ -72,35 +68,34 @@ class TableTransactions extends React.Component {
     const { actions } = this.props;
     const { type, currentMonth } = this.state;
 
-    const start = moment(currentMonth).startOf('month').toISOString();
-    const end = moment(currentMonth).endOf('month').toISOString();
+    const start = moment(currentMonth)
+      .startOf('month')
+      .toISOString();
+    const end = moment(currentMonth)
+      .endOf('month')
+      .toISOString();
 
     const query = {
       batch: 'Categories',
       order: 'transactionDate.asc',
       type,
-      transactionDate: [
-        start,
-        end,
-      ].join(','),
+      transactionDate: [start, end].join(','),
     };
 
     await actions.transactions.list(query);
   }
 
   changeTab(typeTab, type) {
-    this.setState({
-      [typeTab]: type,
-    }, this.getTransactions);
+    this.setState(
+      {
+        [typeTab]: type,
+      },
+      this.getTransactions,
+    );
   }
 
   render() {
-    const {
-      type,
-      currentMonth,
-      nextMonth,
-      previousMonth,
-    } = this.state;
+    const { type, currentMonth, nextMonth, previousMonth } = this.state;
     const { transactions } = this.props;
 
     return (
@@ -110,10 +105,9 @@ class TableTransactions extends React.Component {
             <button
               type="button"
               id="tab-in"
-              className={classname(
-                'tab-in-out__tab',
-                { 'tab-in-out__tab--in-actived': type === 'in' },
-              )}
+              className={classname('tab-in-out__tab', {
+                'tab-in-out__tab--in-actived': type === 'in',
+              })}
               onClick={() => this.changeTab('type', 'in')}
             >
               In
@@ -121,17 +115,20 @@ class TableTransactions extends React.Component {
             <button
               type="button"
               id="tab-out"
-              className={classname(
-                'tab-in-out__tab',
-                { 'tab-in-out__tab--out-actived': type === 'out' },
-              )}
+              className={classname('tab-in-out__tab', {
+                'tab-in-out__tab--out-actived': type === 'out',
+              })}
               onClick={() => this.changeTab('type', 'out')}
             >
               Out
             </button>
           </div>
           <div className="tab-months">
-            <ButtonNavigation onClick={this.onNavigate} direction="previous" month={previousMonth} />
+            <ButtonNavigation
+              onClick={this.onNavigate}
+              direction="previous"
+              month={previousMonth}
+            />
             <span className="tab-months__current">{currentMonth.format('MMMM YY')}</span>
             <ButtonNavigation onClick={this.onNavigate} direction="next" month={nextMonth} />
           </div>
@@ -173,13 +170,15 @@ TableTransactions.propTypes = {
     }).isRequired,
   }).isRequired,
   transactions: PropTypes.shape({
-    data: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number,
-      transactionDate: PropTypes.string,
-      name: PropTypes.string,
-      CategoryId: PropTypes.number,
-      value: PropTypes.string,
-    })),
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        transactionDate: PropTypes.string,
+        name: PropTypes.string,
+        CategoryId: PropTypes.number,
+        value: PropTypes.string,
+      }),
+    ),
   }),
 };
 
@@ -197,4 +196,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = ({ transactions }) => ({ transactions });
 
-export default connect(mapStateToProps, mapDispatchToProps)(TableTransactions);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(TableTransactions);

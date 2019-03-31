@@ -2,9 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import Spin from '../../src/components/Spin';
 
-const setup = Component => (props = {}) => (
-  <Component {...props} />
-);
+const setup = Component => (props = {}) => <Component {...props} />;
 
 describe('Spin', () => {
   let Component;

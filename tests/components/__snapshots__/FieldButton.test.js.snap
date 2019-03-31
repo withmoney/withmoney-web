@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FieldButton should render a component correctly 1`] = `
+<div
+  className="field"
+>
+  <button
+    className="button"
+    type="button"
+  >
+    Text
+  </button>
+</div>
+`;
