@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import TableTransactions from 'components/TableTransactions';
 import HeaderPage from 'components/HeaderPage';
 import InOutPercent from 'components/InOutPercent';
@@ -6,6 +7,9 @@ import AccountTotal from 'components/AccountTotal';
 
 const Dashboard = () => (
   <div className="page">
+    <Helmet>
+      <body className="page-dashboard" />
+    </Helmet>
     <HeaderPage />
     <div className="page-wrapper">
       <div className="page-content">
