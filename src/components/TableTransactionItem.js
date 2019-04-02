@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import * as TransactionsActions from '../store/modules/transactions';
-import InputInline from './InputInline';
-import If from './render-utils/If';
-import ButtonRounded from './ButtonRounded';
+import * as TransactionsActions from 'store/transactions';
+import InputInline from 'components/InputInline';
+import If from 'components/render-utils/If';
+import ButtonRounded from 'components/ButtonRounded';
 
 class TransactionsItem extends React.Component {
   constructor(props) {

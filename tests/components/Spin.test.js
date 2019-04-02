@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Spin from '../../src/components/Spin';
+import Spin from 'components/Spin';
 
 const setup = Component => (props = {}) => <Component {...props} />;
 

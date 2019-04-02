@@ -2,11 +2,11 @@ import React, { Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import * as UserApi from '../api/User';
-import * as UserAction from '../store/modules/user';
-import BoxForm from '../components/BoxForm';
-import FieldInput from '../components/FieldInput';
-import FieldButton from '../components/FieldButton';
+import * as UserApi from 'api/User';
+import * as UserAction from 'store/user';
+import BoxForm from 'components/BoxForm';
+import FieldInput from 'components/FieldInput';
+import FieldButton from 'components/FieldButton';
 
 class Signup extends React.Component {
   constructor(props) {

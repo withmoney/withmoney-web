@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TransactionsItem from './TableTransactionItem';
+import TransactionsItem from 'components/TableTransactionItem';
 
 const TransactionsList = ({ list }) => {
   if (!list.length) {

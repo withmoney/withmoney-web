@@ -1,5 +1,5 @@
 import localStorage from 'localStorage';
-import checkAuth from '../../src/utils/checkAuth';
+import checkAuth from 'app/utils/checkAuth';
 
 jest.mock('localStorage', () => ({
   getItem: jest.fn(),

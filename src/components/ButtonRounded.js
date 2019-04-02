@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import Spin from './Spin';
-import If from './render-utils/If';
+import Spin from 'components/Spin';
+import If from 'components/render-utils/If';
 
 const ButtonRounded = ({ children, medium, isLoading, ...otherProps }) => (
   <button

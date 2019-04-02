@@ -3,11 +3,11 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import * as UserApi from '../api/User';
-import * as UserAction from '../store/modules/user';
-import BoxForm from '../components/BoxForm';
-import FieldInput from '../components/FieldInput';
-import FieldButton from '../components/FieldButton';
+import * as UserApi from 'api/User';
+import * as UserAction from 'store/user';
+import BoxForm from 'components/BoxForm';
+import FieldInput from 'components/FieldInput';
+import FieldButton from 'components/FieldButton';
 
 class Login extends React.Component {
   static propTypes = {

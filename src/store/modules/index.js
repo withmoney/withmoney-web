@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import user from './user';
-import transactions from './transactions';
+import user from 'store/user';
+import transactions from 'store/transactions';
 
 export default combineReducers({
   user,

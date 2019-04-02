@@ -1,8 +1,8 @@
 import React from 'react';
-import TableTransactions from '../components/TableTransactions';
-import HeaderPage from '../components/HeaderPage';
-import InOutPercent from '../components/InOutPercent';
-import AccountTotal from '../components/AccountTotal';
+import TableTransactions from 'components/TableTransactions';
+import HeaderPage from 'components/HeaderPage';
+import InOutPercent from 'components/InOutPercent';
+import AccountTotal from 'components/AccountTotal';
 
 const Dashboard = () => (
   <div className="page">

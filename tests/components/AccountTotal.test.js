@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer';
-import AccountTotal from '../../src/components/AccountTotal';
+import AccountTotal from 'components/AccountTotal';
 
 describe('AccountTotal', () => {
   let Component;

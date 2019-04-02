@@ -1,7 +1,7 @@
-import fetch from '../../src/api/fetch';
-import * as Transactions from '../../src/api/Transactions';
+import fetch from 'api/fetch';
+import * as Transactions from 'api/Transactions';
 
-jest.mock('../../src/api/fetch', () => ({
+jest.mock('api/fetch', () => ({
   get: jest.fn().mockResolvedValue({ hello: 'world' }),
   put: jest.fn().mockResolvedValue({ hello: 'world' }),
 }));
