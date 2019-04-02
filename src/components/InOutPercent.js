@@ -1,5 +1,5 @@
 import React from 'react';
-import PercentBar from './PercentBar';
+import PercentBar from 'components/PercentBar';
 
 const InOutPercent = () => (
   <div className="inout-percent">

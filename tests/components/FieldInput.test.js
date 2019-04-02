@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer';
-import FieldInput from '../../src/components/FieldInput';
+import FieldInput from 'components/FieldInput';
 
 describe('FieldInput', () => {
   let Component;

@@ -1,4 +1,4 @@
-import * as Transactions from '../../api/Transactions';
+import * as Transactions from 'api/Transactions';
 
 const TRANSACTION_SUCCESS = 'transaction/success';
 const TRANSACTION_SUCCESS_PUT = 'transaction/success_put';

@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer';
-import FieldButton from '../../src/components/FieldButton';
+import FieldButton from 'components/FieldButton';
 
 describe('FieldButton', () => {
   let Component;

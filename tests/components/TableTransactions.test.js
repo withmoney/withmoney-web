@@ -3,12 +3,12 @@ import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import TableTransactions from '../../src/components/TableTransactions';
-import * as Transactions from '../../src/api/Transactions';
+import TableTransactions from 'components/TableTransactions';
+import * as Transactions from 'api/Transactions';
 
 const mockStore = configureStore([thunk]);
 
-jest.mock('../../src/api/Transactions', () => ({
+jest.mock('api/Transactions', () => ({
   list: jest.fn().mockResolvedValue(true),
 }));
 

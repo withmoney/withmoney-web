@@ -1,4 +1,4 @@
-import { mountQuery } from '../../src/utils/parse';
+import { mountQuery } from 'app/utils/parse';
 
 describe('Utils parse', () => {
   describe('mountQuery', () => {

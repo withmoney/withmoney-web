@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { catchInvalidToken } from '../utils/parse';
+import { catchInvalidToken } from 'app/utils/parse';
 
 const newAxios = axios.create({
   baseURL: `${process.env.MYMONEY_API}`,

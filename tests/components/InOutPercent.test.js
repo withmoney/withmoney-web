@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer';
-import InOutPercent from '../../src/components/InOutPercent';
+import InOutPercent from 'components/InOutPercent';
 
 describe('InOutPercent', () => {
   let Component;

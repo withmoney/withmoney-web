@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import classname from 'classnames';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
-import ButtonRounded from './ButtonRounded';
-import * as TransactionsActions from '../store/modules/transactions';
-import TransactionsList from './TableTransactionList';
+import ButtonRounded from 'components/ButtonRounded';
+import * as TransactionsActions from 'store/transactions';
+import TransactionsList from 'components/TableTransactionList';
 
 const ButtonNavigation = ({ onClick, direction, month }) => (
   <button type="button" className="tab-months__navigation" onClick={onClick(direction)}>

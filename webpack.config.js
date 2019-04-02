@@ -27,17 +27,13 @@ const CopyWebpackPluginConfig = new CopyWebpackPlugin([
 
 const CleanWebpackPluginConfig = new CleanWebpackPlugin();
 
-
 function resolve(dir) {
   return path.join(__dirname, '.', dir);
 }
 
 module.exports = {
   mode: 'development',
-  entry: [
-    'webpack-hot-middleware/client?path=__webpack_hmr&reload=true',
-    resolve('src/main.js'),
-  ],
+  entry: ['webpack-hot-middleware/client?path=__webpack_hmr&reload=true', resolve('src/main.js')],
   output: {
     path: resolve('dist'),
     filename: 'js/[name].[hash].js',
@@ -74,6 +70,14 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.scss'],
+    alias: {
+      api: resolve('src/api'),
+      app: resolve('src/'),
+      components: resolve('src/components'),
+      pages: resolve('src/pages'),
+      store: resolve('src/store/modules'),
+      styles: resolve('src/assets/style.scss'),
+    },
   },
   devtool: 'source-map',
   plugins: [

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import fetch from '../../src/api/fetch';
+import fetch from 'api/fetch';
 
 jest.mock('axios', () => ({
   create: jest.fn().mockReturnValue({

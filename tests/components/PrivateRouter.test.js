@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import PrivateRouter from '../../src/components/PrivateRouter';
+import PrivateRouter from 'components/PrivateRouter';
 
 jest.mock('react-router-dom', () => ({
   Route: 'route',

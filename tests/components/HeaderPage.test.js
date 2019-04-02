@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer';
-import HeaderPage from '../../src/components/HeaderPage';
+import HeaderPage from 'components/HeaderPage';
 
 describe('HeaderPage', () => {
   let Component;

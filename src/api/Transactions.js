@@ -1,5 +1,5 @@
-import fetch from './fetch';
-import { mountQuery } from '../utils/parse';
+import fetch from 'api/fetch';
+import { mountQuery } from 'app/utils/parse';
 
 export const list = (query = {}) => fetch.get(mountQuery('transactions', query));
 

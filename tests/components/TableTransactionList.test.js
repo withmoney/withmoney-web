@@ -3,7 +3,7 @@ import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import TableTransactionList from '../../src/components/TableTransactionList';
+import TableTransactionList from 'components/TableTransactionList';
 
 describe('TableTransactionList', () => {
   let Component;
