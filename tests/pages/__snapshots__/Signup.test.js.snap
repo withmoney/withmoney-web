@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Signup should render a component correctly 1`] = `
+<div
+  className="box-form"
+>
+  <h1
+    className="box-form__title"
+  >
+    withmoney
+  </h1>
+  <form
+    className="box-form__form"
+    onSubmit={[Function]}
+  >
+    <h3
+      className="box-form__subtitle"
+    >
+      Sign Up
+    </h3>
+    <div
+      className="field"
+    >
+      <input
+        className="field__input"
+        id="name"
+        name="name"
+        onChange={[Function]}
+        placeholder="name"
+        type="text"
+      />
+    </div>
+    <div
+      className="field"
+    >
+      <input
+        className="field__input"
+        id="email"
+        name="email"
+        onChange={[Function]}
+        placeholder="email"
+        type="text"
+      />
+    </div>
+    <div
+      className="field"
+    >
+      <input
+        className="field__input"
+        id="password"
+        name="password"
+        onChange={[Function]}
+        placeholder="password"
+        type="password"
+      />
+    </div>
+    <div
+      className="field"
+    >
+      <input
+        className="field__input"
+        id="passwordConfirm"
+        name="passwordConfirm"
+        onChange={[Function]}
+        placeholder="confirm your password"
+        type="password"
+      />
+    </div>
+    <div
+      className="field"
+    >
+      <button
+        className="button"
+        type="submit"
+      >
+        Sign Up
+      </button>
+    </div>
+    <div
+      className="box-form__footer"
+    >
+      <span>
+        Do not have an account?
+      </span>
+      <a
+        href="/login"
+        onClick={[Function]}
+      >
+        Log In
+      </a>
+    </div>
+  </form>
+</div>
+`;

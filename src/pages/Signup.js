@@ -45,7 +45,7 @@ class Signup extends React.Component {
 
   handleChange({ target }) {
     this.setState({
-      [target.id]: target.value,
+      [target.name]: target.value,
     });
   }
 
@@ -80,19 +80,13 @@ class Signup extends React.Component {
     );
 
     return (
-      <Fragment>
-        <Helmet>
-          <title>Signup</title>
-          <body className="page-signup" />
-        </Helmet>
-        <BoxForm
-          title="withmoney"
-          subtitle="Sign Up"
-          onSubmit={this.onSave}
-          fields={this.renderFields()}
-          footer={footer}
-        />
-      </Fragment>
+      <BoxForm
+        title="withmoney"
+        subtitle="Sign Up"
+        onSubmit={this.onSave}
+        fields={this.renderFields()}
+        footer={footer}
+      />
     );
   }
 }
