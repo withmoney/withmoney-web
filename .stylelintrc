@@ -1,6 +1,6 @@
 {
   "plugins": ["stylelint-prettier"],
-  "extends": ["stylelint-config-prettier", "stylelint-config-rational-order"],
+  "extends": ["stylelint-config-rational-order"],
   "rules": {
     "indentation": 2,
     "string-quotes": "double",
