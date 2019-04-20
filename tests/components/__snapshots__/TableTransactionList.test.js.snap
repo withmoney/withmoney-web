@@ -1,38 +1,35 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TableTransactionList should render null when dont have any transaction 1`] = `null`;
+exports[`TableTransactionList should render null when dont have any transaction 1`] = `
+<div
+  className="table-transactions__no-data"
+>
+  No Transaction on this month.
+</div>
+`;
+
+exports[`TableTransactionList should render spin when loading status is true 1`] = `
+<div
+  className="table-transactions__loading"
+>
+  <img
+    alt="spin"
+    className="spin"
+    src="/static/img/spin-black.svg"
+  />
+</div>
+`;
 
 exports[`TableTransactionList should render table with list of transactions 1`] = `
-<div
-  className="table-transactions__row"
-  onDoubleClick={[Function]}
->
-  <div
-    className="table-transactions__col"
-  >
-    2018-08-01 20:80
-  </div>
-  <div
-    className="table-transactions__col"
-  >
-    Name
-  </div>
-  <div
-    className="table-transactions__col"
-  >
-    1
-  </div>
-  <div
-    className="table-transactions__col"
-  >
-    0.00
-  </div>
-  <div
-    className="table-transactions__col"
-  >
-    <input
-      type="checkbox"
-    />
-  </div>
-</div>
+<table-transaction-item
+  transaction={
+    Object {
+      "CategoryId": 1,
+      "id": 99,
+      "name": "Name",
+      "transactionDate": "2018-08-01 20:80",
+      "value": "0.00",
+    }
+  }
+/>
 `;

@@ -83,7 +83,7 @@ class TableTransactions extends React.Component {
       transactionDate: [start, end].join(','),
     };
 
-    await actions.transactions.list(query);
+    await actions.transaction.list(query);
   }
 
   changeTab(typeTab, type) {
@@ -142,9 +142,9 @@ class TableTransactions extends React.Component {
           <div className="table-transactions__header-col">Is Paid?</div>
         </div>
         <div className="table-transactions__body">
-          <TransactionsList list={transactions.data} />
+          <TransactionsList list={transactions.data} isLoading={transactions.isLoading} />
           <div className="table-transactions__action">
-            <ButtonRounded>Add Transaction</ButtonRounded>
+            <ButtonRounded disabled={transactions.isLoading}>Add Transaction</ButtonRounded>
           </div>
         </div>
         <div className="table-transactions__footer">
@@ -168,18 +168,20 @@ TableTransactions.propTypes = {
   actions: TransactionActionsTypes.isRequired,
   transactions: PropTypes.shape({
     data: TransactionListTypes,
+    isLoading: PropTypes.bool,
   }),
 };
 
 TableTransactions.defaultProps = {
   transactions: {
     data: [],
+    isLoading: false,
   },
 };
 
 const mapDispatchToProps = dispatch => ({
   actions: {
-    transactions: bindActionCreators(TransactionsActions, dispatch),
+    transaction: bindActionCreators(TransactionsActions, dispatch),
   },
 });
 

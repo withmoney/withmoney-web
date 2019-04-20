@@ -11,6 +11,7 @@ const mockStore = configureStore([thunk]);
 jest.mock('api/Transactions', () => ({
   list: jest.fn().mockResolvedValue(true),
 }));
+jest.mock('components/TableTransactionList', () => 'table-transaction-list');
 
 describe('TableTransactions', () => {
   let now;

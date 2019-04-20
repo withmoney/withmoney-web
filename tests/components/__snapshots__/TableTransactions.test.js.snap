@@ -83,38 +83,20 @@ exports[`TableTransactions should render table with list of transactions 1`] = `
   <div
     className="table-transactions__body"
   >
-    <div
-      className="table-transactions__row"
-      onDoubleClick={[Function]}
-    >
-      <div
-        className="table-transactions__col"
-      >
-        2018-08-01 20:80
-      </div>
-      <div
-        className="table-transactions__col"
-      >
-        Name
-      </div>
-      <div
-        className="table-transactions__col"
-      >
-        1
-      </div>
-      <div
-        className="table-transactions__col"
-      >
-        0.00
-      </div>
-      <div
-        className="table-transactions__col"
-      >
-        <input
-          type="checkbox"
-        />
-      </div>
-    </div>
+    <table-transaction-list
+      isLoading={false}
+      list={
+        Array [
+          Object {
+            "CategoryId": 1,
+            "id": 99,
+            "name": "Name",
+            "transactionDate": "2018-08-01 20:80",
+            "value": "0.00",
+          },
+        ]
+      }
+    />
     <div
       className="table-transactions__action"
     >
@@ -255,6 +237,10 @@ exports[`TableTransactions should render with any one transaction entity 1`] = `
   <div
     className="table-transactions__body"
   >
+    <table-transaction-list
+      isLoading={false}
+      list={Array []}
+    />
     <div
       className="table-transactions__action"
     >
