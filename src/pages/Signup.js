@@ -80,13 +80,19 @@ class Signup extends React.Component {
     );
 
     return (
-      <BoxForm
-        title="withmoney"
-        subtitle="Sign Up"
-        onSubmit={this.onSave}
-        fields={this.renderFields()}
-        footer={footer}
-      />
+      <Fragment>
+        <Helmet>
+          <title>Signup</title>
+          <body className="page-signup" />
+        </Helmet>
+        <BoxForm
+          title="withmoney"
+          subtitle="Sign Up"
+          onSubmit={this.onSave}
+          fields={this.renderFields()}
+          footer={footer}
+        />
+      </Fragment>
     );
   }
 }
