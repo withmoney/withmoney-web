@@ -45,7 +45,7 @@ class Signup extends React.Component {
 
   handleChange({ target }) {
     this.setState({
-      [target.id]: target.value,
+      [target.name]: target.value,
     });
   }
 

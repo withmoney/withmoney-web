@@ -10,9 +10,7 @@
     "test-framework-setup.js",
     "jest.config.json"
   ],
-  "collectCoverageFrom": [
-    "<rootDir>/src/**/*.{js,jsx}"
-  ],
+  "collectCoverageFrom": ["<rootDir>/src/**/*.{js,jsx}"],
   "moduleNameMapper": {
     "^app(.*)$": "<rootDir>/src$1",
     "^api(.*)$": "<rootDir>/src/api$1",
@@ -21,15 +19,10 @@
     "^store(.*)$": "<rootDir>/src/store/modules$1"
   },
   "snapshotSerializers": ["enzyme-to-json/serializer"],
-  "setupFiles": [
-    "<rootDir>/tests/test-framework-setup.js"
-  ],
+  "setupFiles": ["<rootDir>/tests/test-framework-setup.js"],
   "rootDir": "../",
-  "testMatch": [
-    "<rootDir>/tests/**/?(*.)test.{js,jsx}"
-  ],
+  "testMatch": ["<rootDir>/tests/**/?(*.)test.{js,jsx}"],
   "transform": {
     "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
   }
 }
-
