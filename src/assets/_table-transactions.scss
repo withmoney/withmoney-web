@@ -95,6 +95,21 @@
   &__label {
     padding-bottom: 5px;
   }
+
+  &__no-data {
+    @extend %col;
+    text-align: center;
+  }
+
+  &__loading {
+    @extend %col;
+    text-align: center;
+
+    .spin {
+      width: 14px;
+      transform: scale(2);
+    }
+  }
 }
 
 .tab-in-out {
