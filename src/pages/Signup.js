@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import * as UserApi from 'api/User';
 import * as UserAction from 'store/user';
 import BoxForm from 'components/BoxForm';
@@ -70,24 +71,28 @@ class Signup extends React.Component {
     );
   }
 
-  renderFooter() {
-    return (
+  render() {
+    const footer = (
       <Fragment>
-        <span>Do not have an account?</span>
+        <span>Do Already have an account?</span>
         <Link to="/login">Log In</Link>
       </Fragment>
     );
-  }
 
-  render() {
     return (
-      <BoxForm
-        title="withmoney"
-        subtitle="Sign Up"
-        onSubmit={this.onSave}
-        fields={this.fields}
-        footer={this.footer}
-      />
+      <Fragment>
+        <Helmet>
+          <title>Signup</title>
+          <body className="page-signup" />
+        </Helmet>
+        <BoxForm
+          title="withmoney"
+          subtitle="Sign Up"
+          onSubmit={this.onSave}
+          fields={this.renderFields()}
+          footer={footer}
+        />
+      </Fragment>
     );
   }
 }

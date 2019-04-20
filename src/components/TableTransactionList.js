@@ -1,6 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import TransactionsItem from 'components/TableTransactionItem';
+import { TransactionListTypes } from 'app/types/transactions';
 
 const TransactionsList = ({ list }) => {
   if (!list.length) {
@@ -11,15 +11,7 @@ const TransactionsList = ({ list }) => {
 };
 
 TransactionsList.propTypes = {
-  list: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number,
-      transactionDate: PropTypes.string,
-      name: PropTypes.string,
-      CategoryId: PropTypes.number,
-      value: PropTypes.string,
-    }),
-  ),
+  list: TransactionListTypes,
 };
 
 TransactionsList.defaultProps = {

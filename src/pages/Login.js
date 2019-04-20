@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { Helmet } from 'react-helmet';
 import * as UserApi from 'api/User';
 import * as UserAction from 'store/user';
 import BoxForm from 'components/BoxForm';
@@ -79,13 +80,19 @@ class Login extends React.Component {
     );
 
     return (
-      <BoxForm
-        title="withmoney"
-        subtitle="Log in"
-        onSubmit={this.onSave}
-        fields={fields}
-        footer={footer}
-      />
+      <Fragment>
+        <Helmet>
+          <title>Login</title>
+          <body className="page-login" />
+        </Helmet>
+        <BoxForm
+          title="withmoney"
+          subtitle="Log in"
+          onSubmit={this.onSave}
+          fields={fields}
+          footer={footer}
+        />
+      </Fragment>
     );
   }
 }

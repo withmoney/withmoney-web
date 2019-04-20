@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
@@ -7,6 +6,7 @@ import * as TransactionsActions from 'store/transactions';
 import InputInline from 'components/InputInline';
 import If from 'components/render-utils/If';
 import ButtonRounded from 'components/ButtonRounded';
+import { TransactionActionsTypes, TransactionTypes } from 'app/types/transactions';
 
 class TransactionsItem extends React.Component {
   constructor(props) {
@@ -83,7 +83,7 @@ class TransactionsItem extends React.Component {
     } = this.props;
 
     return (
-      <>
+      <Fragment>
         <If condition={isEditing}>
           <div className={classCol}>
             <ButtonRounded type="button" onClick={this.save} medium isLoading={isLoading}>
@@ -96,7 +96,7 @@ class TransactionsItem extends React.Component {
             <input type="checkbox" />
           </div>
         </If>
-      </>
+      </Fragment>
     );
   }
 
@@ -135,19 +135,8 @@ class TransactionsItem extends React.Component {
 }
 
 TransactionsItem.propTypes = {
-  actions: PropTypes.shape({
-    transaction: PropTypes.shape({
-      put: PropTypes.func.isRequired,
-    }).isRequired,
-  }).isRequired,
-  transaction: PropTypes.shape({
-    id: PropTypes.number,
-    transactionDate: PropTypes.string,
-    name: PropTypes.string,
-    CategoryId: PropTypes.number,
-    value: PropTypes.string,
-    isLoading: PropTypes.bool,
-  }),
+  actions: TransactionActionsTypes.isRequired,
+  transaction: TransactionTypes,
 };
 
 TransactionsItem.defaultProps = {

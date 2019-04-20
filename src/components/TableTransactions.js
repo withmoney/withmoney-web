@@ -7,6 +7,7 @@ import moment from 'moment-timezone';
 import ButtonRounded from 'components/ButtonRounded';
 import * as TransactionsActions from 'store/transactions';
 import TransactionsList from 'components/TableTransactionList';
+import { TransactionActionsTypes, TransactionListTypes } from 'app/types/transactions';
 
 const ButtonNavigation = ({ onClick, direction, month }) => (
   <button type="button" className="tab-months__navigation" onClick={onClick(direction)}>
@@ -164,21 +165,9 @@ class TableTransactions extends React.Component {
 }
 
 TableTransactions.propTypes = {
-  actions: PropTypes.shape({
-    transactions: PropTypes.shape({
-      list: PropTypes.func.isRequired,
-    }).isRequired,
-  }).isRequired,
+  actions: TransactionActionsTypes.isRequired,
   transactions: PropTypes.shape({
-    data: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number,
-        transactionDate: PropTypes.string,
-        name: PropTypes.string,
-        CategoryId: PropTypes.number,
-        value: PropTypes.string,
-      }),
-    ),
+    data: TransactionListTypes,
   }),
 };
 

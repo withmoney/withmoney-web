@@ -10,7 +10,15 @@
 @import "./percent-bar";
 
 body {
-  height: 100vh;
   font-family: "Roboto", sans-serif;
   background-color: #FFFFFF;
+}
+
+.page-login,
+.page-signup {
+  background-color: #525252;
+}
+
+[root-react] {
+  height: 100vh;
 }
