@@ -74,7 +74,7 @@ class Signup extends React.Component {
   render() {
     const footer = (
       <Fragment>
-        <span>Do not have an account?</span>
+        <span>Do Already have an account?</span>
         <Link to="/login">Log In</Link>
       </Fragment>
     );
