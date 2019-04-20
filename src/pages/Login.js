@@ -80,7 +80,7 @@ class Login extends React.Component {
     );
 
     return (
-      <>
+      <Fragment>
         <Helmet>
           <title>Login</title>
           <body className="page-login" />
@@ -92,7 +92,7 @@ class Login extends React.Component {
           fields={fields}
           footer={footer}
         />
-      </>
+      </Fragment>
     );
   }
 }

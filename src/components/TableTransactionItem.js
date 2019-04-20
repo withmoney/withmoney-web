@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -83,7 +83,7 @@ class TransactionsItem extends React.Component {
     } = this.props;
 
     return (
-      <>
+      <Fragment>
         <If condition={isEditing}>
           <div className={classCol}>
             <ButtonRounded type="button" onClick={this.save} medium isLoading={isLoading}>
@@ -96,7 +96,7 @@ class TransactionsItem extends React.Component {
             <input type="checkbox" />
           </div>
         </If>
-      </>
+      </Fragment>
     );
   }
 
