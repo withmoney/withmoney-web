@@ -80,7 +80,7 @@ exports[`Signup should render a component correctly 1`] = `
       className="box-form__footer"
     >
       <span>
-        Do not have an account?
+        Do Already have an account?
       </span>
       <a
         href="/login"
