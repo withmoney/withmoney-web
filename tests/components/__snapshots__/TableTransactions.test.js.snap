@@ -92,7 +92,8 @@ exports[`TableTransactions should render table with list of transactions 1`] = `
             "id": 99,
             "name": "Name",
             "transactionDate": "2018-08-01 20:80",
-            "value": "0.00",
+            "type": "in",
+            "value": "10.00",
           },
         ]
       }
@@ -137,17 +138,17 @@ exports[`TableTransactions should render table with list of transactions 1`] = `
       <div
         className="table-transactions__value"
       >
-        $ 5,000.12
+        $10.00
       </div>
       <div
         className="table-transactions__value"
       >
-        $ 5,000.12
+        $20.00
       </div>
       <div
         className="table-transactions__value"
       >
-        $ 5,000.12
+        $30.00
       </div>
     </div>
   </div>
@@ -251,48 +252,6 @@ exports[`TableTransactions should render with any one transaction entity 1`] = `
       >
         Add Transaction
       </button>
-    </div>
-  </div>
-  <div
-    className="table-transactions__footer"
-  >
-    <div
-      className="table-transactions__labels"
-    >
-      <div
-        className="table-transactions__label"
-      >
-        All Outs
-      </div>
-      <div
-        className="table-transactions__label"
-      >
-        All In
-      </div>
-      <div
-        className="table-transactions__label"
-      >
-        Total
-      </div>
-    </div>
-    <div
-      className="table-transactions__values"
-    >
-      <div
-        className="table-transactions__value"
-      >
-        $ 5,000.12
-      </div>
-      <div
-        className="table-transactions__value"
-      >
-        $ 5,000.12
-      </div>
-      <div
-        className="table-transactions__value"
-      >
-        $ 5,000.12
-      </div>
     </div>
   </div>
 </div>

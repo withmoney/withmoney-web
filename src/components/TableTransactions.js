@@ -7,6 +7,7 @@ import moment from 'moment-timezone';
 import ButtonRounded from 'components/ButtonRounded';
 import * as TransactionsActions from 'store/transactions';
 import TransactionsList from 'components/TableTransactionList';
+import TableTransactionsFooter from 'components/TableTransactionsFooter';
 import { TransactionActionsTypes, TransactionListTypes } from 'app/types/transactions';
 
 const ButtonNavigation = ({ onClick, direction, month }) => (
@@ -67,7 +68,7 @@ class TableTransactions extends React.Component {
 
   async getTransactions() {
     const { actions } = this.props;
-    const { type, currentMonth } = this.state;
+    const { currentMonth } = this.state;
 
     const start = moment(currentMonth)
       .startOf('month')
@@ -79,7 +80,6 @@ class TableTransactions extends React.Component {
     const query = {
       batch: 'Categories',
       order: 'transactionDate.asc',
-      type,
       transactionDate: [start, end].join(','),
     };
 
@@ -87,12 +87,18 @@ class TableTransactions extends React.Component {
   }
 
   changeTab(typeTab, type) {
-    this.setState(
-      {
-        [typeTab]: type,
-      },
-      this.getTransactions,
-    );
+    this.setState({
+      [typeTab]: type,
+    });
+  }
+
+  transactionByType() {
+    const {
+      transactions: { data: transactions },
+    } = this.props;
+    const { type } = this.state;
+
+    return transactions.filter(transaction => transaction.type === type);
   }
 
   isFirstLoading() {
@@ -148,23 +154,12 @@ class TableTransactions extends React.Component {
           <div className="table-transactions__header-col">Is Paid?</div>
         </div>
         <div className="table-transactions__body">
-          <TransactionsList list={transactions.data} isLoading={this.isFirstLoading()} />
+          <TransactionsList list={this.transactionByType()} isLoading={this.isFirstLoading()} />
           <div className="table-transactions__action">
             <ButtonRounded disabled={transactions.isLoading}>Add Transaction</ButtonRounded>
           </div>
         </div>
-        <div className="table-transactions__footer">
-          <div className="table-transactions__labels">
-            <div className="table-transactions__label">All Outs</div>
-            <div className="table-transactions__label">All In</div>
-            <div className="table-transactions__label">Total</div>
-          </div>
-          <div className="table-transactions__values">
-            <div className="table-transactions__value">$ 5,000.12</div>
-            <div className="table-transactions__value">$ 5,000.12</div>
-            <div className="table-transactions__value">$ 5,000.12</div>
-          </div>
-        </div>
+        <TableTransactionsFooter transactions={transactions.data} />
       </div>
     );
   }
