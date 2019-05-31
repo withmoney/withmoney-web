@@ -95,6 +95,12 @@ class TableTransactions extends React.Component {
     );
   }
 
+  isFirstLoading() {
+    const { transactions } = this.props;
+
+    return transactions.isLoading && !transactions.data.length;
+  }
+
   render() {
     const { type, currentMonth, nextMonth, previousMonth } = this.state;
     const { transactions } = this.props;
@@ -142,7 +148,7 @@ class TableTransactions extends React.Component {
           <div className="table-transactions__header-col">Is Paid?</div>
         </div>
         <div className="table-transactions__body">
-          <TransactionsList list={transactions.data} isLoading={transactions.isLoading} />
+          <TransactionsList list={transactions.data} isLoading={this.isFirstLoading()} />
           <div className="table-transactions__action">
             <ButtonRounded disabled={transactions.isLoading}>Add Transaction</ButtonRounded>
           </div>
