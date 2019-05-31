@@ -28,7 +28,7 @@ exports[`TableTransactionList should render table with list of transactions 1`] 
       "id": 99,
       "name": "Name",
       "transactionDate": "2018-08-01 20:80",
-      "value": "0.00",
+      "value": "10.00",
     }
   }
 />
