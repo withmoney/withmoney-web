@@ -9,7 +9,7 @@ import * as Transactions from 'api/Transactions';
 const mockStore = configureStore([thunk]);
 
 jest.mock('api/Transactions', () => ({
-  list: jest.fn().mockResolvedValue(true),
+  list: jest.fn().mockResolvedValue({}),
 }));
 jest.mock('components/TableTransactionList', () => 'table-transaction-list');
 
@@ -39,15 +39,7 @@ describe('TableTransactions', () => {
 
   it('should render table with list of transactions', () => {
     Transactions.list.mockResolvedValueOnce({
-      data: [
-        {
-          id: 99,
-          name: 'Name',
-          transactionDate: '2018-08-01 20:80',
-          CategoryId: 1,
-          value: '0.00',
-        },
-      ],
+      data: [],
     });
 
     const ComponentWithData = global.withRedux(
@@ -60,7 +52,16 @@ describe('TableTransactions', () => {
               name: 'Name',
               transactionDate: '2018-08-01 20:80',
               CategoryId: 1,
-              value: '0.00',
+              type: 'in',
+              value: '10.00',
+            },
+            {
+              id: 101,
+              name: 'Name',
+              transactionDate: '2018-08-01 20:80',
+              CategoryId: 1,
+              type: 'out',
+              value: '20.00',
             },
           ],
         },
@@ -81,7 +82,6 @@ describe('TableTransactions', () => {
       batch: 'Categories',
       order: 'transactionDate.asc',
       transactionDate: '2018-07-01T00:00:00.000Z,2018-07-31T23:59:59.999Z',
-      type: 'in',
     });
 
     wrapper.find('#tab-out').simulate('click');
@@ -90,7 +90,6 @@ describe('TableTransactions', () => {
       batch: 'Categories',
       order: 'transactionDate.asc',
       transactionDate: '2018-07-01T00:00:00.000Z,2018-07-31T23:59:59.999Z',
-      type: 'out',
     });
 
     wrapper.find('#tab-in').simulate('click');
@@ -99,7 +98,6 @@ describe('TableTransactions', () => {
       batch: 'Categories',
       order: 'transactionDate.asc',
       transactionDate: '2018-07-01T00:00:00.000Z,2018-07-31T23:59:59.999Z',
-      type: 'in',
     });
   });
 });

@@ -35,7 +35,7 @@ describe('TableTransactionList', () => {
             name: 'Name',
             transactionDate: '2018-08-01 20:80',
             CategoryId: 1,
-            value: '0.00',
+            value: '10.00',
           },
         ],
       }),
