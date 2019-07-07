@@ -94,11 +94,11 @@ class TableTransactions extends React.Component {
 
   transactionByType() {
     const {
-      transactions: { data: transactions },
+      transactions: { data },
     } = this.props;
     const { type } = this.state;
 
-    return transactions.filter(transaction => transaction.type === type);
+    return data.filter(transaction => transaction.type === type);
   }
 
   isFirstLoading() {
@@ -112,7 +112,7 @@ class TableTransactions extends React.Component {
     const { transactions } = this.props;
 
     const columns = [
-      { name: 'isPaid', label: 'Is Paid?', style: { flexBasis: '15%' }},
+      { name: 'isPaid', label: 'Is Paid?', style: { flexBasis: '15%' } },
       { name: 'transactionDate', label: 'Date', style: { flexBasis: '15%' } },
       { name: 'name', label: 'Name', style: { flexBasis: '20%' } },
       { name: 'CategoryId', label: 'Category', style: { flexBasis: '20%' } },
@@ -157,14 +157,8 @@ class TableTransactions extends React.Component {
         </div>
         <div className="table-transactions__header">
           {columns.map(column => (
-            <div
-              key={column.name}
-              className="table-transactions__header-col"
-              style={column.style}
-            >
-              <div className="table-transactions__header-col-inner">
-                {column.label}
-              </div>
+            <div key={column.name} className="table-transactions__header-col" style={column.style}>
+              <div className="table-transactions__header-col-inner">{column.label}</div>
             </div>
           ))}
         </div>
@@ -175,9 +169,7 @@ class TableTransactions extends React.Component {
             isLoading={this.isFirstLoading()}
           />
           <div className="table-transactions__action">
-            <ButtonRounded disabled={transactions.isLoading}>
-              Add Transaction
-            </ButtonRounded>
+            <ButtonRounded disabled={transactions.isLoading}>Add Transaction</ButtonRounded>
           </div>
         </div>
         <TableTransactionsFooter transactions={transactions.data} />

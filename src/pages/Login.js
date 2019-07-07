@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { Fragment } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';

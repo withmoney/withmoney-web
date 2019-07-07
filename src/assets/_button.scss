@@ -36,23 +36,22 @@
     background-color: darken(#1C791A, 15%);
   }
 
-  &+& {
+  & + & {
     margin-left: 15px;
   }
 
   &--gray {
-    background-color: #6d6d6d;
+    background-color: #6D6D6D;
 
     &:focus,
     &:hover {
-      background-color: darken(#6d6d6d, 7%);
+      background-color: darken(#6D6D6D, 7%);
     }
 
     &:active {
-      background-color: darken(#6d6d6d, 15%);
+      background-color: darken(#6D6D6D, 15%);
     }
   }
-
 
   &:disabled {
     cursor: not-allowed;
@@ -70,8 +69,8 @@
   }
 
   &--small {
-    border-radius: 5px;
     padding: 6px 10px;
+    border-radius: 5px;
   }
 
   &--medium,

@@ -120,6 +120,9 @@ class TransactionsItem extends React.Component {
 
   renderCell = field => {
     const { isEditing, formData } = this.state;
+    const {
+      transaction: { isLoading },
+    } = this.props;
 
     let children;
     const classCol = TransactionsItem.columnClass(isEditing, field.name);
@@ -134,7 +137,7 @@ class TransactionsItem extends React.Component {
           name={field.name}
           className="table-transactions__input"
           defaultValue={formData[field.name]}
-          disabled={this.props.transaction.isLoading}
+          disabled={isLoading}
           onChange={this.handleInput}
         />
       );
@@ -149,11 +152,14 @@ class TransactionsItem extends React.Component {
 
   render() {
     const { isEditing } = this.state;
-    const { columns } = this.props;
+    const {
+      columns,
+      transaction: { id },
+    } = this.props;
 
     return (
       <div
-        id={`transaction-${this.props.transaction.id}`}
+        id={`transaction-${id}`}
         className={classnames('table-transactions__row', {
           'table-transactions__row--is-editing': isEditing,
         })}
@@ -166,7 +172,7 @@ class TransactionsItem extends React.Component {
 
 TransactionsItem.propTypes = {
   actions: TransactionActionsTypes.isRequired,
-  columns: TransactionColumnsTypes,
+  columns: TransactionColumnsTypes.isRequired,
   transaction: TransactionTypes,
 };
 
