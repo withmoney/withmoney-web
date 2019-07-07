@@ -22,6 +22,52 @@ exports[`TableTransactionList should render spin when loading status is true 1`]
 
 exports[`TableTransactionList should render table with list of transactions 1`] = `
 <table-transaction-item
+  columns={
+    Array [
+      Object {
+        "label": "Is Paid?",
+        "name": "isPaid",
+        "style": Object {
+          "flexBasis": "15%",
+        },
+      },
+      Object {
+        "label": "Date",
+        "name": "transactionDate",
+        "style": Object {
+          "flexBasis": "15%",
+        },
+      },
+      Object {
+        "label": "Name",
+        "name": "name",
+        "style": Object {
+          "flexBasis": "20%",
+        },
+      },
+      Object {
+        "label": "Category",
+        "name": "CategoryId",
+        "style": Object {
+          "flexBasis": "20%",
+        },
+      },
+      Object {
+        "label": "Value",
+        "name": "value",
+        "style": Object {
+          "flexBasis": "15%",
+        },
+      },
+      Object {
+        "label": "Action",
+        "name": "action",
+        "style": Object {
+          "flexBasis": "15%",
+        },
+      },
+    ]
+  }
   transaction={
     Object {
       "CategoryId": 1,

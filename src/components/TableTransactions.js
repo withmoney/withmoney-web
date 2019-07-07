@@ -111,6 +111,15 @@ class TableTransactions extends React.Component {
     const { type, currentMonth, nextMonth, previousMonth } = this.state;
     const { transactions } = this.props;
 
+    const columns = [
+      { name: 'isPaid', label: 'Is Paid?', style: { flexBasis: '15%' }},
+      { name: 'transactionDate', label: 'Date', style: { flexBasis: '15%' } },
+      { name: 'name', label: 'Name', style: { flexBasis: '20%' } },
+      { name: 'CategoryId', label: 'Category', style: { flexBasis: '20%' } },
+      { name: 'value', label: 'Value', style: { flexBasis: '15%' } },
+      { name: 'action', label: 'Action', style: { flexBasis: '15%' } },
+    ];
+
     return (
       <div className="table-transactions">
         <div className="table-transactions__tabs">
@@ -147,16 +156,28 @@ class TableTransactions extends React.Component {
           </div>
         </div>
         <div className="table-transactions__header">
-          <div className="table-transactions__header-col">Date</div>
-          <div className="table-transactions__header-col">Name</div>
-          <div className="table-transactions__header-col">Category</div>
-          <div className="table-transactions__header-col">Value</div>
-          <div className="table-transactions__header-col">Is Paid?</div>
+          {columns.map(column => (
+            <div
+              key={column.name}
+              className="table-transactions__header-col"
+              style={column.style}
+            >
+              <div className="table-transactions__header-col-inner">
+                {column.label}
+              </div>
+            </div>
+          ))}
         </div>
         <div className="table-transactions__body">
-          <TransactionsList list={this.transactionByType()} isLoading={this.isFirstLoading()} />
+          <TransactionsList
+            columns={columns}
+            list={this.transactionByType()}
+            isLoading={this.isFirstLoading()}
+          />
           <div className="table-transactions__action">
-            <ButtonRounded disabled={transactions.isLoading}>Add Transaction</ButtonRounded>
+            <ButtonRounded disabled={transactions.isLoading}>
+              Add Transaction
+            </ButtonRounded>
           </div>
         </div>
         <TableTransactionsFooter transactions={transactions.data} />

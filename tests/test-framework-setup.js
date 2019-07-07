@@ -10,9 +10,9 @@ const setup = (Component, defaultProps = {}) => (props = {}) => (
   <Component {...defaultProps} {...props} />
 );
 
-const withRedux = (store, Component) => (props = {}) => (
+const withRedux = (store, Component, defaultProps = {}) => (props = {}) => (
   <Provider store={store}>
-    <Component {...props} />
+    <Component {...defaultProps} {...props} />
   </Provider>
 );
 

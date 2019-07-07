@@ -6,9 +6,20 @@ import * as TransactionsActions from 'store/transactions';
 import InputInline from 'components/InputInline';
 import If from 'components/render-utils/If';
 import ButtonRounded from 'components/ButtonRounded';
-import { TransactionActionsTypes, TransactionTypes } from 'app/types/transactions';
+import {
+  TransactionActionsTypes,
+  TransactionColumnsTypes,
+  TransactionTypes
+} from 'app/types/transactions';
 
 class TransactionsItem extends React.Component {
+  static columnClass(isEditing, column) {
+    return classnames('table-transactions__col', {
+      'table-transactions__col--is-editing': isEditing,
+      [`table-transactions__col--${column}`]: column,
+    });
+  }
+
   constructor(props) {
     super(props);
 
@@ -16,13 +27,6 @@ class TransactionsItem extends React.Component {
     this.onDoubleClick = this.onDoubleClick.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.save = this.save.bind(this);
-
-    this.fields = [
-      { name: 'transactionDate' },
-      { name: 'name' },
-      { name: 'CategoryId' },
-      { name: 'value' },
-    ];
 
     this.state = {
       isEditing: false,
@@ -85,16 +89,35 @@ class TransactionsItem extends React.Component {
     return (
       <Fragment>
         <If condition={isEditing}>
-          <div className={classCol}>
-            <ButtonRounded type="button" onClick={this.save} medium isLoading={isLoading}>
-              Save
-            </ButtonRounded>
-          </div>
+          <ButtonRounded
+            type="button"
+            className="btn-save"
+            onClick={this.save}
+            isLoading={isLoading}
+            medium
+          >
+            Save
+          </ButtonRounded>
+          <ButtonRounded
+            type="button"
+            className="btn-cancel"
+            onClick={this.toggleEditing}
+            isLoading={isLoading}
+            theme="gray"
+            small
+          >
+            <i className="fa fa-times" />
+          </ButtonRounded> 
         </If>
         <If condition={!isEditing}>
-          <div className={classCol}>
-            <input type="checkbox" />
-          </div>
+          <ButtonRounded
+            type="button"
+            className="btn-edit"
+            onClick={this.onDoubleClick}
+            small
+          >
+            <i className="fa fa-edit" />
+          </ButtonRounded> 
         </If>
       </Fragment>
     );
@@ -104,31 +127,48 @@ class TransactionsItem extends React.Component {
     const { isEditing, formData } = this.state;
     const {
       transaction: { isLoading },
+      columns
     } = this.props;
-    const classCol = classnames('table-transactions__col', {
-      'table-transactions__col--is-editing': isEditing,
-    });
-
+    
     return (
       <div
+        id={`transaction-${this.props.transaction.id}`}
         className={classnames('table-transactions__row', {
           'table-transactions__row--is-editing': isEditing,
         })}
-        onDoubleClick={this.onDoubleClick}
       >
-        {this.fields.map(field => (
-          <div key={field.name} className={classCol}>
-            <InputInline
-              isEditing={isEditing}
-              name={field.name}
-              className="table-transactions__input"
-              defaultValue={formData[field.name]}
-              disabled={isLoading}
-              onChange={this.handleInput}
-            />
-          </div>
-        ))}
-        {this.renderAction(classCol)}
+        {columns.map(field => {
+          let children;
+          const classCol = TransactionsItem.columnClass(isEditing, field.name)
+          if (field.name === 'isPaid') {
+            children = <input type="checkbox" />
+          } else if (field.name === 'action') {
+            children = this.renderAction(classCol)
+          } else {
+            children = (
+              <InputInline
+                isEditing={isEditing}
+                name={field.name}
+                className="table-transactions__input"
+                defaultValue={formData[field.name]}
+                disabled={isLoading}
+                onChange={this.handleInput}
+              />
+            )
+          }
+
+          return (
+            <div
+              key={field.name}
+              className={classCol}
+              style={field.style}
+            >
+              <div className="table-transactions__col-inner">
+                {children}
+              </div>
+           </div>
+          )
+        })}
       </div>
     );
   }
@@ -136,6 +176,7 @@ class TransactionsItem extends React.Component {
 
 TransactionsItem.propTypes = {
   actions: TransactionActionsTypes.isRequired,
+  columns: TransactionColumnsTypes,
   transaction: TransactionTypes,
 };
 

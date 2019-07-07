@@ -1,6 +1,8 @@
 %col {
   flex: 1;
-  padding: 15px 12px;
+}
+%col-inner {
+  flex: 1;
 }
 
 .table-transactions {
@@ -46,6 +48,11 @@
     &:nth-child(even) {
       background-color: #ECECEC;
     }
+
+    &-inner {
+      @extend %col-inner;
+      padding: 9px 12px;
+    }
   }
 
   &__col {
@@ -53,8 +60,29 @@
     display: flex;
 
     &--is-editing {
-      padding: 5px;
+      .table-transactions__col-inner {
+        padding: 5px;
+      }
     }
+    &--action {
+      .table-transactions__col-inner {
+        justify-content: flex-end;
+        padding: 9px 9px;
+      }
+      &.table-transactions__col--is-editing {
+        .table-transactions__col-inner {
+          padding: 8px 9px
+        }
+      }
+    }
+  }
+
+  &__col-inner {
+    @extend %col-inner;
+    padding: 9px 12px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   &__input {
