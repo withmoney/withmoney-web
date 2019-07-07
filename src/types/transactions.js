@@ -18,9 +18,11 @@ export const TransactionTypes = PropTypes.shape({
 
 export const TransactionListTypes = PropTypes.arrayOf(TransactionTypes);
 
-export const TransactionColumnsTypes = PropTypes.arrayOf(PropTypes.shape({
-  name: PropTypes.string.isRequired,
-  style: PropTypes.shape({
-    flexBasis: PropTypes.string.isRequired,
-  }).isRequired,
-})).isRequired;
+export const TransactionColumnsTypes = PropTypes.arrayOf(
+  PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    style: PropTypes.shape({
+      flexBasis: PropTypes.string.isRequired,
+    }).isRequired,
+  }),
+);

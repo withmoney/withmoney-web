@@ -1,6 +1,7 @@
 %col {
   flex: 1;
 }
+
 %col-inner {
   flex: 1;
 }
@@ -8,8 +9,8 @@
 .table-transactions {
   &__tabs {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     padding-right: 5px;
     padding-left: 5px;
   }
@@ -20,7 +21,6 @@
 
   &__row {
     display: flex;
-
     background-color: #FFFFFF;
     border-bottom: 1px solid #D7D7D7;
 
@@ -64,14 +64,16 @@
         padding: 5px;
       }
     }
+
     &--action {
       .table-transactions__col-inner {
         justify-content: flex-end;
         padding: 9px 9px;
       }
+
       &.table-transactions__col--is-editing {
         .table-transactions__col-inner {
-          padding: 8px 9px
+          padding: 8px 9px;
         }
       }
     }
@@ -79,10 +81,10 @@
 
   &__col-inner {
     @extend %col-inner;
-    padding: 9px 12px;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
+    justify-content: flex-start;
+    padding: 9px 12px;
   }
 
   &__input {
@@ -216,8 +218,8 @@
 
   &__current {
     display: inline-flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     width: 130px;
     color: black;
     background-color: white;

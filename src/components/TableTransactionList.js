@@ -16,18 +16,12 @@ const TransactionsList = ({ list, columns, isLoading }) => {
     return <div className="table-transactions__no-data">No Transaction on this month.</div>;
   }
 
-  return list.map(item => (
-    <TransactionsItem
-      key={item.id}
-      transaction={item}
-      columns={columns}
-    />
-  ));
+  return list.map(item => <TransactionsItem key={item.id} transaction={item} columns={columns} />);
 };
 
 TransactionsList.propTypes = {
   list: TransactionListTypes,
-  columns: TransactionColumnsTypes,
+  columns: TransactionColumnsTypes.isRequired,
   isLoading: PropTypes.bool,
 };
 
