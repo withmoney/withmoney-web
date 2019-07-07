@@ -15,7 +15,15 @@ describe('TableTransactionItem', () => {
   let Component;
 
   beforeAll(() => {
-    Component = global.withRedux(mockStore({}), TableTransactionItem);
+    const columns =  [
+      { name: 'isPaid', label: 'Is Paid?', style: { flexBasis: '15%' }},
+      { name: 'transactionDate', label: 'Date', style: { flexBasis: '15%' } },
+      { name: 'name', label: 'Name', style: { flexBasis: '20%' } },
+      { name: 'CategoryId', label: 'Category', style: { flexBasis: '20%' } },
+      { name: 'value', label: 'Value', style: { flexBasis: '15%' } },
+      { name: 'action', label: 'Action', style: { flexBasis: '15%' } },
+    ];
+    Component = global.withRedux(mockStore({}), TableTransactionItem, { columns });
   });
 
   it('should render a static row with transaction', () => {
@@ -50,7 +58,7 @@ describe('TableTransactionItem', () => {
 
     expect(wrapper.find('TransactionsItem').state().isEditing).toBe(false);
 
-    wrapper.find('.table-transactions__row').simulate('doubleclick');
+    wrapper.find('#transaction-55 .btn-edit').at(1).simulate('click');
 
     expect(wrapper.find('TransactionsItem').state().isEditing).toBe(true);
 
@@ -58,7 +66,7 @@ describe('TableTransactionItem', () => {
       .find('input[name="name"]')
       .simulate('change', { target: { name: 'name', value: 'Name New' } });
 
-    wrapper.find('button').simulate('click');
+    wrapper.find('.btn-save').at(1).simulate('click');
 
     expect(Transactions.put).toBeCalledWith(55, {
       id: 55,

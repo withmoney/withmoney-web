@@ -36,10 +36,23 @@
     background-color: darken(#1C791A, 15%);
   }
 
-  &--medium {
-    padding: 8px 16px;
-    font-size: 14px;
+  &+& {
+    margin-left: 15px;
   }
+
+  &--gray {
+    background-color: #6d6d6d;
+
+    &:focus,
+    &:hover {
+      background-color: darken(#6d6d6d, 7%);
+    }
+
+    &:active {
+      background-color: darken(#6d6d6d, 15%);
+    }
+  }
+
 
   &:disabled {
     cursor: not-allowed;
@@ -49,5 +62,22 @@
   .spin {
     width: 17px;
     transform: translate(0px, 1px) scale(2);
+  }
+
+  &--medium {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  &--small {
+    border-radius: 5px;
+    padding: 6px 10px;
+  }
+
+  &--medium,
+  &--small {
+    .spin {
+      width: 13px;
+    }
   }
 }

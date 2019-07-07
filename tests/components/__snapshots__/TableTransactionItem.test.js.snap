@@ -3,34 +3,102 @@
 exports[`TableTransactionItem should render a static row with transaction 1`] = `
 <div
   className="table-transactions__row"
-  onDoubleClick={[Function]}
+  id="transaction-55"
 >
   <div
-    className="table-transactions__col"
+    className="table-transactions__col table-transactions__col--isPaid"
+    style={
+      Object {
+        "flexBasis": "15%",
+      }
+    }
   >
-    2019-05-31
+    <div
+      className="table-transactions__col-inner"
+    >
+      <input
+        type="checkbox"
+      />
+    </div>
   </div>
   <div
-    className="table-transactions__col"
+    className="table-transactions__col table-transactions__col--transactionDate"
+    style={
+      Object {
+        "flexBasis": "15%",
+      }
+    }
   >
-    Name
+    <div
+      className="table-transactions__col-inner"
+    >
+      2019-05-31
+    </div>
   </div>
   <div
-    className="table-transactions__col"
+    className="table-transactions__col table-transactions__col--name"
+    style={
+      Object {
+        "flexBasis": "20%",
+      }
+    }
   >
-    4
+    <div
+      className="table-transactions__col-inner"
+    >
+      Name
+    </div>
   </div>
   <div
-    className="table-transactions__col"
+    className="table-transactions__col table-transactions__col--CategoryId"
+    style={
+      Object {
+        "flexBasis": "20%",
+      }
+    }
   >
-    40.5
+    <div
+      className="table-transactions__col-inner"
+    >
+      4
+    </div>
   </div>
   <div
-    className="table-transactions__col"
+    className="table-transactions__col table-transactions__col--value"
+    style={
+      Object {
+        "flexBasis": "15%",
+      }
+    }
   >
-    <input
-      type="checkbox"
-    />
+    <div
+      className="table-transactions__col-inner"
+    >
+      40.5
+    </div>
+  </div>
+  <div
+    className="table-transactions__col table-transactions__col--action"
+    style={
+      Object {
+        "flexBasis": "15%",
+      }
+    }
+  >
+    <div
+      className="table-transactions__col-inner"
+    >
+      <button
+        className="button-rounded button-rounded--small btn-edit"
+        disabled={false}
+        onClick={[Function]}
+        type="button"
+      >
+        <i
+          className="fa fa-edit"
+        />
+      </button>
+    </div>
   </div>
 </div>
 `;

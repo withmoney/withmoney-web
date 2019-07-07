@@ -56,34 +56,139 @@ exports[`TableTransactions should render table with list of transactions 1`] = `
   >
     <div
       className="table-transactions__header-col"
+      style={
+        Object {
+          "flexBasis": "15%",
+        }
+      }
     >
-      Date
+      <div
+        className="table-transactions__header-col-inner"
+      >
+        Is Paid?
+      </div>
     </div>
     <div
       className="table-transactions__header-col"
+      style={
+        Object {
+          "flexBasis": "15%",
+        }
+      }
     >
-      Name
+      <div
+        className="table-transactions__header-col-inner"
+      >
+        Date
+      </div>
     </div>
     <div
       className="table-transactions__header-col"
+      style={
+        Object {
+          "flexBasis": "20%",
+        }
+      }
     >
-      Category
+      <div
+        className="table-transactions__header-col-inner"
+      >
+        Name
+      </div>
     </div>
     <div
       className="table-transactions__header-col"
+      style={
+        Object {
+          "flexBasis": "20%",
+        }
+      }
     >
-      Value
+      <div
+        className="table-transactions__header-col-inner"
+      >
+        Category
+      </div>
     </div>
     <div
       className="table-transactions__header-col"
+      style={
+        Object {
+          "flexBasis": "15%",
+        }
+      }
     >
-      Is Paid?
+      <div
+        className="table-transactions__header-col-inner"
+      >
+        Value
+      </div>
+    </div>
+    <div
+      className="table-transactions__header-col"
+      style={
+        Object {
+          "flexBasis": "15%",
+        }
+      }
+    >
+      <div
+        className="table-transactions__header-col-inner"
+      >
+        Action
+      </div>
     </div>
   </div>
   <div
     className="table-transactions__body"
   >
     <table-transaction-list
+      columns={
+        Array [
+          Object {
+            "label": "Is Paid?",
+            "name": "isPaid",
+            "style": Object {
+              "flexBasis": "15%",
+            },
+          },
+          Object {
+            "label": "Date",
+            "name": "transactionDate",
+            "style": Object {
+              "flexBasis": "15%",
+            },
+          },
+          Object {
+            "label": "Name",
+            "name": "name",
+            "style": Object {
+              "flexBasis": "20%",
+            },
+          },
+          Object {
+            "label": "Category",
+            "name": "CategoryId",
+            "style": Object {
+              "flexBasis": "20%",
+            },
+          },
+          Object {
+            "label": "Value",
+            "name": "value",
+            "style": Object {
+              "flexBasis": "15%",
+            },
+          },
+          Object {
+            "label": "Action",
+            "name": "action",
+            "style": Object {
+              "flexBasis": "15%",
+            },
+          },
+        ]
+      }
       isLoading={false}
       list={
         Array [
@@ -211,34 +316,139 @@ exports[`TableTransactions should render with any one transaction entity 1`] = `
   >
     <div
       className="table-transactions__header-col"
+      style={
+        Object {
+          "flexBasis": "15%",
+        }
+      }
     >
-      Date
+      <div
+        className="table-transactions__header-col-inner"
+      >
+        Is Paid?
+      </div>
     </div>
     <div
       className="table-transactions__header-col"
+      style={
+        Object {
+          "flexBasis": "15%",
+        }
+      }
     >
-      Name
+      <div
+        className="table-transactions__header-col-inner"
+      >
+        Date
+      </div>
     </div>
     <div
       className="table-transactions__header-col"
+      style={
+        Object {
+          "flexBasis": "20%",
+        }
+      }
     >
-      Category
+      <div
+        className="table-transactions__header-col-inner"
+      >
+        Name
+      </div>
     </div>
     <div
       className="table-transactions__header-col"
+      style={
+        Object {
+          "flexBasis": "20%",
+        }
+      }
     >
-      Value
+      <div
+        className="table-transactions__header-col-inner"
+      >
+        Category
+      </div>
     </div>
     <div
       className="table-transactions__header-col"
+      style={
+        Object {
+          "flexBasis": "15%",
+        }
+      }
     >
-      Is Paid?
+      <div
+        className="table-transactions__header-col-inner"
+      >
+        Value
+      </div>
+    </div>
+    <div
+      className="table-transactions__header-col"
+      style={
+        Object {
+          "flexBasis": "15%",
+        }
+      }
+    >
+      <div
+        className="table-transactions__header-col-inner"
+      >
+        Action
+      </div>
     </div>
   </div>
   <div
     className="table-transactions__body"
   >
     <table-transaction-list
+      columns={
+        Array [
+          Object {
+            "label": "Is Paid?",
+            "name": "isPaid",
+            "style": Object {
+              "flexBasis": "15%",
+            },
+          },
+          Object {
+            "label": "Date",
+            "name": "transactionDate",
+            "style": Object {
+              "flexBasis": "15%",
+            },
+          },
+          Object {
+            "label": "Name",
+            "name": "name",
+            "style": Object {
+              "flexBasis": "20%",
+            },
+          },
+          Object {
+            "label": "Category",
+            "name": "CategoryId",
+            "style": Object {
+              "flexBasis": "20%",
+            },
+          },
+          Object {
+            "label": "Value",
+            "name": "value",
+            "style": Object {
+              "flexBasis": "15%",
+            },
+          },
+          Object {
+            "label": "Action",
+            "name": "action",
+            "style": Object {
+              "flexBasis": "15%",
+            },
+          },
+        ]
+      }
       isLoading={false}
       list={Array []}
     />

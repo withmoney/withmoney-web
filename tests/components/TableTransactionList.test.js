@@ -7,7 +7,15 @@ describe('TableTransactionList', () => {
   let Component;
 
   beforeAll(() => {
-    Component = global.setup(TableTransactionList);
+    const columns =  [
+      { name: 'isPaid', label: 'Is Paid?', style: { flexBasis: '15%' }},
+      { name: 'transactionDate', label: 'Date', style: { flexBasis: '15%' } },
+      { name: 'name', label: 'Name', style: { flexBasis: '20%' } },
+      { name: 'CategoryId', label: 'Category', style: { flexBasis: '20%' } },
+      { name: 'value', label: 'Value', style: { flexBasis: '15%' } },
+      { name: 'action', label: 'Action', style: { flexBasis: '15%' } },
+    ];
+    Component = global.setup(TableTransactionList, { columns });
   });
 
   it('should render null when dont have any transaction', () => {
