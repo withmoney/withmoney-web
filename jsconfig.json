@@ -8,7 +8,7 @@
       "components/*": ["./src/components/*"],
       "pages/*": ["./pages/*"],
       "store/*": ["./src/store/modules/*"],
-      "styles/*": ["./src/assets/*"],
+      "styles/*": ["./src/assets/*"]
     }
   },
   "exclude": [

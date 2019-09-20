@@ -8,7 +8,7 @@ import Login from 'pages/Login';
 import Signup from 'pages/Signup';
 import store from 'app/store';
 
-import 'styles';
+import 'styles/style.scss';
 
 const App = () => (
   <Provider store={store}>

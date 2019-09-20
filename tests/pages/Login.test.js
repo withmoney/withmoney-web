@@ -8,11 +8,7 @@ import * as UserApi from '../../src/api/User';
 const mockStore = configureStore([thunk]);
 
 jest.mock('../../src/api/User', () => ({
-  login: jest.fn().mockResolvedValue({
-    data: {
-      success: true,
-    },
-  }),
+  login: jest.fn(),
 }));
 
 describe('Login', () => {
@@ -31,6 +27,12 @@ describe('Login', () => {
   it('should call onSabe action when login form is submitted', () => {
     const wrapper = mount(Component());
 
+    UserApi.login.mockResolvedValue({
+      data: {
+        success: true,
+      },
+    });
+
     wrapper
       .find('input[name="email"]')
       .simulate('change', { target: { name: 'email', value: 'davidcostadev@gmail.com' } });
@@ -43,6 +45,30 @@ describe('Login', () => {
     expect(UserApi.login).toBeCalledWith({
       email: 'davidcostadev@gmail.com',
       password: '123456',
+    });
+  });
+
+  it('Should return error', done => {
+    const oldError = global.console.error;
+    global.console.error = jest.fn();
+
+    const wrapper = mount(Component());
+    UserApi.login.mockRejectedValue({
+      response: {
+        data: {
+          message: 'error',
+        },
+      },
+    });
+
+    wrapper.find('form').simulate('submit');
+    wrapper.update();
+
+    setImmediate(() => {
+      expect(wrapper.find('Login').instance().state.message).toBe('error');
+      done();
+
+      global.console.error = oldError;
     });
   });
 });

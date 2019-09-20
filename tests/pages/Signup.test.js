@@ -50,7 +50,6 @@ describe('Signup', () => {
       name: 'David Costa',
       email: 'davidcostadev@gmail.com',
       password: '123456',
-      passwordConfirm: '123456',
     });
   });
 });
