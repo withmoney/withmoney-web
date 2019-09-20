@@ -10,8 +10,8 @@
     "dev": "export NODE_ENV=development && node server.js",
     "start": "yarn run build && http=server ./dist",
     "build": "export NODE_ENV=production && webpack --mode production",
-    "test": "yarn run jest --coverage",
-    "jest": "jest --config ./tests/jest.config.json",
+    "test": "jest --config ./tests/jest.config.json",
+    "jest": "jest --config ./tests/jest.config.dev.json",
     "coverage": "http-server ./coverage/lcov-report -o"
   },
   "devDependencies": {

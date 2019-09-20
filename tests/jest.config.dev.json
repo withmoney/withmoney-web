@@ -1,7 +1,4 @@
 {
-  "coverageDirectory": "<rootDir>/coverage",
-  "collectCoverage": true,
-  "collectCoverageFrom": ["<rootDir>/src/**/*.js"],
   "coveragePathIgnorePatterns": [
     "/node_modules/",
     "/coverage/",
