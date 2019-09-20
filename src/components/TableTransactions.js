@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import classname from 'classnames';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
+import * as Transactions from 'api/Transactions';
 import ButtonRounded from 'components/ButtonRounded';
 import * as TransactionsActions from 'store/transactions';
 import TransactionsList from 'components/TableTransactionList';
@@ -66,7 +67,7 @@ class TableTransactions extends React.Component {
     };
   }
 
-  async getTransactions() {
+  getTransactions = async () => {
     const { actions } = this.props;
     const { currentMonth } = this.state;
 
@@ -85,6 +86,16 @@ class TableTransactions extends React.Component {
 
     await actions.transaction.list(query);
   }
+
+  addTransaction = async () => {
+    const { type } = this.state;
+    try {
+      await Transactions.post({ type });
+      await this.getTransactions();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   changeTab(typeTab, type) {
     this.setState({
@@ -169,7 +180,9 @@ class TableTransactions extends React.Component {
             isLoading={this.isFirstLoading()}
           />
           <div className="table-transactions__action">
-            <ButtonRounded disabled={transactions.isLoading}>Add Transaction</ButtonRounded>
+            <ButtonRounded disabled={transactions.isLoading} onClick={this.addTransaction}>
+              Add Transaction
+            </ButtonRounded>
           </div>
         </div>
         <TableTransactionsFooter transactions={transactions.data} />
