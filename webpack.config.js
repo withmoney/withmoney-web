@@ -76,7 +76,7 @@ module.exports = {
       components: resolve('src/components'),
       pages: resolve('src/pages'),
       store: resolve('src/store/modules'),
-      styles: resolve('src/assets/style.scss'),
+      styles: resolve('src/assets'),
     },
   },
   devtool: 'source-map',

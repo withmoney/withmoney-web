@@ -30,15 +30,19 @@ class Login extends React.Component {
     this.state = {
       email: '',
       password: '',
+      message: '',
     };
   }
 
   async onSave(event) {
     event.preventDefault();
     const { actions, history } = this.props;
-
+    const { email, password } = this.state;
     try {
-      const { data } = await UserApi.login(this.state);
+      const { data } = await UserApi.login({
+        email,
+        password,
+      });
 
       if (data.success) {
         window.localStorage.setItem('token', data.token);
@@ -51,10 +55,12 @@ class Login extends React.Component {
 
         history.push('/');
       } else {
-        console.log('User not finded.');
+        console.error('');
+        this.setState({ message: data.message });
       }
-    } catch (e) {
-      console.log('User not finded.');
+    } catch (error) {
+      console.error(error);
+      this.setState({ message: error.response.data.message });
     }
   }
 
@@ -65,6 +71,8 @@ class Login extends React.Component {
   }
 
   render() {
+    const { message } = this.state;
+
     const fields = (
       <Fragment>
         <FieldInput id="email" onChange={this.handleChange} />
@@ -89,6 +97,7 @@ class Login extends React.Component {
         <BoxForm
           title="withmoney"
           subtitle="Log in"
+          message={message}
           onSubmit={this.onSave}
           fields={fields}
           footer={footer}

@@ -22,25 +22,36 @@ class Signup extends React.Component {
       email: '',
       password: '',
       passwordConfirm: '',
+      message: '',
     };
   }
 
   async onSave(event) {
     event.preventDefault();
-    const { password, passwordConfirm } = this.state;
+    const { name, email, password, passwordConfirm } = this.state;
 
     if (password !== passwordConfirm) {
-      throw new Error('please confirm your password');
+      this.setState({
+        message: 'Please confirm your password',
+      });
+      throw new Error('Please confirm your password');
     }
 
     try {
-      await UserApi.signup(this.state);
+      await UserApi.signup({
+        name,
+        email,
+        password,
+      });
 
-      console.log(
-        'Your signup with success, please wait til the administratos enabled you account.',
-      );
-    } catch (e) {
-      console.log("Error, It's not possible create your account at this moment.");
+      this.setState({
+        message: 'Your signup with success, please wait til the managers enabled you account.',
+      });
+    } catch (error) {
+      console.error(error);
+      this.setState({
+        message: error.response.data.message,
+      });
     }
   }
 
@@ -73,6 +84,8 @@ class Signup extends React.Component {
   }
 
   render() {
+    const { message } = this.state;
+
     const footer = (
       <Fragment>
         <span>Do Already have an account?</span>
@@ -90,6 +103,7 @@ class Signup extends React.Component {
           title="withmoney"
           subtitle="Sign Up"
           onSubmit={this.onSave}
+          message={message}
           fields={this.renderFields()}
           footer={footer}
         />

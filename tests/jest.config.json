@@ -11,18 +11,22 @@
     "jest.config.json"
   ],
   "collectCoverageFrom": ["<rootDir>/src/**/*.{js,jsx}"],
+  "moduleFileExtensions": ["js"],
   "moduleNameMapper": {
+    "\\.(css|less|sass|scss)$": "<rootDir>/styleMock.js",
     "^app(.*)$": "<rootDir>/src$1",
     "^api(.*)$": "<rootDir>/src/api$1",
     "^components(.*)$": "<rootDir>/src/components$1",
     "^pages(.*)$": "<rootDir>/src/pages$1",
-    "^store(.*)$": "<rootDir>/src/store/modules$1"
+    "^store(.*)$": "<rootDir>/src/store/modules$1",
+    "^styles(.*)$": "<rootDir>/src/assets$1"
   },
   "snapshotSerializers": ["enzyme-to-json/serializer"],
   "setupFiles": ["<rootDir>/tests/test-framework-setup.js"],
   "rootDir": "../",
   "testMatch": ["<rootDir>/tests/**/?(*.)test.{js,jsx}"],
   "transform": {
+
     "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
   }
 }
