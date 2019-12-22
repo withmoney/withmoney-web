@@ -1,6 +1,7 @@
 import * as Transactions from 'api/Transactions';
 
 const TRANSACTION_SUCCESS = 'transaction/success';
+const TRANSACTION_SUCCESS_CREATED = 'transaction/success_created';
 const TRANSACTION_SUCCESS_PUT = 'transaction/success_put';
 const TRANSACTION_REQUEST = 'transaction/request';
 const TRANSACTION_FAIL = 'transaction/fail';
@@ -17,6 +18,14 @@ const onSuccess = ({ data }) => ({
   payload: {
     data,
     isLoading: false,
+  },
+});
+
+const onSuccessCreated = (id, { data }) => ({
+  type: TRANSACTION_SUCCESS_CREATED,
+  payload: {
+    id,
+    data,
   },
 });
 
@@ -47,6 +56,14 @@ export const list = query => dispatch => {
     .catch(error => dispatch(onFail(error)));
 };
 
+export const create = data => dispatch => {
+  dispatch(onRequest());
+
+  return Transactions.create(data)
+    .then(response => dispatch(onSuccessCreated(data.id, response)))
+    .catch(error => dispatch(onFail({ id: data.id, message: error.message, method: 'put' })));
+};
+
 export const put = data => dispatch => {
   dispatch(onRequest(data));
 
@@ -65,6 +82,12 @@ export default (state = init, { type, payload }) => {
         ...state,
         isLoading: false,
         data: payload.data,
+      };
+    case TRANSACTION_SUCCESS_CREATED:
+      return {
+        ...state,
+        isLoading: false,
+        data: [...state.data, ...payload.data],
       };
     case TRANSACTION_SUCCESS_PUT:
       return {

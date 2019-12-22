@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import classname from 'classnames';
 import PropTypes from 'prop-types';
 import moment from 'moment-timezone';
-import * as Transactions from 'api/Transactions';
 import ButtonRounded from 'components/ButtonRounded';
 import * as TransactionsActions from 'store/transactions';
 import TransactionsList from 'components/TableTransactionList';
@@ -23,7 +22,7 @@ ButtonNavigation.propTypes = {
   month: PropTypes.any.isRequired,
 };
 
-class TableTransactions extends React.Component {
+export class TableTransactions extends React.Component {
   constructor(props) {
     super(props);
 
@@ -85,12 +84,16 @@ class TableTransactions extends React.Component {
     };
 
     await actions.transaction.list(query);
-  }
+  };
 
   addTransaction = async () => {
     const { type } = this.state;
+    const { actions } = this.props;
     try {
-      await Transactions.post({ type });
+      await actions.transaction.create({
+        type,
+        transactionDate: moment.tz('UTC').toISOString(),
+      });
       await this.getTransactions();
     } catch (error) {
       console.error(error);
@@ -180,7 +183,11 @@ class TableTransactions extends React.Component {
             isLoading={this.isFirstLoading()}
           />
           <div className="table-transactions__action">
-            <ButtonRounded disabled={transactions.isLoading} onClick={this.addTransaction}>
+            <ButtonRounded
+              id="add-transaction"
+              disabled={transactions.isLoading}
+              onClick={this.addTransaction}
+            >
               Add Transaction
             </ButtonRounded>
           </div>

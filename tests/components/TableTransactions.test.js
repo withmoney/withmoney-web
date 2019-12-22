@@ -3,13 +3,14 @@ import renderer from 'react-test-renderer';
 import { mount } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import TableTransactions from 'components/TableTransactions';
+import ConnectedComponent, { TableTransactions } from 'components/TableTransactions';
 import * as Transactions from 'api/Transactions';
 
 const mockStore = configureStore([thunk]);
 
 jest.mock('api/Transactions', () => ({
   list: jest.fn().mockResolvedValue({}),
+  create: jest.fn(),
 }));
 jest.mock('components/TableTransactionList', () => 'table-transaction-list');
 
@@ -18,7 +19,7 @@ describe('TableTransactions', () => {
   let Component;
 
   beforeAll(() => {
-    Component = global.withRedux(mockStore({}), TableTransactions);
+    Component = global.withRedux(mockStore({}), ConnectedComponent);
     now = Date.now;
     Date.now = () => 1548860400000;
   });
@@ -66,7 +67,7 @@ describe('TableTransactions', () => {
           ],
         },
       }),
-      TableTransactions,
+      ConnectedComponent,
     );
 
     const wrapper = renderer.create(ComponentWithData());
@@ -95,6 +96,32 @@ describe('TableTransactions', () => {
     wrapper.find('#tab-in').simulate('click');
 
     expect(Transactions.list).toBeCalledWith({
+      batch: 'Categories',
+      order: 'transactionDate.asc',
+      transactionDate: '2018-07-01T00:00:00.000Z,2018-07-31T23:59:59.999Z',
+    });
+  });
+
+  it('Should call fetch transaction.create on click add transaction button', () => {
+    Date.now = () => 1532473578215;
+    const defaultProps = {
+      actions: {
+        transaction: {
+          put: jest.fn(),
+          list: jest.fn(),
+          create: jest.fn(),
+        },
+      },
+    };
+    const wrapper = mount(global.setup(TableTransactions, defaultProps)());
+
+    wrapper.find('button#add-transaction').simulate('click');
+
+    expect(defaultProps.actions.transaction.create).toBeCalledWith({
+      transactionDate: '2018-07-24T23:06:18.215Z',
+      type: 'in',
+    });
+    expect(defaultProps.actions.transaction.list).toBeCalledWith({
       batch: 'Categories',
       order: 'transactionDate.asc',
       transactionDate: '2018-07-01T00:00:00.000Z,2018-07-31T23:59:59.999Z',

@@ -209,6 +209,8 @@ exports[`TableTransactions should render table with list of transactions 1`] = `
       <button
         className="button-rounded"
         disabled={false}
+        id="add-transaction"
+        onClick={[Function]}
         type="button"
       >
         Add Transaction
@@ -458,6 +460,8 @@ exports[`TableTransactions should render with any one transaction entity 1`] = `
       <button
         className="button-rounded"
         disabled={false}
+        id="add-transaction"
+        onClick={[Function]}
         type="button"
       >
         Add Transaction

@@ -3,7 +3,7 @@ import { mountQuery } from 'app/utils/parse';
 
 export const list = (query = {}) => fetch.get(mountQuery('transactions', query));
 
-export const post = (data = {}) => fetch.post(`transactions`, data);
+export const create = (data = {}) => fetch.post(`transactions`, data);
 
 export const get = id => fetch.get(`transactions/${id}`);
 
