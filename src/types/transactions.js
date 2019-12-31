@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 
 export const TransactionActionsTypes = PropTypes.shape({
   transaction: PropTypes.shape({
+    create: PropTypes.func.isRequired,
     put: PropTypes.func.isRequired,
     list: PropTypes.func.isRequired,
   }).isRequired,

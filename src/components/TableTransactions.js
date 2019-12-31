@@ -22,7 +22,7 @@ ButtonNavigation.propTypes = {
   month: PropTypes.any.isRequired,
 };
 
-class TableTransactions extends React.Component {
+export class TableTransactions extends React.Component {
   constructor(props) {
     super(props);
 
@@ -66,7 +66,7 @@ class TableTransactions extends React.Component {
     };
   }
 
-  async getTransactions() {
+  getTransactions = async () => {
     const { actions } = this.props;
     const { currentMonth } = this.state;
 
@@ -84,7 +84,21 @@ class TableTransactions extends React.Component {
     };
 
     await actions.transaction.list(query);
-  }
+  };
+
+  addTransaction = async () => {
+    const { type } = this.state;
+    const { actions } = this.props;
+    try {
+      await actions.transaction.create({
+        type,
+        transactionDate: moment.tz('UTC').toISOString(),
+      });
+      await this.getTransactions();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   changeTab(typeTab, type) {
     this.setState({
@@ -169,7 +183,13 @@ class TableTransactions extends React.Component {
             isLoading={this.isFirstLoading()}
           />
           <div className="table-transactions__action">
-            <ButtonRounded disabled={transactions.isLoading}>Add Transaction</ButtonRounded>
+            <ButtonRounded
+              id="add-transaction"
+              disabled={transactions.isLoading}
+              onClick={this.addTransaction}
+            >
+              Add Transaction
+            </ButtonRounded>
           </div>
         </div>
         <TableTransactionsFooter transactions={transactions.data} />
