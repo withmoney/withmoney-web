@@ -8,3 +8,5 @@ export const create = (data = {}) => fetch.post(`transactions`, data);
 export const get = id => fetch.get(`transactions/${id}`);
 
 export const put = (id, data) => fetch.put(`transactions/${id}`, data);
+
+export const destroy = id => fetch.delete(`transactions/${id}`);

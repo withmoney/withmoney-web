@@ -42,6 +42,13 @@ class TransactionsItem extends React.Component {
     }
   }
 
+  onDelete = id => {
+    const { actions } = this.props;
+    if (window.confirm('Do you really want to delete this transaction?')) {
+      actions.transaction.destroy(id);
+    }
+  };
+
   handleInput({ target: { name, value } }) {
     const { formData } = this.state;
     this.setState({
@@ -83,11 +90,11 @@ class TransactionsItem extends React.Component {
   renderAction() {
     const { isEditing } = this.state;
     const {
-      transaction: { isLoading },
+      transaction: { isLoading, id },
     } = this.props;
 
     return (
-      <Fragment>
+      <>
         <If condition={isEditing}>
           <ButtonRounded
             type="button"
@@ -110,11 +117,20 @@ class TransactionsItem extends React.Component {
           </ButtonRounded>
         </If>
         <If condition={!isEditing}>
+          <ButtonRounded
+            type="button"
+            className="btn-destroy"
+            theme="gray"
+            onClick={() => this.onDelete(id)}
+            small
+          >
+            <i className="fa fa-trash" />
+          </ButtonRounded>
           <ButtonRounded type="button" className="btn-edit" onClick={this.onDoubleClick} small>
             <i className="fa fa-edit" />
           </ButtonRounded>
         </If>
-      </Fragment>
+      </>
     );
   }
 
@@ -188,7 +204,4 @@ const mapDispachToProps = dispatch => ({
   },
 });
 
-export default connect(
-  null,
-  mapDispachToProps,
-)(TransactionsItem);
+export default connect(null, mapDispachToProps)(TransactionsItem);

@@ -3,6 +3,7 @@ import * as Transactions from 'api/Transactions';
 const TRANSACTION_SUCCESS = 'transaction/success';
 const TRANSACTION_SUCCESS_CREATED = 'transaction/success_created';
 const TRANSACTION_SUCCESS_PUT = 'transaction/success_put';
+const TRANSACTION_SUCCESS_DESTROY = 'transaction/success_destroy';
 const TRANSACTION_REQUEST = 'transaction/request';
 const TRANSACTION_FAIL = 'transaction/fail';
 
@@ -34,6 +35,13 @@ const onSuccessPut = (id, { data }) => ({
   payload: {
     id,
     data,
+  },
+});
+
+const onSuccessDestroy = id => ({
+  type: TRANSACTION_SUCCESS_DESTROY,
+  payload: {
+    id,
   },
 });
 
@@ -72,6 +80,14 @@ export const put = data => dispatch => {
     .catch(error => dispatch(onFail({ id: data.id, message: error.message, method: 'put' })));
 };
 
+export const destroy = id => dispatch => {
+  dispatch(onRequest({ id }));
+
+  return Transactions.destroy(id)
+    .then(response => dispatch(onSuccessDestroy(id, response)))
+    .catch(error => dispatch(onFail({ id, message: error.message, method: 'destroy' })));
+};
+
 const findAndChange = (data, id, newData) =>
   data.map(item => (item.id === id ? { ...item, ...newData } : item));
 
@@ -96,6 +112,12 @@ export default (state = init, { type, payload }) => {
         data: state.data.map(item =>
           item.id === payload.id ? { ...item, isLoading: false, ...payload.data } : item,
         ),
+      };
+    case TRANSACTION_SUCCESS_DESTROY:
+      return {
+        ...state,
+        isLoading: false,
+        data: state.data.filter(item => item.id !== payload.id),
       };
     case TRANSACTION_FAIL:
       if (typeof payload.id !== 'undefined' && payload.method === 'put') {
