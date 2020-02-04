@@ -1,0 +1,47 @@
+{
+  "name": "withmoney-web",
+  "version": "2.0.0",
+  "description": "This is project to financial control",
+  "main": "src/index.ts",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "dev": "webpack-dev-server --config config/webpack.config.js --hot --open",
+    "build": "webpack --config config/webpack.config.js",
+    "start": "http-server dist",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withmoney/withmoney-web.git"
+  },
+  "keywords": [
+    "react",
+    "typescript"
+  ],
+  "author": "David Costa <davidcostadev@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/withmoney/withmoney-web/issues"
+  },
+  "homepage": "https://github.com/withmoney/withmoney-web#readme",
+  "devDependencies": {
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
+    "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.12.1",
+    "source-map-loader": "^0.2.4",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.5",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.2"
+  },
+  "dependencies": {
+    "@types/styled-components": "^4.4.2",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "styled-components": "^5.0.1"
+  }
+}
