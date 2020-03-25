@@ -1,6 +1,7 @@
 import React, { FormEvent, useState, ChangeEvent } from 'react';
+import { useMutation } from '@apollo/react-hooks';
+import { gql } from 'apollo-boost';
 import styled from 'styled-components';
-import Auth from '../services/auth';
 
 const Page = styled.div`
   height: 100vh;
@@ -117,32 +118,38 @@ const Alert = styled.div`
   border-radius: 4px;
 `;
 
+export const USER_LOGIN = gql`
+  mutation userLogin($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+    }
+  }
+`;
+
 const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [userLogin, { loading, error }] = useMutation(USER_LOGIN);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    setIsLoading(true);
     try {
-      const { data } = await Auth.login(form);
-      if (!data.success) {
-        setError('Your email or password are invalid!');
-      }
-    } catch (error) {
-      setError(error.message);
-    } finally {
-      setIsLoading(false);
-    }
+      const {
+        data: {
+          login: { token },
+        },
+      } = await userLogin({
+        variables: form,
+      });
+
+      localStorage.setItem('withmoney-token', token);
+    } catch (err) {}
   };
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm({
       ...form,
-      [name]: value
+      [name]: value,
     });
   };
 
@@ -152,13 +159,18 @@ const Login = () => {
         <Brand>withmoney</Brand>
         <Form onSubmit={onSubmit}>
           <Title>Signin</Title>
-          {!!error && <Alert isRed>{error}</Alert>}
+          {error &&
+            error.graphQLErrors.map(({ message }, index) => (
+              <Alert key={index} isRed>
+                {message}
+              </Alert>
+            ))}
           <Field
             type="email"
             name="email"
             placeholder="Email"
             onChange={handleInput}
-            disabled={isLoading}
+            disabled={loading}
             required
           />
           <Field
@@ -166,12 +178,12 @@ const Login = () => {
             name="password"
             placeholder="Password"
             onChange={handleInput}
-            disabled={isLoading}
+            disabled={loading}
             required
           />
           <Flex>
             <Link>Reset your password</Link>
-            <Button disabled={isLoading}>{isLoading ? 'Sending...' : 'Login'}</Button>
+            <Button disabled={loading}>{loading ? 'Sending...' : 'Login'}</Button>
           </Flex>
           <Flex>
             <span>Do you not have an account?</span>

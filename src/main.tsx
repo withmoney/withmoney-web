@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createGlobalStyle } from 'styled-components';
+import { ApolloProvider } from '@apollo/react-hooks';
+import ApolloClient from 'apollo-boost';
 import Login from './pages/Login';
 
 const GlobalStyle = createGlobalStyle`
@@ -16,12 +18,16 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
+const client = new ApolloClient({
+  uri: process.env.APOLLO_SERVER_API
+});
+
 const App = () => (
   <>
     <GlobalStyle />
-    <div>
+    <ApolloProvider client={client}>
       <Login />
-    </div>
+    </ApolloProvider>
   </>
 );
 
