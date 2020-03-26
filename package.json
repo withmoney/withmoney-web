@@ -7,8 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "dev": "webpack-dev-server --config config/webpack.config.js --hot --open",
-    "build": "webpack --config config/webpack.config.js",
+    "dev": "env-cmd -f .env webpack-dev-server --config config/webpack.config.js --hot --open",
+    "build": "env-cmd webpack --config config/webpack.config.js",
     "start": "http-server dist",
     "test": "jest"
   },
@@ -27,11 +27,16 @@
   },
   "homepage": "https://github.com/withmoney/withmoney-web#readme",
   "devDependencies": {
-    "@types/react": "^16.9.19",
-    "@types/react-dom": "^16.9.5",
+    "@testing-library/react": "^10.0.1",
+    "@types/jest": "^25.1.4",
+    "dotenv-webpack": "^1.7.0",
+    "env-cmd": "^10.1.0",
     "html-webpack-plugin": "^3.2.0",
     "http-server": "^0.12.1",
+    "jest": "^25.1.0",
+    "jest-styled-components": "^7.0.0",
     "source-map-loader": "^0.2.4",
+    "ts-jest": "^25.2.1",
     "ts-loader": "^6.2.1",
     "typescript": "^3.7.5",
     "webpack": "^4.41.5",
@@ -39,9 +44,13 @@
     "webpack-dev-server": "^3.10.2"
   },
   "dependencies": {
-    "@types/axios": "^0.14.0",
+    "@apollo/react-hooks": "^3.1.3",
+    "@apollo/react-testing": "^3.1.3",
+    "@types/react": "^16.9.19",
+    "@types/react-dom": "^16.9.5",
     "@types/styled-components": "^4.4.2",
-    "axios": "^0.19.2",
+    "apollo-boost": "^0.4.7",
+    "graphql": "^14.6.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "styled-components": "^5.0.1"
