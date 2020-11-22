@@ -25,11 +25,11 @@ module.exports = {
   plugins: [
     new DotEnv(),
     new HTMLWebpackPlugin({
-      // filename: path.relative(__dirname, 'dist/index.html')
       template: resolve('public/index.html'),
     }),
   ],
   devServer: {
+    historyApiFallback: true,
     port: 4000,
   },
   devtool: 'source-map',
