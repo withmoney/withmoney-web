@@ -1,7 +1,95 @@
 import React, { FormEvent, useState, ChangeEvent } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { gql } from 'apollo-boost';
+import { gql } from '@apollo/client';
 import styled from 'styled-components';
+
+interface AlertProps {
+  isRed?: boolean;
+}
+export const USER_LOGIN = gql`
+  mutation userLogin($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+    }
+  }
+`;
+
+const Login = () => {
+  const [form, setForm] = useState({ email: '', password: '' });
+  const [userLogin, { loading, error }] = useMutation(USER_LOGIN);
+
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    try {
+      const {
+        data: {
+          login: { token },
+        },
+      } = await userLogin({
+        variables: form,
+      });
+
+      localStorage.setItem('withmoney-token', token);
+    } catch (err) {}
+  };
+
+  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setForm({
+      ...form,
+      [name]: value,
+    });
+  };
+
+  return (
+    <Page>
+      <Container>
+        <Brand>withmoney</Brand>
+        <Form onSubmit={onSubmit}>
+          <Title>Log in</Title>
+          {error &&
+            error.graphQLErrors.map(({ message }, index) => (
+              <Alert key={index} isRed>
+                {message}
+              </Alert>
+            ))}
+          <Field
+            type="email"
+            name="email"
+            placeholder="Email"
+            onChange={handleInput}
+            disabled={loading}
+            required
+          />
+          <Field
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={handleInput}
+            disabled={loading}
+            required
+          />
+          <Flex>
+            <Link>Reset your password</Link>
+            <Button disabled={loading}>{loading ? 'Sending...' : 'Log in'}</Button>
+          </Flex>
+          <Flex>
+            <span>Do you not have an account?</span>
+            <Link>Sign up</Link>
+          </Flex>
+        </Form>
+      </Container>
+    </Page>
+  );
+};
+
+const Alert = styled.div`
+  background-color: ${(props: AlertProps) => (props.isRed ? '#963621' : '#214296')};
+  color: white;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+`;
 
 const Page = styled.div`
   height: 100vh;
@@ -105,94 +193,5 @@ const Link = styled.a`
     color: #256a43;
   }
 `;
-
-interface AlertProps {
-  isRed?: boolean;
-}
-
-const Alert = styled.div`
-  background-color: ${(props: AlertProps) => (props.isRed ? '#963621' : '#214296')};
-  color: white;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 4px;
-`;
-
-export const USER_LOGIN = gql`
-  mutation userLogin($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-    }
-  }
-`;
-
-const Login = () => {
-  const [form, setForm] = useState({ email: '', password: '' });
-  const [userLogin, { loading, error }] = useMutation(USER_LOGIN);
-
-  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    try {
-      const {
-        data: {
-          login: { token },
-        },
-      } = await userLogin({
-        variables: form,
-      });
-
-      localStorage.setItem('withmoney-token', token);
-    } catch (err) {}
-  };
-
-  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setForm({
-      ...form,
-      [name]: value,
-    });
-  };
-
-  return (
-    <Page>
-      <Container>
-        <Brand>withmoney</Brand>
-        <Form onSubmit={onSubmit}>
-          <Title>Signin</Title>
-          {error &&
-            error.graphQLErrors.map(({ message }, index) => (
-              <Alert key={index} isRed>
-                {message}
-              </Alert>
-            ))}
-          <Field
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={handleInput}
-            disabled={loading}
-            required
-          />
-          <Field
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={handleInput}
-            disabled={loading}
-            required
-          />
-          <Flex>
-            <Link>Reset your password</Link>
-            <Button disabled={loading}>{loading ? 'Sending...' : 'Login'}</Button>
-          </Flex>
-          <Flex>
-            <span>Do you not have an account?</span>
-            <Link>Signup</Link>
-          </Flex>
-        </Form>
-      </Container>
-    </Page>
-  );
-};
 
 export default Login;
