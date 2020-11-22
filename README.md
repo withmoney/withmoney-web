@@ -2,18 +2,20 @@
 
 ## Installation
 
-1. npm install
+1. `yarn`
 
 ## How to use
 
+- `cp .env.example .env`
+
 ### Development
 
-1. npm run dev
+1. `yarn dev`
 
 ### Production
 
-1. npm run build
-2. npm run start
+1. `yarn build`
+2. `yarn start`
 
 ## Author
 
