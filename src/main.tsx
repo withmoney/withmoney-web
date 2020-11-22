@@ -19,7 +19,18 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const client = new ApolloClient({
-  uri: process.env.APOLLO_SERVER_API
+  uri: process.env.APOLLO_SERVER_API,
+  request: async operation => {
+    // Get JWT token from local storage
+    const token = window.localStorage.getItem('withmoney-token');
+
+    // Pass token to headers
+    operation.setContext({
+      headers: {
+        Authorization: token ? `Bearer ${token}` : '',
+      },
+    });
+  },
 });
 
 const App = () => (
