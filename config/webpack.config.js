@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 // const DotEnv = require('dotenv-webpack');
 
@@ -24,6 +25,11 @@ module.exports = {
   },
   plugins: [
     // new DotEnv(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        APOLLO_SERVER_API: process.env.APOLLO_SERVER_API,
+      },
+    }),
     new HTMLWebpackPlugin({
       template: resolve('public/index.html'),
     }),
