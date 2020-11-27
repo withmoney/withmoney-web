@@ -27,7 +27,7 @@ module.exports = {
     // new DotEnv(),
     new webpack.DefinePlugin({
       'process.env': {
-        APOLLO_SERVER_API: process.env.APOLLO_SERVER_API,
+        APOLLO_SERVER_API: JSON.stringify(process.env.APOLLO_SERVER_API),
       },
     }),
     new HTMLWebpackPlugin({
