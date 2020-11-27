@@ -1,6 +1,6 @@
 const path = require('path');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-const DotEnv = require('dotenv-webpack');
+// const DotEnv = require('dotenv-webpack');
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir);
@@ -23,7 +23,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new DotEnv(),
+    // new DotEnv(),
     new HTMLWebpackPlugin({
       template: resolve('public/index.html'),
     }),
