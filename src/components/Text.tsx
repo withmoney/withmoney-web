@@ -11,4 +11,4 @@ const Text = styled.p<TextProps>`
   color: ${(props) => theme.variants[props.variation || 'default']};
 `;
 
-export { Text };
+export default Text;
