@@ -8,7 +8,7 @@ type TextProps = {
 type Variations = 'primary' | 'disabled' | 'danger';
 
 const Text = styled.p<TextProps>`
-  color: ${(props) => theme.variants[props.variation || 'default']};
+  color: ${(props) => theme.variants.text[props.variation || 'default']};
 `;
 
 export default Text;
