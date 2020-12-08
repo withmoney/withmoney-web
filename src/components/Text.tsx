@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '../theme';
 
 type TextProps = {
   children: React.ReactNode;
@@ -8,18 +9,7 @@ type TextProps = {
 type Variations = 'primary' | 'disabled' | 'danger';
 
 const Text = styled.p<TextProps>`
-  color: ${(props) => {
-    switch (props.variation) {
-      case 'primary':
-        return '#219653';
-      case 'disabled':
-        return '#9AA0A9';
-      case 'danger':
-        return '#E98686';
-      default:
-        return '#363636';
-    }
-  }};
+  color: ${(props) => theme.variants[props.variation || 'default']};
 `;
 
 export { Text };
