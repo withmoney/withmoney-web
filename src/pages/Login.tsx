@@ -2,6 +2,7 @@ import React, { FormEvent, useState, ChangeEvent } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { gql } from '@apollo/client';
 import styled from 'styled-components';
+import Button from '../components/Button';
 
 interface AlertProps {
   isRed?: boolean;
@@ -71,7 +72,9 @@ const Login = () => {
           />
           <Flex>
             <Link>Reset your password</Link>
-            <Button disabled={loading}>{loading ? 'Sending...' : 'Log in'}</Button>
+            <Button variation="primary" disabled={loading}>
+              {loading ? 'Sending...' : 'Log in'}
+            </Button>
           </Flex>
           <Flex>
             <span>Do you not have an account?</span>
@@ -152,33 +155,6 @@ const Flex = styled.div`
   justify-content: space-between;
   & + & {
     margin-top: 20px;
-  }
-`;
-
-const Button = styled.button`
-  background-color: #219653;
-  color: white;
-  font-size: 16px;
-  border-width: 0px;
-  padding: 11px 13px;
-  border-radius: 5px;
-  cursor: pointer;
-  outline: none;
-
-  &:hover {
-    background-color: #308856;
-  }
-
-  &:focus {
-    box-shadow: 0 0 0px 2px rgba(33, 150, 83, 0.5);
-  }
-
-  &:active {
-    background-color: #256a43;
-  }
-
-  &:disabled {
-    background-color: hsla(146, 10%, 36%, 1);
   }
 `;
 

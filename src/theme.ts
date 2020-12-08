@@ -2,7 +2,7 @@ const theme = {
   variants: {
     text: {
       primary: '#219653',
-      disabled: '#9AA0A9',
+      light: '#9AA0A9',
       danger: '#E98686',
       default: '#363636',
     },
@@ -93,7 +93,7 @@ const theme = {
           default: 'none',
           hover: 'none',
           active: 'none',
-          focus: 'solid 2px #3273DC',
+          focus: 'none',
           disabled: 'none',
         },
       },
@@ -123,7 +123,7 @@ const theme = {
           default: 'none',
           hover: 'none',
           active: 'none',
-          focus: '0 0 0px 2px rgba(50,115,220,0.25)',
+          focus: '0 0 0px 2px rgba(50,115,220,0.50)',
           disabled: 'none',
         },
       },

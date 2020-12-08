@@ -16,7 +16,7 @@ const Button = styled.button<TextProps>`
   border: ${(props) => theme.variants.button.border[props.variation || 'default'].default};
   padding: 11px 13px;
   border-radius: ${(props) => (props.rouded ? '37px' : '5px')};
-  cursor: pointer;
+  cursor: ${(props) => (props.disabled ? '' : 'pointer')};
   outline: none;
 
   &:hover {
