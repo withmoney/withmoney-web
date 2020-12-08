@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 type TextProps = {
-  isDisabled?: unknown;
-  isPrimary?: unknown;
-  isDanger?: unknown;
+  isDisabled?: any;
+  isPrimary?: any;
+  isDanger?: any;
 };
 
 const Text = styled.p<TextProps>`
