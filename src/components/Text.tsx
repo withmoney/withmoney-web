@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import theme from '../theme';
 
 type TextProps = {
-  children: React.ReactNode;
   variation?: Variations;
 };
 
