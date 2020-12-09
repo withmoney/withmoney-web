@@ -17,9 +17,7 @@ const GlobalStyle = createGlobalStyle`
     color: #333333;
   }
 `;
-// console.log({
-//   APOLLO_SERVER_API: process.env.APOLLO_SERVER_API,
-// });
+
 const httpLink = createHttpLink({
   uri: process.env.APOLLO_SERVER_API,
 });

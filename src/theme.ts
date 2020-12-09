@@ -127,9 +127,6 @@ const theme = {
           disabled: 'none',
         },
       },
-      rounded: {
-        borderRadius: '37px',
-      },
     },
   },
 };
