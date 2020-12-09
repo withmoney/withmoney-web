@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import theme from '../theme';
 
 type TextProps = {
   variation?: Variations;
@@ -9,8 +8,9 @@ type TextProps = {
 type Variations = 'primary' | 'danger' | 'light';
 
 const Text = styled.p<TextProps>`
-  color: ${(props) => theme.variants.text[props.variation || 'default']};
-  text-decoration: ${(props) => (props.link ? 'underline' : 'none')};
+  color: ${({ variation = 'default' }) => `var(--text-color-${variation})`};
+  text-decoration: ${({ link }) => (link ? 'underline' : 'none')};
+  cursor: ${({ link }) => (link ? 'pointer' : '')};
 `;
 
 export default Text;
