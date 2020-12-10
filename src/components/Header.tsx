@@ -11,7 +11,7 @@ const Header = styled(Text)<Props>`
   font-size: ${({ as = 'default' }) => `var(--font-${as})`};
   font-weight: ${({ as = 'default' }) => `var(--font-${as}-weight)`};
   line-height: ${({ as = 'default' }) => `var(--font-${as}-line-height)`};
-  text-align: ${({ as }) => as};
+  text-align: ${({ align }) => align};
 `;
 
 export default Header;
