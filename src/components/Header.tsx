@@ -7,7 +7,6 @@ type Props = {
 };
 
 const Header = styled(Text)<Props>`
-  color: ${({ variation = 'default' }) => `var(--text-${variation}-color)`};
   font-size: ${({ as = 'default' }) => `var(--font-${as})`};
   font-weight: ${({ as = 'default' }) => `var(--font-${as}-weight)`};
   line-height: ${({ as = 'default' }) => `var(--font-${as}-line-height)`};
