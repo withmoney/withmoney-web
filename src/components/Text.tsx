@@ -1,16 +1,13 @@
 import styled from 'styled-components';
 
-type TextProps = {
+type Props = {
   variation?: Variations;
-  link?: boolean;
 };
 
 type Variations = 'primary' | 'danger' | 'light';
 
-const Text = styled.p<TextProps>`
-  color: ${({ variation = 'default' }) => `var(--text-color-${variation})`};
-  text-decoration: ${({ link }) => (link ? 'underline' : 'none')};
-  cursor: ${({ link }) => (link ? 'pointer' : '')};
+const Text = styled.p<Props>`
+  color: ${({ variation = 'default' }) => `var(--text-${variation}-color)`};
 `;
 
 export default Text;

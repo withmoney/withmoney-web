@@ -2,74 +2,67 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   html {
-      /* Text */
-        /* Color */
-        --text-color-primary: #219653;
-        --text-color-light: #9AA0A9;
-        --text-color-danger: #E98686;
-        --text-color-default: #363636;
+    /* fonts */
+    --font-default: 16px;
 
-      /* Button */
-        /* Color */
-          /* Button default color */
-          --button-color-default: #363636;
-          --button-color-primary: #FFFFFF;
-          --button-color-light: #363636;
-          --button-color-danger: #FFFFFF;
-          /* Button disabled color */
-          --button-color-disabled-default: #9B9B9B;
-          --button-color-disabled-primary: #FFFFFF;
-          --button-color-disabled-light: #9B9B9B;
-          --button-color-disabled-danger: #FFFFFF;
+    /* Text */
+    --text-default-color: #363636;
+    --text-primary-color: #219653;
+    --text-light-color: #9AA0A9;
+    --text-danger-color: #E98686;
 
-        /* Background */
-          /* Button default background-color */
-          --button-background-color-default: #FFFFFF;
-          --button-background-color-primary: #219653;
-          --button-background-color-light: #E7E7E7;
-          --button-background-color-danger: #E98686;
-          /* Button hover background-color */
-          --button-background-color-hover-default: #FFFFFF;
-          --button-background-color-hover-primary: #1C8147;
-          --button-background-color-hover-light: #DADADA;
-          --button-background-color-hover-danger: #E57070;
-          /* Button active background-color */
-          --button-background-color-active-default: #FFFFFF;
-          --button-background-color-active-primary: #1A7540;
-          --button-background-color-active-light: #D3D3D3;
-          --button-background-color-active-danger: #E36363;
-          /* Button focus background-color */
-          --button-background-color-focus-default: #FFFFFF;
-          --button-background-color-focus-primary: #219653;
-          --button-background-color-focus-light: #E7E7E7;
-          --button-background-color-focus-danger: #E98686;
-          /* Button disabled background-color */
-          --button-background-color-disabled-default: #FFFFFF;
-          --button-background-color-disabled-primary: #90CBA9;
-          --button-background-color-disabled-light: #E7E7E7;
-          --button-background-color-disabled-danger: #F4C3C3;
+    /* Button */
+    --button-padding-height: 12px;
+    --button-padding-width: 18px;
 
-        /* Border */
-          /* Button border-color */
-          --button-border-default: #DBDBDB;
-          --button-border-primary: none;
-          --button-border-light: none;
-          --button-border-danger: none;
-          /* Button border-hover */
-          --button-border-hover-default: #B5B5B5;
-          /* Button border-active */
-          --button-border-active-default: #4A4A4A;
-          /* Button border-focus */
-          --button-border-focus-default: #3273DC;
-          /* Button border-disabled */
-          --button-border-disabled-default: #DBDBDB;
+    --button-default-color: #363636;
+    --button-primary-color: #FFFFFF;
+    --button-light-color: #363636;
+    --button-danger-color: #FFFFFF;
 
-        /* box-shadow */
-          /* Button box-shadow-focus */
-          --button-box-shadow-focus-default: rgba(50, 115, 220, 0.25);
-          --button-box-shadow-focus-primary: rgba(33, 150, 83, 0.5);
-          --button-box-shadow-focus-light: rgba(50, 115, 220, 0.25);
-          --button-box-shadow-focus-danger: rgba(233, 134, 134, 0.5);
+    --button-default-color-disabled: #9B9B9B;
+    --button-primary-color-disabled: #FFFFFF;
+    --button-light-color-disabled: #9B9B9B;
+    --button-danger-color-disabled: #FFFFFF;
+
+    --button-default-background-color: #FFFFFF;
+    --button-primary-background-color: #219653;
+    --button-light-background-color: #E7E7E7;
+    --button-danger-background-color: #E98686;
+
+    --button-default-background-color-hover: #FFFFFF;
+    --button-primary-background-color-hover: #1C8147;
+    --button-light-background-color-hover: #DADADA;
+    --button-danger-background-color-hover: #E57070;
+
+    --button-default-background-color-active: #FFFFFF;
+    --button-primary-background-color-active: #1A7540;
+    --button-light-background-color-active: #D3D3D3;
+    --button-danger-background-color-active: #E36363;
+
+    --button-default-background-color-focus: #FFFFFF;
+    --button-primary-background-color-focus: #219653;
+    --button-light-background-color-focus: #E7E7E7;
+    --button-danger-background-color-focus: #E98686;
+
+    --button-default-background-color-disabled: #FFFFFF;
+    --button-primary-background-color-disabled: #90CBA9;
+    --button-light-background-color-disabled: #E7E7E7;
+    --button-danger-background-color-disabled: #F4C3C3;
+
+    /* Border */
+    --button-default-border: #DBDBDB;
+    --button-default-border-hover: #B5B5B5;
+    --button-default-border-active: #4A4A4A;
+    --button-default-border-focus: #3273DC;
+    --button-default-border-disabled: #DBDBDB;
+    --button-light-border-focus: #3273DC;
+
+    /* box-shadow */
+    --button-default-box-shadow-focus: rgba(50, 115, 220, 0.25);
+    --button-primary-box-shadow-focus: rgba(33, 150, 83, 0.5);
+    --button-light-box-shadow-focus: rgba(50, 115, 220, 0.25);
+    --button-danger-box-shadow-focus: rgba(233, 134, 134, 0.5);
     }
 
   * {
