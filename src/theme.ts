@@ -4,6 +4,20 @@ const GlobalStyle = createGlobalStyle`
   html {
     /* fonts */
     --font-default: 16px;
+    --font-h1: 42px;
+    --font-h2: 37px;
+    --font-h3: 32px;
+
+    --font-default-weight: normal;
+    --font-h1-weight: bold;
+    --font-h2-weight: bold;
+    --font-h3-weight: bold;
+
+    --font-default-line-height: ;
+    --font-h1-line-height: 52px;
+    --font-h2-line-height: 47px;
+    --font-h3-line-height: 42px;
+
 
     /* Text */
     --text-default-color: #363636;
@@ -50,7 +64,6 @@ const GlobalStyle = createGlobalStyle`
     --button-light-background-color-disabled: #E7E7E7;
     --button-danger-background-color-disabled: #F4C3C3;
 
-    /* Border */
     --button-default-border: #DBDBDB;
     --button-default-border-hover: #B5B5B5;
     --button-default-border-active: #4A4A4A;
@@ -58,12 +71,11 @@ const GlobalStyle = createGlobalStyle`
     --button-default-border-disabled: #DBDBDB;
     --button-light-border-focus: #3273DC;
 
-    /* box-shadow */
     --button-default-box-shadow-focus: rgba(50, 115, 220, 0.25);
     --button-primary-box-shadow-focus: rgba(33, 150, 83, 0.5);
     --button-light-box-shadow-focus: rgba(50, 115, 220, 0.25);
     --button-danger-box-shadow-focus: rgba(233, 134, 134, 0.5);
-    }
+  }
 
   * {
     box-sizing: border-box;
@@ -75,6 +87,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Roboto', sans-serif;
     color: #333333;
   }
+  
 `;
 
 export default GlobalStyle;
