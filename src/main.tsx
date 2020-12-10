@@ -1,25 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createGlobalStyle } from 'styled-components';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import Login from './pages/Login';
+import GlobalStyle from './theme';
 
-const GlobalStyle = createGlobalStyle`
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    font-size: 16px;
-    margin: 0;
-    font-family: 'Roboto', sans-serif;
-    color: #333333;
-  }
-`;
-console.log({
-  APOLLO_SERVER_API: process.env.APOLLO_SERVER_API,
-});
 const httpLink = createHttpLink({
   uri: process.env.APOLLO_SERVER_API,
 });
