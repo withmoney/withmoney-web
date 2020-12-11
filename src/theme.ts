@@ -28,6 +28,9 @@ const GlobalStyle = createGlobalStyle`
     /* Button */
     --button-padding-height: 12px;
     --button-padding-width: 18px;
+    --button-rounded-padding: 22px;
+    --button-icon-width: 16px;
+    --button-icon-margin: 10px;
 
     --button-default-color: #363636;
     --button-primary-color: #FFFFFF;

@@ -9,6 +9,10 @@ type Props = {
 type Variations = 'primary' | 'danger' | 'light';
 
 const Button = styled.button<Props>`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
   color: ${({ variation = 'default' }) => `var(--button-${variation}-color)`};
   background-color: ${({ variation = 'default' }) => `var(--button-${variation}-background-color)`};
   font-size: var(--font-default);
@@ -48,18 +52,18 @@ const Button = styled.button<Props>`
   ${({ rounded }) =>
     rounded &&
     css`
-      padding-left: 15px;
-      padding-right: 15px;
+      padding-left: var(--button-rounded-padding);
+      padding-right: var(--button-rounded-padding);
     `}
 
   ${StyledIconBase} {
     color: ${({ variation = 'default' }) => `var(--button-${variation}-color)`};
-    font-size: 16px;
-    width: 16px;
+    font-size: --font-default;
+    width: var(--button-icon-width);
   }
 
   ${StyledIconBase} + span {
-    margin-left: 10px;
+    margin-left: var(--button-icon-margin);
   }
 `;
 
