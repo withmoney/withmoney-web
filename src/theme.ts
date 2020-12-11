@@ -76,7 +76,7 @@ const GlobalStyle = createGlobalStyle`
     --button-danger-box-shadow-focus: rgba(233, 134, 134, 0.5);
 
     /* Input */
-    --input-disabled-color: gray;
+    --input-disabled-color: #ececec;
     --input-border-radius: 5px;
     --input-border-color: #bdbdbd;
     --input-border-color-hover: #B0B0B0;
