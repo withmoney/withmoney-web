@@ -75,6 +75,21 @@ const GlobalStyle = createGlobalStyle`
     --button-primary-box-shadow-focus: rgba(33, 150, 83, 0.5);
     --button-light-box-shadow-focus: rgba(50, 115, 220, 0.25);
     --button-danger-box-shadow-focus: rgba(233, 134, 134, 0.5);
+
+    /* Textarea */
+    --text-area-color: #363636;
+    --text-area-border-color: #BDBDBD;
+    --text-area-border-color-hover: #B0B0B0;
+    --text-area-border-color-focus: #3273dc;
+    --text-area-border-color-active: #a9a9a9;
+    --text-area-border-color-disabled: #dddddd;
+    --text-area-border-color-placeholder: #bdbdbd;
+    --text-area-background-color-disabled: #ececec;
+    --text-area-box-shadow-focus: rgba(50, 115, 220, 0.25);
+    --text-area-box-shadow-padding-top: 10px;
+    --text-area-box-shadow-padding-left: 12px;
+    
+
   }
 
   * {
