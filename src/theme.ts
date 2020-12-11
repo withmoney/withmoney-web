@@ -85,8 +85,8 @@ const GlobalStyle = createGlobalStyle`
     --input-border-color-focus-danger: #dc3232;
     --input-border-color-disabled: #dddddd;
     --input-disabled-background-color: #ececec;
-    --input-padding-width: 12px;
-    --input-padding-height: 10px;
+    --input-padding-horizontal: 12px;
+    --input-padding-vertical: 10px;
     --input-margin-bottom: 20px;
     --input-box-shadow: rgba(50, 115, 220, 0.25);
     --input-box-shadow-danger: rgba(220, 50, 50, 0.25);

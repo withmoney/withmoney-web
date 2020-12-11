@@ -4,7 +4,7 @@ const Input = styled.input`
   font-size: var(--font-default);
   border-radius: var(--input-border-radius);
   border: 2px solid var(--input-border-color);
-  padding: var(--input-padding-height) var(--input-padding-width);
+  padding: var(--input-padding-vertical) var(--input-padding-horizontal);
   margin-bottom: var(--input-margin-bottom);
   outline: none;
 
