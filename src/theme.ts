@@ -27,6 +27,9 @@ const GlobalStyle = createGlobalStyle`
     /* Button */
     --button-padding-height: 12px;
     --button-padding-width: 18px;
+    --button-rounded-padding: 22px;
+    --button-icon-width: 16px;
+    --button-icon-margin: 10px;
 
     --button-default-color: #363636;
     --button-primary-color: #FFFFFF;
@@ -74,6 +77,9 @@ const GlobalStyle = createGlobalStyle`
     --button-primary-box-shadow-focus: rgba(33, 150, 83, 0.5);
     --button-light-box-shadow-focus: rgba(50, 115, 220, 0.25);
     --button-danger-box-shadow-focus: rgba(233, 134, 134, 0.5);
+
+    --button-padding-horizontal: 13px;
+    --button-padding-vertical: 13px;
 
     /* Input */
     --input-disabled-color: #ececec;
