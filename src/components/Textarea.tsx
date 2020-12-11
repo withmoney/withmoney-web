@@ -6,7 +6,7 @@ const Textarea = styled.textarea`
   font-size: var(--font-default);
   resize: none;
   outline: none;
-  padding: var(--text-area-box-shadow-padding-top) var(--text-area-box-shadow-padding-left);
+  padding: var(--text-area-padding-vertical) var(--text-area-padding-horizontal);
 
   &:hover {
     border-color: var(--text-area-border-color-hover);

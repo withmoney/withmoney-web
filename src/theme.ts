@@ -85,8 +85,8 @@ const GlobalStyle = createGlobalStyle`
     --text-area-border-color-placeholder: #bdbdbd;
     --text-area-background-color-disabled: #ececec;
     --text-area-box-shadow-focus: rgba(50, 115, 220, 0.25);
-    --text-area-box-shadow-padding-top: 10px;
-    --text-area-box-shadow-padding-left: 12px;
+    --text-area-padding-vertical: 10px;
+    --text-area-padding-horizontal: 12px;
     
 
     /* Input */
