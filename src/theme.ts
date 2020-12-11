@@ -79,6 +79,8 @@ const GlobalStyle = createGlobalStyle`
     --input-disabled-color: gray;
     --input-border-radius: 5px;
     --input-border-color: #bdbdbd;
+    --input-border-color-hover: #B0B0B0;
+    --input-border-color-active: #A9A9A9;
     --input-border-color-focus: #3273DC;
     --input-border-color-focus-danger: #dc3232;
     --input-padding-width: 12px;
