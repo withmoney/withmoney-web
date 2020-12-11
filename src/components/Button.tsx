@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { StyledIconBase } from '@styled-icons/styled-icon';
 
 type Props = {
   variation?: Variations;
@@ -42,6 +43,23 @@ const Button = styled.button<Props>`
     background-color: ${({ variation = 'default' }) =>
       `var(--button-${variation}-background-color-disabled)`};
     border-color: ${({ variation = 'default' }) => `var(--button-${variation}-border-disabled)`};
+  }
+
+  ${({ rounded }) =>
+    rounded &&
+    css`
+      padding-left: 15px;
+      padding-right: 15px;
+    `}
+
+  ${StyledIconBase} {
+    color: ${({ variation = 'default' }) => `var(--button-${variation}-color)`};
+    font-size: 16px;
+    width: 16px;
+  }
+
+  ${StyledIconBase} + span {
+    margin-left: 10px;
   }
 `;
 
