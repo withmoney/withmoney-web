@@ -22,7 +22,8 @@ const Input = styled.input`
   }
 
   &:disabled {
-    color: var(--input-disabled-color);
+    border-color: var(--input-border-color-disabled);
+    background-color: var(--input-disabled-background-color);
   }
 `;
 

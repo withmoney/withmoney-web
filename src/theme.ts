@@ -83,6 +83,8 @@ const GlobalStyle = createGlobalStyle`
     --input-border-color-active: #A9A9A9;
     --input-border-color-focus: #3273DC;
     --input-border-color-focus-danger: #dc3232;
+    --input-border-color-disabled: #dddddd;
+    --input-disabled-background-color: #ececec;
     --input-padding-width: 12px;
     --input-padding-height: 10px;
     --input-margin-bottom: 20px;
