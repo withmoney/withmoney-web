@@ -13,11 +13,10 @@ const GlobalStyle = createGlobalStyle`
     --font-h2-weight: bold;
     --font-h3-weight: bold;
 
-    --font-default-line-height: ;
+    --font-default-line-height: 16px;
     --font-h1-line-height: 52px;
     --font-h2-line-height: 47px;
     --font-h3-line-height: 42px;
-
 
     /* Text */
     --text-default-color: #363636;
@@ -75,6 +74,22 @@ const GlobalStyle = createGlobalStyle`
     --button-primary-box-shadow-focus: rgba(33, 150, 83, 0.5);
     --button-light-box-shadow-focus: rgba(50, 115, 220, 0.25);
     --button-danger-box-shadow-focus: rgba(233, 134, 134, 0.5);
+
+    /* Input */
+    --input-disabled-color: #ececec;
+    --input-border-radius: 5px;
+    --input-border-color: #bdbdbd;
+    --input-border-color-hover: #B0B0B0;
+    --input-border-color-active: #A9A9A9;
+    --input-border-color-focus: #3273DC;
+    --input-border-color-focus-danger: #dc3232;
+    --input-border-color-disabled: #dddddd;
+    --input-disabled-background-color: #ececec;
+    --input-padding-horizontal: 12px;
+    --input-padding-vertical: 10px;
+    --input-margin-bottom: 20px;
+    --input-box-shadow: rgba(50, 115, 220, 0.25);
+    --input-box-shadow-danger: rgba(220, 50, 50, 0.25);
   }
 
   * {

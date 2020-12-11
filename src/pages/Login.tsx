@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/react-hooks';
 import { gql } from '@apollo/client';
 import styled from 'styled-components';
 import Button from '../components/Button';
+import Input from '../components/Input';
 
 interface AlertProps {
   isRed?: boolean;
@@ -54,7 +55,7 @@ const Login = () => {
                 {message}
               </Alert>
             ))}
-          <Field
+          <Input
             type="email"
             name="email"
             placeholder="Email"
@@ -62,7 +63,7 @@ const Login = () => {
             disabled={loading}
             required
           />
-          <Field
+          <Input
             type="password"
             name="password"
             placeholder="Password"
@@ -132,22 +133,6 @@ const Title = styled.h2`
   text-align: center;
   margin-bottom: 20px;
   flex-direction: column;
-`;
-
-const Field = styled.input`
-  font-size: 16px;
-  border-radius: 5px;
-  border: 1px solid #bdbdbd;
-  padding: 10px 12px;
-  margin-bottom: 20px;
-  outline: none;
-
-  &:focus {
-    box-shadow: 0 0 0px 2px rgba(33, 150, 83, 0.5);
-  }
-  &:disabled {
-    color: gray;
-  }
 `;
 
 const Flex = styled.div`
