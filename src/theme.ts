@@ -78,6 +78,9 @@ const GlobalStyle = createGlobalStyle`
     --button-light-box-shadow-focus: rgba(50, 115, 220, 0.25);
     --button-danger-box-shadow-focus: rgba(233, 134, 134, 0.5);
 
+    --button-padding-horizontal: 13px;
+    --button-padding-vertical: 13px;
+
     /* Input */
     --input-disabled-color: #ececec;
     --input-border-radius: 5px;
