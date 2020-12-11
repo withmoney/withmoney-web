@@ -49,6 +49,7 @@
     "@apollo/client": "^3.2.7",
     "@apollo/react-hooks": "4.0.0",
     "@apollo/react-testing": "4.0.0",
+    "@styled-icons/entypo": "^10.18.0",
     "@types/react": "^16.9.19",
     "apollo-link-http": "^1.5.17",
     "graphql": "15.4.0",
