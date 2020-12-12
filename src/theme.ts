@@ -96,6 +96,23 @@ const GlobalStyle = createGlobalStyle`
     --input-margin-bottom: 20px;
     --input-box-shadow: rgba(50, 115, 220, 0.25);
     --input-box-shadow-danger: rgba(220, 50, 50, 0.25);
+
+    /* CheckBox */
+    --check-box-size: 1rem;
+    --check-box-position-icon-left: 24%;
+    --check-box-position-icon-top: 8%;
+    --check-box-after-vertical: 54%;
+    --check-box-after-horizontal: 37%;
+    --check-box-after-transform: rotate(45deg);
+
+    --check-box-border-radius: 0.25rem;
+    --check-box-inactive-color: linear-gradient(0deg, #e7e7e7 0%, #feffff 100%);
+    --check-box-color-hover: #ebebeb;
+    --check-box-border-color: #dbdbdb;
+    --check-box-border-color-after: #ffff;
+    --check-box-border-background-color-disabled: #E7E7E7;
+    --check-box-border-color-disabled: #dfe3e9;
+    --check-box-border-color-disabled-after: #8e949d;
   }
 
   * {
