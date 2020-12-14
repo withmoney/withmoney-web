@@ -4,10 +4,13 @@ import { gql } from '@apollo/client';
 import styled from 'styled-components';
 import Button from '../components/Button';
 import Input from '../components/Input';
+import Page from '../components/Page';
+import Alert from '../components/Alert';
+import Header from '../components/Header';
+import Form from '../components/Form';
+import Flex from '../components/Flex';
+import Link from '../components/Link';
 
-interface AlertProps {
-  isRed?: boolean;
-}
 export const USER_LOGIN = gql`
   mutation userLogin($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -46,12 +49,16 @@ const Login = () => {
   return (
     <Page>
       <Container>
-        <Brand>withmoney</Brand>
+        <Header style={{ marginTop: '70px', marginBottom: '45px' }} as="h1" align="center">
+          withmoney
+        </Header>
         <Form onSubmit={onSubmit}>
-          <Title>Log in</Title>
+          <Header style={{ marginBottom: '20px', marginTop: '25px' }} as="h3" align="center">
+            Log in
+          </Header>
           {error &&
             error.graphQLErrors.map(({ message }, index) => (
-              <Alert key={index} isRed>
+              <Alert key={index} isDanger>
                 {message}
               </Alert>
             ))}
@@ -72,14 +79,14 @@ const Login = () => {
             required
           />
           <Flex>
-            <Link>Reset your password</Link>
+            <Link variation="primary">Reset your password</Link>
             <Button variation="primary" disabled={loading}>
               {loading ? 'Sending...' : 'Log in'}
             </Button>
           </Flex>
           <Flex>
             <span>Do you not have an account?</span>
-            <Link>Sign up</Link>
+            <Link variation="primary">Sign up</Link>
           </Flex>
         </Form>
       </Container>
@@ -87,72 +94,9 @@ const Login = () => {
   );
 };
 
-const Alert = styled.div`
-  background-color: ${(props: AlertProps) => (props.isRed ? '#963621' : '#214296')};
-  color: white;
-  padding: 20px;
-  margin-bottom: 20px;
-  border-radius: 4px;
-`;
-
-const Page = styled.div`
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  background-color: #f2f2f2;
-`;
-
 const Container = styled.div`
   padding-left: 15px;
   padding-right: 15px;
-`;
-
-const Brand = styled.h1`
-  text-align: center;
-  font-size: 42px;
-  font-weight: 700;
-  margin-top: 70px;
-  margin-bottom: 45px;
-`;
-
-const Form = styled.form`
-  background-color: white;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 445px;
-  width: 100%;
-  border-radius: 5px;
-  padding: 20px 20px 30px;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Title = styled.h2`
-  font-size: 32px;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 20px;
-  flex-direction: column;
-`;
-
-const Flex = styled.div`
-  display: flex;
-  justify-content: space-between;
-  & + & {
-    margin-top: 20px;
-  }
-`;
-
-const Link = styled.a`
-  color: #219653;
-  text-decoration: underline;
-
-  &:hover {
-    color: #308856;
-  }
-  &:active {
-    color: #256a43;
-  }
 `;
 
 export default Login;
