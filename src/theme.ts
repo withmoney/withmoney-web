@@ -78,6 +78,9 @@ const GlobalStyle = createGlobalStyle`
     --button-light-box-shadow-focus: rgba(50, 115, 220, 0.25);
     --button-danger-box-shadow-focus: rgba(233, 134, 134, 0.5);
 
+    --button-padding-horizontal: 13px;
+    --button-padding-vertical: 13px;
+
     /* Textarea */
     --text-area-color: #363636;
     --text-area-border-color: #BDBDBD;
@@ -90,9 +93,6 @@ const GlobalStyle = createGlobalStyle`
     --text-area-box-shadow-focus: rgba(50, 115, 220, 0.25);
     --text-area-padding-vertical: 10px;
     --text-area-padding-horizontal: 12px;
-    
-    --button-padding-horizontal: 13px;
-    --button-padding-vertical: 13px;
 
     /* Input */
     --input-disabled-color: #ececec;
