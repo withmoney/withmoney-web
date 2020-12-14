@@ -137,6 +137,28 @@ const GlobalStyle = createGlobalStyle`
     --check-box-border-color-disabled: #dfe3e9;
     --check-box-border-color-disabled-after: #8e949d;
 
+    /* Switch */
+    --switch-vertical: 21px;
+    --switch-horizontal: 38px;
+    --switch-border-radius: 11px;
+    --switch-border-radius-after: 50%;
+    --switch-transition-background-border: 0.3s;
+    --switch-transition-box-shadow: 0.2s;
+    --switch-transition-opacity: 0.2s;
+    --switch-transform-translateX: translateX(17px);
+    --switch-position-after: 2px;
+    --switch-position-after-ver-hor: 15px;
+
+    --switch-border-color-inactive: #c4c4c4;
+    --switch-border-color-inactive-hover: #929292;
+    --switch-border-color-disabled: #e9edf1;
+    --switch-border-color-disabled-after: #FFFFFF;
+    --switch-border-color-disabled-inactive: #DBDBDB;
+    --switch-border-color-disabled-checked: #9fa4ab;
+    --switch-background-color-inactive: #FFFFFF;
+    --switch-background-color-disabled: #dbdbdb;
+    --switch-background-color-disabled-checked: #9fa4ab;
+
     /* Form */
     --form-background-color: #FFFFFF;
 
