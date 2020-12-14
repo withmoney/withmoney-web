@@ -21,8 +21,8 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   &:after {
     content: '';
     position: absolute;
-    left: var(--check-box-position-icon-left);
-    top: var(--check-box-position-icon-top);
+    left: var(--check-box-position-icon-vertical);
+    top: var(--check-box-position-icon-horizontal);
     transition: transform 0.2s ease, opacity 0.2s;
     width: var(--check-box-after-horizontal);
     height: var(--check-box-after-vertical);
@@ -44,7 +44,7 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
 
   &:disabled {
     cursor: default;
-    background: var(--check-box-border-background-color-disabled);
+    background: var(--check-box-background-color-disabled);
     border-color: var(--check-box-border-color-disabled);
     &:checked:after {
       border-color: var(--check-box-border-color-disabled-after);
