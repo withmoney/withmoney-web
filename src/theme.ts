@@ -158,8 +158,9 @@ const GlobalStyle = createGlobalStyle`
     --switch-border-color-disabled-checked: #9fa4ab;
     --switch-background-color-inactive: #FFFFFF;
     --switch-background-color-disabled: #dbdbdb;
+    --switch-background-color-after: #DBDBDB;
     --switch-background-color-disabled-checked: #9fa4ab;
-    
+
     /* Radio */
     --radio-size: 1rem;
     --radio-position-icon-left: 25%;

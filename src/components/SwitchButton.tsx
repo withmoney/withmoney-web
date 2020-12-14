@@ -33,7 +33,7 @@ const SwitchButton = styled.input.attrs({ type: 'checkbox' })`
     border-radius: var(--switch-border-radius-after);
     width: var(--switch-position-after-ver-hor);
     height: var(--switch-position-after-ver-hor);
-    background: #dbdbdb;
+    background: var(--switch-background-color-after);
     transform: translateX(0);
   }
   &:checked {
@@ -41,7 +41,7 @@ const SwitchButton = styled.input.attrs({ type: 'checkbox' })`
     border-color: var(--button-primary-background-color);
     :after {
       background: var(--switch-background-color-inactive);
-      transform: translateX(17px);
+      transform: var(--switch-transform-translateX);
     }
   }
   &:disabled {
