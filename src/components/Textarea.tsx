@@ -4,6 +4,7 @@ const Textarea = styled.textarea`
   color: var(--text-area-color);
   border: 2px solid var(--text-area-border-color);
   font-size: var(--font-default);
+  border-radius: var(--input-border-radius);
   resize: none;
   outline: none;
   padding: var(--text-area-padding-vertical) var(--text-area-padding-horizontal);
@@ -27,6 +28,21 @@ const Textarea = styled.textarea`
   }
 
   ::-webkit-input-placeholder {
+    /* Chrome/Opera/Safari */
+    color: var(--text-area-border-color-placeholder);
+  }
+
+  ::-moz-placeholder {
+    /* Firefox 19+ */
+    color: var(--text-area-border-color-placeholder);
+  }
+  :-ms-input-placeholder {
+    /* IE 10+ */
+    color: var(--text-area-border-color-placeholder);
+  }
+
+  :-moz-placeholder {
+    /* Firefox 18- */
     color: var(--text-area-border-color-placeholder);
   }
 `;
