@@ -81,6 +81,19 @@ const GlobalStyle = createGlobalStyle`
     --button-padding-horizontal: 13px;
     --button-padding-vertical: 13px;
 
+    /* Textarea */
+    --text-area-color: #363636;
+    --text-area-border-color: #BDBDBD;
+    --text-area-border-color-hover: #B0B0B0;
+    --text-area-border-color-focus: #3273dc;
+    --text-area-border-color-active: #a9a9a9;
+    --text-area-border-color-disabled: #dddddd;
+    --text-area-border-color-placeholder: #bdbdbd;
+    --text-area-background-color-disabled: #ececec;
+    --text-area-box-shadow-focus: rgba(50, 115, 220, 0.25);
+    --text-area-padding-vertical: 10px;
+    --text-area-padding-horizontal: 12px;
+
     /* Input */
     --input-disabled-color: #ececec;
     --input-border-radius: 5px;
