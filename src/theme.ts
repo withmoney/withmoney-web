@@ -40,6 +40,8 @@ const GlobalStyle = createGlobalStyle`
     --button-rounded-padding: 22px;
     --button-icon-width: 16px;
     --button-icon-margin: 10px;
+    --button-padding-horizontal: 13px;
+    --button-padding-vertical: 13px;
 
     --button-default-color: #363636;
     --button-primary-color: #FFFFFF;
@@ -88,10 +90,10 @@ const GlobalStyle = createGlobalStyle`
     --button-light-box-shadow-focus: rgba(50, 115, 220, 0.25);
     --button-danger-box-shadow-focus: rgba(233, 134, 134, 0.5);
 
-    --button-padding-horizontal: 13px;
-    --button-padding-vertical: 13px;
-
     /* Textarea */
+    --text-area-padding-vertical: 10px;
+    --text-area-padding-horizontal: 12px;
+
     --text-area-color: #363636;
     --text-area-border-color: #BDBDBD;
     --text-area-border-color-hover: #B0B0B0;
@@ -101,12 +103,14 @@ const GlobalStyle = createGlobalStyle`
     --text-area-border-color-placeholder: #bdbdbd;
     --text-area-background-color-disabled: #ececec;
     --text-area-box-shadow-focus: rgba(50, 115, 220, 0.25);
-    --text-area-padding-vertical: 10px;
-    --text-area-padding-horizontal: 12px;
 
     /* Input */
-    --input-disabled-color: #ececec;
     --input-border-radius: 5px;
+    --input-padding-horizontal: 12px;
+    --input-padding-vertical: 10px;
+    --input-margin-bottom: 20px;
+    
+    --input-disabled-color: #ececec;
     --input-border-color: #bdbdbd;
     --input-border-color-hover: #B0B0B0;
     --input-border-color-active: #A9A9A9;
@@ -114,28 +118,41 @@ const GlobalStyle = createGlobalStyle`
     --input-border-color-focus-danger: #dc3232;
     --input-border-color-disabled: #dddddd;
     --input-disabled-background-color: #ececec;
-    --input-padding-horizontal: 12px;
-    --input-padding-vertical: 10px;
-    --input-margin-bottom: 20px;
     --input-box-shadow: rgba(50, 115, 220, 0.25);
     --input-box-shadow-danger: rgba(220, 50, 50, 0.25);
 
     /* CheckBox */
     --check-box-size: 1rem;
-    --check-box-position-icon-left: 24%;
-    --check-box-position-icon-top: 8%;
+    --check-box-position-icon-vertical: 24%;
+    --check-box-position-icon-horizontal: 5%;
     --check-box-after-vertical: 54%;
     --check-box-after-horizontal: 37%;
     --check-box-after-transform: rotate(45deg);
-
     --check-box-border-radius: 0.25rem;
+
     --check-box-inactive-color: linear-gradient(0deg, #e7e7e7 0%, #feffff 100%);
     --check-box-color-hover: #ebebeb;
     --check-box-border-color: #dbdbdb;
     --check-box-border-color-after: #ffff;
-    --check-box-border-background-color-disabled: #E7E7E7;
+    --check-box-background-color-disabled: #E7E7E7;
     --check-box-border-color-disabled: #dfe3e9;
     --check-box-border-color-disabled-after: #8e949d;
+
+    /* Radio */
+    --radio-size: 1rem;
+    --radio-position-icon-left: 25%;
+    --radio-position-icon-top: 25%;
+    --radio-after-horizontal: 50%;
+    --radio-after-vertical: 50%;
+    --radio-border-radius: 50%;
+
+    --radio-inactive-color: linear-gradient(0deg, #e7e7e7 0%, #feffff 100%);
+    --radio-border-color: #dbdbdb;
+    --radio-color-hover: #ebebeb;
+    --radio-background-color-icon: #ffff;
+    --radio-background-color-disabled: #e9edf1;
+    --radio-background-color-disabled-after: #9FA4AB;
+    --radio-border-color-disabled: #dfe3e9;
 
     /* Form */
     --form-background-color: #FFFFFF;
