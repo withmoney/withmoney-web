@@ -24,6 +24,16 @@ const GlobalStyle = createGlobalStyle`
     --text-light-color: #9AA0A9;
     --text-danger-color: #E98686;
 
+    --text-default-color-hover: #636363;
+    --text-primary-color-hover: #27a75e;
+    --text-light-color-hover: #a6adb8;
+    --text-danger-color-hover: #fb9c9c;
+
+    --text-default-color-active: #272727;
+    --text-primary-color-active: #1f854b;
+    --text-light-color-active: #888e96;
+    --text-danger-color-active: #d27474;
+
     /* Button */
     --button-padding-height: 12px;
     --button-padding-width: 18px;
@@ -140,6 +150,16 @@ const GlobalStyle = createGlobalStyle`
     --radio-background-color-disabled: #e9edf1;
     --radio-background-color-disabled-after: #9FA4AB;
     --radio-border-color-disabled: #dfe3e9;
+    /* Form */
+    --form-background-color: #FFFFFF;
+
+    /* Page */
+    --page-background-color: #f2f2f2;
+
+    /* Alert */
+    --alert-primary-background-color: #219653;
+    --alert-danger-background-color: #E98686;
+
   }
 
   * {
