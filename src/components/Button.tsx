@@ -1,4 +1,5 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import { StyledIconBase } from '@styled-icons/styled-icon';
 
 type Props = {
   variation?: Variations;
@@ -8,6 +9,10 @@ type Props = {
 type Variations = 'primary' | 'danger' | 'light';
 
 const Button = styled.button<Props>`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
   color: ${({ variation = 'default' }) => `var(--button-${variation}-color)`};
   background-color: ${({ variation = 'default' }) => `var(--button-${variation}-background-color)`};
   font-size: var(--font-default);
@@ -42,6 +47,23 @@ const Button = styled.button<Props>`
     background-color: ${({ variation = 'default' }) =>
       `var(--button-${variation}-background-color-disabled)`};
     border-color: ${({ variation = 'default' }) => `var(--button-${variation}-border-disabled)`};
+  }
+
+  ${({ rounded }) =>
+    rounded &&
+    css`
+      padding-left: var(--button-rounded-padding);
+      padding-right: var(--button-rounded-padding);
+    `}
+
+  ${StyledIconBase} {
+    color: ${({ variation = 'default' }) => `var(--button-${variation}-color)`};
+    font-size: --font-default;
+    width: var(--button-icon-width);
+  }
+
+  ${StyledIconBase} + span {
+    margin-left: var(--button-icon-margin);
   }
 `;
 
