@@ -45,7 +45,6 @@ const Login = () => {
       [name]: value,
     });
   };
-
   return (
     <Page>
       <Container>
@@ -86,7 +85,9 @@ const Login = () => {
           </Flex>
           <Flex>
             <span>Do you not have an account?</span>
-            <Link variation="primary">Sign up</Link>
+            <Link href="/signup" variation="primary">
+              Sign up
+            </Link>
           </Flex>
         </Form>
       </Container>

@@ -112,6 +112,7 @@ const GlobalStyle = createGlobalStyle`
     
     --input-disabled-color: #ececec;
     --input-border-color: #bdbdbd;
+    --input-border-color-danger: #E98686;
     --input-border-color-hover: #B0B0B0;
     --input-border-color-active: #A9A9A9;
     --input-border-color-focus: #3273DC;

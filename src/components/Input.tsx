@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 
-const Input = styled.input`
+type Props = {
+  invalid?: boolean;
+};
+
+const Input = styled.input<Props>`
   font-size: var(--font-default);
   border-radius: var(--input-border-radius);
-  border: 2px solid var(--input-border-color);
+  border: 2px solid
+    ${({ invalid }) => (invalid ? `var(--input-border-color-danger)` : `var(--input-border-color)`)};
   padding: var(--input-padding-vertical) var(--input-padding-horizontal);
   margin-bottom: var(--input-margin-bottom);
   outline: none;

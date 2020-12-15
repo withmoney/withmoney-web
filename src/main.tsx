@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import Login from './pages/Login';
 import GlobalStyle from './theme';
+import Routers from './routes';
 
 const httpLink = createHttpLink({
   uri: process.env.APOLLO_SERVER_API,
@@ -30,7 +30,7 @@ const App = () => (
   <>
     <GlobalStyle />
     <ApolloProvider client={client}>
-      <Login />
+      <Routers />
     </ApolloProvider>
   </>
 );
