@@ -18,7 +18,7 @@ const SingUp = () => {
   const [verifyLastName, setVerifyLastName] = useState(false);
   const [verifyEmail, setVerifyEmail] = useState(false);
   const [verifyPassword, setVerifyPassword] = useState(false);
-  const [successMessage, setSuccessMenssage] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(false);
 
   const [form, setForm] = useState({
     firstName: '',
@@ -34,7 +34,7 @@ const SingUp = () => {
     const { name, value } = event.target;
     setForm({
       ...form,
-      [name]: value.replace(/[ ]/g, ''),
+      [name]: value.trim(),
     });
   };
 
@@ -52,7 +52,7 @@ const SingUp = () => {
     let is_Email = validator.isEmail(form.email);
     let is_Password = validator.isEmpty(form.password);
     /*@ts-ignore */
-    let isStroing = validator.isStrongPassword(form.password, {
+    let isStrong = validator.isStrongPassword(form.password, {
       minLength: 8,
       minLowercase: 1,
       minUppercase: 1,
@@ -79,7 +79,7 @@ const SingUp = () => {
       error.push({ message: 'Please fill password field!' });
     }
 
-    if (!isStroing) {
+    if (!isStrong) {
       setVerifyPassword(true);
       error.push({ message: 'Your password is weak, use at least eight characters!' });
     }
@@ -97,7 +97,7 @@ const SingUp = () => {
         await userRegister({
           variables: form,
         });
-        setSuccessMenssage(true);
+        setSuccessMessage(true);
       } catch (err) {}
     }
   };
