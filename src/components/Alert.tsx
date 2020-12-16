@@ -1,16 +1,14 @@
 import styled from 'styled-components';
 
-interface AlertProps {
+interface Props {
   isDanger?: boolean;
   show?: boolean;
 }
 
-const Alert = styled.div`
+const Alert = styled.div<Props>`
   display: ${({ show }) => (show ? 'inline' : 'none')};
-  background-color: ${(props: AlertProps) =>
-    props.isDanger
-      ? 'var(--alert-danger-background-color)'
-      : 'var(--alert-primary-background-color)'};
+  background-color: ${({ isDanger }) =>
+    isDanger ? 'var(--alert-danger-background-color)' : 'var(--alert-primary-background-color)'};
   color: white;
   padding: 15px;
   margin-bottom: 20px;

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 const Page = styled.div`
+  min-height: 100vh;
   display: flex;
-  height: 100vh;
   text-align: center;
   flex-direction: column;
   background-color: var(--page-background-color);

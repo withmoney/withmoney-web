@@ -1,7 +1,6 @@
 import React, { FormEvent, useState, ChangeEvent } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import validator from 'validator';
-import styled from 'styled-components';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Page from '../components/Page';
@@ -10,6 +9,7 @@ import Form from '../components/Form';
 import Flex from '../components/Flex';
 import Link from '../components/Link';
 import Alert from '../components/Alert';
+import Container from '../components/Container';
 import USER_REGISTER from './mutations/register';
 
 const SingUp = () => {
@@ -40,13 +40,12 @@ const SingUp = () => {
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSuccessMenssage(false);
     setVerifyFistName(false);
     setVerifyLastName(false);
     setVerifyEmail(false);
     setVerifyPassword(false);
     setVerifyError([]);
-    const errors: any = [];
+    const error: any = [];
 
     let fistName = validator.isEmpty(form.firstName);
     let lastName = validator.isEmpty(form.lastName);
@@ -63,36 +62,35 @@ const SingUp = () => {
     });
 
     if (fistName) {
-      setVerifyLastName(true);
-
-      errors.push({ message: 'Please fill first name field!' });
+      setVerifyFistName(true);
+      error.push({ message: 'Please fill first name field!' });
     }
     if (lastName) {
-      setVerifyEmail(true);
-      errors.push({ message: 'Please fill last name field!' });
+      setVerifyLastName(true);
+      error.push({ message: 'Please fill last name field!' });
     }
     if (!is_Email) {
       setVerifyEmail(true);
-      errors.push({ message: 'Invalid email!' });
+      error.push({ message: 'Invalid email!' });
     }
 
     if (is_Password) {
-      setVerifyEmail(true);
-      errors.push({ message: 'Please fill password field!' });
+      setVerifyPassword(true);
+      error.push({ message: 'Please fill password field!' });
     }
 
     if (!isStroing) {
       setVerifyPassword(true);
-      errors.push({ message: 'Your password is weak, use at least eight characters!' });
+      error.push({ message: 'Your password is weak, use at least eight characters!' });
     }
 
     if (form.confirm !== form.password) {
       setVerifyPassword(true);
-      errors.push({ message: 'The password is different!' });
+      error.push({ message: 'The password is different!' });
     }
 
-    if (errors.length > 0) {
-      setVerifyError(errors);
+    if (error.length > 0) {
+      setVerifyError(error);
       return;
     } else {
       try {
@@ -106,29 +104,34 @@ const SingUp = () => {
 
   return (
     <Page>
-      <Container>
+      <Container show={successMessage}>
         <Header style={{ marginTop: '70px', marginBottom: '45px' }} as="h1" align="center">
           withmoney
         </Header>
+
         <Form onSubmit={onSubmit} style={{ marginBottom: '80px' }}>
           {verifyError.map(({ message }, index) => (
             <Alert show={true} key={index} isDanger>
               {message}
             </Alert>
           ))}
+
           {error &&
             error.graphQLErrors.map(({ message }, index) => (
               <Alert show={true} key={index} isDanger>
                 {message}
               </Alert>
             ))}
+
           <Alert show={successMessage}>
             Your registration was doing with success, please confirm your email address, check your
             inbox
           </Alert>
+
           <Header style={{ marginBottom: '20px', marginTop: '25px' }} as="h3" align="center">
             Sign up
           </Header>
+
           <Flex>
             <Input
               type="text"
@@ -139,6 +142,7 @@ const SingUp = () => {
               style={{ width: '100%', marginRight: '10px' }}
               invalid={verifyFistName}
             />
+
             <Input
               type="text"
               name="lastName"
@@ -147,9 +151,9 @@ const SingUp = () => {
               style={{ width: '100%', marginLeft: '10px' }}
               disabled={loading}
               invalid={verifyLastName}
-              required
             />
           </Flex>
+
           <Input
             type="email"
             name="email"
@@ -157,8 +161,8 @@ const SingUp = () => {
             disabled={loading}
             onChange={handleInput}
             invalid={verifyEmail}
-            required
           />
+
           <Input
             type="password"
             name="password"
@@ -166,8 +170,8 @@ const SingUp = () => {
             onChange={handleInput}
             disabled={loading}
             invalid={verifyPassword}
-            required
           />
+
           <Input
             type="password"
             name="confirm"
@@ -175,13 +179,14 @@ const SingUp = () => {
             onChange={handleInput}
             disabled={loading}
             invalid={verifyPassword}
-            required
           />
+
           <Flex>
             <Button disabled={loading} style={{ margin: 'auto' }} variation="primary">
               {loading ? 'Sending...' : 'Register'}
             </Button>
           </Flex>
+
           <Flex>
             <span>Do you already have an account?</span>
             <Link href="/" variation="primary">
@@ -190,13 +195,25 @@ const SingUp = () => {
           </Flex>
         </Form>
       </Container>
+
+      <Container show={!successMessage}>
+        <Header style={{ marginTop: '70px', marginBottom: '45px' }} as="h1" align="center">
+          withmoney
+        </Header>
+
+        <Form>
+          <Header style={{ marginBottom: '20px', marginTop: '25px' }} as="h3" align="center">
+            Registration done
+          </Header>
+
+          <Alert show={successMessage}>
+            Your registration was doing with success, please confirm your email address, check your
+            inbox!
+          </Alert>
+        </Form>
+      </Container>
     </Page>
   );
 };
-
-const Container = styled.div`
-  padding-left: 15px;
-  padding-right: 15px;
-`;
 
 export default SingUp;
