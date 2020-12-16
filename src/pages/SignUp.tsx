@@ -1,6 +1,5 @@
-import React, { FormEvent, useState, ChangeEvent } from 'react';
+import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import validator from 'validator';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Page from '../components/Page';
@@ -10,27 +9,33 @@ import Flex from '../components/Flex';
 import Link from '../components/Link';
 import Alert from '../components/Alert';
 import Container from '../components/Container';
+import FormControl from '../components/FormControl';
 import USER_REGISTER from './mutations/register';
+import Text from '../components/Text';
+import { userSchema } from './validations/useValidation';
 
 const SingUp = () => {
-  const [verifyError, setVerifyError] = useState([]);
-  const [verifyFistName, setVerifyFistName] = useState(false);
-  const [verifyLastName, setVerifyLastName] = useState(false);
-  const [verifyEmail, setVerifyEmail] = useState(false);
-  const [verifyPassword, setVerifyPassword] = useState(false);
+  const [formIsValid, setFormIsValid] = useState(true);
   const [successMessage, setSuccessMessage] = useState(false);
+  const [userRegister, { loading, error }] = useMutation(USER_REGISTER);
+
+  const [formErrors, setFormErrors] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    passwordConfirm: '',
+  });
 
   const [form, setForm] = useState({
     firstName: '',
     lastName: '',
     email: '',
     password: '',
-    confirm: '',
+    passwordConfirm: '',
   });
 
-  const [userRegister, { loading, error }] = useMutation(USER_REGISTER);
-
-  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleInput = async (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm({
       ...form,
@@ -38,65 +43,26 @@ const SingUp = () => {
     });
   };
 
+  const handleBlur = async (event: ChangeEvent<HTMLInputElement>) => {
+    const { name } = event.target;
+
+    try {
+      await userSchema.validateAt(event.target.name, form);
+      setFormErrors({ ...formErrors, [name]: '' });
+    } catch (err) {
+      setFormErrors({ ...formErrors, [name]: err.errors });
+      console.log(formErrors.firstName);
+    }
+    const isValid = await userSchema.isValid(form);
+    setFormIsValid(!isValid);
+  };
+
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setVerifyFistName(false);
-    setVerifyLastName(false);
-    setVerifyEmail(false);
-    setVerifyPassword(false);
-    setVerifyError([]);
-    const error: any = [];
 
-    let fistName = validator.isEmpty(form.firstName);
-    let lastName = validator.isEmpty(form.lastName);
-    let is_Email = validator.isEmail(form.email);
-    let is_Password = validator.isEmpty(form.password);
-    /*@ts-ignore */
-    let isStrong = validator.isStrongPassword(form.password, {
-      minLength: 8,
-      minLowercase: 1,
-      minUppercase: 1,
-      minNumbers: 0,
-      minSymbols: 0,
-      returnScore: false,
-    });
-
-    if (fistName) {
-      setVerifyFistName(true);
-      error.push({ message: 'Please fill first name field!' });
-    }
-    if (lastName) {
-      setVerifyLastName(true);
-      error.push({ message: 'Please fill last name field!' });
-    }
-    if (!is_Email) {
-      setVerifyEmail(true);
-      error.push({ message: 'Invalid email!' });
-    }
-
-    if (is_Password) {
-      setVerifyPassword(true);
-      error.push({ message: 'Please fill password field!' });
-    }
-
-    if (!isStrong) {
-      setVerifyPassword(true);
-      error.push({ message: 'Your password is weak, use at least eight characters!' });
-    }
-
-    if (form.confirm !== form.password) {
-      setVerifyPassword(true);
-      error.push({ message: 'The password is different!' });
-    }
-
-    if (error.length > 0) {
-      setVerifyError(error);
-      return;
-    } else {
+    if (await userSchema.isValid(form)) {
       try {
-        await userRegister({
-          variables: form,
-        });
+        await userRegister({ variables: form });
         setSuccessMessage(true);
       } catch (err) {}
     }
@@ -110,12 +76,6 @@ const SingUp = () => {
         </Header>
 
         <Form onSubmit={onSubmit} style={{ marginBottom: '80px' }}>
-          {verifyError.map(({ message }, index) => (
-            <Alert show={true} key={index} isDanger>
-              {message}
-            </Alert>
-          ))}
-
           {error &&
             error.graphQLErrors.map(({ message }, index) => (
               <Alert show={true} key={index} isDanger>
@@ -133,62 +93,100 @@ const SingUp = () => {
           </Header>
 
           <Flex>
-            <Input
-              type="text"
-              name="firstName"
-              placeholder="first name"
-              onChange={handleInput}
-              disabled={loading}
-              style={{ width: '100%', marginRight: '10px' }}
-              invalid={verifyFistName}
-            />
+            <FormControl>
+              <Input
+                onBlur={handleBlur}
+                type="text"
+                name="firstName"
+                placeholder="First Name *"
+                onChange={handleInput}
+                disabled={loading}
+                style={{ width: '95%', marginRight: '10px' }}
+              />
+              {!!formErrors.firstName && (
+                <Text style={{ margin: '5px 5px' }} align="left" variation="danger">
+                  {formErrors.firstName}
+                </Text>
+              )}
+            </FormControl>
 
-            <Input
-              type="text"
-              name="lastName"
-              placeholder="last name"
-              onChange={handleInput}
-              style={{ width: '100%', marginLeft: '10px' }}
-              disabled={loading}
-              invalid={verifyLastName}
-            />
+            <FormControl>
+              <Input
+                onBlur={handleBlur}
+                type="text"
+                name="lastName"
+                placeholder="Last Name *"
+                onChange={handleInput}
+                disabled={loading}
+                style={{ marginRight: '10px' }}
+              />
+              {!!formErrors.lastName && (
+                <Text style={{ margin: '5px 5px' }} align="left" variation="danger">
+                  {formErrors.lastName}
+                </Text>
+              )}
+            </FormControl>
           </Flex>
 
-          <Input
-            type="email"
-            name="email"
-            placeholder="email"
-            disabled={loading}
-            onChange={handleInput}
-            invalid={verifyEmail}
-          />
+          <FormControl>
+            <Input
+              onBlur={handleBlur}
+              type="email"
+              name="email"
+              placeholder="Email *"
+              disabled={loading}
+              onChange={handleInput}
+              style={{ marginBottom: '0' }}
+            />
+            {!!formErrors.email && (
+              <Text style={{ margin: '5px 5px' }} align="left" variation="danger">
+                {formErrors.email}
+              </Text>
+            )}
+          </FormControl>
 
-          <Input
-            type="password"
-            name="password"
-            placeholder="password"
-            onChange={handleInput}
-            disabled={loading}
-            invalid={verifyPassword}
-          />
+          <FormControl>
+            <Input
+              onBlur={handleBlur}
+              type="password"
+              name="password"
+              placeholder="Password *"
+              onChange={handleInput}
+              disabled={loading}
+              style={{ marginRight: '20px' }}
+            />
+            {!!formErrors.password && (
+              <Text style={{ margin: '5px 5px' }} align="left" variation="danger">
+                {formErrors.password}
+              </Text>
+            )}
+          </FormControl>
 
-          <Input
-            type="password"
-            name="confirm"
-            placeholder="confirm your password"
-            onChange={handleInput}
-            disabled={loading}
-            invalid={verifyPassword}
-          />
+          <FormControl>
+            <Input
+              onBlur={handleBlur}
+              type="password"
+              name="passwordConfirm"
+              placeholder="Confirm Password *"
+              onChange={handleInput}
+              disabled={loading}
+              style={{ marginBottom: '0px', marginRight: '20px' }}
+            />
+            {!!formErrors.passwordConfirm && (
+              <Text style={{ margin: '5px 5px' }} align="left" variation="danger">
+                {formErrors.passwordConfirm}
+              </Text>
+            )}
+          </FormControl>
 
           <Flex>
-            <Button disabled={loading} style={{ margin: 'auto' }} variation="primary">
+            <Button disabled={formIsValid} style={{ margin: 'auto' }} variation="primary">
               {loading ? 'Sending...' : 'Register'}
             </Button>
           </Flex>
 
           <Flex>
-            <span>Do you already have an account?</span>
+            <Text>Do you already have an account?</Text>
             <Link href="/" variation="primary">
               Sign up
             </Link>

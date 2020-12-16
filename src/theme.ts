@@ -108,7 +108,7 @@ const GlobalStyle = createGlobalStyle`
     --input-border-radius: 5px;
     --input-padding-horizontal: 12px;
     --input-padding-vertical: 10px;
-    --input-margin-bottom: 20px;
+    --input-margin-bottom: 0;
     
     --input-disabled-color: #ececec;
     --input-border-color: #bdbdbd;

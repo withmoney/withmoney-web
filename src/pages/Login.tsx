@@ -10,6 +10,7 @@ import Header from '../components/Header';
 import Form from '../components/Form';
 import Flex from '../components/Flex';
 import Link from '../components/Link';
+import FormControl from '../components/FormControl';
 
 export const USER_LOGIN = gql`
   mutation userLogin($email: String!, $password: String!) {
@@ -61,22 +62,26 @@ const Login = () => {
                 {message}
               </Alert>
             ))}
-          <Input
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={handleInput}
-            disabled={loading}
-            required
-          />
-          <Input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={handleInput}
-            disabled={loading}
-            required
-          />
+          <FormControl>
+            <Input
+              type="email"
+              name="email"
+              placeholder="Email"
+              onChange={handleInput}
+              disabled={loading}
+              required
+            />
+          </FormControl>
+          <FormControl>
+            <Input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={handleInput}
+              disabled={loading}
+              required
+            />
+          </FormControl>
           <Flex>
             <Link variation="primary">Reset your password</Link>
             <Button variation="primary" disabled={loading}>

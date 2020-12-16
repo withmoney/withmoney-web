@@ -6,6 +6,7 @@ type Props = {
 
 const Input = styled.input<Props>`
   font-size: var(--font-default);
+  width: 100%;
   border-radius: var(--input-border-radius);
   border: 2px solid
     ${({ invalid }) => (invalid ? `var(--input-border-color-danger)` : `var(--input-border-color)`)};
