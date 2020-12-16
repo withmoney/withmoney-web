@@ -5,7 +5,7 @@ import { setContext } from '@apollo/client/link/context';
 import GlobalStyle from './theme';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Routers from './Routes';
+import Routers from './routes';
 
 const httpLink = createHttpLink({
   uri: process.env.APOLLO_SERVER_API,
