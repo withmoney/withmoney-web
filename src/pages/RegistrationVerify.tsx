@@ -6,9 +6,9 @@ import Link from '../components/Link';
 import Page from '../components/Page';
 import Header from '../components/Header';
 import Form from '../components/Form';
-import Text from '../components/Text';
 import Container from '../components/Container';
 import LoadingSpinner from '../components/LoadingSpiner';
+import Alert from '../components/Alert';
 
 const RegistrationVerify = () => {
   const urlQuery = useUrlQuery();
@@ -36,9 +36,7 @@ const RegistrationVerify = () => {
 
           {data && (
             <>
-              <Text style={{ margin: '10px' }} variation="primary" align="center">
-                Your email was confirmed
-              </Text>
+              <Alert>Your email was confirmed</Alert>
               <Link to="/signin" variation="primary">
                 You first login now!
               </Link>
@@ -51,11 +49,7 @@ const RegistrationVerify = () => {
             </div>
           )}
 
-          {error && (
-            <Text variation="danger" align="center">
-              {error.message}
-            </Text>
-          )}
+          {error && <Alert isDanger>{error.message}</Alert>}
         </Form>
       </Container>
     </Page>

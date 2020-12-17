@@ -10,7 +10,7 @@ const Router = () => {
     <BrowserRouter>
       <Switch>
         <Redirect exact from="/" to="/signin" />
-        <Route path="/signin" exact component={Login} />
+        <Route path="/signin" component={Login} />
         <Route path="/signup" component={SignUp} />
         <Route path="/verify" component={RegistrationVerify} />
       </Switch>

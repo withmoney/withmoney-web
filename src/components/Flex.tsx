@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export type Props = {
-  justifyContent?: 'center' | 'flex-end' | 'space-between' | 'space-around';
+  justifyContent?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
 };
 
 const Flex = styled.div<Props>`
