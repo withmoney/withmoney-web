@@ -6,7 +6,7 @@ type Props = {
   margin?: string;
 };
 
-type Variations = 'primary' | 'danger' | 'light';
+type Variations = 'primary' | 'danger' | 'light' | 'default';
 
 const Text = styled.p<Props>`
   color: ${({ variation = 'default' }) => `var(--text-${variation}-color)`};

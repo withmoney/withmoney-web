@@ -16,25 +16,20 @@ import Text from '../components/Text';
 import InputGroup from '../components/InputGroup';
 import InputControl from '../components/InputControl';
 
+const initialValues = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  passwordConfirm: '',
+};
+
 const SingUp = () => {
   const [formIsValid, setFormIsValid] = useState(false);
+  const [formErrors, setFormErrors] = useState(initialValues);
+  const [form, setForm] = useState(initialValues);
+
   const [userRegister, { loading, error }] = useMutation(USER_REGISTER);
-
-  const [initialValue, setInitialValue] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    passwordConfirm: '',
-  });
-
-  const [form, setForm] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    passwordConfirm: '',
-  });
 
   useEffect(() => {
     error?.graphQLErrors.map(({ message }) => {
@@ -54,9 +49,9 @@ const SingUp = () => {
     const { name } = event.target;
     try {
       await userSchema.validateAt(event.target.name, form);
-      setInitialValue({ ...initialValue, [name]: '' });
+      setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
-      setInitialValue({ ...initialValue, [name]: err.errors });
+      setFormErrors({ ...formErrors, [name]: err.errors });
     }
     const isValid = await userSchema.isValid(form);
     setFormIsValid(isValid);
@@ -88,95 +83,73 @@ const SingUp = () => {
           </Header>
 
           <InputGroup>
-            <InputControl>
+            <InputControl message={formErrors.firstName} isInvalid={!!formErrors.firstName}>
               <Input
-                isInvalid={!!initialValue.firstName}
-                onBlur={handleBlur}
                 type="text"
                 name="firstName"
                 placeholder="First Name *"
-                onChange={handleInput}
                 disabled={loading}
+                isInvalid={!!formErrors.firstName}
+                onChange={handleInput}
+                onBlur={handleBlur}
               />
-              {!!initialValue.firstName && (
-                <Text align="left" variation="danger">
-                  {initialValue.firstName}
-                </Text>
-              )}
             </InputControl>
 
-            <InputControl>
+            <InputControl message={formErrors.lastName} isInvalid={!!formErrors.firstName}>
               <Input
-                isInvalid={!!initialValue.lastName}
+                isInvalid={!!formErrors.lastName}
                 onBlur={handleBlur}
                 type="text"
                 name="lastName"
                 placeholder="Last Name *"
-                onChange={handleInput}
                 disabled={loading}
+                onChange={handleInput}
               />
-              {!!initialValue.lastName && (
-                <Text align="left" variation="danger">
-                  {initialValue.lastName}
-                </Text>
-              )}
             </InputControl>
           </InputGroup>
 
-          <InputControl>
+          <InputControl message={formErrors.email} isInvalid={!!formErrors.email}>
             <Input
-              isInvalid={!!initialValue.email}
-              onBlur={handleBlur}
               type="email"
               name="email"
               placeholder="Email *"
               disabled={loading}
+              isInvalid={!!formErrors.email}
               onChange={handleInput}
+              onBlur={handleBlur}
             />
-            {!!initialValue.email && (
-              <Text align="left" variation="danger">
-                {initialValue.email}
-              </Text>
-            )}
           </InputControl>
 
-          <InputControl>
+          <InputControl message={formErrors.password} isInvalid={!!formErrors.password}>
             <Input
-              isInvalid={!!initialValue.password}
-              onBlur={handleBlur}
               type="password"
               name="password"
               placeholder="Password *"
-              onChange={handleInput}
               disabled={loading}
+              isInvalid={!!formErrors.password}
+              onChange={handleInput}
+              onBlur={handleBlur}
             />
-            {!!initialValue.password && (
-              <Text align="left" variation="danger">
-                {initialValue.password}
-              </Text>
-            )}
           </InputControl>
 
-          <InputControl>
+          <InputControl
+            message={formErrors.passwordConfirm}
+            isInvalid={!!formErrors.passwordConfirm}
+          >
             <Input
-              isInvalid={!!initialValue.passwordConfirm}
-              onBlur={handleBlur}
               type="password"
               name="passwordConfirm"
               placeholder="Confirm Password *"
-              onChange={handleInput}
               disabled={loading}
+              isInvalid={!!formErrors.passwordConfirm}
+              onChange={handleInput}
+              onBlur={handleBlur}
             />
-            {!!initialValue.passwordConfirm && (
-              <Text align="left" variation="danger">
-                {initialValue.passwordConfirm}
-              </Text>
-            )}
           </InputControl>
 
           <Flex justifyContent="center">
             <Button disabled={!formIsValid} variation="primary">
-              {loading ? 'Registering' : 'Register'}
+              {loading ? 'Registering...' : 'Register'}
             </Button>
           </Flex>
 

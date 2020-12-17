@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 import Flex, { Props as FlexProps } from './Flex';
-import InputControl from './InputControl';
+import { Control } from './InputControl';
 
 const InputGroup = styled(Flex)<FlexProps>`
-  ${InputControl} + ${InputControl} {
+  ${Control} + ${Control} {
     margin-left: 15px;
   }
 `;
