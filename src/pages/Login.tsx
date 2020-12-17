@@ -83,7 +83,7 @@ const Login = () => {
               required
             />
           </InputGroup>
-          <Flex align="space-between">
+          <Flex justifyContent="space-between">
             <Link to="/" variation="primary">
               Reset your password
             </Link>
@@ -91,7 +91,7 @@ const Login = () => {
               {loading ? 'Sending...' : 'Log in'}
             </Button>
           </Flex>
-          <Flex align="space-between">
+          <Flex justifyContent="space-between">
             <Text>Do you not have an account?</Text>
             <Link to="/signup" variation="primary">
               Sign up

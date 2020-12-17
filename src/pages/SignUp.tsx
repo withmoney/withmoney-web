@@ -14,6 +14,7 @@ import Link from '../components/Link';
 import Container from '../components/Container';
 import Text from '../components/Text';
 import InputGroup from '../components/InputGroup';
+import InputControl from '../components/InputControl';
 
 const SingUp = () => {
   const [formIsValid, setFormIsValid] = useState(false);
@@ -86,8 +87,8 @@ const SingUp = () => {
             Sign up
           </Header>
 
-          <Flex>
-            <InputGroup>
+          <InputGroup>
+            <InputControl>
               <Input
                 isInvalid={!!initialValue.firstName}
                 onBlur={handleBlur}
@@ -96,16 +97,15 @@ const SingUp = () => {
                 placeholder="First Name *"
                 onChange={handleInput}
                 disabled={loading}
-                style={{ width: '95%', marginRight: '10px' }}
               />
               {!!initialValue.firstName && (
                 <Text align="left" variation="danger">
                   {initialValue.firstName}
                 </Text>
               )}
-            </InputGroup>
+            </InputControl>
 
-            <InputGroup>
+            <InputControl>
               <Input
                 isInvalid={!!initialValue.lastName}
                 onBlur={handleBlur}
@@ -114,17 +114,16 @@ const SingUp = () => {
                 placeholder="Last Name *"
                 onChange={handleInput}
                 disabled={loading}
-                style={{ width: '95%', marginLeft: '10px' }}
               />
               {!!initialValue.lastName && (
                 <Text align="left" variation="danger">
                   {initialValue.lastName}
                 </Text>
               )}
-            </InputGroup>
-          </Flex>
+            </InputControl>
+          </InputGroup>
 
-          <InputGroup>
+          <InputControl>
             <Input
               isInvalid={!!initialValue.email}
               onBlur={handleBlur}
@@ -139,9 +138,9 @@ const SingUp = () => {
                 {initialValue.email}
               </Text>
             )}
-          </InputGroup>
+          </InputControl>
 
-          <InputGroup>
+          <InputControl>
             <Input
               isInvalid={!!initialValue.password}
               onBlur={handleBlur}
@@ -156,9 +155,9 @@ const SingUp = () => {
                 {initialValue.password}
               </Text>
             )}
-          </InputGroup>
+          </InputControl>
 
-          <InputGroup>
+          <InputControl>
             <Input
               isInvalid={!!initialValue.passwordConfirm}
               onBlur={handleBlur}
@@ -173,15 +172,15 @@ const SingUp = () => {
                 {initialValue.passwordConfirm}
               </Text>
             )}
-          </InputGroup>
+          </InputControl>
 
-          <Flex align="center">
+          <Flex justifyContent="center">
             <Button disabled={!formIsValid} variation="primary">
               {loading ? 'Registering' : 'Register'}
             </Button>
           </Flex>
 
-          <Flex align="space-between">
+          <Flex justifyContent="space-between">
             <Text>Do you already have an account?</Text>
             <Link to="/signin" variation="primary">
               Sign up
