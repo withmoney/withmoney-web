@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 type Props = {
-  invalid?: boolean;
+  isInvalid?: boolean;
 };
 
 const Input = styled.input<Props>`
@@ -9,7 +9,8 @@ const Input = styled.input<Props>`
   width: 100%;
   border-radius: var(--input-border-radius);
   border: 2px solid
-    ${({ invalid }) => (invalid ? `var(--input-border-color-danger)` : `var(--input-border-color)`)};
+    ${({ isInvalid }) =>
+      isInvalid ? `var(--input-border-color-danger)` : `var(--input-border-color)`};
   padding: var(--input-padding-vertical) var(--input-padding-horizontal);
   margin-bottom: var(--input-margin-bottom);
   outline: none;

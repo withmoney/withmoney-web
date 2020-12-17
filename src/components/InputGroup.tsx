@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-const FormControl = styled.div`
+const InputGroup = styled.div`
   margin-bottom: 20px;
 `;
 
-export default FormControl;
+export default InputGroup;

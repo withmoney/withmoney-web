@@ -1,23 +1,23 @@
-import React, { useEffect, ChangeEvent } from 'react';
-import CHECK_HASH from './mutations/CheckHash';
-import { useUrlQuery } from '../hooks/UseURLQuery';
+import React, { useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import styled from 'styled-components';
+import { CHECK_HASH } from '../graphql/AuthGql';
+import { useUrlQuery } from '../hooks/UseURLQuery';
 import Link from '../components/Link';
 import Page from '../components/Page';
 import Header from '../components/Header';
 import Form from '../components/Form';
+import Text from '../components/Text';
+import Container from '../components/Container';
+import LoadingSpinner from '../components/LoadingSpiner';
 
 const RegistrationVerify = () => {
-  const hash = useUrlQuery();
-  const [verifyHash, { error }] = useMutation(CHECK_HASH);
+  const urlQuery = useUrlQuery();
+  const [verifyHash, { data, loading, error }] = useMutation(CHECK_HASH);
 
   useEffect(() => {
     const verify = async () => {
-      if (hash) {
-        try {
-          await verifyHash({ variables: hash });
-        } catch (err) {}
+      if (urlQuery) {
+        await verifyHash({ variables: urlQuery });
       }
     };
     verify();
@@ -26,36 +26,40 @@ const RegistrationVerify = () => {
   return (
     <Page>
       <Container>
-        <Header style={{ marginTop: '70px', marginBottom: '45px' }} as="h1" align="center">
+        <Header as="h1" align="center">
           withmoney
         </Header>
         <Form>
-          <Header style={{ marginBottom: '20px', marginTop: '25px' }} as="h3" align="center">
+          <Header as="h3" align="center">
             Registration
           </Header>
-          {error ? (
-            <Header style={{ fontSize: '18px' }} variation="danger" align="center">
-              {error.message}
-            </Header>
-          ) : (
+
+          {data && (
             <>
-              <Header style={{ fontSize: '18px' }} variation="primary" align="center">
+              <Text style={{ margin: '10px' }} variation="primary" align="center">
                 Your email was confirmed
-              </Header>
-              <Link href="/" variation="primary">
+              </Text>
+              <Link to="/signin" variation="primary">
                 You first login now!
               </Link>
             </>
+          )}
+
+          {loading && (
+            <div style={{ position: 'relative', margin: '10px' }}>
+              <LoadingSpinner />
+            </div>
+          )}
+
+          {error && (
+            <Text variation="danger" align="center">
+              {error.message}
+            </Text>
           )}
         </Form>
       </Container>
     </Page>
   );
 };
-
-const Container = styled.div`
-  padding-left: 15px;
-  padding-right: 15px;
-`;
 
 export default RegistrationVerify;

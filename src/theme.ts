@@ -18,6 +18,16 @@ const GlobalStyle = createGlobalStyle`
     --font-h2-line-height: 47px;
     --font-h3-line-height: 42px;
 
+    --font-default-margin-top: 0;
+    --font-h1-margin-top: 70px;
+    --font-h2-margin-top: 45px;
+    --font-h3-margin-top: 20px;
+
+    --font-default-margin-bottom: 0;
+    --font-h1-margin-bottom: 45px;
+    --font-h2-margin-bottom: 35px;
+    --font-h3-margin-bottom: 25px;
+
     /* Text */
     --text-default-color: #363636;
     --text-primary-color: #219653;
@@ -188,6 +198,17 @@ const GlobalStyle = createGlobalStyle`
     --alert-primary-background-color: #219653;
     --alert-danger-background-color: #E98686;
 
+    /* Spinner */
+    --spinner-size: 40px;
+    --spinner-position-vertical: 10%;
+    --spinner-position-horizontal: 50%;
+    --spinner-animation-time: 1.5s;
+    --spinner-border-radius: 50%;
+    --spinner-transform: translate3d(-50%, -50%, 0);
+    
+
+    --spinner-border-color: #cfd0d1;
+    --spinner-border-bottom-color: #1c8147;
   }
 
   * {

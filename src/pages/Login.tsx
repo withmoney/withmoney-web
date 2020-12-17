@@ -1,7 +1,6 @@
 import React, { FormEvent, useState, ChangeEvent } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { gql } from '@apollo/client';
-import styled from 'styled-components';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Page from '../components/Page';
@@ -10,7 +9,9 @@ import Header from '../components/Header';
 import Form from '../components/Form';
 import Flex from '../components/Flex';
 import Link from '../components/Link';
-import FormControl from '../components/FormControl';
+import Container from '../components/Container';
+import Text from '../components/Text';
+import InputGroup from '../components/InputGroup';
 
 export const USER_LOGIN = gql`
   mutation userLogin($email: String!, $password: String!) {
@@ -49,11 +50,11 @@ const Login = () => {
   return (
     <Page>
       <Container>
-        <Header style={{ marginTop: '70px', marginBottom: '45px' }} as="h1" align="center">
+        <Header as="h1" align="center">
           withmoney
         </Header>
         <Form onSubmit={onSubmit}>
-          <Header style={{ marginBottom: '20px', marginTop: '25px' }} as="h3" align="center">
+          <Header as="h3" align="center">
             Log in
           </Header>
           {error &&
@@ -62,7 +63,7 @@ const Login = () => {
                 {message}
               </Alert>
             ))}
-          <FormControl>
+          <InputGroup>
             <Input
               type="email"
               name="email"
@@ -71,8 +72,8 @@ const Login = () => {
               disabled={loading}
               required
             />
-          </FormControl>
-          <FormControl>
+          </InputGroup>
+          <InputGroup>
             <Input
               type="password"
               name="password"
@@ -81,16 +82,18 @@ const Login = () => {
               disabled={loading}
               required
             />
-          </FormControl>
-          <Flex>
-            <Link variation="primary">Reset your password</Link>
+          </InputGroup>
+          <Flex align="space-between">
+            <Link to="/" variation="primary">
+              Reset your password
+            </Link>
             <Button variation="primary" disabled={loading}>
               {loading ? 'Sending...' : 'Log in'}
             </Button>
           </Flex>
-          <Flex>
-            <span>Do you not have an account?</span>
-            <Link href="/signup" variation="primary">
+          <Flex align="space-between">
+            <Text>Do you not have an account?</Text>
+            <Link to="/signup" variation="primary">
               Sign up
             </Link>
           </Flex>
@@ -99,10 +102,5 @@ const Login = () => {
     </Page>
   );
 };
-
-const Container = styled.div`
-  padding-left: 15px;
-  padding-right: 15px;
-`;
 
 export default Login;

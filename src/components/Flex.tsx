@@ -1,8 +1,12 @@
 import styled from 'styled-components';
 
-const Flex = styled.div`
+type Props = {
+  align?: 'center' | 'flex-end' | 'space-between' | 'space-around';
+};
+
+const Flex = styled.div<Props>`
   display: flex;
-  justify-content: space-between;
+  justify-content: ${({ align = 'flex-start' }) => align};
   & + & {
     margin-top: 20px;
   }

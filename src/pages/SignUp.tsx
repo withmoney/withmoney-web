@@ -1,5 +1,9 @@
 import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
+import { toast } from 'react-toastify';
+
+import { userSchema } from '../schema/registration';
+import { USER_REGISTER } from '../graphql/AuthGql';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Page from '../components/Page';
@@ -7,19 +11,15 @@ import Header from '../components/Header';
 import Form from '../components/Form';
 import Flex from '../components/Flex';
 import Link from '../components/Link';
-import Alert from '../components/Alert';
 import Container from '../components/Container';
-import FormControl from '../components/FormControl';
-import USER_REGISTER from './mutations/register';
 import Text from '../components/Text';
-import { userSchema } from './validations/useValidation';
+import InputGroup from '../components/InputGroup';
 
 const SingUp = () => {
-  const [formIsValid, setFormIsValid] = useState(true);
-  const [successMessage, setSuccessMessage] = useState(false);
+  const [formIsValid, setFormIsValid] = useState(false);
   const [userRegister, { loading, error }] = useMutation(USER_REGISTER);
 
-  const [formErrors, setFormErrors] = useState({
+  const [initialValue, setInitialValue] = useState({
     firstName: '',
     lastName: '',
     email: '',
@@ -35,6 +35,12 @@ const SingUp = () => {
     passwordConfirm: '',
   });
 
+  useEffect(() => {
+    error?.graphQLErrors.map(({ message }) => {
+      toast.error(message);
+    });
+  }, [error]);
+
   const handleInput = async (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm({
@@ -45,16 +51,14 @@ const SingUp = () => {
 
   const handleBlur = async (event: ChangeEvent<HTMLInputElement>) => {
     const { name } = event.target;
-
     try {
       await userSchema.validateAt(event.target.name, form);
-      setFormErrors({ ...formErrors, [name]: '' });
+      setInitialValue({ ...initialValue, [name]: '' });
     } catch (err) {
-      setFormErrors({ ...formErrors, [name]: err.errors });
-      console.log(formErrors.firstName);
+      setInitialValue({ ...initialValue, [name]: err.errors });
     }
     const isValid = await userSchema.isValid(form);
-    setFormIsValid(!isValid);
+    setFormIsValid(isValid);
   };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -63,38 +67,29 @@ const SingUp = () => {
     if (await userSchema.isValid(form)) {
       try {
         await userRegister({ variables: form });
-        setSuccessMessage(true);
+        toast.success(
+          'Your registration was doing with success, please confirm your email address, check your inbox',
+        );
       } catch (err) {}
     }
   };
 
   return (
     <Page>
-      <Container show={successMessage}>
-        <Header style={{ marginTop: '70px', marginBottom: '45px' }} as="h1" align="center">
+      <Container>
+        <Header as="h1" align="center">
           withmoney
         </Header>
 
-        <Form onSubmit={onSubmit} style={{ marginBottom: '80px' }}>
-          {error &&
-            error.graphQLErrors.map(({ message }, index) => (
-              <Alert show={true} key={index} isDanger>
-                {message}
-              </Alert>
-            ))}
-
-          <Alert show={successMessage}>
-            Your registration was doing with success, please confirm your email address, check your
-            inbox
-          </Alert>
-
-          <Header style={{ marginBottom: '20px', marginTop: '25px' }} as="h3" align="center">
+        <Form onSubmit={onSubmit}>
+          <Header as="h3" align="center">
             Sign up
           </Header>
 
           <Flex>
-            <FormControl>
+            <InputGroup>
               <Input
+                isInvalid={!!initialValue.firstName}
                 onBlur={handleBlur}
                 type="text"
                 name="firstName"
@@ -103,111 +98,95 @@ const SingUp = () => {
                 disabled={loading}
                 style={{ width: '95%', marginRight: '10px' }}
               />
-              {!!formErrors.firstName && (
-                <Text style={{ margin: '5px 5px' }} align="left" variation="danger">
-                  {formErrors.firstName}
+              {!!initialValue.firstName && (
+                <Text align="left" variation="danger">
+                  {initialValue.firstName}
                 </Text>
               )}
-            </FormControl>
+            </InputGroup>
 
-            <FormControl>
+            <InputGroup>
               <Input
+                isInvalid={!!initialValue.lastName}
                 onBlur={handleBlur}
                 type="text"
                 name="lastName"
                 placeholder="Last Name *"
                 onChange={handleInput}
                 disabled={loading}
-                style={{ marginRight: '10px' }}
+                style={{ width: '95%', marginLeft: '10px' }}
               />
-              {!!formErrors.lastName && (
-                <Text style={{ margin: '5px 5px' }} align="left" variation="danger">
-                  {formErrors.lastName}
+              {!!initialValue.lastName && (
+                <Text align="left" variation="danger">
+                  {initialValue.lastName}
                 </Text>
               )}
-            </FormControl>
+            </InputGroup>
           </Flex>
 
-          <FormControl>
+          <InputGroup>
             <Input
+              isInvalid={!!initialValue.email}
               onBlur={handleBlur}
               type="email"
               name="email"
               placeholder="Email *"
               disabled={loading}
               onChange={handleInput}
-              style={{ marginBottom: '0' }}
             />
-            {!!formErrors.email && (
-              <Text style={{ margin: '5px 5px' }} align="left" variation="danger">
-                {formErrors.email}
+            {!!initialValue.email && (
+              <Text align="left" variation="danger">
+                {initialValue.email}
               </Text>
             )}
-          </FormControl>
+          </InputGroup>
 
-          <FormControl>
+          <InputGroup>
             <Input
+              isInvalid={!!initialValue.password}
               onBlur={handleBlur}
               type="password"
               name="password"
               placeholder="Password *"
               onChange={handleInput}
               disabled={loading}
-              style={{ marginRight: '20px' }}
             />
-            {!!formErrors.password && (
-              <Text style={{ margin: '5px 5px' }} align="left" variation="danger">
-                {formErrors.password}
+            {!!initialValue.password && (
+              <Text align="left" variation="danger">
+                {initialValue.password}
               </Text>
             )}
-          </FormControl>
+          </InputGroup>
 
-          <FormControl>
+          <InputGroup>
             <Input
+              isInvalid={!!initialValue.passwordConfirm}
               onBlur={handleBlur}
               type="password"
               name="passwordConfirm"
               placeholder="Confirm Password *"
               onChange={handleInput}
               disabled={loading}
-              style={{ marginBottom: '0px', marginRight: '20px' }}
             />
-            {!!formErrors.passwordConfirm && (
-              <Text style={{ margin: '5px 5px' }} align="left" variation="danger">
-                {formErrors.passwordConfirm}
+            {!!initialValue.passwordConfirm && (
+              <Text align="left" variation="danger">
+                {initialValue.passwordConfirm}
               </Text>
             )}
-          </FormControl>
+          </InputGroup>
 
-          <Flex>
-            <Button disabled={formIsValid} style={{ margin: 'auto' }} variation="primary">
-              {loading ? 'Sending...' : 'Register'}
+          <Flex align="center">
+            <Button disabled={!formIsValid} variation="primary">
+              {loading ? 'Registering' : 'Register'}
             </Button>
           </Flex>
 
-          <Flex>
+          <Flex align="space-between">
             <Text>Do you already have an account?</Text>
-            <Link href="/" variation="primary">
+            <Link to="/signin" variation="primary">
               Sign up
             </Link>
           </Flex>
-        </Form>
-      </Container>
-
-      <Container show={!successMessage}>
-        <Header style={{ marginTop: '70px', marginBottom: '45px' }} as="h1" align="center">
-          withmoney
-        </Header>
-
-        <Form>
-          <Header style={{ marginBottom: '20px', marginTop: '25px' }} as="h3" align="center">
-            Registration done
-          </Header>
-
-          <Alert show={successMessage}>
-            Your registration was doing with success, please confirm your email address, check your
-            inbox!
-          </Alert>
         </Form>
       </Container>
     </Page>
