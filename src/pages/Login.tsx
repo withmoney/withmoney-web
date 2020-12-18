@@ -84,7 +84,7 @@ const Login = () => {
             />
           </InputGroup>
           <Flex justifyContent="space-between">
-            <Link to="/" variation="primary">
+            <Link to="/password-recovery" variation="primary">
               Reset your password
             </Link>
             <Button variation="primary" disabled={loading}>

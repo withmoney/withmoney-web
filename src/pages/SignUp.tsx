@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
+import React, { FormEvent, useState, ChangeEvent } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 
@@ -29,7 +29,7 @@ const SingUp = () => {
   const [formErrors, setFormErrors] = useState(initialValues);
   const [form, setForm] = useState(initialValues);
 
-  const [userRegister, { loading, error }] = useMutation(USER_REGISTER);
+  const [userRegister, { loading }] = useMutation(USER_REGISTER);
 
   const handleInput = async (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
