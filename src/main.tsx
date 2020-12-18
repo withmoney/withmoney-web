@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { ToastContainer } from 'react-toastify';
 import { setContext } from '@apollo/client/link/context';
-import Login from './pages/Login';
 import GlobalStyle from './theme';
+import Routers from './routes';
+import 'react-toastify/dist/ReactToastify.css';
 
 const httpLink = createHttpLink({
   uri: process.env.APOLLO_SERVER_API,
@@ -29,8 +31,9 @@ const client = new ApolloClient({
 const App = () => (
   <>
     <GlobalStyle />
+    <ToastContainer />
     <ApolloProvider client={client}>
-      <Login />
+      <Routers />
     </ApolloProvider>
   </>
 );

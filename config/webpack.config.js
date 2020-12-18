@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
-// const DotEnv = require('dotenv-webpack');
+const DotEnv = require('dotenv-webpack');
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir);
@@ -36,7 +36,7 @@ module.exports = {
     ],
   },
   plugins: [
-    // new DotEnv(),
+    new DotEnv(),
     new webpack.DefinePlugin({
       'process.env': {
         APOLLO_SERVER_API: JSON.stringify(process.env.APOLLO_SERVER_API),

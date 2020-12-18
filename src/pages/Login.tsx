@@ -1,7 +1,6 @@
 import React, { FormEvent, useState, ChangeEvent } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { gql } from '@apollo/client';
-import styled from 'styled-components';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Page from '../components/Page';
@@ -10,6 +9,9 @@ import Header from '../components/Header';
 import Form from '../components/Form';
 import Flex from '../components/Flex';
 import Link from '../components/Link';
+import Container from '../components/Container';
+import Text from '../components/Text';
+import InputGroup from '../components/InputGroup';
 
 export const USER_LOGIN = gql`
   mutation userLogin($email: String!, $password: String!) {
@@ -45,15 +47,14 @@ const Login = () => {
       [name]: value,
     });
   };
-
   return (
     <Page>
       <Container>
-        <Header style={{ marginTop: '70px', marginBottom: '45px' }} as="h1" align="center">
+        <Header as="h1" align="center">
           withmoney
         </Header>
         <Form onSubmit={onSubmit}>
-          <Header style={{ marginBottom: '20px', marginTop: '25px' }} as="h3" align="center">
+          <Header as="h3" align="center">
             Log in
           </Header>
           {error &&
@@ -62,41 +63,44 @@ const Login = () => {
                 {message}
               </Alert>
             ))}
-          <Input
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={handleInput}
-            disabled={loading}
-            required
-          />
-          <Input
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={handleInput}
-            disabled={loading}
-            required
-          />
-          <Flex>
-            <Link variation="primary">Reset your password</Link>
+          <InputGroup>
+            <Input
+              type="email"
+              name="email"
+              placeholder="Email"
+              onChange={handleInput}
+              disabled={loading}
+              required
+            />
+          </InputGroup>
+          <InputGroup>
+            <Input
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={handleInput}
+              disabled={loading}
+              required
+            />
+          </InputGroup>
+          <Flex justifyContent="space-between">
+            <Link to="/" variation="primary">
+              Reset your password
+            </Link>
             <Button variation="primary" disabled={loading}>
               {loading ? 'Sending...' : 'Log in'}
             </Button>
           </Flex>
-          <Flex>
-            <span>Do you not have an account?</span>
-            <Link variation="primary">Sign up</Link>
+          <Flex justifyContent="space-between">
+            <Text>Do you not have an account?</Text>
+            <Link to="/signup" variation="primary">
+              Sign up
+            </Link>
           </Flex>
         </Form>
       </Container>
     </Page>
   );
 };
-
-const Container = styled.div`
-  padding-left: 15px;
-  padding-right: 15px;
-`;
 
 export default Login;
