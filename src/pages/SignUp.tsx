@@ -42,7 +42,7 @@ const SingUp = () => {
     try {
       await userSchema.validateAt(event.target.name, form);
       const isValid = await userSchema.isValid(form);
-      setFormState({ error: initialValues, isValid: isValid });
+      setFormState({ error: { ...formState.error, [name]: '' }, isValid: isValid });
     } catch (err) {
       setFormState({ error: { ...formState.error, [name]: err.message }, isValid: false });
     }
