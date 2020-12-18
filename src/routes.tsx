@@ -15,8 +15,8 @@ const Router = () => {
         <Route path="/signin" component={Login} />
         <Route path="/signup" component={SignUp} />
         <Route path="/verify" component={RegistrationVerify} />
-        <Route path="/password-recovery" component={ResetPassword} />
-        <Route path="/reset-password" component={ChangePassword} />
+        <Route path="/reset-password" component={ResetPassword} />
+        <Route path="/change-password" component={ChangePassword} />
       </Switch>
     </BrowserRouter>
   );

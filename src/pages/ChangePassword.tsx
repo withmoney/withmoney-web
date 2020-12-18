@@ -1,51 +1,44 @@
 import React, { FormEvent, useState, ChangeEvent } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
-import { useUrlQuery } from '../hooks/UseURLQuery';
-import { checkPassword } from '../schema/registration';
-import { CHANGE_PASSWORD } from '../graphql/AuthGql';
+import { checkEmail } from '../schema/registration';
+import { REQUEST_CHANGE_PASSWORD } from '../graphql/AuthGql';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Page from '../components/Page';
 import Header from '../components/Header';
 import Form from '../components/Form';
 import Flex from '../components/Flex';
+import Link from '../components/Link';
 import Container from '../components/Container';
 import InputControl from '../components/InputControl';
-
-const initialValues = {
-  password: '',
-  passwordConfirm: '',
-};
+import Text from '../components/Text';
 
 const ChangePassword = () => {
-  const urlQuery = useUrlQuery();
-  const [password, setPassword] = useState(initialValues);
-  const [formState, setFormState] = useState({ error: initialValues, isValid: false });
-  const [changePassword, { loading }] = useMutation(CHANGE_PASSWORD);
+  const [form, setForm] = useState({ email: '' });
+  const [formState, setFormState] = useState({ error: '', isValid: false });
+  const [requestChangePassword, { loading }] = useMutation(REQUEST_CHANGE_PASSWORD);
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setPassword({ ...password, [name]: value.trim() });
+    const { value } = event.target;
+    setForm({ email: value.trim() });
   };
 
-  const handleBlur = async (event: ChangeEvent<HTMLInputElement>) => {
-    const { name } = event.target;
+  const handleBlur = async () => {
     try {
-      await checkPassword.validateAt(event.target.name, password);
-      const isValid = await checkPassword.isValid(password);
-      setFormState({ error: initialValues, isValid: isValid });
+      await checkEmail.validate(form);
+      setFormState({ error: '', isValid: true });
     } catch (err) {
-      setFormState({ error: { ...formState.error, [name]: err.message }, isValid: false });
+      setFormState({ error: err.message, isValid: false });
     }
   };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (await checkPassword.isValid(password)) {
+    if (await checkEmail.validate(form)) {
       try {
-        await changePassword({ variables: { hash: urlQuery.hash, password: password.password } });
-        toast.success('Your password is changed!');
+        await requestChangePassword({ variables: form });
+        toast.success('You will receive an email you are registered!');
       } catch (err) {
         toast.error(err.message);
       }
@@ -60,30 +53,15 @@ const ChangePassword = () => {
         </Header>
         <Form onSubmit={onSubmit}>
           <Header as="h3" align="center">
-            You new password
+            Reset password
           </Header>
-          <InputControl message={formState.error.password} isInvalid={!!formState.error.password}>
+          <InputControl message={formState.error} isInvalid={!!formState.error}>
             <Input
-              type="password"
-              name="password"
-              placeholder="Password"
+              isInvalid={!!formState.error}
+              type="email"
+              name="email"
+              placeholder="Email"
               disabled={loading}
-              isInvalid={!!formState.error.password}
-              onBlur={handleBlur}
-              onChange={handleInput}
-            />
-          </InputControl>
-
-          <InputControl
-            message={formState.error.passwordConfirm}
-            isInvalid={!!formState.error.passwordConfirm}
-          >
-            <Input
-              type="password"
-              name="passwordConfirm"
-              placeholder="Confirm password"
-              disabled={loading}
-              isInvalid={!!formState.error.passwordConfirm}
               onBlur={handleBlur}
               onChange={handleInput}
             />
@@ -91,8 +69,16 @@ const ChangePassword = () => {
 
           <Flex justifyContent="center">
             <Button disabled={!formState.isValid} variation="primary">
-              {loading ? 'Saving...' : 'Save'}
+              {loading ? 'Resetting...' : 'Reset'}
             </Button>
+          </Flex>
+
+          <Flex justifyContent="space-between">
+            <Text>Did you remembered?</Text>
+
+            <Link to="/signin" variation="primary">
+              Sign up
+            </Link>
           </Flex>
         </Form>
       </Container>

@@ -24,7 +24,7 @@ const initialValues = {
   passwordConfirm: '',
 };
 
-const SingUp = () => {
+const SignUp = () => {
   const [form, setForm] = useState(initialValues);
   const [formState, setFormState] = useState({ error: initialValues, isValid: false });
   const [userRegister, { loading }] = useMutation(USER_REGISTER);
@@ -161,4 +161,4 @@ const SingUp = () => {
   );
 };
 
-export default SingUp;
+export default SignUp;
