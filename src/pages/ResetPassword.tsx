@@ -16,8 +16,7 @@ import Text from '../components/Text';
 
 const ResetPassword = () => {
   const [email, setEmail] = useState({ email: '' });
-  const [formError, setFormError] = useState('');
-  const [formIsValid, setFormIsValid] = useState(false);
+  const [formState, setFormState] = useState({ error: '', isValid: false });
   const [requestChangePassword, { loading }] = useMutation(REQUEST_CHANGE_PASSWORD);
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
@@ -28,11 +27,9 @@ const ResetPassword = () => {
   const handleBlur = async () => {
     try {
       await checkEmail.validate(email);
-      setFormError('');
-      setFormIsValid(true);
+      setFormState({ error: '', isValid: true });
     } catch (err) {
-      setFormIsValid(false);
-      setFormError(err.message);
+      setFormState({ error: err.message, isValid: false });
     }
   };
 
@@ -58,8 +55,9 @@ const ResetPassword = () => {
           <Header as="h3" align="center">
             Reset password
           </Header>
-          <InputControl message={formError} isInvalid={!!email}>
+          <InputControl message={formState.error} isInvalid={!!formState.error}>
             <Input
+              isInvalid={!!formState.error}
               type="email"
               name="email"
               placeholder="Email"
@@ -70,7 +68,7 @@ const ResetPassword = () => {
           </InputControl>
 
           <Flex justifyContent="center">
-            <Button disabled={!formIsValid} variation="primary">
+            <Button disabled={!formState.isValid} variation="primary">
               {loading ? 'Resetting...' : 'Reset'}
             </Button>
           </Flex>
