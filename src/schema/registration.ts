@@ -14,7 +14,6 @@ export const userSchema = yup.object().shape({
       'password',
       "Your password is weak, it's need at least one letter on Lower case, one letter on upper case, one number and one symbol",
       (value: string = '') =>
-        /* @ts-ignore */
         isStrongPassword(value, {
           minLength: 8,
           minLowercase: 1,
@@ -40,7 +39,6 @@ export const checkPassword = yup.object().shape({
       'password',
       "Your password is weak, it's need at least one letter on Lower case, one letter on upper case, one number and one symbol",
       (value: string = '') =>
-        /* @ts-ignore */
         isStrongPassword(value, {
           minLength: 8,
           minLowercase: 1,
