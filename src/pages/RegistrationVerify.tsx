@@ -43,11 +43,7 @@ const RegistrationVerify = () => {
             </>
           )}
 
-          {loading && (
-            <div style={{ position: 'relative', margin: '10px' }}>
-              <LoadingSpinner />
-            </div>
-          )}
+          {loading && <LoadingSpinner margin="auto" />}
 
           {error && <Alert isDanger>{error.message}</Alert>}
         </Form>

@@ -31,12 +31,6 @@ const SingUp = () => {
 
   const [userRegister, { loading, error }] = useMutation(USER_REGISTER);
 
-  useEffect(() => {
-    error?.graphQLErrors.map(({ message }) => {
-      toast.error(message);
-    });
-  }, [error]);
-
   const handleInput = async (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm({
@@ -66,7 +60,9 @@ const SingUp = () => {
         toast.success(
           'Your registration was doing with success, please confirm your email address, check your inbox',
         );
-      } catch (err) {}
+      } catch (err) {
+        toast.error(`${err.name}: ${err.message}`);
+      }
     }
   };
 

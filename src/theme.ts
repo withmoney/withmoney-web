@@ -200,13 +200,9 @@ const GlobalStyle = createGlobalStyle`
 
     /* Spinner */
     --spinner-size: 40px;
-    --spinner-position-vertical: 10%;
-    --spinner-position-horizontal: 50%;
     --spinner-animation-time: 1.5s;
     --spinner-border-radius: 50%;
-    --spinner-transform: translate3d(-50%, -50%, 0);
     
-
     --spinner-border-color: #cfd0d1;
     --spinner-border-bottom-color: #1c8147;
   }
