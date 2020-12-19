@@ -14,7 +14,31 @@ export const userSchema = yup.object().shape({
       'password',
       "Your password is weak, it's need at least one letter on Lower case, one letter on upper case, one number and one symbol",
       (value: string = '') =>
-        /* @ts-ignore */
+        isStrongPassword(value, {
+          minLength: 8,
+          minLowercase: 1,
+          minUppercase: 1,
+          minNumbers: 0,
+          minSymbols: 0,
+          returnScore: false,
+        }),
+    ),
+  passwordConfirm: yup.string().equals([yup.ref('password'), null], 'Passwords must match'),
+});
+
+export const checkEmail = yup.object().shape({
+  email: yup.string().email('Invalid Email!').required('Required'),
+});
+
+export const checkPassword = yup.object().shape({
+  password: yup
+    .string()
+    .required('Required')
+    .min(8, 'Too Short!')
+    .test(
+      'password',
+      "Your password is weak, it's need at least one letter on Lower case, one letter on upper case, one number and one symbol",
+      (value: string = '') =>
         isStrongPassword(value, {
           minLength: 8,
           minLowercase: 1,
