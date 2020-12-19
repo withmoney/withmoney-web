@@ -2,7 +2,7 @@ import React, { FormEvent, useState, ChangeEvent } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 import { useUrlQuery } from '../hooks/UseURLQuery';
-import { checkPassword } from '../schema/registration';
+import { checkPassword } from '../schema/formVerifies';
 import { CHANGE_PASSWORD } from '../graphql/AuthGql';
 import Button from '../components/Button';
 import Input from '../components/Input';

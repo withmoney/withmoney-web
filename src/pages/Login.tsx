@@ -1,10 +1,11 @@
 import React, { FormEvent, useState, ChangeEvent } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { gql } from '@apollo/client';
+import { toast } from 'react-toastify';
+import { USER_LOGIN } from '../graphql/AuthGql';
+import { formLogin } from '../schema/formVerifies';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Page from '../components/Page';
-import Alert from '../components/Alert';
 import Header from '../components/Header';
 import Form from '../components/Form';
 import Flex from '../components/Flex';
@@ -12,85 +13,106 @@ import Link from '../components/Link';
 import Container from '../components/Container';
 import Text from '../components/Text';
 import InputGroup from '../components/InputGroup';
+import InputControl from '../components/InputControl';
 
-export const USER_LOGIN = gql`
-  mutation userLogin($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      token
-    }
-  }
-`;
+const initialValues = {
+  email: '',
+  password: '',
+};
 
 const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
-  const [userLogin, { loading, error }] = useMutation(USER_LOGIN);
-
-  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    try {
-      const {
-        data: {
-          login: { token },
-        },
-      } = await userLogin({
-        variables: form,
-      });
-
-      localStorage.setItem('withmoney-token', token);
-    } catch (err) {}
-  };
+  const [formState, setFormState] = useState({ error: initialValues, isValid: false });
+  const [userLogin, { loading }] = useMutation(USER_LOGIN);
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm({
       ...form,
-      [name]: value,
+      [name]: value.trim(),
     });
   };
+
+  const handleBlur = async (event: ChangeEvent<HTMLInputElement>) => {
+    const { name } = event.target;
+    try {
+      await formLogin.validateAt(name, form);
+      const isValid = await formLogin.isValid(form);
+      setFormState({ error: { ...formState.error, [name]: '' }, isValid: isValid });
+    } catch (err) {
+      setFormState({ error: { ...formState.error, [name]: err.message }, isValid: false });
+    }
+  };
+
+  const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (await formLogin.isValid(form)) {
+      try {
+        const {
+          data: {
+            login: { token },
+          },
+        } = await userLogin({
+          variables: form,
+        });
+
+        localStorage.setItem('withmoney-token', token);
+      } catch (err) {
+        toast.error(err.message);
+      }
+    }
+  };
+
   return (
     <Page>
       <Container>
         <Header as="h1" align="center">
           withmoney
         </Header>
+
         <Form onSubmit={onSubmit}>
           <Header as="h3" align="center">
             Log in
           </Header>
-          {error &&
-            error.graphQLErrors.map(({ message }, index) => (
-              <Alert key={index} isDanger>
-                {message}
-              </Alert>
-            ))}
-          <InputGroup>
-            <Input
-              type="email"
-              name="email"
-              placeholder="Email"
-              onChange={handleInput}
-              disabled={loading}
-              required
-            />
-          </InputGroup>
-          <InputGroup>
-            <Input
-              type="password"
-              name="password"
-              placeholder="Password"
-              onChange={handleInput}
-              disabled={loading}
-              required
-            />
-          </InputGroup>
+
+          <InputControl message={formState.error.email} isInvalid={!!formState.error.email}>
+            <InputGroup>
+              <Input
+                isInvalid={!!formState.error.email}
+                type="email"
+                name="email"
+                placeholder="Email"
+                disabled={loading}
+                onBlur={handleBlur}
+                onChange={handleInput}
+              />
+            </InputGroup>
+          </InputControl>
+
+          <InputControl message={formState.error.password} isInvalid={!!formState.error.password}>
+            <InputGroup>
+              <Input
+                isInvalid={!!formState.error.password}
+                type="password"
+                name="password"
+                placeholder="Password"
+                disabled={loading}
+                onChange={handleInput}
+                onBlur={handleBlur}
+              />
+            </InputGroup>
+          </InputControl>
+
           <Flex justifyContent="space-between">
             <Link to="/change-password" variation="primary">
               Reset your password
             </Link>
-            <Button variation="primary" disabled={loading}>
+
+            <Button variation="primary" disabled={!formState.isValid}>
               {loading ? 'Sending...' : 'Log in'}
             </Button>
           </Flex>
+
           <Flex justifyContent="space-between">
             <Text>Do you not have an account?</Text>
             <Link to="/signup" variation="primary">

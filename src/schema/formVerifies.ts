@@ -2,7 +2,7 @@ import * as yup from 'yup';
 /* @ts-ignore */
 import isStrongPassword from 'validator/lib/isStrongPassword';
 
-export const userSchema = yup.object().shape({
+export const formRegistration = yup.object().shape({
   firstName: yup.string().required('Required').min(3, 'Too Short!'),
   lastName: yup.string().required('Required').min(3, 'Too Short!'),
   email: yup.string().required('Required').email('Invalid Email!'),
@@ -24,6 +24,11 @@ export const userSchema = yup.object().shape({
         }),
     ),
   passwordConfirm: yup.string().equals([yup.ref('password'), null], 'Passwords must match'),
+});
+
+export const formLogin = yup.object().shape({
+  email: yup.string().email('Invalid Email!').required('Required'),
+  password: yup.string().required('Required'),
 });
 
 export const checkEmail = yup.object().shape({
