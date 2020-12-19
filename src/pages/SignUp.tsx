@@ -152,7 +152,7 @@ const SignUp = () => {
           <Flex justifyContent="space-between">
             <Text>Do you already have an account?</Text>
             <Link to="/signin" variation="primary">
-              Sign up
+              Sign in
             </Link>
           </Flex>
         </Form>
