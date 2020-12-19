@@ -2,7 +2,7 @@ import React, { FormEvent, useState, ChangeEvent } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 import { USER_LOGIN } from '../graphql/AuthGql';
-import { formLogin } from '../schema/formVerifies';
+import { loginSchema } from '../schema/auth';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import Page from '../components/Page';
@@ -36,8 +36,8 @@ const Login = () => {
   const handleBlur = async (event: ChangeEvent<HTMLInputElement>) => {
     const { name } = event.target;
     try {
-      await formLogin.validateAt(name, form);
-      const isValid = await formLogin.isValid(form);
+      await loginSchema.validateAt(name, form);
+      const isValid = await loginSchema.isValid(form);
       setFormState({ error: { ...formState.error, [name]: '' }, isValid: isValid });
     } catch (err) {
       setFormState({ error: { ...formState.error, [name]: err.message }, isValid: false });
@@ -46,7 +46,7 @@ const Login = () => {
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (await formLogin.isValid(form)) {
+    if (await loginSchema.isValid(form)) {
       try {
         const {
           data: {

@@ -2,7 +2,7 @@ import React, { FormEvent, useState, ChangeEvent } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 import { useUrlQuery } from '../hooks/UseURLQuery';
-import { checkPassword } from '../schema/formVerifies';
+import { checkPasswordSchema } from '../schema/auth';
 import { CHANGE_PASSWORD } from '../graphql/AuthGql';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -32,8 +32,8 @@ const ResetPassword = () => {
   const handleBlur = async (event: ChangeEvent<HTMLInputElement>) => {
     const { name } = event.target;
     try {
-      await checkPassword.validateAt(event.target.name, form);
-      const isValid = await checkPassword.isValid(form);
+      await checkPasswordSchema.validateAt(event.target.name, form);
+      const isValid = await checkPasswordSchema.isValid(form);
       setFormState({ error: initialValues, isValid: isValid });
     } catch (err) {
       setFormState({ error: { ...formState.error, [name]: err.message }, isValid: false });
@@ -42,7 +42,7 @@ const ResetPassword = () => {
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (await checkPassword.isValid(form)) {
+    if (await checkPasswordSchema.isValid(form)) {
       try {
         await changePassword({ variables: { hash: urlQuery.hash, password: form.password } });
         toast.success('Your password is changed!');
