@@ -1,7 +1,7 @@
 import React, { FormEvent, useState, ChangeEvent } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
-import { checkEmail } from '../schema/registration';
+import { checkEmailSchema } from '../schema/auth';
 import { REQUEST_CHANGE_PASSWORD } from '../graphql/AuthGql';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -26,7 +26,7 @@ const ChangePassword = () => {
 
   const handleBlur = async () => {
     try {
-      await checkEmail.validate(form);
+      await checkEmailSchema.validate(form);
       setFormState({ error: '', isValid: true });
     } catch (err) {
       setFormState({ error: err.message, isValid: false });
@@ -35,7 +35,7 @@ const ChangePassword = () => {
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (await checkEmail.validate(form)) {
+    if (await checkEmailSchema.validate(form)) {
       try {
         await requestChangePassword({ variables: form });
         toast.success('You will receive an email you are registered!');

@@ -2,7 +2,7 @@ import React, { FormEvent, useState, ChangeEvent } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 
-import { userSchema } from '../schema/registration';
+import { registerSchema } from '../schema/auth';
 import { USER_REGISTER } from '../graphql/AuthGql';
 import Button from '../components/Button';
 import Input from '../components/Input';
@@ -40,8 +40,8 @@ const SignUp = () => {
   const handleBlur = async (event: ChangeEvent<HTMLInputElement>) => {
     const { name } = event.target;
     try {
-      await userSchema.validateAt(event.target.name, form);
-      const isValid = await userSchema.isValid(form);
+      await registerSchema.validateAt(event.target.name, form);
+      const isValid = await registerSchema.isValid(form);
       setFormState({ error: { ...formState.error, [name]: '' }, isValid: isValid });
     } catch (err) {
       setFormState({ error: { ...formState.error, [name]: err.message }, isValid: false });
@@ -51,7 +51,7 @@ const SignUp = () => {
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (await userSchema.isValid(form)) {
+    if (await registerSchema.isValid(form)) {
       try {
         await userRegister({ variables: form });
         toast.success(
@@ -152,7 +152,7 @@ const SignUp = () => {
           <Flex justifyContent="space-between">
             <Text>Do you already have an account?</Text>
             <Link to="/signin" variation="primary">
-              Sign up
+              Sign in
             </Link>
           </Flex>
         </Form>
