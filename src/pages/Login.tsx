@@ -1,5 +1,6 @@
 import React, { FormEvent, useState, ChangeEvent } from 'react';
 import { useMutation } from '@apollo/react-hooks';
+import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { USER_LOGIN } from '../graphql/AuthGql';
 import { loginSchema } from '../schema/auth';
@@ -24,6 +25,7 @@ const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [formState, setFormState] = useState({ error: initialValues, isValid: false });
   const [userLogin, { loading }] = useMutation(USER_LOGIN);
+  const history = useHistory();
 
   const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -57,6 +59,7 @@ const Login = () => {
         });
 
         localStorage.setItem('withmoney-token', token);
+        history.push('/');
       } catch (err) {
         toast.error(err.message);
       }
