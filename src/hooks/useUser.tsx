@@ -11,8 +11,6 @@ export const useUser = () => {
   const decoded = jwt.decode(token) as {
     userId: string;
   };
-  console.log(decoded);
-
   const logged = !!data?.me?.id && data.me.id === decoded?.userId;
 
   return { logged, loading };
