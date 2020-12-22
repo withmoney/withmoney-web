@@ -1,15 +1,15 @@
 import React from 'react';
-import { PlayGround, Operations, NavBar, Container, Sidebar } from './Dashboard.styles';
+import { Wrapper, Content, NavBar, Sidebar, Page } from './Dashboard.styles';
 
 const Dashboard = () => {
   return (
-    <Container>
+    <Page>
       <Sidebar />
-      <PlayGround>
+      <Wrapper>
         <NavBar />
-        <Operations />
-      </PlayGround>
-    </Container>
+        <Content />
+      </Wrapper>
+    </Page>
   );
 };
 

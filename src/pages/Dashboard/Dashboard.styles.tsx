@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-export const Operations = styled.div`
+export const Content = styled.div`
   margin: 15px;
   width: calc(100wv - 300px);
   height: 100%;
   background-color: #ffffff;
 `;
 
-export const PlayGround = styled.div`
+export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -20,7 +20,7 @@ export const NavBar = styled.div`
   background-color: #ffffff;
 `;
 
-export const Container = styled.div`
+export const Page = styled.div`
   display: flex;
 `;
 
