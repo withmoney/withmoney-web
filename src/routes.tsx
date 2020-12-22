@@ -1,12 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Switch, Redirect } from 'react-router-dom';
 
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
-import RegistrationVerify from './pages/RegistrationVerify';
-import ResetPassword from './pages/ResetPassword';
-import ChangePassword from './pages/ChangePassword';
-import Dashboard from './pages/Dashboard';
+import {
+  Login,
+  SignUp,
+  Dashboard,
+  ChangePassword,
+  ResetPassword,
+  RegistrationVerify,
+} from './pages';
+
 import { AuthenticatedRoute, UnauthenticatedRoute } from './components/AuthenticatedRoute';
 
 const Router = () => {

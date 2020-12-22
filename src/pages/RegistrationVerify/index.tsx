@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
-import { CHECK_HASH } from '../graphql/AuthGql';
-import { useUrlQuery } from '../hooks/UseURLQuery';
-import Link from '../components/Link';
-import Page from '../components/Page';
-import Header from '../components/Header';
-import Form from '../components/Form';
-import Container from '../components/Container';
-import LoadingSpinner from '../components/LoadingSpiner';
-import Alert from '../components/Alert';
+import { CHECK_HASH } from '../../graphql/AuthGql';
+import { useUrlQuery } from '../../hooks/UseURLQuery';
+import Link from '../../components/Link';
+import Page from '../../components/Page';
+import Header from '../../components/Header';
+import Form from '../../components/Form';
+import Container from '../../components/Container';
+import LoadingSpinner from '../../components/LoadingSpiner';
+import Alert from '../../components/Alert';
 
 const RegistrationVerify = () => {
   const urlQuery = useUrlQuery();
