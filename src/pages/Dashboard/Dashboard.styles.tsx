@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
-export const Calcs = styled.div`
+export const Operations = styled.div`
   margin: 15px;
   width: calc(100wv - 300px);
   height: 100%;
   background-color: #ffffff;
 `;
 
-export const Operations = styled.div`
+export const PlayGround = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;

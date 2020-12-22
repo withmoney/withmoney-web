@@ -1,14 +1,14 @@
 import React from 'react';
-import { Calcs, Operations, NavBar, Container, Sidebar } from './Dashboard.styles';
+import { PlayGround, Operations, NavBar, Container, Sidebar } from './Dashboard.styles';
 
 const Dashboard = () => {
   return (
     <Container>
       <Sidebar />
-      <Operations>
+      <PlayGround>
         <NavBar />
-        <Calcs />
-      </Operations>
+        <Operations />
+      </PlayGround>
     </Container>
   );
 };
