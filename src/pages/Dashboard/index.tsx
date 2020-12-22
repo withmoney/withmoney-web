@@ -1,10 +1,14 @@
 import React from 'react';
-import { Wrapper, Content, NavBar, Sidebar, Page } from './Dashboard.styles';
+import Content from './Content';
+import SideBar from './SideBar';
+import NavBar from './NavBar';
+import Wrapper from './Wrapper';
+import Page from './Page';
 
 const Dashboard = () => {
   return (
     <Page>
-      <Sidebar />
+      <SideBar />
       <Wrapper>
         <NavBar />
         <Content />
