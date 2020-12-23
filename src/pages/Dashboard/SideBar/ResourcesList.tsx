@@ -12,7 +12,7 @@ const ResourcesList = () => {
       </Resource>
       <Resource>
         <MoneyOff />
-        <Text weight="500">Reports</Text>
+        <Text>Reports</Text>
       </Resource>
     </ResourcesListContainer>
   );

@@ -29,6 +29,11 @@ const GlobalStyle = createGlobalStyle`
     --font-h3-margin-bottom: 25px;
 
     /* Text */
+    --text-font-sm: 8px;
+    --text-font-md: 16px;
+    --text-font-lg: 24px;
+    --text-font-xl: 32px;
+
     --text-default-color: #363636;
     --text-primary-color: #219653;
     --text-light-color: #9AA0A9;

@@ -5,8 +5,8 @@ import Text from '../../../components/Text';
 const Balance = () => {
   return (
     <BalanceContainer>
-      <Text fontSize="18px">Balance</Text>
-      <Text weight="900">R$ 1200,00</Text>
+      <Text>Balance</Text>
+      <Text>R$ 1200,00</Text>
     </BalanceContainer>
   );
 };

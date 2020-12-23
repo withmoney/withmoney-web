@@ -7,9 +7,7 @@ const HamburgerMenu = () => {
   return (
     <MenuContainer>
       <Menu title="Withmoney" />
-      <Text fontSize="20px" weight="900">
-        Withmoney
-      </Text>
+      <Text font="lg">Withmoney</Text>
     </MenuContainer>
   );
 };
