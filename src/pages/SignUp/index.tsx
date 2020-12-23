@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, ChangeEvent } from 'react';
+import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 
@@ -28,6 +28,18 @@ const SignUp = () => {
   const [form, setForm] = useState(initialValues);
   const [formState, setFormState] = useState({ error: initialValues, isValid: false });
   const [userRegister, { loading }] = useMutation(USER_REGISTER);
+
+  useEffect(() => {
+    const checkForm = async () => {
+      try {
+        const isValid = await registerSchema.isValid(form);
+        setFormState({ error: { ...initialValues }, isValid: isValid });
+      } catch (err) {
+        setFormState({ error: { ...initialValues }, isValid: false });
+      }
+    };
+    checkForm();
+  }, [form]);
 
   const handleInput = async (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -144,7 +156,7 @@ const SignUp = () => {
           </InputControl>
 
           <Flex justifyContent="center">
-            <Button disabled={!formState.isValid} variation="primary">
+            <Button disabled={!formState.isValid || loading} variation="primary">
               {loading ? 'Registering...' : 'Register'}
             </Button>
           </Flex>

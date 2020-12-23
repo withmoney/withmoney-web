@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, ChangeEvent } from 'react';
+import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -27,7 +27,19 @@ const Login = () => {
   const [userLogin, { loading }] = useMutation(USER_LOGIN);
   const history = useHistory();
 
-  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    const checkForm = async () => {
+      try {
+        const isValid = await loginSchema.isValid(form);
+        setFormState({ error: { ...initialValues }, isValid: isValid });
+      } catch (err) {
+        setFormState({ error: { ...initialValues }, isValid: false });
+      }
+    };
+    checkForm();
+  }, [form]);
+
+  const handleInput = async (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm({
       ...form,
@@ -111,7 +123,7 @@ const Login = () => {
               Reset your password
             </Link>
 
-            <Button variation="primary" disabled={!formState.isValid}>
+            <Button variation="primary" disabled={!formState.isValid || loading}>
               {loading ? 'Sending...' : 'Log in'}
             </Button>
           </Flex>

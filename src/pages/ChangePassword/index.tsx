@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, ChangeEvent } from 'react';
+import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 import { checkEmailSchema } from '../../schema/auth';
@@ -19,7 +19,19 @@ const ChangePassword = () => {
   const [formState, setFormState] = useState({ error: '', isValid: false });
   const [requestChangePassword, { loading }] = useMutation(REQUEST_CHANGE_PASSWORD);
 
-  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    const checkForm = async () => {
+      try {
+        await checkEmailSchema.validate(form);
+        setFormState({ error: '', isValid: true });
+      } catch (err) {
+        setFormState({ error: '', isValid: false });
+      }
+    };
+    checkForm();
+  }, [form]);
+
+  const handleInput = async (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setForm({ email: value.trim() });
   };
@@ -68,7 +80,7 @@ const ChangePassword = () => {
           </InputControl>
 
           <Flex justifyContent="center">
-            <Button disabled={!formState.isValid} variation="primary">
+            <Button disabled={!formState.isValid || loading} variation="primary">
               {loading ? 'Resetting...' : 'Reset'}
             </Button>
           </Flex>

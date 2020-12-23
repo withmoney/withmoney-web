@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, ChangeEvent } from 'react';
+import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 import { useUrlQuery } from '../../hooks/UseURLQuery';
@@ -24,7 +24,19 @@ const ResetPassword = () => {
   const [formState, setFormState] = useState({ error: initialValues, isValid: false });
   const [changePassword, { loading }] = useMutation(CHANGE_PASSWORD);
 
-  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    const checkForm = async () => {
+      try {
+        const isValid = await checkPasswordSchema.isValid(form);
+        setFormState({ error: initialValues, isValid: isValid });
+      } catch (err) {
+        setFormState({ error: { ...initialValues }, isValid: false });
+      }
+    };
+    checkForm();
+  }, [form]);
+
+  const handleInput = async (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value.trim() });
   };
@@ -90,7 +102,7 @@ const ResetPassword = () => {
           </InputControl>
 
           <Flex justifyContent="center">
-            <Button disabled={!formState.isValid} variation="primary">
+            <Button disabled={!formState.isValid || loading} variation="primary">
               {loading ? 'Saving...' : 'Save'}
             </Button>
           </Flex>
