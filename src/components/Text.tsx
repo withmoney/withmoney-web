@@ -5,6 +5,7 @@ type Props = {
   align?: 'center' | 'left' | 'right';
   margin?: string;
   font?: 'sm' | 'md' | 'lg' | 'xl';
+  bold?: boolean;
 };
 
 type Variations = 'primary' | 'danger' | 'light' | 'default';
@@ -14,6 +15,7 @@ const Text = styled.p<Props>`
   text-align: ${({ align }) => align};
   margin: ${({ margin = '0' }) => margin};
   font-size: ${({ font = 'md' }) => `var(--text-font-${font})`};
+  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
 `;
 
 export default Text;

@@ -6,7 +6,7 @@ const Balance = () => {
   return (
     <BalanceContainer>
       <Text>Balance</Text>
-      <Text>R$ 1200,00</Text>
+      <Text bold>R$ 1200,00</Text>
     </BalanceContainer>
   );
 };
