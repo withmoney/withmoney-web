@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Text from './Text';
+import Text from '../../../components/Text';
 import { AttachMoney as IconMoney, MoneyOff as IconMoneyOff } from '@styled-icons/material';
 
 const ResourcesList = () => {

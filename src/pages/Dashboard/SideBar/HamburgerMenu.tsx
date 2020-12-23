@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Menu as Icon } from '@styled-icons/material';
-import Text from './Text';
+import Text from '../../../components/Text';
 
 const HamburgerMenu = () => {
   return (

@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import HamburgerMenu from '../../../components/HamburgerMenu';
-import Balance from '../../../components/Balance';
-import Information from '../../../components/Information';
-import ResourcesList from '../../../components/ResourcesList';
+import HamburgerMenu from './HamburgerMenu';
+import Balance from './Balance';
+import Information from './Information';
+import ResourcesList from './ResourcesList';
 
 const SideBar = () => {
   return (
