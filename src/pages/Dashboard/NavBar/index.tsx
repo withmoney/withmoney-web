@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import DropDownMenu from './DropDownMenu';
-import Date from './Date';
+import MonthNavigation from './MonthNavigation';
 
 const NavBar = () => {
   return (
     <NavBarContainer>
-      <Date />
+      <MonthNavigation />
       <DropDownMenu />
     </NavBarContainer>
   );

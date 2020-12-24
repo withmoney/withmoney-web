@@ -4,7 +4,7 @@ import { ArrowIosBack, ArrowIosForward } from '@styled-icons/evaicons-solid';
 import ArrowButton from './ArrowButton';
 import Text from '../../../components/Text';
 
-const Date = () => {
+const MonthNavigation = () => {
   return (
     <DateContainer>
       <ArrowButton>
@@ -25,4 +25,4 @@ const DateContainer = styled.div`
   padding: 0 22px;
 `;
 
-export default Date;
+export default MonthNavigation;

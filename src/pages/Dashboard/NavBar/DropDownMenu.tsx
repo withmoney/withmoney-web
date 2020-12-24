@@ -3,15 +3,11 @@ import styled from 'styled-components';
 import Menu from './Menu';
 import Text from '../../../components/Text';
 
-const URL =
-  'https://www.accessinsurance.co.uk/wp-content/themes/accessinsurance2017/images/ourpeople/benstarling.jpg';
+const URL = 'https://ui-avatars.com/api/?name=User+Name';
 
 const DropDownMenu = () => {
   const [activeMenu, setActiveMenu] = useState(false);
-
-  const OpenMenu = () => {
-    activeMenu ? setActiveMenu(false) : setActiveMenu(true);
-  };
+  const OpenMenu = () => setActiveMenu(!activeMenu);
 
   return (
     <DropDownMenuContainer onClick={OpenMenu}>
