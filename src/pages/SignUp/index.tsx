@@ -1,4 +1,5 @@
 import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 
@@ -26,19 +27,16 @@ const initialValues = {
 
 const SignUp = () => {
   const [form, setForm] = useState(initialValues);
-  const [formState, setFormState] = useState({ error: initialValues, isValid: false });
+  const [formErrors, setFormState] = useState({ error: initialValues });
+  const [formValidate, setFormValidate] = useState(false);
   const [userRegister, { loading }] = useMutation(USER_REGISTER);
+  const history = useHistory();
 
   useEffect(() => {
-    const checkForm = async () => {
-      try {
-        const isValid = await registerSchema.isValid(form);
-        setFormState({ error: { ...initialValues }, isValid: isValid });
-      } catch (err) {
-        setFormState({ error: { ...initialValues }, isValid: false });
-      }
+    const checkFormValidate = async () => {
+      setFormValidate(await registerSchema.isValid(form));
     };
-    checkForm();
+    checkFormValidate();
   }, [form]);
 
   const handleInput = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -53,22 +51,21 @@ const SignUp = () => {
     const { name } = event.target;
     try {
       await registerSchema.validateAt(event.target.name, form);
-      const isValid = await registerSchema.isValid(form);
-      setFormState({ error: { ...formState.error, [name]: '' }, isValid: isValid });
+      setFormState({ error: { ...formErrors.error, [name]: '' } });
     } catch (err) {
-      setFormState({ error: { ...formState.error, [name]: err.message }, isValid: false });
+      setFormState({ error: { ...formErrors.error, [name]: err.message } });
     }
   };
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     if (await registerSchema.isValid(form)) {
       try {
         await userRegister({ variables: form });
         toast.success(
           'Your registration was doing with success, please confirm your email address, check your inbox',
         );
+        history.push('/signin');
       } catch (err) {
         toast.error(err.message);
       }
@@ -89,23 +86,26 @@ const SignUp = () => {
 
           <InputGroup>
             <InputControl
-              message={formState.error.firstName}
-              isInvalid={!!formState.error.firstName}
+              message={formErrors.error.firstName}
+              isInvalid={!!formErrors.error.firstName}
             >
               <Input
                 type="text"
                 name="firstName"
                 placeholder="First Name *"
                 disabled={loading}
-                isInvalid={!!formState.error.firstName}
+                isInvalid={!!formErrors.error.firstName}
                 onChange={handleInput}
                 onBlur={handleBlur}
               />
             </InputControl>
 
-            <InputControl message={formState.error.lastName} isInvalid={!!formState.error.lastName}>
+            <InputControl
+              message={formErrors.error.lastName}
+              isInvalid={!!formErrors.error.lastName}
+            >
               <Input
-                isInvalid={!!formState.error.lastName}
+                isInvalid={!!formErrors.error.lastName}
                 onBlur={handleBlur}
                 type="text"
                 name="lastName"
@@ -116,47 +116,47 @@ const SignUp = () => {
             </InputControl>
           </InputGroup>
 
-          <InputControl message={formState.error.email} isInvalid={!!formState.error.email}>
+          <InputControl message={formErrors.error.email} isInvalid={!!formErrors.error.email}>
             <Input
               type="email"
               name="email"
               placeholder="Email *"
               disabled={loading}
-              isInvalid={!!formState.error.email}
+              isInvalid={!!formErrors.error.email}
               onChange={handleInput}
               onBlur={handleBlur}
             />
           </InputControl>
 
-          <InputControl message={formState.error.password} isInvalid={!!formState.error.password}>
+          <InputControl message={formErrors.error.password} isInvalid={!!formErrors.error.password}>
             <Input
               type="password"
               name="password"
               placeholder="Password *"
               disabled={loading}
-              isInvalid={!!formState.error.password}
+              isInvalid={!!formErrors.error.password}
               onChange={handleInput}
               onBlur={handleBlur}
             />
           </InputControl>
 
           <InputControl
-            message={formState.error.passwordConfirm}
-            isInvalid={!!formState.error.passwordConfirm}
+            message={formErrors.error.passwordConfirm}
+            isInvalid={!!formErrors.error.passwordConfirm}
           >
             <Input
               type="password"
               name="passwordConfirm"
               placeholder="Confirm Password *"
               disabled={loading}
-              isInvalid={!!formState.error.passwordConfirm}
+              isInvalid={!!formErrors.error.passwordConfirm}
               onChange={handleInput}
               onBlur={handleBlur}
             />
           </InputControl>
 
           <Flex justifyContent="center">
-            <Button disabled={!formState.isValid || loading} variation="primary">
+            <Button disabled={!formValidate || loading} variation="primary">
               {loading ? 'Registering...' : 'Register'}
             </Button>
           </Flex>

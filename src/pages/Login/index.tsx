@@ -22,22 +22,19 @@ const initialValues = {
 };
 
 const Login = () => {
-  const [form, setForm] = useState({ email: '', password: '' });
-  const [formState, setFormState] = useState({ error: initialValues, isValid: false });
   const [userLogin, { loading }] = useMutation(USER_LOGIN);
   const history = useHistory();
 
+  const [form, setForm] = useState(initialValues);
+  const [formErrors, setFormState] = useState({ error: initialValues });
+  const [formValidate, setFormValidate] = useState(false);
+
   useEffect(() => {
     const checkForm = async () => {
-      try {
-        const isValid = await loginSchema.isValid(form);
-        setFormState({ error: { ...initialValues }, isValid: isValid });
-      } catch (err) {
-        setFormState({ error: { ...initialValues }, isValid: false });
-      }
+      setFormValidate(await loginSchema.isValid(form));
     };
     checkForm();
-  }, [form]);
+  });
 
   const handleInput = async (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -51,10 +48,9 @@ const Login = () => {
     const { name } = event.target;
     try {
       await loginSchema.validateAt(name, form);
-      const isValid = await loginSchema.isValid(form);
-      setFormState({ error: { ...formState.error, [name]: '' }, isValid: isValid });
+      setFormState({ error: { ...formErrors.error, [name]: '' } });
     } catch (err) {
-      setFormState({ error: { ...formState.error, [name]: err.message }, isValid: false });
+      setFormState({ error: { ...formErrors.error, [name]: err.message } });
     }
   };
 
@@ -90,10 +86,10 @@ const Login = () => {
             Log in
           </Header>
 
-          <InputControl message={formState.error.email} isInvalid={!!formState.error.email}>
+          <InputControl message={formErrors.error.email} isInvalid={!!formErrors.error.email}>
             <InputGroup>
               <Input
-                isInvalid={!!formState.error.email}
+                isInvalid={!!formErrors.error.email}
                 type="email"
                 name="email"
                 placeholder="Email"
@@ -104,10 +100,10 @@ const Login = () => {
             </InputGroup>
           </InputControl>
 
-          <InputControl message={formState.error.password} isInvalid={!!formState.error.password}>
+          <InputControl message={formErrors.error.password} isInvalid={!!formErrors.error.password}>
             <InputGroup>
               <Input
-                isInvalid={!!formState.error.password}
+                isInvalid={!!formErrors.error.password}
                 type="password"
                 name="password"
                 placeholder="Password"
@@ -123,7 +119,7 @@ const Login = () => {
               Reset your password
             </Link>
 
-            <Button variation="primary" disabled={!formState.isValid || loading}>
+            <Button variation="primary" disabled={!formValidate || loading}>
               {loading ? 'Sending...' : 'Log in'}
             </Button>
           </Flex>

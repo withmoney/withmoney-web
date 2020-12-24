@@ -16,17 +16,13 @@ import Text from '../../components/Text';
 
 const ChangePassword = () => {
   const [form, setForm] = useState({ email: '' });
-  const [formState, setFormState] = useState({ error: '', isValid: false });
+  const [formErrors, setFormState] = useState({ error: '' });
+  const [formValidate, setFormValidate] = useState(false);
   const [requestChangePassword, { loading }] = useMutation(REQUEST_CHANGE_PASSWORD);
 
   useEffect(() => {
     const checkForm = async () => {
-      try {
-        await checkEmailSchema.validate(form);
-        setFormState({ error: '', isValid: true });
-      } catch (err) {
-        setFormState({ error: '', isValid: false });
-      }
+      setFormValidate(await checkEmailSchema.isValid(form));
     };
     checkForm();
   }, [form]);
@@ -39,9 +35,9 @@ const ChangePassword = () => {
   const handleBlur = async () => {
     try {
       await checkEmailSchema.validate(form);
-      setFormState({ error: '', isValid: true });
+      setFormState({ error: '' });
     } catch (err) {
-      setFormState({ error: err.message, isValid: false });
+      setFormState({ error: err.message });
     }
   };
 
@@ -67,9 +63,9 @@ const ChangePassword = () => {
           <Header as="h3" align="center">
             Reset password
           </Header>
-          <InputControl message={formState.error} isInvalid={!!formState.error}>
+          <InputControl message={formErrors.error} isInvalid={!!formErrors.error}>
             <Input
-              isInvalid={!!formState.error}
+              isInvalid={!!formErrors.error}
               type="email"
               name="email"
               placeholder="Email"
@@ -80,7 +76,7 @@ const ChangePassword = () => {
           </InputControl>
 
           <Flex justifyContent="center">
-            <Button disabled={!formState.isValid || loading} variation="primary">
+            <Button disabled={!formValidate || loading} variation="primary">
               {loading ? 'Resetting...' : 'Reset'}
             </Button>
           </Flex>
@@ -89,7 +85,7 @@ const ChangePassword = () => {
             <Text>Did you remembered?</Text>
 
             <Link to="/signin" variation="primary">
-              Sign up
+              Sign in
             </Link>
           </Flex>
         </Form>
