@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, ChangeEvent } from 'react';
+import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 import { checkEmailSchema } from '../../schema/auth';
@@ -16,10 +16,18 @@ import Text from '../../components/Text';
 
 const ChangePassword = () => {
   const [form, setForm] = useState({ email: '' });
-  const [formState, setFormState] = useState({ error: '', isValid: false });
+  const [formErrors, setFormErrors] = useState({ error: '' });
+  const [formValidate, setFormValidate] = useState(false);
   const [requestChangePassword, { loading }] = useMutation(REQUEST_CHANGE_PASSWORD);
 
-  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    const checkForm = async () => {
+      setFormValidate(await checkEmailSchema.isValid(form));
+    };
+    checkForm();
+  }, [form]);
+
+  const handleInput = async (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setForm({ email: value.trim() });
   };
@@ -27,9 +35,9 @@ const ChangePassword = () => {
   const handleBlur = async () => {
     try {
       await checkEmailSchema.validate(form);
-      setFormState({ error: '', isValid: true });
+      setFormErrors({ error: '' });
     } catch (err) {
-      setFormState({ error: err.message, isValid: false });
+      setFormErrors({ error: err.message });
     }
   };
 
@@ -55,9 +63,9 @@ const ChangePassword = () => {
           <Header as="h3" align="center">
             Reset password
           </Header>
-          <InputControl message={formState.error} isInvalid={!!formState.error}>
+          <InputControl message={formErrors.error} isInvalid={!!formErrors.error}>
             <Input
-              isInvalid={!!formState.error}
+              isInvalid={!!formErrors.error}
               type="email"
               name="email"
               placeholder="Email"
@@ -68,7 +76,7 @@ const ChangePassword = () => {
           </InputControl>
 
           <Flex justifyContent="center">
-            <Button disabled={!formState.isValid} variation="primary">
+            <Button disabled={!formValidate || loading} variation="primary">
               {loading ? 'Resetting...' : 'Reset'}
             </Button>
           </Flex>
@@ -77,7 +85,7 @@ const ChangePassword = () => {
             <Text>Did you remembered?</Text>
 
             <Link to="/signin" variation="primary">
-              Sign up
+              Sign in
             </Link>
           </Flex>
         </Form>

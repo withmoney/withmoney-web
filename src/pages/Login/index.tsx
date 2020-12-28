@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, ChangeEvent } from 'react';
+import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -22,12 +22,21 @@ const initialValues = {
 };
 
 const Login = () => {
-  const [form, setForm] = useState({ email: '', password: '' });
-  const [formState, setFormState] = useState({ error: initialValues, isValid: false });
   const [userLogin, { loading }] = useMutation(USER_LOGIN);
   const history = useHistory();
 
-  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+  const [form, setForm] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState(initialValues);
+  const [formValidate, setFormValidate] = useState(false);
+
+  useEffect(() => {
+    const checkForm = async () => {
+      setFormValidate(await loginSchema.isValid(form));
+    };
+    checkForm();
+  });
+
+  const handleInput = async (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm({
       ...form,
@@ -39,10 +48,9 @@ const Login = () => {
     const { name } = event.target;
     try {
       await loginSchema.validateAt(name, form);
-      const isValid = await loginSchema.isValid(form);
-      setFormState({ error: { ...formState.error, [name]: '' }, isValid: isValid });
+      setFormErrors(formErrors);
     } catch (err) {
-      setFormState({ error: { ...formState.error, [name]: err.message }, isValid: false });
+      setFormErrors({ ...formErrors, [name]: err.message });
     }
   };
 
@@ -78,10 +86,10 @@ const Login = () => {
             Log in
           </Header>
 
-          <InputControl message={formState.error.email} isInvalid={!!formState.error.email}>
+          <InputControl message={formErrors.email} isInvalid={!!formErrors.email}>
             <InputGroup>
               <Input
-                isInvalid={!!formState.error.email}
+                isInvalid={!!formErrors.email}
                 type="email"
                 name="email"
                 placeholder="Email"
@@ -92,10 +100,10 @@ const Login = () => {
             </InputGroup>
           </InputControl>
 
-          <InputControl message={formState.error.password} isInvalid={!!formState.error.password}>
+          <InputControl message={formErrors.password} isInvalid={!!formErrors.password}>
             <InputGroup>
               <Input
-                isInvalid={!!formState.error.password}
+                isInvalid={!!formErrors.password}
                 type="password"
                 name="password"
                 placeholder="Password"
@@ -111,7 +119,7 @@ const Login = () => {
               Reset your password
             </Link>
 
-            <Button variation="primary" disabled={!formState.isValid}>
+            <Button variation="primary" disabled={!formValidate || loading}>
               {loading ? 'Sending...' : 'Log in'}
             </Button>
           </Flex>
