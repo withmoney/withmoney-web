@@ -11,7 +11,7 @@ const Dashboard = () => {
       <SideBar />
       <Wrapper>
         <NavBar />
-        <Content />
+        <Content></Content>
       </Wrapper>
     </DashboardContainer>
   );

@@ -13,7 +13,7 @@ const MonthNavigation = () => {
       <ArrowButton>
         <ArrowIosForward />
       </ArrowButton>
-      <Text bold>December 2020</Text>
+      <Text>December 2020</Text>
     </DateContainer>
   );
 };

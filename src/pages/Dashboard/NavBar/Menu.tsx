@@ -16,8 +16,12 @@ const Menu = ({ show }: Props) => {
     history.push('/');
   };
 
+  if (!show) {
+    return null;
+  }
+
   return (
-    <MenuContainer show={show}>
+    <MenuContainer>
       <MenuContent>
         <Link to="/">Profile</Link>
         <Link to="/">Change Password</Link>
@@ -30,8 +34,8 @@ const Menu = ({ show }: Props) => {
 const MenuContent = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 25px;
-  border-bottom: solid 2px #e7e7e7;
+  text-align: start;
+  border-bottom: solid 2px var(--dashboard-border-color);
   margin: 20px;
   ${Link} {
     margin-bottom: 20px;
@@ -39,20 +43,18 @@ const MenuContent = styled.div`
 `;
 
 const MenuContainer = styled.div<Props>`
-  display: ${({ show }) => (show ? 'flex' : 'none')};
-  flex-direction: column;
   position: absolute;
   top: 55px;
   right: 10px;
   width: 270px;
-  height: 170px;
-  background-color: #ffffff;
+  padding-bottom: 50px;
+  background-color: var(--dashboard-color-white);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
   ${Button} {
     position: absolute;
-    right: 25px;
-    bottom: 15px;
+    right: 18;
+    bottom: 14px;
   }
 `;
 

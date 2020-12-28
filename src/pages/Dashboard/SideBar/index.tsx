@@ -17,9 +17,7 @@ const SideBar = () => {
 };
 
 export const Container = styled.div`
-  width: 300px;
-  height: 100vh;
-  background-color: #e5e5e5;
+  background-color: var(--dashboard-color-grey);
 `;
 
 export default SideBar;

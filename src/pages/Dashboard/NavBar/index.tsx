@@ -16,10 +16,8 @@ const NavBarContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
-  min-height: 50px;
-  max-height: 50px;
-  background-color: #ffffff;
+  padding: 5px;
+  background-color: var(--dashboard-color-white);
 `;
 
 export default NavBar;

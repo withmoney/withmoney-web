@@ -3,20 +3,27 @@ import styled from 'styled-components';
 import Menu from './Menu';
 import Text from '../../../components/Text';
 
-const URL = 'https://ui-avatars.com/api/?name=User+Name';
+const data = { fistName: 'User', lastName: 'Name', image: '' };
 
 const DropDownMenu = () => {
   const [activeMenu, setActiveMenu] = useState(false);
   const OpenMenu = () => setActiveMenu(!activeMenu);
 
+  const getDefaultImage = () => {
+    const URL = `https://ui-avatars.com/api/?name=${data.fistName}+${data.lastName}`;
+    return URL;
+  };
+
   return (
-    <DropDownMenuContainer onClick={OpenMenu}>
+    <DropDownMenuButton onClick={OpenMenu}>
       <DropDownMenuContent active={activeMenu}>
-        <Avatar src={URL} />
-        <Text>User Name</Text>
+        <Avatar src={getDefaultImage()} />
+        <Text>
+          {data.fistName} {data.lastName}
+        </Text>
       </DropDownMenuContent>
       <Menu show={activeMenu} />
-    </DropDownMenuContainer>
+    </DropDownMenuButton>
   );
 };
 
@@ -28,22 +35,24 @@ const DropDownMenuContent = styled.div<Props>`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
-  padding: 5px;
-  background-color: ${({ active }) => (active ? '#dadada' : '#fffff')};
+  border-radius: var(--dashboard-dropdown-radius);
+  border-left: 2px solid var(--dashboard-border-color);
+  padding: 5px 10px;
+  background-color: ${({ active }) =>
+    active ? 'var(--dashboard-color-lightgrey)' : 'var(--dashboard-color-white)'};
 `;
 
-const DropDownMenuContainer = styled.div`
+const DropDownMenuButton = styled.div`
+  background-color: var(--dashboard-color-white);
   padding: 0 20px;
-  border-left: solid 2px #e7e7e7;
   cursor: pointer;
 `;
 
 const Avatar = styled.img`
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  margin-right: 7px;
+  width: var(--dashboard-dropdown-avatar-size);
+  height: var(--dashboard-dropdown-avatar-size);
+  border-radius: var(--dashboard-default-radius);
+  margin-right: 8px;
 `;
 
 export default DropDownMenu;

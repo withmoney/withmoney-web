@@ -10,17 +10,21 @@ const ArrowButton = ({ children }: Props) => {
 };
 
 const ArrowButtonContainer = styled.button`
-  background-color: #e7e7e7;
-  width: 34px;
-  height: 34px;
+  background-color: var(--dashboard-button-color);
+  width: var(--dashboard-button-size);
+  height: var(--dashboard-button-size);
   margin-right: 10px;
-  border-radius: 50%;
+  border-radius: var(--dashboard-default-radius);
   cursor: pointer;
   border: none;
   outline: none;
 
   &:hover {
-    background-color: #dddcdc;
+    background-color: var(--dashboard-button-color-hover);
+  }
+
+  &:active {
+    background-color: var(--dashboard-button-color-active);
   }
 `;
 
