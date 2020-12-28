@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import Text from '../../../components/Text';
+import { currencyFormat } from '../../../utils/currency';
+import { LANG, CURRENCY } from '../../../constants/currency';
 
 type Props = {
-  name?: string;
-  current?: string;
-  desired?: string;
-  color?: string;
-  percent?: string;
+  name: string;
+  current: string | any;
+  desired: string | any;
+  color: string;
+  percent: string;
 };
 
 const Info = ({ name, current, desired, color, percent }: Props) => {
@@ -18,8 +20,8 @@ const Info = ({ name, current, desired, color, percent }: Props) => {
         <Progress color={color} percent={percent} />
       </ProgressBar>
       <BalanceContainer>
-        <Text>R$ {current}</Text>
-        <Text>R$ {desired}</Text>
+        <Text>{currencyFormat(LANG, CURRENCY, current)}</Text>
+        <Text>{currencyFormat(LANG, CURRENCY, desired)}</Text>
       </BalanceContainer>
     </InfoContainer>
   );
@@ -36,10 +38,15 @@ const ProgressBar = styled.div`
   background-color: #cfcfcf;
 `;
 
-const Progress = styled.div<Props>`
+type ProgressProps = {
+  color: string;
+  percent?: string;
+};
+
+const Progress = styled.div<ProgressProps>`
   width: ${({ percent = '0%' }) => `${percent}`};
   height: 10px;
-  background-color: ${({ color }) => color};
+  background-color: ${({ color = '#fff' }) => color};
 `;
 
 const BalanceContainer = styled.div`

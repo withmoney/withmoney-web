@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import Text from '../../../components/Text';
 import { AttachMoney as IconMoney, MoneyOff as IconMoneyOff } from '@styled-icons/material';
 
-const ResourcesList = () => {
+const Menu = () => {
   return (
-    <ResourcesListContainer>
-      <Resource active>
+    <MenuContainer>
+      <Resource>
         <Money />
         <Text>Transition</Text>
       </Resource>
@@ -14,7 +14,7 @@ const ResourcesList = () => {
         <MoneyOff />
         <Text>Reports</Text>
       </Resource>
-    </ResourcesListContainer>
+    </MenuContainer>
   );
 };
 
@@ -28,7 +28,7 @@ const MoneyOff = styled(IconMoneyOff)`
   margin-right: 10px;
 `;
 
-const ResourcesListContainer = styled.div`
+const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 200px;
@@ -36,18 +36,24 @@ const ResourcesListContainer = styled.div`
   padding-top: 20px;
 `;
 
-type ResourceProps = {
-  active?: boolean;
-};
-
-const Resource = styled.div<ResourceProps>`
+const Resource = styled.button`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background-color: ${({ active }) => (active ? ' #E7E7E7' : '#ffff')};
+  background-color: #ffff;
   width: 300px;
   height: 45px;
   padding: 0 20px;
+  outline: none;
+  border: none;
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+
+  &:active {
+    background-color: #e7e7e7;
+  }
 `;
 
-export default ResourcesList;
+export default Menu;

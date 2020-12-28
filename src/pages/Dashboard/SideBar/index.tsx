@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import HamburgerMenu from './HamburgerMenu';
 import Balance from './Balance';
 import Information from './Information';
-import ResourcesList from './ResourcesList';
+import Menu from './Menu';
 
 const SideBar = () => {
   return (
@@ -11,7 +11,7 @@ const SideBar = () => {
       <HamburgerMenu />
       <Balance />
       <Information />
-      <ResourcesList />
+      <Menu />
     </Container>
   );
 };
