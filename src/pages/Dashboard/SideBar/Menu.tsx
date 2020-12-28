@@ -31,28 +31,27 @@ const MoneyOff = styled(IconMoneyOff)`
 const MenuContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 150px;
-  background-color: #ffff;
+  background-color: var(--dashboard-color-white);
   padding-top: 20px;
+  padding-bottom: 20px;
 `;
 
 const MenuButton = styled.button`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background-color: #ffff;
+  background-color: var(--dashboard-color-white);
   width: 300px;
-  height: 45px;
-  padding: 0 20px;
+  padding: 10px 20px;
   outline: none;
   border: none;
 
   &:hover {
-    background-color: #e7e7e7;
+    background-color: var(--dashboard-button-color-hover);
   }
 
   &:active {
-    background-color: #dadada;
+    background-color: var(--dashboard-button-color-active);
   }
 `;
 

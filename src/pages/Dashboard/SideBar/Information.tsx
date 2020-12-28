@@ -12,28 +12,28 @@ const Information = () => {
     <InformationContainer>
       <Info
         percent={percentCalc(10, 100)}
-        color="#80DA89"
+        variation="entrance"
         name="Entrance"
         current={10}
         desired={100}
       />
       <Info
         percent={percentCalc(50, 100)}
-        color="#DA9680"
+        variation="recurrent"
         name="Recurrent"
         current={50}
         desired={100}
       />
       <Info
         percent={percentCalc(75, 100)}
-        color="#D3DA80"
+        variation="credit"
         name="Credit"
         current={75}
         desired={100}
       />
       <Info
         percent={percentCalc(100, 100)}
-        color="#C380DA"
+        variation="unforessen"
         name="Unforessen"
         current={100}
         desired={100}
@@ -45,9 +45,10 @@ const Information = () => {
 const InformationContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: calc(100% - 315px);
-  background-color: #ffff;
-  border-bottom: 2px solid #f2f2f2;
+  background-color: var(--dashboard-color-white);
+  padding-top: 10px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--dashboard-border-color);
 `;
 
 export default Information;

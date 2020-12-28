@@ -210,7 +210,35 @@ const GlobalStyle = createGlobalStyle`
     
     --spinner-border-color: #cfd0d1;
     --spinner-border-bottom-color: #1c8147;
+
+
+  /*DashBoard colors */
+  --dashboard-color-white: #FFFFFF;
+  --dashboard-color-grey: #E5E5E5;
+  --dashboard-color-lightgrey: #dadada;
+  --dashboard-border-color: #f2f2f2;
+  --dashboard-default-radius: 50%;
+  /* navBar */
+  --dashboard-button-color: #e7e7e7;
+  --dashboard-button-color-hover: #dddcdc;
+  --dashboard-button-color-active: #cfcfcf;
+  --dashboard-button-size: 34px;
+  --dashboard-dropdown-radius: 5%;
+  --dashboard-dropdown-avatar-size: 30px;
+  /* sideBar */
+  --dashboard-icon-color: #363636;
+  --dashboard-icon-size: 40px;
+  --dashboard-empty-progress-bar: #cfcfcf;
+  --dashboard-progress-bar-entrance: #80DA89;
+  --dashboard-progress-bar-recurrent: #DA9680;
+  --dashboard-progress-bar-credit: #D3DA80;
+  --dashboard-progress-bar-unforessen: #C380DA;
+
+
   }
+
+  
+
 
   * {
     box-sizing: border-box;

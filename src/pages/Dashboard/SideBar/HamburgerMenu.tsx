@@ -13,8 +13,9 @@ const HamburgerMenu = () => {
 };
 
 const Menu = styled(MenuIcon)`
-  margin: 10px;
-  width: 40px;
+  margin-right: 10px;
+  width: var(--dashboard-icon-size);
+  color: var(--dashboard-icon-color);
   &:hover {
     cursor: pointer;
   }
@@ -22,11 +23,11 @@ const Menu = styled(MenuIcon)`
 
 const MenuContainer = styled.div`
   display: flex;
-  height: 50px;
+  padding: 5px 25px;
   align-items: center;
-  background-color: #ffff;
+  background-color: var(--dashboard-color-white);
   margin-bottom: 15px;
-  border-right: 2px solid #f2f2f2;
+  border-right: 2px solid var(--dashboard-border-color);
 `;
 
 export default HamburgerMenu;

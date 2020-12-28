@@ -17,10 +17,9 @@ export const BalanceContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
-  height: 85px;
-  background-color: #ffff;
-  border-bottom: 2px solid #f2f2f2;
+  padding: 24px 20px;
+  background-color: var(--dashboard-color-white);
+  border-bottom: 2px solid var(--dashboard-border-color);
 `;
 
 export default Balance;

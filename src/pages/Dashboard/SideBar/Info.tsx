@@ -8,16 +8,16 @@ type Props = {
   name: string;
   current: string | any;
   desired: string | any;
-  color: string;
+  variation: 'entrance' | 'recurrent' | 'credit' | 'unforessen';
   percent: string;
 };
 
-const Info = ({ name, current, desired, color, percent }: Props) => {
+const Info = ({ name, current, desired, variation, percent }: Props) => {
   return (
     <InfoContainer>
       <Text>{name}</Text>
       <ProgressBar>
-        <Progress color={color} percent={percent} />
+        <Progress variation={variation} percent={percent} />
       </ProgressBar>
       <BalanceContainer>
         <Text>{currencyFormat(LANG, CURRENCY, current)}</Text>
@@ -32,24 +32,24 @@ const InfoContainer = styled.div`
 `;
 
 const ProgressBar = styled.div`
-  height: 10px;
-  background-color: #cfcfcf;
+  display: flex;
+  background-color: var(--dashboard-empty-progress-bar);
+`;
+
+type ProgressProps = {
+  variation: string;
+  percent: string;
+};
+
+const Progress = styled.div<ProgressProps>`
+  width: ${({ percent }) => percent};
+  padding: 5px 0;
+  background-color: ${({ variation }) => `var(--dashboard-progress-bar-${variation})`};
 `;
 
 const BalanceContainer = styled.div`
   display: flex;
   justify-content: space-between;
-`;
-
-type ProgressProps = {
-  color: string;
-  percent: string;
-};
-
-const Progress = styled.div<ProgressProps>`
-  width: ${({ percent = '0%' }) => `${percent}`};
-  height: 10px;
-  background-color: ${({ color = '#ffff' }) => color};
 `;
 
 export default Info;
