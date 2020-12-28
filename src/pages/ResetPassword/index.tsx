@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, ChangeEvent } from 'react';
+import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 import { useUrlQuery } from '../../hooks/UseURLQuery';
@@ -21,10 +21,18 @@ const initialValues = {
 const ResetPassword = () => {
   const urlQuery = useUrlQuery();
   const [form, setForm] = useState(initialValues);
-  const [formState, setFormState] = useState({ error: initialValues, isValid: false });
+  const [formErrors, setFormErrors] = useState(initialValues);
+  const [formValidate, setFormValidate] = useState(false);
   const [changePassword, { loading }] = useMutation(CHANGE_PASSWORD);
 
-  const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
+  useEffect(() => {
+    const checkForm = async () => {
+      setFormValidate(await checkPasswordSchema.isValid(form));
+    };
+    checkForm();
+  }, [form]);
+
+  const handleInput = async (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setForm({ ...form, [name]: value.trim() });
   };
@@ -33,10 +41,9 @@ const ResetPassword = () => {
     const { name } = event.target;
     try {
       await checkPasswordSchema.validateAt(event.target.name, form);
-      const isValid = await checkPasswordSchema.isValid(form);
-      setFormState({ error: initialValues, isValid: isValid });
+      setFormErrors(initialValues);
     } catch (err) {
-      setFormState({ error: { ...formState.error, [name]: err.message }, isValid: false });
+      setFormErrors({ ...formErrors, [name]: err.message });
     }
   };
 
@@ -62,35 +69,35 @@ const ResetPassword = () => {
           <Header as="h3" align="center">
             You new password
           </Header>
-          <InputControl message={formState.error.password} isInvalid={!!formState.error.password}>
+          <InputControl message={formErrors.password} isInvalid={!!formErrors.password}>
             <Input
               type="password"
               name="password"
               placeholder="Password"
               disabled={loading}
-              isInvalid={!!formState.error.password}
+              isInvalid={!!formErrors.password}
               onBlur={handleBlur}
               onChange={handleInput}
             />
           </InputControl>
 
           <InputControl
-            message={formState.error.passwordConfirm}
-            isInvalid={!!formState.error.passwordConfirm}
+            message={formErrors.passwordConfirm}
+            isInvalid={!!formErrors.passwordConfirm}
           >
             <Input
               type="password"
               name="passwordConfirm"
               placeholder="Confirm password"
               disabled={loading}
-              isInvalid={!!formState.error.passwordConfirm}
+              isInvalid={!!formErrors.passwordConfirm}
               onBlur={handleBlur}
               onChange={handleInput}
             />
           </InputControl>
 
           <Flex justifyContent="center">
-            <Button disabled={!formState.isValid} variation="primary">
+            <Button disabled={!formValidate || loading} variation="primary">
               {loading ? 'Saving...' : 'Save'}
             </Button>
           </Flex>
