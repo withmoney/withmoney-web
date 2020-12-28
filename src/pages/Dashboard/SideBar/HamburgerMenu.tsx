@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Menu as Icon } from '@styled-icons/material';
+import { Menu as MenuIcon } from '@styled-icons/material';
 import Text from '../../../components/Text';
 
 const HamburgerMenu = () => {
   return (
     <MenuContainer>
-      <Menu title="Withmoney" />
+      <Menu title="withmoney" />
       <Text font="lg">Withmoney</Text>
     </MenuContainer>
   );
 };
 
-const Menu = styled(Icon)`
+const Menu = styled(MenuIcon)`
   margin: 10px;
   width: 40px;
   &:hover {
@@ -26,7 +26,7 @@ const MenuContainer = styled.div`
   align-items: center;
   background-color: #ffff;
   margin-bottom: 15px;
-  border-right: solid 2px #f2f2f2;
+  border-right: 2px solid #f2f2f2;
 `;
 
 export default HamburgerMenu;
