@@ -22,7 +22,7 @@ const Menu = styled(MenuIcon)`
 
 const MenuContainer = styled.div`
   display: flex;
-  max-height: 50px;
+  height: 50px;
   align-items: center;
   background-color: #ffff;
   margin-bottom: 15px;
