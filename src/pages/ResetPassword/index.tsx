@@ -21,7 +21,7 @@ const initialValues = {
 const ResetPassword = () => {
   const urlQuery = useUrlQuery();
   const [form, setForm] = useState(initialValues);
-  const [formErrors, setFormState] = useState({ error: initialValues });
+  const [formErrors, setFormErrors] = useState(initialValues);
   const [formValidate, setFormValidate] = useState(false);
   const [changePassword, { loading }] = useMutation(CHANGE_PASSWORD);
 
@@ -41,9 +41,9 @@ const ResetPassword = () => {
     const { name } = event.target;
     try {
       await checkPasswordSchema.validateAt(event.target.name, form);
-      setFormState({ error: initialValues });
+      setFormErrors(initialValues);
     } catch (err) {
-      setFormState({ error: { ...formErrors.error, [name]: err.message } });
+      setFormErrors({ ...formErrors, [name]: err.message });
     }
   };
 
@@ -69,28 +69,28 @@ const ResetPassword = () => {
           <Header as="h3" align="center">
             You new password
           </Header>
-          <InputControl message={formErrors.error.password} isInvalid={!!formErrors.error.password}>
+          <InputControl message={formErrors.password} isInvalid={!!formErrors.password}>
             <Input
               type="password"
               name="password"
               placeholder="Password"
               disabled={loading}
-              isInvalid={!!formErrors.error.password}
+              isInvalid={!!formErrors.password}
               onBlur={handleBlur}
               onChange={handleInput}
             />
           </InputControl>
 
           <InputControl
-            message={formErrors.error.passwordConfirm}
-            isInvalid={!!formErrors.error.passwordConfirm}
+            message={formErrors.passwordConfirm}
+            isInvalid={!!formErrors.passwordConfirm}
           >
             <Input
               type="password"
               name="passwordConfirm"
               placeholder="Confirm password"
               disabled={loading}
-              isInvalid={!!formErrors.error.passwordConfirm}
+              isInvalid={!!formErrors.passwordConfirm}
               onBlur={handleBlur}
               onChange={handleInput}
             />

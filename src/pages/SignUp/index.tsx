@@ -27,7 +27,7 @@ const initialValues = {
 
 const SignUp = () => {
   const [form, setForm] = useState(initialValues);
-  const [formErrors, setFormState] = useState({ error: initialValues });
+  const [formErrors, setFormErrors] = useState(initialValues);
   const [formValidate, setFormValidate] = useState(false);
   const [userRegister, { loading }] = useMutation(USER_REGISTER);
   const history = useHistory();
@@ -51,9 +51,9 @@ const SignUp = () => {
     const { name } = event.target;
     try {
       await registerSchema.validateAt(event.target.name, form);
-      setFormState({ error: { ...formErrors.error, [name]: '' } });
+      setFormErrors(initialValues);
     } catch (err) {
-      setFormState({ error: { ...formErrors.error, [name]: err.message } });
+      setFormErrors({ ...formErrors, [name]: err.message });
     }
   };
 
@@ -85,27 +85,21 @@ const SignUp = () => {
           </Header>
 
           <InputGroup>
-            <InputControl
-              message={formErrors.error.firstName}
-              isInvalid={!!formErrors.error.firstName}
-            >
+            <InputControl message={formErrors.firstName} isInvalid={!!formErrors.firstName}>
               <Input
                 type="text"
                 name="firstName"
                 placeholder="First Name *"
                 disabled={loading}
-                isInvalid={!!formErrors.error.firstName}
+                isInvalid={!!formErrors.firstName}
                 onChange={handleInput}
                 onBlur={handleBlur}
               />
             </InputControl>
 
-            <InputControl
-              message={formErrors.error.lastName}
-              isInvalid={!!formErrors.error.lastName}
-            >
+            <InputControl message={formErrors.lastName} isInvalid={!!formErrors.lastName}>
               <Input
-                isInvalid={!!formErrors.error.lastName}
+                isInvalid={!!formErrors.lastName}
                 onBlur={handleBlur}
                 type="text"
                 name="lastName"
@@ -116,40 +110,40 @@ const SignUp = () => {
             </InputControl>
           </InputGroup>
 
-          <InputControl message={formErrors.error.email} isInvalid={!!formErrors.error.email}>
+          <InputControl message={formErrors.email} isInvalid={!!formErrors.email}>
             <Input
               type="email"
               name="email"
               placeholder="Email *"
               disabled={loading}
-              isInvalid={!!formErrors.error.email}
+              isInvalid={!!formErrors.email}
               onChange={handleInput}
               onBlur={handleBlur}
             />
           </InputControl>
 
-          <InputControl message={formErrors.error.password} isInvalid={!!formErrors.error.password}>
+          <InputControl message={formErrors.password} isInvalid={!!formErrors.password}>
             <Input
               type="password"
               name="password"
               placeholder="Password *"
               disabled={loading}
-              isInvalid={!!formErrors.error.password}
+              isInvalid={!!formErrors.password}
               onChange={handleInput}
               onBlur={handleBlur}
             />
           </InputControl>
 
           <InputControl
-            message={formErrors.error.passwordConfirm}
-            isInvalid={!!formErrors.error.passwordConfirm}
+            message={formErrors.passwordConfirm}
+            isInvalid={!!formErrors.passwordConfirm}
           >
             <Input
               type="password"
               name="passwordConfirm"
               placeholder="Confirm Password *"
               disabled={loading}
-              isInvalid={!!formErrors.error.passwordConfirm}
+              isInvalid={!!formErrors.passwordConfirm}
               onChange={handleInput}
               onBlur={handleBlur}
             />

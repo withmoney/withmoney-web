@@ -16,7 +16,7 @@ import Text from '../../components/Text';
 
 const ChangePassword = () => {
   const [form, setForm] = useState({ email: '' });
-  const [formErrors, setFormState] = useState({ error: '' });
+  const [formErrors, setFormErrors] = useState({ error: '' });
   const [formValidate, setFormValidate] = useState(false);
   const [requestChangePassword, { loading }] = useMutation(REQUEST_CHANGE_PASSWORD);
 
@@ -35,9 +35,9 @@ const ChangePassword = () => {
   const handleBlur = async () => {
     try {
       await checkEmailSchema.validate(form);
-      setFormState({ error: '' });
+      setFormErrors({ error: '' });
     } catch (err) {
-      setFormState({ error: err.message });
+      setFormErrors({ error: err.message });
     }
   };
 

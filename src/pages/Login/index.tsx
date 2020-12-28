@@ -26,7 +26,7 @@ const Login = () => {
   const history = useHistory();
 
   const [form, setForm] = useState(initialValues);
-  const [formErrors, setFormState] = useState({ error: initialValues });
+  const [formErrors, setFormErrors] = useState(initialValues);
   const [formValidate, setFormValidate] = useState(false);
 
   useEffect(() => {
@@ -48,9 +48,9 @@ const Login = () => {
     const { name } = event.target;
     try {
       await loginSchema.validateAt(name, form);
-      setFormState({ error: { ...formErrors.error, [name]: '' } });
+      setFormErrors(formErrors);
     } catch (err) {
-      setFormState({ error: { ...formErrors.error, [name]: err.message } });
+      setFormErrors({ ...formErrors, [name]: err.message });
     }
   };
 
@@ -86,10 +86,10 @@ const Login = () => {
             Log in
           </Header>
 
-          <InputControl message={formErrors.error.email} isInvalid={!!formErrors.error.email}>
+          <InputControl message={formErrors.email} isInvalid={!!formErrors.email}>
             <InputGroup>
               <Input
-                isInvalid={!!formErrors.error.email}
+                isInvalid={!!formErrors.email}
                 type="email"
                 name="email"
                 placeholder="Email"
@@ -100,10 +100,10 @@ const Login = () => {
             </InputGroup>
           </InputControl>
 
-          <InputControl message={formErrors.error.password} isInvalid={!!formErrors.error.password}>
+          <InputControl message={formErrors.password} isInvalid={!!formErrors.password}>
             <InputGroup>
               <Input
-                isInvalid={!!formErrors.error.password}
+                isInvalid={!!formErrors.password}
                 type="password"
                 name="password"
                 placeholder="Password"

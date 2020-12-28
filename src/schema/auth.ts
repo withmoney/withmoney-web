@@ -28,7 +28,7 @@ export const registerSchema = yup.object().shape({
 
 export const loginSchema = yup.object().shape({
   email: yup.string().email('Invalid Email!').required('Required'),
-  password: yup.string().required('Required').min(5, ''),
+  password: yup.string().required('Required'),
 });
 
 export const checkEmailSchema = yup.object().shape({
