@@ -1,16 +1,24 @@
 import React from 'react';
-import { Wrapper, Content, NavBar, Sidebar, Page } from './Dashboard.styles';
+import styled from 'styled-components';
+import Content from './Content';
+import SideBar from './SideBar';
+import NavBar from './NavBar';
+import Wrapper from './Wrapper';
 
 const Dashboard = () => {
   return (
-    <Page>
-      <Sidebar />
+    <DashboardContainer>
+      <SideBar />
       <Wrapper>
         <NavBar />
         <Content />
       </Wrapper>
-    </Page>
+    </DashboardContainer>
   );
 };
+
+const DashboardContainer = styled.div`
+  display: flex;
+`;
 
 export default Dashboard;
