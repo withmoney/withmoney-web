@@ -48,7 +48,7 @@ const Login = () => {
     const { name } = event.target;
     try {
       await loginSchema.validateAt(name, form);
-      setFormErrors(formErrors);
+      setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
       setFormErrors({ ...formErrors, [name]: err.message });
     }

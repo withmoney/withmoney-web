@@ -51,7 +51,7 @@ const SignUp = () => {
     const { name } = event.target;
     try {
       await registerSchema.validateAt(event.target.name, form);
-      setFormErrors(initialValues);
+      setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
       setFormErrors({ ...formErrors, [name]: err.message });
     }
