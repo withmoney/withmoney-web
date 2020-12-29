@@ -5,7 +5,7 @@ import SideBar from './SideBar';
 import NavBar from './NavBar';
 import Wrapper from './Wrapper';
 import HideProvider from '../../hooks/useHide';
-
+//dashboard
 const Dashboard = () => {
   return (
     <DashboardContainer>
