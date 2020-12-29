@@ -8,7 +8,6 @@ const data = { fistName: 'User', lastName: 'Name', image: '' };
 
 const DropDownMenu = () => {
   const { showMenu, setShowMenu } = useHide();
-  console.log(showMenu);
 
   const getDefaultImage = () => {
     const URL = `https://ui-avatars.com/api/?name=${data.fistName}+${data.lastName}`;
