@@ -3,20 +3,18 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import Link from '../../../components/Link';
 import Button from '../../../components/Button';
+import { useHide } from '../../../hooks/useHide';
 
-type Props = {
-  show?: boolean;
-};
-
-const Menu = ({ show }: Props) => {
+const Menu = () => {
   const history = useHistory();
+  const { showMenu } = useHide();
 
   const LogOut = () => {
     localStorage.removeItem('withmoney-token');
     history.push('/');
   };
 
-  if (!show) {
+  if (!showMenu) {
     return null;
   }
 
@@ -42,7 +40,7 @@ const MenuContent = styled.div`
   }
 `;
 
-const MenuContainer = styled.div<Props>`
+const MenuContainer = styled.div`
   position: absolute;
   top: 55px;
   right: 10px;

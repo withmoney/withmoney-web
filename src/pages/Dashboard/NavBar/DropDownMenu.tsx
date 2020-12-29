@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Menu from './Menu';
 import Text from '../../../components/Text';
+import { useHide } from '../../../hooks/useHide';
 
 const data = { fistName: 'User', lastName: 'Name', image: '' };
 
 const DropDownMenu = () => {
-  const [activeMenu, setActiveMenu] = useState(false);
-  const OpenMenu = () => setActiveMenu(!activeMenu);
+  const { showMenu, setShowMenu } = useHide();
+  console.log(showMenu);
 
   const getDefaultImage = () => {
     const URL = `https://ui-avatars.com/api/?name=${data.fistName}+${data.lastName}`;
@@ -15,34 +16,39 @@ const DropDownMenu = () => {
   };
 
   return (
-    <DropDownMenuButton onClick={OpenMenu}>
-      <DropDownMenuContent active={activeMenu}>
+    <DropDownMenuContent>
+      <DropDownMenuButton onClick={() => setShowMenu(!showMenu)}>
         <Avatar src={getDefaultImage()} />
         <Text>
           {data.fistName} {data.lastName}
         </Text>
-      </DropDownMenuContent>
-      <Menu show={activeMenu} />
-    </DropDownMenuButton>
+      </DropDownMenuButton>
+      <Menu />
+    </DropDownMenuContent>
   );
 };
 
-type Props = {
-  active?: boolean;
-};
-
-const DropDownMenuContent = styled.div<Props>`
+const DropDownMenuButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: var(--dashboard-dropdown-radius);
-  border-left: 2px solid var(--dashboard-border-color);
   padding: 5px 10px;
-  background-color: ${({ active }) =>
-    active ? 'var(--dashboard-color-lightgrey)' : 'var(--dashboard-color-white)'};
+  outline: none;
+  border: none;
+  background-color: var(--dashboard-color-white);
+  border-left: 2px solid var(--dashboard-border-color);
+
+  &:hover {
+    background-color: var(--dashboard-button-color-hover);
+  }
+
+  &:active {
+    background-color: var(--dashboard-button-color-active);
+  }
 `;
 
-const DropDownMenuButton = styled.div`
+const DropDownMenuContent = styled.div`
   background-color: var(--dashboard-color-white);
   padding: 0 20px;
   cursor: pointer;
