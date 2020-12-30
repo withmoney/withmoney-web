@@ -33,11 +33,12 @@ export const MeuButton = styled.button`
 `;
 
 type ContainerProps = {
-  show: boolean;
+  isSidebarOpen: boolean;
 };
 
 export const MenuContainer = styled.div<ContainerProps>`
-  min-width: ${({ show }) => (show ? '0' : '300px')};
+  width: ${({ isSidebarOpen }) => (isSidebarOpen ? '300px' : '71px')};
+  transition: width 0.2s ease-out;
   display: flex;
   align-items: center;
   background-color: var(--dashboard-color-white);

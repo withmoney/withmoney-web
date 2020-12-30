@@ -24,7 +24,6 @@ export const MenuButton = styled.button`
   justify-content: flex-start;
   align-items: center;
   background-color: var(--dashboard-color-white);
-  width: 300px;
   padding: 10px 20px;
   outline: none;
   border: none;

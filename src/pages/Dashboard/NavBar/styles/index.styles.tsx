@@ -8,7 +8,7 @@ export const NavBarContainer = styled.div`
 
 export const NavBarSection = styled.div`
   display: flex;
-  width: 100%;
+  flex-grow: 1;
   justify-content: space-between;
   align-items: center;
   background-color: var(--dashboard-color-white);

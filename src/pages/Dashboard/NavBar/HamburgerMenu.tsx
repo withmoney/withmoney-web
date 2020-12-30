@@ -1,16 +1,16 @@
 import React from 'react';
 import Text from '../../../components/Text';
-import { useSideHide } from '../../../hooks/useSideHide';
+import { useSidebarCollapse } from '../../../hooks/useSidebarCollapse';
 import { MenuContainer, MeuButton, Menu } from './styles/HamburgerMenu.styles';
 
 const HamburgerMenu = () => {
-  const { sideHide, setSideHide } = useSideHide();
+  const { isSidebarOpen, toggleSidebar } = useSidebarCollapse();
   return (
-    <MenuContainer show={sideHide}>
+    <MenuContainer isSidebarOpen={isSidebarOpen}>
       <MeuButton>
-        <Menu active={sideHide} onClick={() => setSideHide(!sideHide)} title="withmoney" />
+        <Menu active={isSidebarOpen} onClick={toggleSidebar} title="withmoney" />
       </MeuButton>
-      {sideHide ? '' : <Text font="lg">withmoney</Text>}
+      {isSidebarOpen && <Text font="lg">withmoney</Text>}
     </MenuContainer>
   );
 };

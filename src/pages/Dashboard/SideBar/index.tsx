@@ -2,13 +2,13 @@ import React from 'react';
 import Balance from './Balance';
 import Information from './Information';
 import Menu from './Menu';
-import { useSideHide } from '../../../hooks/useSideHide';
+import { useSidebarCollapse } from '../../../hooks/useSidebarCollapse';
 import { Container } from './styles/index.styles';
 
 const SideBar = () => {
-  const { sideHide } = useSideHide();
+  const { isSidebarOpen } = useSidebarCollapse();
   return (
-    <Container hide={sideHide}>
+    <Container isSidebarOpen={isSidebarOpen}>
       <Balance />
       <Information />
       <Menu />
