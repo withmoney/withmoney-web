@@ -10,16 +10,17 @@ export const Menu = styled(MenuIcon)<PropsMenu>`
   padding: 5px;
   width: var(--dashboard-icon-size);
   color: var(--dashboard-icon-color);
-  background-color: ${({ active }) => (active ? '#dadada' : '#ffff')};
+  background-color: ${({ active }) =>
+    active ? 'var(--dashboard-color-lightgrey)' : 'var(--dashboard-color-white)'};
   border-radius: 50%;
   cursor: pointer;
 
   &:hover {
-    background-color: #dadada;
+    background-color: var(--dashboard-color-lightgrey);
   }
 
   &:active {
-    background-color: #c5c4c4;
+    background-color: var(--dashboard-color-grey);
     box-shadow: 0px 0px 0px 2px rgba(50, 115, 220, 0.25);
   }
 `;

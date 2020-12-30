@@ -38,7 +38,7 @@ export const MenuContainer = styled.div`
     border-top: 0px solid transparent;
     border-right: 8px solid transparent;
     border-left: 8px solid transparent;
-    border-bottom: 11px solid #ffff;
+    border-bottom: 11px solid var(--dashboard-color-white);
   }
 `;
 
