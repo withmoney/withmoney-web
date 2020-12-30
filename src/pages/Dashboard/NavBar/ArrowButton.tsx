@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { ArrowButtonContainer } from './Styles/ArrowButton styles';
 
 type Props = {
   children?: React.ReactNode;
@@ -8,24 +8,5 @@ type Props = {
 const ArrowButton = ({ children }: Props) => {
   return <ArrowButtonContainer>{children}</ArrowButtonContainer>;
 };
-
-const ArrowButtonContainer = styled.button`
-  background-color: var(--dashboard-button-color);
-  width: var(--dashboard-button-size);
-  height: var(--dashboard-button-size);
-  margin-right: 10px;
-  border-radius: var(--dashboard-default-radius);
-  cursor: pointer;
-  border: none;
-  outline: none;
-
-  &:hover {
-    background-color: var(--dashboard-button-color-hover);
-  }
-
-  &:active {
-    background-color: var(--dashboard-button-color-active);
-  }
-`;
 
 export default ArrowButton;

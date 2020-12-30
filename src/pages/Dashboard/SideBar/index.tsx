@@ -1,29 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
 import Balance from './Balance';
 import Information from './Information';
 import Menu from './Menu';
-import { useHide } from '../../../hooks/useHide';
+import { useSideHide } from '../../../hooks/useSideHide';
+import { Container } from './styles/index styles';
 
 const SideBar = () => {
-  const { hideSideBar } = useHide();
+  const { sideHide } = useSideHide();
   return (
-    <Container hide={hideSideBar}>
+    <Container hide={sideHide}>
       <Balance />
       <Information />
       <Menu />
     </Container>
   );
 };
-
-type Props = {
-  hide: boolean;
-};
-
-export const Container = styled.div<Props>`
-  background-color: var(--dashboard-color-grey);
-  margin-right: 15px;
-  display: ${({ hide }) => (hide ? 'none' : 'block')};
-`;
 
 export default SideBar;

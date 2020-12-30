@@ -1,6 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
 import Info from './Info';
+import { InformationContainer } from './styles/Information styles';
 
 const Information = () => {
   const percentCalc = (current: number, desired: number) => {
@@ -41,14 +41,5 @@ const Information = () => {
     </InformationContainer>
   );
 };
-
-const InformationContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: var(--dashboard-color-white);
-  padding-top: 10px;
-  padding-bottom: 20px;
-  border-bottom: 2px solid var(--dashboard-border-color);
-`;
 
 export default Information;

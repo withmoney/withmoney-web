@@ -1,59 +1,25 @@
 import React from 'react';
-import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import Link from '../../../components/Link';
 import Button from '../../../components/Button';
-import { useHide } from '../../../hooks/useHide';
+import { MenuContainer, MenuContent, ButtonLink } from './Styles/Menu styles';
 
 const Menu = () => {
   const history = useHistory();
-  const { showMenu } = useHide();
 
   const LogOut = () => {
     localStorage.removeItem('withmoney-token');
     history.push('/');
   };
 
-  if (!showMenu) {
-    return null;
-  }
-
   return (
     <MenuContainer>
       <MenuContent>
-        <Link to="/">Profile</Link>
-        <Link to="/">Change Password</Link>
+        <ButtonLink to="/">Profile</ButtonLink>
+        <ButtonLink to="/">Change Password</ButtonLink>
       </MenuContent>
       <Button onClick={LogOut}>Log out</Button>
     </MenuContainer>
   );
 };
-
-const MenuContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: start;
-  border-bottom: solid 2px var(--dashboard-border-color);
-  margin: 20px;
-  ${Link} {
-    margin-bottom: 20px;
-  }
-`;
-
-const MenuContainer = styled.div`
-  position: absolute;
-  top: 55px;
-  right: 10px;
-  width: 270px;
-  padding-bottom: 50px;
-  background-color: var(--dashboard-color-white);
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
-  ${Button} {
-    position: absolute;
-    right: 18;
-    bottom: 14px;
-  }
-`;
 
 export default Menu;

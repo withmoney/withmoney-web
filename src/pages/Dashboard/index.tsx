@@ -4,19 +4,19 @@ import Content from './Content';
 import SideBar from './SideBar';
 import NavBar from './NavBar';
 import Wrapper from './Wrapper';
-import HideProvider from '../../hooks/useHide';
-//dashboard
+import SideHideProvider from '../../hooks/useSideHide';
+
 const Dashboard = () => {
   return (
     <DashboardContainer>
-      <HideProvider>
+      <SideHideProvider>
         <Wrapper>
           <NavBar />
           <Content>
             <SideBar />
           </Content>
         </Wrapper>
-      </HideProvider>
+      </SideHideProvider>
     </DashboardContainer>
   );
 };

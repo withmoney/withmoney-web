@@ -1,8 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 import { ArrowIosBack, ArrowIosForward } from '@styled-icons/evaicons-solid';
 import ArrowButton from './ArrowButton';
 import Text from '../../../components/Text';
+import { DateContainer } from './Styles/MonthNavigation styles';
 
 const MonthNavigation = () => {
   return (
@@ -17,12 +17,5 @@ const MonthNavigation = () => {
     </DateContainer>
   );
 };
-
-const DateContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0 22px;
-`;
 
 export default MonthNavigation;
