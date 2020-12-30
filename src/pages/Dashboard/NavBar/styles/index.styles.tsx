@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const NavBarContainer = styled.div`
   display: flex;
-  padding: 5px;
   background-color: var(--dashboard-color-white);
 `;
 

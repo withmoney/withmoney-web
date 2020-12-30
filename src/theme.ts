@@ -223,7 +223,7 @@ const GlobalStyle = createGlobalStyle`
   --dashboard-button-color-hover: #dddcdc;
   --dashboard-button-color-active: #cfcfcf;
   --dashboard-button-size: 34px;
-  --dashboard-dropdown-radius: 5%;
+  --dashboard-dropdown-radius: 5px;
   --dashboard-dropdown-avatar-size: 30px;
   /* sideBar */
   --dashboard-icon-color: #363636;

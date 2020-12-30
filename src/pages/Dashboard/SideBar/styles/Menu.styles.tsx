@@ -27,6 +27,7 @@ export const MenuButton = styled.button`
   padding: 10px 20px;
   outline: none;
   border: none;
+  cursor: pointer;
 
   &:hover {
     background-color: var(--dashboard-button-color-hover);

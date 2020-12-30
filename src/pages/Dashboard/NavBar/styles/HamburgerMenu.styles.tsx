@@ -11,7 +11,7 @@ export const Menu = styled(MenuIcon)<PropsMenu>`
   width: var(--dashboard-icon-size);
   color: var(--dashboard-icon-color);
   background-color: ${({ active }) =>
-    active ? 'var(--dashboard-color-lightgrey)' : 'var(--dashboard-color-white)'};
+    active ? 'var(--dashboard-color-white)' : 'var(--dashboard-color-lightgrey)'};
   border-radius: 50%;
   cursor: pointer;
 

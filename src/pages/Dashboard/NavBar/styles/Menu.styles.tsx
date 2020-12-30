@@ -9,7 +9,7 @@ export const MenuContent = styled.div`
   border-bottom: solid 2px var(--dashboard-border-color);
   margin: 20px;
   ${Link} {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 `;
 
@@ -40,8 +40,13 @@ export const MenuContainer = styled.div`
     border-left: 8px solid transparent;
     border-bottom: 11px solid var(--dashboard-color-white);
   }
+  z-index: 1000;
 `;
 
 export const ButtonLink = styled(Link)`
   text-decoration: none;
+  padding: 10px;
+  &:hover {
+    background-color: var(--dashboard-color-grey);
+  }
 `;

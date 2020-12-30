@@ -6,7 +6,7 @@ const Wrapper = styled.div`
   flex-grow: 1;
   width: 100%;
   height: 100vh;
-  background-color: var(--dashboard-color-grey);
+  background-color: var(--page-background-color);
 `;
 
 export default Wrapper;

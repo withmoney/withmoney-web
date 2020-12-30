@@ -15,31 +15,30 @@ const Dashboard = () => {
         <NavBar />
         <Content>
           <SideBar />
-          <Miolo isSidebarOpen={isSidebarOpen}>
-            <MioloContent>
+          <Operations isSidebarOpen={isSidebarOpen}>
+            <OperationsContent>
               <span>oi</span>
-            </MioloContent>
-          </Miolo>
+            </OperationsContent>
+          </Operations>
         </Content>
       </Wrapper>
     </DashboardContainer>
   );
 };
 
-type MioloProps = {
+type OperationsProps = {
   isSidebarOpen: boolean;
 };
 
-const Miolo = styled.div<MioloProps>`
+const Operations = styled.div<OperationsProps>`
   height: 100%;
   flex: 1;
   margin-left: ${({ isSidebarOpen }) => (isSidebarOpen ? '300px' : '0')};
   transition: margin-left 0.2s ease-out;
-  padding: 15px;
+  padding: 0 15px;
 `;
 
-const MioloContent = styled.div`
-  background-color: red;
+const OperationsContent = styled.div`
   height: 100%;
 `;
 
