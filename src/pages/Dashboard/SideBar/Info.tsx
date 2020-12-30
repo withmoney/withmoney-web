@@ -2,7 +2,7 @@ import React from 'react';
 import Text from '../../../components/Text';
 import { currencyFormat } from '../../../utils/currency';
 import { LANG, CURRENCY } from '../../../constants/currency';
-import { InfoContainer, ProgressBar, Progress, BalanceContainer } from './styles/Info styles';
+import { InfoContainer, ProgressBar, Progress, BalanceContainer } from './styles/Info.styles';
 
 type Props = {
   name: string;

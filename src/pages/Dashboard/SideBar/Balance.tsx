@@ -2,7 +2,7 @@ import React from 'react';
 import Text from '../../../components/Text';
 import { LANG, CURRENCY } from '../../../constants/currency';
 import { currencyFormat } from '../../../utils/currency';
-import { BalanceContainer } from './styles/Balance styles';
+import { BalanceContainer } from './styles/Balance.styles';
 
 const Balance = () => {
   return (

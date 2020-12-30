@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowButtonContainer } from './Styles/ArrowButton styles';
+import { ArrowButtonContainer } from './styles/ArrowButton.styles';
 
 type Props = {
   children?: React.ReactNode;

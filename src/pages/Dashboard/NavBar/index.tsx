@@ -2,7 +2,7 @@ import React from 'react';
 import DropDownMenu from './DropDownMenu';
 import MonthNavigation from './MonthNavigation';
 import HamburgerMenu from './HamburgerMenu';
-import { NavBarContainer, NavBarSection } from './Styles/index styles';
+import { NavBarContainer, NavBarSection } from './styles/index.styles';
 
 const NavBar = () => {
   return (

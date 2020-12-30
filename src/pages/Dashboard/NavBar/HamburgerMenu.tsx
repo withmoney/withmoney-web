@@ -1,7 +1,7 @@
 import React from 'react';
 import Text from '../../../components/Text';
 import { useSideHide } from '../../../hooks/useSideHide';
-import { MenuContainer, MeuButton, Menu } from './Styles/HamburgerMenu styles';
+import { MenuContainer, MeuButton, Menu } from './styles/HamburgerMenu.styles';
 
 const HamburgerMenu = () => {
   const { sideHide, setSideHide } = useSideHide();

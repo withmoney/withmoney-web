@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowIosBack, ArrowIosForward } from '@styled-icons/evaicons-solid';
 import ArrowButton from './ArrowButton';
 import Text from '../../../components/Text';
-import { DateContainer } from './Styles/MonthNavigation styles';
+import { DateContainer } from './styles/MonthNavigation.styles';
 
 const MonthNavigation = () => {
   return (

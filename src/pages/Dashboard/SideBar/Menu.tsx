@@ -1,6 +1,6 @@
 import React from 'react';
 import Text from '../../../components/Text';
-import { MenuContainer, MenuButton, Money, MoneyOff } from './styles/Menu styles';
+import { MenuContainer, MenuButton, Money, MoneyOff } from './styles/Menu.styles';
 
 const Menu = () => {
   return (
