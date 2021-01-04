@@ -8,7 +8,7 @@ const Balance = () => {
   return (
     <BalanceContainer>
       <Text>Balance</Text>
-      <Text>{currencyFormat(LANG, CURRENCY, 1200)}</Text>
+      <Text bold>{currencyFormat(LANG, CURRENCY, 1200)}</Text>
     </BalanceContainer>
   );
 };

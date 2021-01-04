@@ -138,7 +138,7 @@ const GlobalStyle = createGlobalStyle`
     --input-box-shadow-danger: rgba(220, 50, 50, 0.25);
 
     /* CheckBox */
-    --check-box-size: 1rem;
+    --check-box-size: 23px;
     --check-box-position-icon-vertical: 24%;
     --check-box-position-icon-horizontal: 5%;
     --check-box-after-vertical: 54%;
@@ -248,6 +248,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 16px;
     margin: 0;
     font-family: 'Roboto', sans-serif;
+    background-color: #f2f2f2;
     color: #333333;
   }
   

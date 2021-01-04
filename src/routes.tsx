@@ -22,7 +22,7 @@ const Router = () => {
         <UnauthenticatedRoute path="/verify" component={RegistrationVerify} />
         <UnauthenticatedRoute path="/reset-password" component={ResetPassword} />
         <UnauthenticatedRoute path="/change-password" component={ChangePassword} />
-        <AuthenticatedRoute path="/dashboard" component={Dashboard} />
+        <AuthenticatedRoute path="/" component={Dashboard} />
       </Switch>
     </BrowserRouter>
   );
