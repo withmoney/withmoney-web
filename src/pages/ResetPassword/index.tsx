@@ -41,7 +41,7 @@ const ResetPassword = () => {
     const { name } = event.target;
     try {
       await checkPasswordSchema.validateAt(event.target.name, form);
-      setFormErrors(initialValues);
+      setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
       setFormErrors({ ...formErrors, [name]: err.message });
     }
