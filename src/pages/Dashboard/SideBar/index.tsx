@@ -3,7 +3,7 @@ import Balance from './Balance';
 import Information from './Information';
 import Menu from './Menu';
 import { useSidebarCollapse } from '../../../hooks/useSidebarCollapse';
-import { Container } from './styles/index.styles';
+import { Container } from './style/index.style';
 
 const SideBar = () => {
   const { isSidebarOpen } = useSidebarCollapse();

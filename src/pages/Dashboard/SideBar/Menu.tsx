@@ -1,30 +1,23 @@
 import React, { useState } from 'react';
 import Text from '../../../components/Text';
-import { MenuContainer, MenuButton, Money, MoneyOff } from './styles/Menu.styles';
+import { MenuContainer, MenuButton, Money, MoneyOff } from './style/Menu.style';
 
 const Menu = () => {
-  const [activeDashboard, setActiveDashboard] = useState(true);
-  const [activeReports, setActiveReports] = useState(false);
+  const [activeMenu, setActiveMenu] = useState('Dashboard');
 
   return (
     <MenuContainer>
       <MenuButton
-        onClick={() => {
-          setActiveDashboard(true);
-          setActiveReports(false);
-        }}
-        isActive={activeDashboard}
+        onClick={() => setActiveMenu('Dashboard')}
+        isActive={activeMenu === 'Dashboard'}
         to="/dashboard"
       >
         <Money />
         <Text>Dashboard</Text>
       </MenuButton>
       <MenuButton
-        onClick={() => {
-          setActiveReports(true);
-          setActiveDashboard(false);
-        }}
-        isActive={activeReports}
+        onClick={() => setActiveMenu('Report')}
+        isActive={activeMenu === 'Report'}
         to="/reports"
       >
         <MoneyOff />

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const TableConfig = () => {
+const Config = () => {
   return (
     <colgroup>
       <col width="8%"></col>
@@ -13,28 +13,21 @@ export const TableConfig = () => {
     </colgroup>
   );
 };
-
-export const Table = styled.table`
+const Table = styled.table`
   margin-bottom: 25px;
 `;
 
-export const THeader = styled.thead``;
-export const TBody = styled.tbody``;
-export const TFoot = styled.tfoot``;
-export const TR = styled.tr`
+const Header = styled.thead``;
+const Body = styled.tbody``;
+const Foot = styled.tfoot``;
+const Row = styled.tr`
   margin-bottom: 10px;
 `;
 
-export const TH = styled.th`
-  font-weight: normal;
-  text-align: start;
-  &:first-child {
-    text-align: center;
-  }
-`;
-export const TD = styled.td`
+const Cell = styled.th`
   padding-right: 15px;
   &:first-child {
     text-align: center;
   }
 `;
+export default { Table, Header, Body, Foot, Row, Cell, Config };

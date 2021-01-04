@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import { TBody, TR, TD } from '../Components/Table';
+import Table from '../Components/Table';
 import CheckBox from '../../../components/Checkbox';
 import Input from '../../../components/Input';
 import Button from '../../../components/Button';
+import { currencyFormat } from '../../../utils/currency';
+import { LANG, CURRENCY } from '../../../constants/currency';
 
 const data = [
   {
@@ -12,7 +14,7 @@ const data = [
     date: '26/12',
     name: 'João Borges Santos',
     category: 'Food',
-    price: 'R$ 12,00',
+    price: 12.0,
   },
   {
     id: 2,
@@ -20,7 +22,7 @@ const data = [
     date: '26/12',
     name: 'João Borges Santos',
     category: 'Food',
-    price: 'R$ 12,00',
+    price: 12.0,
   },
   {
     id: 3,
@@ -28,39 +30,39 @@ const data = [
     date: '26/12',
     name: 'João Borges Santos',
     category: 'Food',
-    price: 'R$ 12,00',
+    price: 15.0,
   },
 ];
 
 const EntranceData = () => {
   return (
-    <TBody>
-      {data &&
+    <Table.Body>
+      {!!data.length &&
         data.map((operation) => {
           return (
-            <TR key={operation.id}>
-              <TD>
+            <Table.Row key={operation.id}>
+              <Table.Cell>
                 <CheckBox checked={operation.isPaid} />
-              </TD>
-              <TD>
+              </Table.Cell>
+              <Table.Cell>
                 <InputOperations value={operation.date} />
-              </TD>
-              <TD>
+              </Table.Cell>
+              <Table.Cell>
                 <InputOperations value={operation.name} />
-              </TD>
-              <TD>
+              </Table.Cell>
+              <Table.Cell>
                 <InputOperations value={operation.category} />
-              </TD>
-              <TD>
-                <InputOperations value={operation.price} />
-              </TD>
-              <TD>
+              </Table.Cell>
+              <Table.Cell>
+                <InputOperations value={currencyFormat(LANG, CURRENCY, operation.price)} />
+              </Table.Cell>
+              <Table.Cell>
                 <Button variation="danger">Delete</Button>
-              </TD>
-            </TR>
+              </Table.Cell>
+            </Table.Row>
           );
         })}
-    </TBody>
+    </Table.Body>
   );
 };
 

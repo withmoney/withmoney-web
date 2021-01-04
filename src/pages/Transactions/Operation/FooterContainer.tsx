@@ -1,16 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import Text from '../../../components/Text';
+import { currencyFormat } from '../../../utils/currency';
+import { LANG, CURRENCY } from '../../../constants/currency';
 
 const data = {
-  entrance: 'R$ 12.00,00',
-  recurrent: 'R$ 800,00',
-  credit: 'R$ 200,00',
-  unforeseen: 'R$ 150,00',
-  closeBalance: 'R$ 50,00',
+  entrance: 12000.0,
+  recurrent: 800.0,
+  credit: 200.0,
+  unforeseen: 150.0,
+  closeBalance: 50.0,
 };
 
-const EntranceInfo = () => {
+const FooterContainer = () => {
   return (
     <InfoContainer>
       <InfoWrapper>
@@ -33,7 +35,7 @@ const EntranceInfo = () => {
             <Text bold>Closing balance</Text>
           </InfoTitle>
           <InfoValue>
-            <Text bold>{data.closeBalance}</Text>
+            <Text bold>{currencyFormat(LANG, CURRENCY, data.closeBalance)}</Text>
           </InfoValue>
         </Info>
       </InfoWrapper>
@@ -76,4 +78,4 @@ const InfoValue = styled.div`
   }
 `;
 
-export default EntranceInfo;
+export default FooterContainer;
