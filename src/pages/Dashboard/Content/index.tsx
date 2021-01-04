@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 const Content = styled.div`
-  margin: 15px;
-  width: calc(100wv - 300px);
-  background-color: var(--dashboard-color-white);
+  display: flex;
+  flex-grow: 1;
+  margin-top: 15px;
+  position: relative;
 `;
 
 export default Content;

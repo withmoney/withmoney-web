@@ -1,23 +1,19 @@
 import React from 'react';
-import styled from 'styled-components';
-import HamburgerMenu from './HamburgerMenu';
 import Balance from './Balance';
 import Information from './Information';
 import Menu from './Menu';
+import { useSidebarCollapse } from '../../../hooks/useSidebarCollapse';
+import { Container } from './styles/index.styles';
 
 const SideBar = () => {
+  const { isSidebarOpen } = useSidebarCollapse();
   return (
-    <Container>
-      <HamburgerMenu />
+    <Container isSidebarOpen={isSidebarOpen}>
       <Balance />
       <Information />
       <Menu />
     </Container>
   );
 };
-
-export const Container = styled.div`
-  background-color: var(--dashboard-color-grey);
-`;
 
 export default SideBar;
