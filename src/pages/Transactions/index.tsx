@@ -15,12 +15,12 @@ const Operation = () => {
     <Container>
       <Tabs />
       <OperationContainer>
-        <Table.Table>
+        <Table>
           <Table.Config />
           <EntranceTitle />
           <EntranceData />
           <EntranceLoad />
-        </Table.Table>
+        </Table>
         <ButtonContent>
           <Button rounded variation="light">
             <Plus />

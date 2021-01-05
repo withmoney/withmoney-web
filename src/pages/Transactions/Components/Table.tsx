@@ -1,6 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
+type Props = {
+  children?: React.ReactNode;
+};
+
+const Table = ({ children }: Props) => {
+  return <table>{children}</table>;
+};
+
 const Config = () => {
   return (
     <colgroup>
@@ -13,21 +21,21 @@ const Config = () => {
     </colgroup>
   );
 };
-const Table = styled.table`
-  margin-bottom: 25px;
-`;
 
-const Header = styled.thead``;
-const Body = styled.tbody``;
-const Foot = styled.tfoot``;
-const Row = styled.tr`
+Table.Header = styled.thead``;
+Table.Body = styled.tbody``;
+Table.Foot = styled.tfoot``;
+Table.Row = styled.tr`
   margin-bottom: 10px;
 `;
-
-const Cell = styled.th`
+Table.Cell = styled.th`
+  font-weight: normal;
+  text-align: start;
   padding-right: 15px;
   &:first-child {
     text-align: center;
   }
 `;
-export default { Table, Header, Body, Foot, Row, Cell, Config };
+Table.Config = Config;
+
+export default Table;
