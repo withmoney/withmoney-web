@@ -11,7 +11,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-const dateTime = createContext<DateTimeContext>({});
+const DateTimeContext = createContext<DateTimeContext>({});
 
 export default function DateTimeProvider({ children }: Props) {
   const [currentDateTime, setCurrentDateTime] = useState(DateTime.local());
@@ -25,14 +25,14 @@ export default function DateTimeProvider({ children }: Props) {
   };
 
   return (
-    <dateTime.Provider value={{ currentDateTime, goToNextMonth, goToPreviewMonth }}>
+    <DateTimeContext.Provider value={{ currentDateTime, goToNextMonth, goToPreviewMonth }}>
       {children}
-    </dateTime.Provider>
+    </DateTimeContext.Provider>
   );
 }
 
 export function useDateTime() {
-  const context = useContext(dateTime);
+  const context = useContext(DateTimeContext);
   const { currentDateTime, goToNextMonth, goToPreviewMonth } = context;
   return { currentDateTime, goToNextMonth, goToPreviewMonth };
 }
