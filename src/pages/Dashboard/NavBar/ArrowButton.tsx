@@ -3,10 +3,11 @@ import { ArrowButtonContainer } from './styles/ArrowButton.styles';
 
 type Props = {
   children?: React.ReactNode;
+  onClick?: () => void;
 };
 
-const ArrowButton = ({ children }: Props) => {
-  return <ArrowButtonContainer>{children}</ArrowButtonContainer>;
+const ArrowButton = ({ children, onClick }: Props) => {
+  return <ArrowButtonContainer onClick={onClick}>{children}</ArrowButtonContainer>;
 };
 
 export default ArrowButton;

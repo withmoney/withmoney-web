@@ -5,24 +5,25 @@ import SideBar from './SideBar';
 import NavBar from './NavBar';
 import Wrapper from './Wrapper';
 import { useSidebarCollapse } from '../../hooks/useSidebarCollapse';
-
+import DateTimeProvider from '../../hooks/useMonthNavegation';
 const Dashboard = () => {
   const { isSidebarOpen } = useSidebarCollapse();
-
   return (
-    <DashboardContainer>
-      <Wrapper>
-        <NavBar />
-        <Content>
-          <SideBar />
-          <Operations isSidebarOpen={isSidebarOpen}>
-            <OperationsContent>
-              <span>oi</span>
-            </OperationsContent>
-          </Operations>
-        </Content>
-      </Wrapper>
-    </DashboardContainer>
+    <DateTimeProvider>
+      <DashboardContainer>
+        <Wrapper>
+          <NavBar />
+          <Content>
+            <SideBar />
+            <Operations isSidebarOpen={isSidebarOpen}>
+              <OperationsContent>
+                <span>oi</span>
+              </OperationsContent>
+            </Operations>
+          </Content>
+        </Wrapper>
+      </DashboardContainer>
+    </DateTimeProvider>
   );
 };
 
