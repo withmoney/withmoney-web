@@ -6,7 +6,9 @@ import { DateContainer } from './styles/MonthNavigation.styles';
 import { useDateTime } from '../../../hooks/useMonthNavegation';
 
 const MonthNavigation = () => {
-  const { monthLong, year, goToNextMonth, goToPreviewMonth } = useDateTime();
+  const { currentDateTime, goToNextMonth, goToPreviewMonth } = useDateTime();
+  const month = currentDateTime?.monthLong;
+  const year = currentDateTime?.year;
   return (
     <DateContainer>
       <ArrowButton onClick={goToPreviewMonth}>
@@ -15,7 +17,7 @@ const MonthNavigation = () => {
       <ArrowButton onClick={goToNextMonth}>
         <ArrowIosForward />
       </ArrowButton>
-      <Text style={{ textTransform: 'capitalize' }}>{`${monthLong} ${year}`}</Text>
+      <Text>{`${month} ${year}`}</Text>
     </DateContainer>
   );
 };
