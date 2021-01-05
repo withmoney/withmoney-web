@@ -7,7 +7,7 @@ import {
   DropDownMenuButton,
   Avatar,
   MenuContainer,
-} from './styles/DropDownMenu.styles';
+} from './style/DropDownMenu.style';
 
 const data = { fistName: 'User', lastName: 'Name', image: '' };
 const API = 'https://ui-avatars.com/api/?name=';

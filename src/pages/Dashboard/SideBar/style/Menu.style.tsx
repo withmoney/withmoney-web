@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Link from '../../../../components/Link';
 import { AttachMoney as IconMoney, MoneyOff as IconMoneyOff } from '@styled-icons/material';
 
 export const Money = styled(IconMoney)`
@@ -19,14 +20,17 @@ export const MenuContainer = styled.div`
   padding-bottom: 20px;
 `;
 
-export const MenuButton = styled.button`
+type MenuButtonProps = {
+  isActive?: boolean;
+};
+
+export const MenuButton = styled(Link)<MenuButtonProps>`
   display: flex;
-  justify-content: flex-start;
   align-items: center;
-  background-color: var(--dashboard-color-white);
+  text-decoration: none;
+  background-color: ${({ isActive }) =>
+    isActive ? 'var(--dashboard-button-color-hover)' : `var(--dashboard-color-white)`};
   padding: 10px 20px;
-  outline: none;
-  border: none;
   cursor: pointer;
 
   &:hover {
