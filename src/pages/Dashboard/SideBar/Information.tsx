@@ -1,6 +1,6 @@
 import React from 'react';
 import Info from './Info';
-import { InformationContainer } from './styles/Information.styles';
+import { InformationContainer } from './style/Information.style';
 
 const Information = () => {
   const percentCalc = (current: number, desired: number) => {

@@ -2,8 +2,8 @@ import React from 'react';
 import { ArrowIosBack, ArrowIosForward } from '@styled-icons/evaicons-solid';
 import ArrowButton from './ArrowButton';
 import Text from '../../../components/Text';
-import { DateContainer } from './styles/MonthNavigation.styles';
-import { useDateTime } from '../../../hooks/useMonthNavegation';
+import { DateContainer } from './style/MonthNavigation.style';
+import { useDateTime } from '../../../hooks/useMonthNavigation';
 
 const MonthNavigation = () => {
   const { currentDateTime, goToNextMonth, goToPreviewMonth } = useDateTime();

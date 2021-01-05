@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import Button from '../../../components/Button';
-import { MenuContainer, MenuContent, ButtonLink } from './styles/Menu.styles';
+import { MenuContainer, MenuContent, ButtonLink } from './style/Menu.style';
 
 const Menu = () => {
   const history = useHistory();
