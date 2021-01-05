@@ -3,17 +3,21 @@ import { ArrowIosBack, ArrowIosForward } from '@styled-icons/evaicons-solid';
 import ArrowButton from './ArrowButton';
 import Text from '../../../components/Text';
 import { DateContainer } from './style/MonthNavigation.style';
+import { useDateTime } from '../../../hooks/useMonthNavigation';
 
 const MonthNavigation = () => {
+  const { currentDateTime, goToNextMonth, goToPreviewMonth } = useDateTime();
+  const month = currentDateTime?.monthLong;
+  const year = currentDateTime?.year;
   return (
     <DateContainer>
-      <ArrowButton>
+      <ArrowButton onClick={goToPreviewMonth}>
         <ArrowIosBack />
       </ArrowButton>
-      <ArrowButton>
+      <ArrowButton onClick={goToNextMonth}>
         <ArrowIosForward />
       </ArrowButton>
-      <Text>December 2020</Text>
+      <Text>{`${month} ${year}`}</Text>
     </DateContainer>
   );
 };
