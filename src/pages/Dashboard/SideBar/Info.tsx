@@ -6,13 +6,18 @@ import { InfoContainer, ProgressBar, Progress, BalanceContainer } from './style/
 
 type Props = {
   name: string;
-  current: string | any;
-  desired: string | any;
+  current: number;
+  desired: number;
   variation: 'entrance' | 'recurrent' | 'credit' | 'unforessen';
-  percent: string;
 };
 
-const Info = ({ name, current, desired, variation, percent }: Props) => {
+const percentCalc = (current: number, desired: number) => {
+  const result = Math.round((current * 100) / desired);
+  return `${result}%`;
+};
+
+const Info = ({ name, current, desired, variation }: Props) => {
+  const percent = percentCalc(current, desired);
   return (
     <InfoContainer>
       <Text>{name}</Text>
