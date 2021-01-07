@@ -44,6 +44,7 @@ const OperationContainer = styled.div`
 const ButtonContent = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: 20px;
 `;
 
 export default Operation;

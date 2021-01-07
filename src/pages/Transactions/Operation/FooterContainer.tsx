@@ -45,7 +45,7 @@ const FooterContainer = () => {
 
 const InfoContainer = styled.div`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   background-color: #fafafa;
   padding: 30px;
 `;
@@ -53,7 +53,6 @@ const InfoContainer = styled.div`
 const InfoWrapper = styled.div`
   display: 'flex';
   flex-direction: 'column';
-  padding-right: 25%;
 `;
 
 const Info = styled.div`

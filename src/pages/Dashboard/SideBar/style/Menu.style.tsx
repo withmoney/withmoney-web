@@ -20,16 +20,16 @@ export const MenuContainer = styled.div`
   padding-bottom: 20px;
 `;
 
-type MenuButtonProps = {
-  isActive?: boolean;
+type ButtonProps = {
+  open?: boolean;
 };
 
-export const MenuButton = styled(Link)<MenuButtonProps>`
+export const MenuButton = styled(Link)<ButtonProps>`
   display: flex;
   align-items: center;
   text-decoration: none;
-  background-color: ${({ isActive }) =>
-    isActive ? 'var(--dashboard-button-color-hover)' : `var(--dashboard-color-white)`};
+  background-color: ${({ open }) =>
+    open ? 'var(--dashboard-button-color-hover)' : 'var(--dashboard-color-white)'};
   padding: 10px 20px;
   cursor: pointer;
 

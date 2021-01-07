@@ -3,22 +3,19 @@ import styled from 'styled-components';
 import SideBar from './SideBar';
 import NavBar from './NavBar';
 import Wrapper from './Wrapper';
-import DateTimeProvider from '../../hooks/useMonthNavigation';
 import ContentPage from './Operations/ContentPage';
 
 const Dashboard = () => {
   return (
-    <DateTimeProvider>
-      <DashboardContainer>
-        <Wrapper>
-          <NavBar />
-          <Content>
-            <SideBar />
-            <ContentPage />
-          </Content>
-        </Wrapper>
-      </DashboardContainer>
-    </DateTimeProvider>
+    <DashboardContainer>
+      <Wrapper>
+        <NavBar />
+        <Content>
+          <SideBar />
+          <ContentPage />
+        </Content>
+      </Wrapper>
+    </DashboardContainer>
   );
 };
 
