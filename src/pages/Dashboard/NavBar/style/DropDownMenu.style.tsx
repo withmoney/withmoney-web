@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 type MenuButtonProps = {
-  isActive: boolean;
+  isActive?: boolean;
 };
 
 export const DropDownMenuButton = styled.button<MenuButtonProps>`

@@ -31,7 +31,7 @@ export default function DateTimeProvider({ children }: Props) {
   );
 }
 
-export function useDateTime() {
+export function useMonthNavigation() {
   const context = useContext(DateTimeContext);
   const { currentDateTime, goToNextMonth, goToPreviewMonth } = context;
   return { currentDateTime, goToNextMonth, goToPreviewMonth };

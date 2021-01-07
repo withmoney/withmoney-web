@@ -1,5 +1,6 @@
 import { gql } from '@apollo/client';
 
+//Query
 export const GET_ME = gql`
   query getMe {
     me {
@@ -8,6 +9,25 @@ export const GET_ME = gql`
   }
 `;
 
+export const GET_OPERATIONS = gql`
+  query getOperations($startDateTime: DateTime!, $endDateTime: DateTime!) {
+    me {
+      operations(where: { createdAt: { gte: $startDateTime, lte: $endDateTime } }) {
+        id
+        name
+        value
+        type
+        isPaid
+        category {
+          name
+        }
+        createdAt
+      }
+    }
+  }
+`;
+
+//Mutation
 export const USER_LOGIN = gql`
   mutation userLogin($email: String!, $password: String!) {
     login(email: $email, password: $password) {

@@ -17,4 +17,14 @@ export const ArrowButtonContainer = styled.button`
   &:active {
     background-color: var(--dashboard-button-color-active);
   }
+
+  &:disabled {
+    background-color: var(--dashboard-button-color);
+    &:hover {
+      background-color: var(--dashboard-button-color);
+    }
+    &:active {
+      background-color: var(--dashboard-button-color);
+    }
+  }
 `;
