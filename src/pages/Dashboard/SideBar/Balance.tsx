@@ -14,7 +14,7 @@ const Balance = () => {
   return (
     <BalanceContainer>
       <Text>Balance</Text>
-      <Text variation={balance ? 'danger' : 'default'} bold>
+      <Text variation={balance < 0 ? 'danger' : 'default'} bold>
         {currencyFormat(LANG, CURRENCY, balance)}
       </Text>
     </BalanceContainer>

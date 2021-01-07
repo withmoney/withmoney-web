@@ -1,42 +1,57 @@
 import React from 'react';
 import Info from './Info';
 import { InformationContainer } from './style/Information.style';
+import { useOperations } from '../../../hooks/useOperations';
+import { TransactionType } from '../../../models';
+import getCalcOperationsByType from '../../../utils/getCalcOperationsByType';
 
 const Information = () => {
-  const percentCalc = (current: number, desired: number) => {
-    const result = Math.round((current * 100) / desired);
-    return `${result}%`;
-  };
+  const { data } = useOperations();
+
+  const operations = data?.me?.operations || [];
+
+  const [totalPaidDeposit, totalDeposit] = getCalcOperationsByType(
+    operations,
+    TransactionType.Deposit,
+  );
+  const [totalPaidCreditCard, totalCreditCard] = getCalcOperationsByType(
+    operations,
+    TransactionType.CreditCard,
+  );
+  const [totalPaidFixedExpense, totalFixedExpense] = getCalcOperationsByType(
+    operations,
+    TransactionType.FixedExpense,
+  );
+  const [totalPaidVariableExpense, totalVariableExpense] = getCalcOperationsByType(
+    operations,
+    TransactionType.VariableExpense,
+  );
 
   return (
     <InformationContainer>
       <Info
-        percent={percentCalc(10, 100)}
         variation="entrance"
         name="Entrance"
-        current={10}
-        desired={100}
+        current={totalPaidDeposit}
+        desired={totalDeposit}
       />
       <Info
-        percent={percentCalc(50, 100)}
         variation="recurrent"
         name="Recurrent"
-        current={50}
-        desired={100}
+        current={totalPaidCreditCard}
+        desired={totalCreditCard}
       />
       <Info
-        percent={percentCalc(75, 100)}
         variation="credit"
         name="Credit"
-        current={75}
-        desired={100}
+        current={totalPaidFixedExpense}
+        desired={totalFixedExpense}
       />
       <Info
-        percent={percentCalc(100, 100)}
         variation="unforessen"
         name="Unforessen"
-        current={100}
-        desired={100}
+        current={totalPaidVariableExpense}
+        desired={totalVariableExpense}
       />
     </InformationContainer>
   );
