@@ -9,7 +9,7 @@ const Menu = () => {
     <MenuContainer>
       <MenuButton
         onClick={() => setActiveMenu('Dashboard')}
-        isActive={activeMenu === 'Dashboard'}
+        open={activeMenu === 'Dashboard'}
         to="/dashboard"
       >
         <Money />
@@ -17,7 +17,7 @@ const Menu = () => {
       </MenuButton>
       <MenuButton
         onClick={() => setActiveMenu('Report')}
-        isActive={activeMenu === 'Report'}
+        open={activeMenu === 'Report'}
         to="/reports"
       >
         <MoneyOff />

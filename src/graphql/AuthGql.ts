@@ -13,6 +13,7 @@ export const GET_OPERATIONS = gql`
   query getOperations($initDate: DateTime!, $endDate: DateTime!) {
     me {
       operations(where: { createdAt: { gte: $initDate, lte: $endDate } }) {
+        id
         name
         value
         type

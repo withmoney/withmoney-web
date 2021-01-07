@@ -42,19 +42,19 @@ const EntranceData = () => {
           return (
             <Table.Row key={operation.id}>
               <Table.Cell>
-                <CheckBox checked={operation.isPaid} />
+                <CheckBox readOnly checked={operation.isPaid} />
               </Table.Cell>
               <Table.Cell>
-                <InputOperations value={operation.date} />
+                <InputOperations readOnly value={operation.date} />
               </Table.Cell>
               <Table.Cell>
-                <InputOperations value={operation.name} />
+                <InputOperations readOnly value={operation.name} />
               </Table.Cell>
               <Table.Cell>
-                <InputOperations value={operation.category} />
+                <InputOperations readOnly value={operation.category} />
               </Table.Cell>
               <Table.Cell>
-                <InputOperations value={currencyFormat(LANG, CURRENCY, operation.price)} />
+                <InputOperations readOnly value={currencyFormat(LANG, CURRENCY, operation.price)} />
               </Table.Cell>
               <Table.Cell>
                 <Button variation="danger">Delete</Button>
