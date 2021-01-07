@@ -4,7 +4,6 @@ import SideBar from './SideBar';
 import NavBar from './NavBar';
 import Wrapper from './Wrapper';
 import ContentPage from './Operations/ContentPage';
-import { useOperations } from '../../hooks/useOperations';
 
 const Dashboard = () => {
   return (
