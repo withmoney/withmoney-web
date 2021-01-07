@@ -4,16 +4,12 @@ import MonthNavigation from './MonthNavigation';
 import HamburgerMenu from './HamburgerMenu';
 import { NavBarContainer, NavBarSection } from './style/index.style';
 
-type Props = {
-  isLoading: boolean;
-};
-
-const NavBar = ({ isLoading }: Props) => {
+const NavBar = () => {
   return (
     <NavBarContainer>
       <HamburgerMenu />
       <NavBarSection>
-        <MonthNavigation isLoading={isLoading} />
+        <MonthNavigation />
         <DropDownMenu />
       </NavBarSection>
     </NavBarContainer>

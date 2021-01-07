@@ -4,21 +4,20 @@ import ArrowButton from './ArrowButton';
 import Text from '../../../components/Text';
 import { DateContainer } from './style/MonthNavigation.style';
 import { useDateTime } from '../../../hooks/useMonthNavigation';
+import { useOperations } from '../../../hooks/useOperations';
 
-type Props = {
-  isLoading: boolean;
-};
-
-const MonthNavigation = ({ isLoading }: Props) => {
+const MonthNavigation = () => {
   const { currentDateTime, goToNextMonth, goToPreviewMonth } = useDateTime();
+  const { loading } = useOperations();
+
   const month = currentDateTime?.monthLong;
   const year = currentDateTime?.year;
   return (
     <DateContainer>
-      <ArrowButton isLoading={isLoading} onClick={goToPreviewMonth}>
+      <ArrowButton isLoading={loading} onClick={goToPreviewMonth}>
         <ArrowIosBack />
       </ArrowButton>
-      <ArrowButton isLoading={isLoading} onClick={goToNextMonth}>
+      <ArrowButton isLoading={loading} onClick={goToNextMonth}>
         <ArrowIosForward />
       </ArrowButton>
       <Text>{`${month} ${year}`}</Text>

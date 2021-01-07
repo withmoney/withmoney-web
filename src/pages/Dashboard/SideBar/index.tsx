@@ -5,15 +5,11 @@ import Menu from './Menu';
 import { useSidebarCollapse } from '../../../hooks/useSidebarCollapse';
 import { Container } from './style/index.style';
 
-type Props = {
-  balance: number;
-};
-
-const SideBar = ({ balance }: Props) => {
+const SideBar = () => {
   const { isSidebarOpen } = useSidebarCollapse();
   return (
     <Container isSidebarOpen={isSidebarOpen}>
-      <Balance balance={balance} />
+      <Balance />
       <Information />
       <Menu />
     </Container>
