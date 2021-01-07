@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks';
-import { useDateTime } from './useMonthNavigation';
+import { useMonthNavigation } from './useMonthNavigation';
 import { GET_OPERATIONS } from '../graphql/AuthGql';
 import { Me } from '../models';
 
@@ -8,12 +8,12 @@ type Data = {
 };
 
 export function useOperations() {
-  const { currentDateTime } = useDateTime();
+  const { currentDateTime } = useMonthNavigation();
 
   return useQuery<Data>(GET_OPERATIONS, {
     variables: {
-      initDate: currentDateTime?.startOf('month'),
-      endDate: currentDateTime?.endOf('month'),
+      startDateTime: currentDateTime?.startOf('month'),
+      endDateTime: currentDateTime?.endOf('month'),
     },
   });
 }

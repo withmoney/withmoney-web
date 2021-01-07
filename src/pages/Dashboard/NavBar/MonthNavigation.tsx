@@ -3,11 +3,11 @@ import { ArrowIosBack, ArrowIosForward } from '@styled-icons/evaicons-solid';
 import ArrowButton from './ArrowButton';
 import Text from '../../../components/Text';
 import { DateContainer } from './style/MonthNavigation.style';
-import { useDateTime } from '../../../hooks/useMonthNavigation';
+import { useMonthNavigation } from '../../../hooks/useMonthNavigation';
 import { useOperations } from '../../../hooks/useOperations';
 
 const MonthNavigation = () => {
-  const { currentDateTime, goToNextMonth, goToPreviewMonth } = useDateTime();
+  const { currentDateTime, goToNextMonth, goToPreviewMonth } = useMonthNavigation();
   const { loading } = useOperations();
 
   const month = currentDateTime?.monthLong;

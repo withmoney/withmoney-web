@@ -1,8 +1,8 @@
 export enum TransactionType {
-  CreditCard,
-  Deposit,
-  FixedExpense,
-  VariableExpense,
+  CreditCard = 'CreditCard',
+  Deposit = 'Deposit',
+  FixedExpense = 'FixedExpense',
+  VariableExpense = 'VariableExpense',
 }
 
 export interface Account {

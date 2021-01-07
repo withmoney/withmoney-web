@@ -10,13 +10,14 @@ export const GET_ME = gql`
 `;
 
 export const GET_OPERATIONS = gql`
-  query getOperations($initDate: DateTime!, $endDate: DateTime!) {
+  query getOperations($startDateTime: DateTime!, $endDateTime: DateTime!) {
     me {
-      operations(where: { createdAt: { gte: $initDate, lte: $endDate } }) {
+      operations(where: { createdAt: { gte: $startDateTime, lte: $endDateTime } }) {
         id
         name
         value
         type
+        isPaid
         category {
           name
         }
