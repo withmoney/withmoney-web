@@ -3,16 +3,20 @@ import styled from 'styled-components';
 import Text from '../../../components/Text';
 import { currencyFormat } from '../../../utils/currency';
 import { LANG, CURRENCY } from '../../../constants/currency';
-
-const data = {
-  entrance: 12000.0,
-  recurrent: 800.0,
-  credit: 200.0,
-  unforeseen: 150.0,
-  closeBalance: 50.0,
-};
+import { useOperations } from '../../../hooks/useOperations';
+import { TransactionType } from '../../../models';
+import { getTotalOperations } from '../../../utils/calcOperations';
 
 const FooterContainer = () => {
+  const { data } = useOperations();
+  const operations = data?.me?.operations || [];
+
+  const totalEntrance = getTotalOperations(operations, TransactionType.Deposit);
+  const totalRecurrent = getTotalOperations(operations, TransactionType.CreditCard);
+  const totalCredit = getTotalOperations(operations, TransactionType.FixedExpense);
+  const totalUnforeseen = getTotalOperations(operations, TransactionType.VariableExpense);
+  const closeBalance = totalEntrance - totalRecurrent - totalCredit - totalUnforeseen;
+
   return (
     <InfoContainer>
       <InfoWrapper>
@@ -24,10 +28,10 @@ const FooterContainer = () => {
             <Text>Unforeseen</Text>
           </InfoTitle>
           <InfoValue>
-            <Text>{data.entrance}</Text>
-            <Text>{data.recurrent}</Text>
-            <Text>{data.credit}</Text>
-            <Text>{data.unforeseen}</Text>
+            <Text>{currencyFormat(LANG, CURRENCY, totalEntrance)}</Text>
+            <Text>{currencyFormat(LANG, CURRENCY, totalRecurrent)}</Text>
+            <Text>{currencyFormat(LANG, CURRENCY, totalCredit)}</Text>
+            <Text>{currencyFormat(LANG, CURRENCY, totalUnforeseen)}</Text>
           </InfoValue>
         </Info>
         <Info>
@@ -35,7 +39,9 @@ const FooterContainer = () => {
             <Text bold>Closing balance</Text>
           </InfoTitle>
           <InfoValue>
-            <Text bold>{currencyFormat(LANG, CURRENCY, data.closeBalance)}</Text>
+            <Text variation={closeBalance < 0 ? 'danger' : 'default'} bold>
+              {currencyFormat(LANG, CURRENCY, closeBalance)}
+            </Text>
           </InfoValue>
         </Info>
       </InfoWrapper>

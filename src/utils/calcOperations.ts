@@ -4,7 +4,7 @@ const sumOperation = (accumulateValue: number, currentValue: Operation) => {
   return accumulateValue + currentValue.value;
 };
 
-const getCalcOperationsByType = (operations: Operation[], type: TransactionType) => {
+export const getCalcOperationsByType = (operations: Operation[], type: TransactionType) => {
   const operationFiltered = operations.filter((operation) => operation.type === type);
   const operationsPaidOut = operationFiltered.filter((operation) => operation.isPaid);
   const totalPaidOut = operationsPaidOut.reduce(sumOperation, 0);
@@ -13,4 +13,8 @@ const getCalcOperationsByType = (operations: Operation[], type: TransactionType)
   return [totalPaidOut, total];
 };
 
-export default getCalcOperationsByType;
+export const getTotalOperations = (operations: Operation[], type: TransactionType) => {
+  const operationFiltered = operations.filter((operation) => operation.type === type);
+  const total = operationFiltered.reduce(sumOperation, 0);
+  return total;
+};
