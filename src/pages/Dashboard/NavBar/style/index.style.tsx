@@ -12,3 +12,7 @@ export const NavBarSection = styled.div`
   align-items: center;
   background-color: var(--dashboard-color-white);
 `;
+
+export const ContentNav = styled.div`
+  display: flex;
+`;
