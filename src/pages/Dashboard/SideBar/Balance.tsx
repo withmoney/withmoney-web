@@ -8,9 +8,10 @@ import getBalance from '../../../utils/getBalance';
 
 const Balance = () => {
   const { data } = useOperations();
+  console.log({ data });
   const operations = data?.me?.operations || [];
   const balance = getBalance(operations);
-
+  console.log(balance);
   return (
     <BalanceContainer>
       <Text>Balance</Text>

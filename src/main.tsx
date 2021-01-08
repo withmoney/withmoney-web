@@ -6,7 +6,7 @@ import { setContext } from '@apollo/client/link/context';
 import GlobalStyle from './theme';
 import Routers from './routes';
 import SidebarProvider from './hooks/useSidebarCollapse';
-import DateTimeProvider from './hooks/useMonthNavigation';
+import OperationsFiltersProvider from './hooks/useOperationsFilters';
 import 'react-toastify/dist/ReactToastify.css';
 
 const httpLink = createHttpLink({
@@ -36,9 +36,9 @@ const App = () => (
     <ToastContainer />
     <ApolloProvider client={client}>
       <SidebarProvider>
-        <DateTimeProvider>
+        <OperationsFiltersProvider>
           <Routers />
-        </DateTimeProvider>
+        </OperationsFiltersProvider>
       </SidebarProvider>
     </ApolloProvider>
   </>

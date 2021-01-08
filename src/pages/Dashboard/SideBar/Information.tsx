@@ -3,6 +3,7 @@ import Info from './Info';
 import { InformationContainer } from './style/Information.style';
 import { useOperations } from '../../../hooks/useOperations';
 import { TransactionType } from '../../../models';
+import filterOperations from '../../../utils/filterOperations';
 import getCalcOperationsByType from '../../../utils/getCalcOperationsByType';
 
 const Information = () => {
