@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Link from '../../../components/Link';
 import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
 import { TransactionType } from '../../../models';
 
@@ -13,7 +12,6 @@ export const Tabs = () => {
           setCurrentTransactionType(TransactionType.Deposit);
         }}
         open={currentTransactionType === TransactionType.Deposit}
-        to="/dashboard"
       >
         Entrance
       </Button>
@@ -22,21 +20,18 @@ export const Tabs = () => {
           setCurrentTransactionType(TransactionType.FixedExpense);
         }}
         open={currentTransactionType === TransactionType.FixedExpense}
-        to="/dashboard"
       >
         Recurrent
       </Button>
       <Button
         onClick={() => setCurrentTransactionType(TransactionType.CreditCard)}
         open={currentTransactionType === TransactionType.CreditCard}
-        to="/dashboard"
       >
         Credit
       </Button>
       <Button
         onClick={() => setCurrentTransactionType(TransactionType.VariableExpense)}
         open={currentTransactionType === TransactionType.VariableExpense}
-        to="/dashboard"
       >
         Unforeseen
       </Button>
@@ -54,7 +49,7 @@ type ButtonProps = {
   open?: boolean;
 };
 
-export const Button = styled(Link)<ButtonProps>`
+export const Button = styled.div<ButtonProps>`
   padding: 20px;
   text-decoration: none;
   background-color: ${({ open }) =>
