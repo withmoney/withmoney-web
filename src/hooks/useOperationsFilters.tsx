@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import { DateTime } from 'luxon';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_ACCOUNTS } from '../graphql/AuthGql';
-import { Me } from '../models';
+import { Me, TransactionType } from '../models';
 
 type Data = {
   me: Me;
@@ -11,9 +11,11 @@ type Data = {
 interface OperationsFiltersContext {
   currentDateTime?: DateTime;
   currentAccountId?: string;
+  currentTransactionType?: TransactionType;
   goToNextMonth?: () => void;
   goToPreviewMonth?: () => void;
   setCurrentAccountId: (accountId: string) => void;
+  setCurrentTransactionType: (TransactionType: TransactionType) => void;
 }
 
 type Props = {
@@ -22,11 +24,15 @@ type Props = {
 
 const OperationsFiltersContext = createContext<OperationsFiltersContext>({
   setCurrentAccountId: () => {},
+  setCurrentTransactionType: () => {},
 });
 
 export default function OperationsFiltersProvider({ children }: Props) {
   const [currentDateTime, setCurrentDateTime] = useState(DateTime.local());
   const [currentAccountId, setCurrentAccountId] = useState<string | undefined>();
+  const [currentTransactionType, setCurrentTransactionType] = useState<TransactionType>(
+    TransactionType.Deposit,
+  );
 
   const { data } = useQuery<Data>(GET_ACCOUNTS);
 
@@ -49,9 +55,11 @@ export default function OperationsFiltersProvider({ children }: Props) {
       value={{
         currentDateTime,
         currentAccountId,
+        currentTransactionType,
         goToNextMonth,
         goToPreviewMonth,
         setCurrentAccountId,
+        setCurrentTransactionType,
       }}
     >
       {children}
@@ -64,15 +72,19 @@ export function useOperationsFilters() {
   const {
     currentDateTime,
     currentAccountId,
+    currentTransactionType,
     goToNextMonth,
     goToPreviewMonth,
     setCurrentAccountId,
+    setCurrentTransactionType,
   } = context;
   return {
     currentDateTime,
     currentAccountId,
+    currentTransactionType,
     goToNextMonth,
     goToPreviewMonth,
     setCurrentAccountId,
+    setCurrentTransactionType,
   };
 }

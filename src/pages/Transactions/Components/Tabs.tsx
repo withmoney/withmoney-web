@@ -1,36 +1,41 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Link from '../../../components/Link';
+import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
+import { TransactionType } from '../../../models';
 
 export const Tabs = () => {
-  const [CurrentTransactionType, setCurrentTransactionType] = useState('Entrance');
-
+  const { currentTransactionType, setCurrentTransactionType } = useOperationsFilters();
   return (
     <ButtonGroup>
       <Button
-        onClick={() => setCurrentTransactionType('Entrance')}
-        open={CurrentTransactionType === 'Entrance'}
+        onClick={() => {
+          setCurrentTransactionType(TransactionType.Deposit);
+        }}
+        open={currentTransactionType === TransactionType.Deposit}
         to="/dashboard"
       >
         Entrance
       </Button>
       <Button
-        onClick={() => setCurrentTransactionType('Recurrent')}
-        open={CurrentTransactionType === 'Recurrent'}
+        onClick={() => {
+          setCurrentTransactionType(TransactionType.FixedExpense);
+        }}
+        open={currentTransactionType === TransactionType.FixedExpense}
         to="/dashboard"
       >
         Recurrent
       </Button>
       <Button
-        onClick={() => setCurrentTransactionType('Credit')}
-        open={CurrentTransactionType === 'Credit'}
+        onClick={() => setCurrentTransactionType(TransactionType.CreditCard)}
+        open={currentTransactionType === TransactionType.CreditCard}
         to="/dashboard"
       >
         Credit
       </Button>
       <Button
-        onClick={() => setCurrentTransactionType('Unforeseen')}
-        open={CurrentTransactionType === 'Unforeseen'}
+        onClick={() => setCurrentTransactionType(TransactionType.VariableExpense)}
+        open={currentTransactionType === TransactionType.VariableExpense}
         to="/dashboard"
       >
         Unforeseen

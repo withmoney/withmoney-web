@@ -38,14 +38,14 @@ const Information = () => {
       <Info
         variation="recurrent"
         name="Recurrent"
-        current={totalPaidCreditCard}
-        desired={totalCreditCard}
+        current={totalPaidFixedExpense}
+        desired={totalFixedExpense}
       />
       <Info
         variation="credit"
         name="Credit"
-        current={totalPaidFixedExpense}
-        desired={totalFixedExpense}
+        current={totalPaidCreditCard}
+        desired={totalCreditCard}
       />
       <Info
         variation="unforessen"

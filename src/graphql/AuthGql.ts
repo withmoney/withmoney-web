@@ -24,6 +24,9 @@ export const GET_OPERATIONS = gql`
         type
         isPaid
         createdAt
+        category {
+          name
+        }
       }
     }
   }
