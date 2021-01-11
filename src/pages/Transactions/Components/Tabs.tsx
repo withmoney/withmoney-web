@@ -56,6 +56,7 @@ export const Button = styled.div<ButtonProps>`
     open ? `var(--dashboard-color-white)` : `var(--dashboard-color-grey)`};
   outline: none;
   border: none;
+  cursor: pointer;
 
   &:hover {
     background-color: ${({ open }) =>
