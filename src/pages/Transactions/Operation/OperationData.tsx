@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { DateTime } from 'luxon';
 import Table from '../Components/Table';
 import CheckBox from '../../../components/Checkbox';
 import Input from '../../../components/Input';
@@ -12,19 +13,26 @@ import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
 const EntranceData = () => {
   const { data } = useOperations();
   const { currentTransactionType } = useOperationsFilters();
+
   return (
     <Table.Body>
       {!!data?.me?.operations?.length &&
         data.me?.operations
           ?.filter((operation) => operation.type === currentTransactionType)
           .map((operation) => {
+            const date = DateTime.fromISO(operation.createdAt);
             return (
               <Table.Row key={operation.id}>
                 <Table.Cell>
                   <CheckBox readOnly checked={operation.isPaid} />
                 </Table.Cell>
                 <Table.Cell>
-                  <InputOperations readOnly value={operation.createdAt} />
+                  <InputOperations
+                    readOnly
+                    value={`${date.day <= 9 ? '0' + date.day : date.day}/${
+                      date.month <= 9 ? '0' + date.month : date.month
+                    }`}
+                  />
                 </Table.Cell>
                 <Table.Cell>
                   <InputOperations readOnly value={operation.name} />
