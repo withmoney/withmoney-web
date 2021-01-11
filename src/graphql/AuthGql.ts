@@ -10,18 +10,31 @@ export const GET_ME = gql`
 `;
 
 export const GET_OPERATIONS = gql`
-  query getOperations($startDateTime: DateTime!, $endDateTime: DateTime!) {
+  query getOperations($startDateTime: DateTime!, $endDateTime: DateTime!, $accountId: String!) {
     me {
-      operations(where: { createdAt: { gte: $startDateTime, lte: $endDateTime } }) {
+      operations(
+        where: {
+          createdAt: { gte: $startDateTime, lte: $endDateTime }
+          accountId: { equals: $accountId }
+        }
+      ) {
         id
         name
         value
         type
         isPaid
-        category {
-          name
-        }
         createdAt
+      }
+    }
+  }
+`;
+
+export const GET_ACCOUNTS = gql`
+  query getAccounts {
+    me {
+      accounts {
+        id
+        name
       }
     }
   }

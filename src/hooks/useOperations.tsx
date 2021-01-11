@@ -1,5 +1,6 @@
-import { useQuery } from '@apollo/react-hooks';
-import { useMonthNavigation } from './useMonthNavigation';
+import { useEffect } from 'react';
+import { useLazyQuery } from '@apollo/react-hooks';
+import { useOperationsFilters } from './useOperationsFilters';
 import { GET_OPERATIONS } from '../graphql/AuthGql';
 import { Me } from '../models';
 
@@ -8,12 +9,23 @@ type Data = {
 };
 
 export function useOperations() {
-  const { currentDateTime } = useMonthNavigation();
+  const { currentDateTime, currentAccountId } = useOperationsFilters();
 
-  return useQuery<Data>(GET_OPERATIONS, {
-    variables: {
-      startDateTime: currentDateTime?.startOf('month'),
-      endDateTime: currentDateTime?.endOf('month'),
-    },
-  });
+  const [getOperations, operationData] = useLazyQuery<Data>(GET_OPERATIONS);
+
+  useEffect(() => {
+    if (currentAccountId) {
+      getOperations({
+        variables: {
+          startDateTime: currentDateTime?.startOf('month'),
+          endDateTime: currentDateTime?.endOf('month'),
+          accountId: currentAccountId,
+        },
+      });
+    }
+  }, [currentAccountId, currentDateTime]);
+
+  if (!currentAccountId) return { data: undefined, loading: true };
+
+  return operationData;
 }
