@@ -28,7 +28,7 @@ Table.Foot = styled.tfoot``;
 Table.Row = styled.tr`
   margin-bottom: 10px;
 `;
-Table.Cell = styled.th`
+Table.Cell = styled.td`
   font-weight: normal;
   text-align: start;
   padding-right: 15px;

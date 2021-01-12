@@ -12,8 +12,8 @@ const FooterContainer = () => {
   const operations = data?.me?.operations || [];
 
   const totalEntrance = getTotalOperations(operations, TransactionType.Deposit);
-  const totalRecurrent = getTotalOperations(operations, TransactionType.CreditCard);
-  const totalCredit = getTotalOperations(operations, TransactionType.FixedExpense);
+  const totalRecurrent = getTotalOperations(operations, TransactionType.FixedExpense);
+  const totalCredit = getTotalOperations(operations, TransactionType.CreditCard);
   const totalUnforeseen = getTotalOperations(operations, TransactionType.VariableExpense);
   const closeBalance = totalEntrance - totalRecurrent - totalCredit - totalUnforeseen;
 

@@ -7,6 +7,7 @@ const Select = styled.select`
   padding: var(--input-padding-vertical) var(--input-padding-horizontal);
   margin-bottom: var(--input-margin-bottom);
   outline: none;
+  cursor: pointer;
 
   &:hover {
     border-color: var(--input-border-color-hover);

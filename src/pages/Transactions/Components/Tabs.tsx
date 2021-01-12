@@ -1,37 +1,40 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import Link from '../../../components/Link';
+import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
+import { TransactionType } from '../../../models';
 
 export const Tabs = () => {
-  const [CurrentTransactionType, setCurrentTransactionType] = useState('Entrance');
-
+  const { currentTransactionType, setCurrentTransactionType } = useOperationsFilters();
   return (
     <ButtonGroup>
       <Button
-        onClick={() => setCurrentTransactionType('Entrance')}
-        open={CurrentTransactionType === 'Entrance'}
-        to="/dashboard"
+        type="button"
+        onClick={() => {
+          setCurrentTransactionType(TransactionType.Deposit);
+        }}
+        open={currentTransactionType === TransactionType.Deposit}
       >
         Entrance
       </Button>
       <Button
-        onClick={() => setCurrentTransactionType('Recurrent')}
-        open={CurrentTransactionType === 'Recurrent'}
-        to="/dashboard"
+        type="button"
+        onClick={() => {
+          setCurrentTransactionType(TransactionType.FixedExpense);
+        }}
+        open={currentTransactionType === TransactionType.FixedExpense}
       >
         Recurrent
       </Button>
       <Button
-        onClick={() => setCurrentTransactionType('Credit')}
-        open={CurrentTransactionType === 'Credit'}
-        to="/dashboard"
+        onClick={() => setCurrentTransactionType(TransactionType.CreditCard)}
+        open={currentTransactionType === TransactionType.CreditCard}
       >
         Credit
       </Button>
       <Button
-        onClick={() => setCurrentTransactionType('Unforeseen')}
-        open={CurrentTransactionType === 'Unforeseen'}
-        to="/dashboard"
+        type="button"
+        onClick={() => setCurrentTransactionType(TransactionType.VariableExpense)}
+        open={currentTransactionType === TransactionType.VariableExpense}
       >
         Unforeseen
       </Button>
@@ -49,13 +52,14 @@ type ButtonProps = {
   open?: boolean;
 };
 
-export const Button = styled(Link)<ButtonProps>`
+export const Button = styled.button<ButtonProps>`
   padding: 20px;
   text-decoration: none;
   background-color: ${({ open }) =>
     open ? `var(--dashboard-color-white)` : `var(--dashboard-color-grey)`};
   outline: none;
   border: none;
+  cursor: pointer;
 
   &:hover {
     background-color: ${({ open }) =>
