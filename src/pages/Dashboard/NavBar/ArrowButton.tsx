@@ -9,7 +9,7 @@ type Props = {
 
 const ArrowButton = ({ children, onClick, isLoading }: Props) => {
   return (
-    <ArrowButtonContainer disabled={isLoading} onClick={onClick}>
+    <ArrowButtonContainer type="button" disabled={isLoading} onClick={onClick}>
       {children}
     </ArrowButtonContainer>
   );

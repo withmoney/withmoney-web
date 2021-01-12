@@ -25,6 +25,7 @@ export const GET_OPERATIONS = gql`
         isPaid
         createdAt
         category {
+          id
           name
         }
       }

@@ -8,6 +8,7 @@ export const Tabs = () => {
   return (
     <ButtonGroup>
       <Button
+        type="button"
         onClick={() => {
           setCurrentTransactionType(TransactionType.Deposit);
         }}
@@ -16,6 +17,7 @@ export const Tabs = () => {
         Entrance
       </Button>
       <Button
+        type="button"
         onClick={() => {
           setCurrentTransactionType(TransactionType.FixedExpense);
         }}
@@ -30,6 +32,7 @@ export const Tabs = () => {
         Credit
       </Button>
       <Button
+        type="button"
         onClick={() => setCurrentTransactionType(TransactionType.VariableExpense)}
         open={currentTransactionType === TransactionType.VariableExpense}
       >
@@ -49,7 +52,7 @@ type ButtonProps = {
   open?: boolean;
 };
 
-export const Button = styled.div<ButtonProps>`
+export const Button = styled.button<ButtonProps>`
   padding: 20px;
   text-decoration: none;
   background-color: ${({ open }) =>

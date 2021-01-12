@@ -29,9 +29,7 @@ const EntranceData = () => {
                 <Table.Cell>
                   <InputOperations
                     readOnly
-                    value={`${date.day <= 9 ? '0' + date.day : date.day}/${
-                      date.month <= 9 ? '0' + date.month : date.month
-                    }`}
+                    value={`${date.day}`.padStart(2, '0') + '/' + `${date.month}`.padStart(2, '0')}
                   />
                 </Table.Cell>
                 <Table.Cell>
