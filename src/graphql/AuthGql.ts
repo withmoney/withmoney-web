@@ -44,6 +44,18 @@ export const GET_ACCOUNTS = gql`
   }
 `;
 
+export const CATEGORY_SEARCH = gql`
+  query categorySearch($name: String!, $type: TransactionType!) {
+    me {
+      categories(where: { name: { contains: $name }, type: { equals: $type } }) {
+        id
+        name
+        type
+      }
+    }
+  }
+`;
+
 //Mutation
 export const USER_LOGIN = gql`
   mutation userLogin($email: String!, $password: String!) {

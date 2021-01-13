@@ -9,6 +9,7 @@ import Button from '../../../components/Button';
 import CheckBox from '../../../components/Checkbox';
 import Table from '../Components/Table';
 import Input from '../../../components/Input';
+import { DataCategorySelect } from './DataCategorySelect';
 
 const DataContainer = () => {
   const { currentTransactionType } = useOperationsFilters();
@@ -35,7 +36,7 @@ const DataContainer = () => {
                   <InputOperations readOnly value={operation.name} />
                 </Table.Cell>
                 <Table.Cell>
-                  <InputOperations readOnly value={operation.category.name} />
+                  <DataCategorySelect />
                 </Table.Cell>
                 <Table.Cell>
                   <InputOperations
