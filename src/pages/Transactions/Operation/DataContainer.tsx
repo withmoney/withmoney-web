@@ -2,17 +2,20 @@ import React from 'react';
 import styled from 'styled-components';
 import { DateTime } from 'luxon';
 import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
-import { currencyFormat } from '../../../utils/currency';
 import { LANG, CURRENCY } from '../../../constants/currency';
 import { useOperations } from '../../../hooks/useOperations';
 import Button from '../../../components/Button';
 import CheckBox from '../../../components/Checkbox';
 import Table from '../Components/Table';
 import Input from '../../../components/Input';
+import InputCurrency from '../../../components/InputCurrency';
 
 const DataContainer = () => {
   const { currentTransactionType } = useOperationsFilters();
   const { data } = useOperations();
+
+  const toggleInputCurrency = (value: number) => {};
+
   return (
     <>
       {!!data?.me?.operations?.length &&
@@ -38,9 +41,11 @@ const DataContainer = () => {
                   <InputOperations readOnly value={operation.category.name} />
                 </Table.Cell>
                 <Table.Cell>
-                  <InputOperations
-                    readOnly
-                    value={currencyFormat(LANG, CURRENCY, operation.value)}
+                  <InputCurrency
+                    onChange={toggleInputCurrency}
+                    value={operation.value}
+                    currency={CURRENCY}
+                    lang={LANG}
                   />
                 </Table.Cell>
                 <Table.Cell>

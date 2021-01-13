@@ -65,6 +65,7 @@
     "@apollo/client": "^3.2.7",
     "@apollo/react-hooks": "4.0.0",
     "@apollo/react-testing": "4.0.0",
+    "@davidcostadev/ui": "^1.1.0",
     "@styled-icons/entypo": "^10.18.0",
     "@styled-icons/evaicons-solid": "^10.18.0",
     "@styled-icons/material": "^10.18.0",
