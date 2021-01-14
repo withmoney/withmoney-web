@@ -56,6 +56,18 @@ export const CATEGORY_SEARCH = gql`
   }
 `;
 
+export const ALL_CATEGORY = gql`
+  query {
+    me {
+      categories {
+        id
+        name
+        type
+      }
+    }
+  }
+`;
+
 //Mutation
 export const USER_LOGIN = gql`
   mutation userLogin($email: String!, $password: String!) {

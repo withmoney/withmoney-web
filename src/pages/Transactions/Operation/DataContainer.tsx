@@ -36,7 +36,7 @@ const DataContainer = () => {
                   <InputOperations readOnly value={operation.name} />
                 </Table.Cell>
                 <Table.Cell>
-                  <DataCategorySelect />
+                  <DataCategorySelect CategoryId={operation.category.id} />
                 </Table.Cell>
                 <Table.Cell>
                   <InputOperations
