@@ -1064,6 +1064,17 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
+"@davidcostadev/ui@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@davidcostadev/ui/-/ui-1.1.0.tgz#e185ff9752a27977d4506973e9ae0695d8ac2525"
+  integrity sha512-ePkzNrkg97NVCwtKc+K90G038gQMmhNfzEEpcjEO3+OtI4DmjXNx4VZL0nwAm8f4uHWSS7nAJFPg/t5C0Pn5GQ==
+  dependencies:
+    "@types/styled-components" "^5.1.3"
+    react "^16.13.1"
+    react-dom "^16.13.1"
+    styled-components "^5.1.1"
+    tslib "^2.0.1"
+
 "@emotion/cache@^10.0.27", "@emotion/cache@^10.0.9":
   version "10.0.29"
   resolved "https://registry.yarnpkg.com/@emotion/cache/-/cache-10.0.29.tgz#87e7e64f412c060102d589fe7c6dc042e6f9d1e0"
@@ -1099,16 +1110,6 @@
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/@emotion/hash/-/hash-0.8.0.tgz#bbbff68978fefdbe68ccb533bc8cbe1d1afb5413"
   integrity sha512-kBJtf7PH6aWwZ6fka3zQ0p6SBYzx4fl1LoZXE2RrnYST9Xljm7WfKJrU4g/Xr3Beg72MLrp1AWNUmuYJTL7Cow==
-"@davidcostadev/ui@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@davidcostadev/ui/-/ui-1.1.0.tgz#e185ff9752a27977d4506973e9ae0695d8ac2525"
-  integrity sha512-ePkzNrkg97NVCwtKc+K90G038gQMmhNfzEEpcjEO3+OtI4DmjXNx4VZL0nwAm8f4uHWSS7nAJFPg/t5C0Pn5GQ==
-  dependencies:
-    "@types/styled-components" "^5.1.3"
-    react "^16.13.1"
-    react-dom "^16.13.1"
-    styled-components "^5.1.1"
-    tslib "^2.0.1"
 
 "@emotion/is-prop-valid@^0.8.7", "@emotion/is-prop-valid@^0.8.8":
   version "0.8.8"
@@ -1531,6 +1532,18 @@
   integrity sha512-9bVao7LvyorRGZCw0VmH/dr7Og+NdjYSsKAxB43OQoComFbBgsEpoR9JW6+qSq/ogwVBg8GI2MfAlk4SYI4OLg==
   dependencies:
     "@types/node" "*"
+
+"@types/lodash.debounce@^4.0.6":
+  version "4.0.6"
+  resolved "https://registry.yarnpkg.com/@types/lodash.debounce/-/lodash.debounce-4.0.6.tgz#c5a2326cd3efc46566c47e4c0aa248dc0ee57d60"
+  integrity sha512-4WTmnnhCfDvvuLMaF3KV4Qfki93KebocUF45msxhYyjMttZDQYzHkO639ohhk8+oco2cluAFL3t5+Jn4mleylQ==
+  dependencies:
+    "@types/lodash" "*"
+
+"@types/lodash@*":
+  version "4.14.167"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.167.tgz#ce7d78553e3c886d4ea643c37ec7edc20f16765e"
+  integrity sha512-w7tQPjARrvdeBkX/Rwg95S592JwxqOjmms3zWQ0XZgSyxSLdzWaYH3vErBhdVS/lRBX7F8aBYcYJYTr5TMGOzw==
 
 "@types/lodash@^4.14.165":
   version "4.14.165"
@@ -5661,6 +5674,11 @@ lodash-es@^4.17.11:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.15.tgz#21bd96839354412f23d7a10340e5eac6ee455d78"
   integrity sha512-rlrc3yU3+JNOpZ9zj5pQtxnx2THmvRykwL4Xlxoa8I9lHBlVbbyPhgyPMioxVZ4NqyxaVVtaJnzsyOidQIhyyQ==
+
+lodash.debounce@^4.0.8:
+  version "4.0.8"
+  resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
+  integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
 
 lodash.includes@^4.3.0:
   version "4.3.0"
