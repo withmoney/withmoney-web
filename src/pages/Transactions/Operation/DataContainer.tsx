@@ -8,7 +8,7 @@ import Button from '../../../components/Button';
 import CheckBox from '../../../components/Checkbox';
 import Table from '../Components/Table';
 import Input from '../../../components/Input';
-import { DataCategorySelect } from './DataCategorySelect';
+import { CategorySelect } from './CategorySelect';
 import InputCurrency from '../../../components/InputCurrency';
 
 const DataContainer = () => {
@@ -39,7 +39,7 @@ const DataContainer = () => {
                   <InputOperations readOnly value={operation.name} />
                 </Table.Cell>
                 <Table.Cell>
-                  <DataCategorySelect CategoryId={operation.category.id} />
+                  <CategorySelect CategoryId={operation.category.id} />
                 </Table.Cell>
                 <Table.Cell>
                   <InputCurrency
