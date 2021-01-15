@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/react-hooks';
 import styled from 'styled-components';
 import Select from '../../../components/Select';
 import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
-import { GET_ACCOUNTS } from '../../../graphql/AuthGql';
+import { GET_ACCOUNTS } from '../../../graphql/Accounts';
 import { Me } from '../../../models';
 
 type Data = {

@@ -1,12 +1,8 @@
 import { useEffect } from 'react';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { useOperationsFilters } from './useOperationsFilters';
-import { GET_OPERATIONS } from '../graphql/AuthGql';
-import { Me } from '../models';
-
-type Data = {
-  me: Me;
-};
+import { GET_OPERATIONS, UPDATE_OPERATION } from '../graphql/Operations';
+import { Data } from '../models';
 
 export function useOperations() {
   const { currentDateTime, currentAccountId } = useOperationsFilters();
@@ -28,4 +24,21 @@ export function useOperations() {
   if (!currentAccountId) return { data: undefined, loading: true };
 
   return operationData;
+}
+
+export function useUpdateOperation() {
+  const { currentDateTime, currentAccountId } = useOperationsFilters();
+  const [upDateOperation, { data, error }] = useMutation<Data>(UPDATE_OPERATION, {
+    refetchQueries: [
+      {
+        query: GET_OPERATIONS,
+        variables: {
+          startDateTime: currentDateTime?.startOf('month'),
+          endDateTime: currentDateTime?.endOf('month'),
+          accountId: currentAccountId,
+        },
+      },
+    ],
+  });
+  return { upDateOperation, data, error };
 }

@@ -1,11 +1,17 @@
 import React from 'react';
-import styled from 'styled-components';
 import Text from '../../../components/Text';
 import { currencyFormat } from '../../../utils/currency';
 import { LANG, CURRENCY } from '../../../constants/currency';
 import { useOperations } from '../../../hooks/useOperations';
 import { TransactionType } from '../../../models';
 import { getTotalOperations } from '../../../utils/calcOperations';
+import {
+  InfoContainer,
+  InfoWrapper,
+  Info,
+  InfoTitle,
+  InfoValue,
+} from './style/FooterContainer.style';
 
 const FooterContainer = () => {
   const { data } = useOperations();
@@ -48,39 +54,5 @@ const FooterContainer = () => {
     </InfoContainer>
   );
 };
-
-const InfoContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  background-color: #fafafa;
-  padding: 30px;
-`;
-
-const InfoWrapper = styled.div`
-  display: 'flex';
-  flex-direction: 'column';
-`;
-
-const Info = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const InfoTitle = styled.div`
-  width: '200px';
-  text-align: right;
-  width: 250px;
-  ${Text} {
-    padding: 10px 0;
-    margin-right: 25px;
-  }
-`;
-
-const InfoValue = styled.div`
-  width: 150px;
-  ${Text} {
-    padding: 10px 0;
-  }
-`;
 
 export default FooterContainer;

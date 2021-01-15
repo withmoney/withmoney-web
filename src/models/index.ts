@@ -56,4 +56,8 @@ export interface Operation {
   category: Category;
 }
 
+export type Data = {
+  me: Me;
+};
+
 export interface Me extends User {}

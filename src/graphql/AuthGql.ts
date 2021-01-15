@@ -9,65 +9,6 @@ export const GET_ME = gql`
   }
 `;
 
-export const GET_OPERATIONS = gql`
-  query getOperations($startDateTime: DateTime!, $endDateTime: DateTime!, $accountId: String!) {
-    me {
-      operations(
-        where: {
-          createdAt: { gte: $startDateTime, lte: $endDateTime }
-          accountId: { equals: $accountId }
-        }
-      ) {
-        id
-        name
-        value
-        type
-        isPaid
-        createdAt
-        category {
-          id
-          name
-        }
-      }
-    }
-  }
-`;
-
-export const GET_ACCOUNTS = gql`
-  query getAccounts {
-    me {
-      accounts {
-        id
-        name
-      }
-    }
-  }
-`;
-
-export const CATEGORY_SEARCH = gql`
-  query categorySearch($name: String!, $type: TransactionType!) {
-    me {
-      categories(where: { name: { contains: $name }, type: { equals: $type } }) {
-        id
-        name
-        type
-      }
-    }
-  }
-`;
-
-export const ALL_CATEGORY = gql`
-  query {
-    me {
-      categories {
-        id
-        name
-        type
-      }
-    }
-  }
-`;
-
 //Mutation
 export const USER_LOGIN = gql`
   mutation userLogin($email: String!, $password: String!) {

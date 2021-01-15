@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks';
-import { GET_ACCOUNTS } from '../graphql/AuthGql';
+import { GET_ACCOUNTS } from '../graphql/Accounts';
 import { Me } from '../models';
 
 type Data = {
