@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import debounce from 'lodash.debounce';
@@ -6,22 +6,29 @@ import { useFilterCategories, useCreateCategory } from '../../../hooks/useCatego
 import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
 import { useUpdateOperation } from '../../../hooks/useOperations';
 import customStyles from './style/CategorySelect.style';
+import Input from '../../../components/Input';
 import { ALL_CATEGORY } from '../../../graphql/Categories';
-import { Data, Operation } from '../../../models';
+import { Data, Operation, Category } from '../../../models';
 
 type Props = {
   CategoryId: string;
   OperationData: Operation;
 };
 
+type Option = {
+  value: string;
+  label: string;
+};
+
 const CategorySelect = ({ CategoryId, OperationData }: Props) => {
   const { currentTransactionType } = useOperationsFilters();
-  const { data: allCategories } = useQuery<Data>(ALL_CATEGORY);
+  const { data: allCategories, loading } = useQuery<Data>(ALL_CATEGORY);
+  const [value, setValue] = useState<Option | undefined>();
 
   const filterCategory = useFilterCategories();
 
   const loadOptions = debounce((value: string, callback: any) => {
-    filterCategory(value).then((results: any) => callback(results));
+    filterCategory(value).then((results: Option[]) => callback(results));
   }, 400);
 
   const { createCategory } = useCreateCategory();
@@ -43,12 +50,13 @@ const CategorySelect = ({ CategoryId, OperationData }: Props) => {
           isPaid: OperationData.isPaid,
         },
       });
+      setValue({ value: data.createOneCategory.id, label: data.createOneCategory.name });
     });
   };
 
   const update = (data: any) => {
     if (CategoryId === data.value) {
-      return data.value;
+      return;
     } else {
       upDateOperation({
         variables: {
@@ -69,18 +77,21 @@ const CategorySelect = ({ CategoryId, OperationData }: Props) => {
       value: category.id,
       label: category.name,
     }))
-    .filter((category: any) => category.value === CategoryId);
+    .filter((category: Option) => category.value === CategoryId);
 
   const defaultOptions = allCategories?.me.categories
-    .filter((option: any) => option.type === currentTransactionType)
+    .filter((option: Category) => option.type === currentTransactionType)
     .map((category) => ({
       value: category.id,
       label: category.name,
     }));
 
-  return (
+  return loading ? (
+    <Input defaultValue="loading" disabled />
+  ) : (
     <AsyncCreatableSelect
       cacheOptions
+      value={value}
       defaultOptions={defaultOptions}
       defaultValue={defaultValues}
       aria-label="Category search"
