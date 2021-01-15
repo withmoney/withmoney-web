@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/client';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import debounce from 'lodash.debounce';
@@ -47,17 +47,21 @@ const CategorySelect = ({ CategoryId, OperationData }: Props) => {
   };
 
   const update = (data: any) => {
-    upDateOperation({
-      variables: {
-        id: OperationData.id,
-        name: OperationData.name,
-        type: OperationData.type,
-        accountId: OperationData.account.id,
-        categoryId: data.value,
-        value: OperationData.value,
-        isPaid: OperationData.isPaid,
-      },
-    });
+    if (CategoryId === data.value) {
+      return data.value;
+    } else {
+      upDateOperation({
+        variables: {
+          id: OperationData.id,
+          name: OperationData.name,
+          type: OperationData.type,
+          accountId: OperationData.account.id,
+          categoryId: data.value,
+          value: OperationData.value,
+          isPaid: OperationData.isPaid,
+        },
+      });
+    }
   };
 
   const defaultValues = allCategories?.me.categories
