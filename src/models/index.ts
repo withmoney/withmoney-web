@@ -49,6 +49,7 @@ export interface Operation {
   isPaid: boolean;
   type: TransactionType;
   createdAt: string;
+  paidAt: string;
   updatedAt: string;
   deletedAt: string;
   account: Account;

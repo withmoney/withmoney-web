@@ -23,7 +23,7 @@ const DataContainer = () => {
         data.me?.operations
           ?.filter((operation) => operation.type === currentTransactionType)
           .map((operation) => {
-            const date = DateTime.fromISO(operation.createdAt);
+            const date = DateTime.fromISO(operation.paidAt);
             return (
               <Table.Row key={operation.id}>
                 <Table.Cell>

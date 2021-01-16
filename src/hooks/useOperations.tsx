@@ -28,7 +28,7 @@ export function useOperations() {
 
 export function useUpdateOperation() {
   const { currentDateTime, currentAccountId } = useOperationsFilters();
-  const [upDateOperation, { data, error }] = useMutation<Data>(UPDATE_OPERATION, {
+  const [updateOperation, { data, error }] = useMutation<Data>(UPDATE_OPERATION, {
     refetchQueries: [
       {
         query: GET_OPERATIONS,
@@ -40,5 +40,5 @@ export function useUpdateOperation() {
       },
     ],
   });
-  return { upDateOperation, data, error };
+  return { updateOperation, data, error };
 }

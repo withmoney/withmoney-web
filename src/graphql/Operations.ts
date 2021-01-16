@@ -9,13 +9,14 @@ export const GET_OPERATIONS = gql`
           createdAt: { gte: $startDateTime, lte: $endDateTime }
           accountId: { equals: $accountId }
         }
-        orderBy: [{ createdAt: asc }]
+        orderBy: [{ paidAt: asc }]
       ) {
         id
         name
         value
         type
         isPaid
+        paidAt
         createdAt
         account {
           id
@@ -29,7 +30,6 @@ export const GET_OPERATIONS = gql`
     }
   }
 `;
-
 // mutations
 
 export const UPDATE_OPERATION = gql`

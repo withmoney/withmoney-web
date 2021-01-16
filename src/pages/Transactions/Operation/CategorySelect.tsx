@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
+import { toast } from 'react-toastify';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import debounce from 'lodash.debounce';
 import { useFilterCategories, useCreateCategory } from '../../../hooks/useCategories';
@@ -21,44 +22,45 @@ type Option = {
 };
 
 const CategorySelect = ({ CategoryId, OperationData }: Props) => {
-  const { currentTransactionType } = useOperationsFilters();
-  const { data: allCategories, loading } = useQuery<Data>(ALL_CATEGORY);
   const [value, setValue] = useState<Option | undefined>();
-
+  const { data: allCategories, loading } = useQuery<Data>(ALL_CATEGORY);
+  const { currentTransactionType } = useOperationsFilters();
+  const { createCategory } = useCreateCategory();
+  const { updateOperation } = useUpdateOperation();
   const filterCategory = useFilterCategories();
 
   const loadOptions = debounce((value: string, callback: any) => {
     filterCategory(value).then((results: Option[]) => callback(results));
   }, 400);
 
-  const { createCategory } = useCreateCategory();
-  const { upDateOperation } = useUpdateOperation();
-
   const create = (value: string) => {
     createCategory({
       variables: { name: value, type: currentTransactionType },
-    }).then(({ data }: any) => {
-      const CategoryID = data.createOneCategory;
-      upDateOperation({
-        variables: {
-          id: OperationData.id,
-          name: OperationData.name,
-          type: OperationData.type,
-          accountId: OperationData.account.id,
-          categoryId: CategoryID.id,
-          value: OperationData.value,
-          isPaid: OperationData.isPaid,
-        },
-      });
-      setValue({ value: data.createOneCategory.id, label: data.createOneCategory.name });
-    });
+    })
+      .then(({ data }: any) => {
+        const CategoryID = data.createOneCategory;
+        updateOperation({
+          variables: {
+            id: OperationData.id,
+            name: OperationData.name,
+            type: OperationData.type,
+            accountId: OperationData.account.id,
+            categoryId: CategoryID.id,
+            value: OperationData.value,
+            isPaid: OperationData.isPaid,
+          },
+        })
+          .then(() => {
+            setValue({ value: data.createOneCategory.id, label: data.createOneCategory.name });
+          })
+          .catch((err) => toast.error(err.message));
+      })
+      .catch((err) => toast.error(err.message));
   };
 
   const update = (data: any) => {
-    if (CategoryId === data.value) {
-      return;
-    } else {
-      upDateOperation({
+    if (CategoryId !== data.value) {
+      updateOperation({
         variables: {
           id: OperationData.id,
           name: OperationData.name,
@@ -68,7 +70,9 @@ const CategorySelect = ({ CategoryId, OperationData }: Props) => {
           value: OperationData.value,
           isPaid: OperationData.isPaid,
         },
-      });
+      })
+        .then()
+        .catch((err) => toast.error(err.message));
     }
   };
 
