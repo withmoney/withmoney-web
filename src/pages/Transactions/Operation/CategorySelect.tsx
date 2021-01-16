@@ -39,40 +39,43 @@ const CategorySelect = ({ CategoryId, OperationData }: Props) => {
     })
       .then(({ data }: any) => {
         const CategoryID = data.createOneCategory;
-        updateOperation({
-          variables: {
-            id: OperationData.id,
-            name: OperationData.name,
-            type: OperationData.type,
-            accountId: OperationData.account.id,
-            categoryId: CategoryID.id,
-            value: OperationData.value,
-            isPaid: OperationData.isPaid,
-          },
-        })
-          .then(() => {
-            setValue({ value: data.createOneCategory.id, label: data.createOneCategory.name });
-          })
-          .catch((err) => toast.error(err.message));
+        try {
+          updateOperation({
+            variables: {
+              id: OperationData.id,
+              name: OperationData.name,
+              type: OperationData.type,
+              accountId: OperationData.account.id,
+              categoryId: CategoryID.id,
+              value: OperationData.value,
+              isPaid: OperationData.isPaid,
+            },
+          });
+          setValue({ value: data.createOneCategory.id, label: data.createOneCategory.name });
+        } catch (err) {
+          toast.error(err.message);
+        }
       })
       .catch((err) => toast.error(err.message));
   };
 
   const update = (data: any) => {
     if (CategoryId !== data.value) {
-      updateOperation({
-        variables: {
-          id: OperationData.id,
-          name: OperationData.name,
-          type: OperationData.type,
-          accountId: OperationData.account.id,
-          categoryId: data.value,
-          value: OperationData.value,
-          isPaid: OperationData.isPaid,
-        },
-      })
-        .then()
-        .catch((err) => toast.error(err.message));
+      try {
+        updateOperation({
+          variables: {
+            id: OperationData.id,
+            name: OperationData.name,
+            type: OperationData.type,
+            accountId: OperationData.account.id,
+            categoryId: data.value,
+            value: OperationData.value,
+            isPaid: OperationData.isPaid,
+          },
+        });
+      } catch (err) {
+        toast.error(err.message);
+      }
     }
   };
 
