@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { DateTime } from 'luxon';
+import debounce from 'lodash.debounce';
+import { toast } from 'react-toastify';
+import { useUpdateOperation } from '../../../hooks/useOperations';
 import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
 import { LANG, CURRENCY } from '../../../constants/currency';
 import { useOperations } from '../../../hooks/useOperations';
@@ -10,12 +13,28 @@ import Table from '../Components/Table';
 import Input from '../../../components/Input';
 import CategorySelect from './CategorySelect';
 import InputCurrency from '../../../components/InputCurrency';
+import { Operation } from '../../../models';
 
 const DataContainer = () => {
   const { currentTransactionType } = useOperationsFilters();
   const { data } = useOperations();
+  const { updateOperation } = useUpdateOperation();
 
-  const toggleInputCurrency = (value: number) => {};
+  const toggleInputCurrency = debounce((value: number, operation: Operation) => {
+    updateOperation({
+      variables: {
+        id: operation.id,
+        name: operation.name,
+        type: operation.type,
+        accountId: operation.account.id,
+        categoryId: operation.category.id,
+        value: value,
+        isPaid: operation.isPaid,
+      },
+    })
+      .then()
+      .catch((err) => toast.error(err.message));
+  }, 1000);
 
   return (
     <>
@@ -46,7 +65,7 @@ const DataContainer = () => {
                 </Table.Cell>
                 <Table.Cell>
                   <InputCurrency
-                    onChange={toggleInputCurrency}
+                    onChange={(value: number) => toggleInputCurrency(value, operation)}
                     value={operation.value}
                     currency={CURRENCY}
                     lang={LANG}
