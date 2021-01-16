@@ -1,5 +1,4 @@
 import React from 'react';
-import styled from 'styled-components';
 import { DateTime } from 'luxon';
 import debounce from 'lodash.debounce';
 import { toast } from 'react-toastify';
@@ -10,37 +9,57 @@ import { useOperations } from '../../../hooks/useOperations';
 import Button from '../../../components/Button';
 import CheckBox from '../../../components/Checkbox';
 import Table from '../Components/Table';
-import Input from '../../../components/Input';
+import InputOperations from './InputOptions';
 import CategorySelect from './CategorySelect';
 import InputCurrency from '../../../components/InputCurrency';
 import { Operation } from '../../../models';
 
 const DataContainer = () => {
-  const { currentTransactionType } = useOperationsFilters();
   const { data } = useOperations();
+  const { currentTransactionType } = useOperationsFilters();
   const { updateOperation } = useUpdateOperation();
 
   const toggleInputCurrency = debounce((value: number, operation: Operation) => {
-    updateOperation({
-      variables: {
-        id: operation.id,
-        name: operation.name,
-        type: operation.type,
-        accountId: operation.account.id,
-        categoryId: operation.category.id,
-        value: value,
-        isPaid: operation.isPaid,
-      },
-    })
-      .then()
-      .catch((err) => toast.error(err.message));
-  }, 1000);
+    try {
+      updateOperation({
+        variables: {
+          id: operation.id,
+          name: operation.name,
+          type: operation.type,
+          accountId: operation.account.id,
+          categoryId: operation.category ? operation.category.id : '',
+          value: value,
+          isPaid: operation.isPaid,
+        },
+      });
+    } catch (err) {
+      toast.error(err.message);
+    }
+  }, 800);
+
+  const toggleInputName = debounce((value: string, operation: Operation) => {
+    try {
+      updateOperation({
+        variables: {
+          id: operation.id,
+          name: value,
+          type: operation.type,
+          accountId: operation.account.id,
+          categoryId: operation.category ? operation.category.id : '',
+          value: operation.value,
+          isPaid: operation.isPaid,
+        },
+      });
+    } catch (err) {
+      toast.error(err.message);
+    }
+  }, 800);
 
   return (
     <>
-      {!!data?.me?.operations?.length &&
-        data.me?.operations
-          ?.filter((operation) => operation.type === currentTransactionType)
+      {!!data?.me.operations &&
+        data.me.operations
+          .filter((operation) => operation.type === currentTransactionType)
           .map((operation) => {
             const date = DateTime.fromISO(operation.paidAt);
             return (
@@ -50,12 +69,15 @@ const DataContainer = () => {
                 </Table.Cell>
                 <Table.Cell>
                   <InputOperations
-                    readOnly
+                    onChange={() => {}}
                     value={`${date.day}`.padStart(2, '0') + '/' + `${date.month}`.padStart(2, '0')}
                   />
                 </Table.Cell>
                 <Table.Cell>
-                  <InputOperations readOnly value={operation.name} />
+                  <InputOperations
+                    onChange={(value) => toggleInputName(value, operation)}
+                    value={operation.name}
+                  />
                 </Table.Cell>
                 <Table.Cell>
                   <CategorySelect
@@ -80,9 +102,5 @@ const DataContainer = () => {
     </>
   );
 };
-
-const InputOperations = styled(Input)`
-  height: 40px;
-`;
 
 export default DataContainer;
