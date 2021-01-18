@@ -55,6 +55,27 @@ const DataContainer = () => {
     }
   }, 800);
 
+  const toggleInputIsPaid = (
+    { target: { checked } }: React.ChangeEvent<HTMLInputElement>,
+    operation: Operation,
+  ) => {
+    try {
+      updateOperation({
+        variables: {
+          id: operation.id,
+          name: operation.name,
+          type: operation.type,
+          accountId: operation.account.id,
+          categoryId: operation.category ? operation.category.id : '',
+          value: operation.value,
+          isPaid: checked,
+        },
+      });
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
   return (
     <>
       {!!data?.me.operations &&
@@ -65,11 +86,13 @@ const DataContainer = () => {
             return (
               <Table.Row key={operation.id}>
                 <Table.Cell>
-                  <CheckBox readOnly checked={operation.isPaid} />
+                  <CheckBox
+                    onChange={(event) => toggleInputIsPaid(event, operation)}
+                    checked={operation.isPaid}
+                  />
                 </Table.Cell>
                 <Table.Cell>
                   <InputOperations
-                    onChange={() => {}}
                     value={`${date.day}`.padStart(2, '0') + '/' + `${date.month}`.padStart(2, '0')}
                   />
                 </Table.Cell>
