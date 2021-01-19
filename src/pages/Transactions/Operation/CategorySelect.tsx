@@ -49,6 +49,7 @@ const CategorySelect = ({ CategoryId, OperationData }: Props) => {
               categoryId: CategoryID.id,
               value: OperationData.value,
               isPaid: OperationData.isPaid,
+              paidAt: OperationData.paidAt,
             },
           });
           setValue({ value: data.createOneCategory.id, label: data.createOneCategory.name });
@@ -71,6 +72,7 @@ const CategorySelect = ({ CategoryId, OperationData }: Props) => {
             categoryId: data.value,
             value: OperationData.value,
             isPaid: OperationData.isPaid,
+            paidAt: OperationData.paidAt,
           },
         });
       } catch (err) {

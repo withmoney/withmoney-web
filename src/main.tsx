@@ -7,6 +7,7 @@ import GlobalStyle from './theme';
 import Routers from './routes';
 import SidebarProvider from './hooks/useSidebarCollapse';
 import OperationsFiltersProvider from './hooks/useOperationsFilters';
+import 'react-dates/initialize';
 import 'react-toastify/dist/ReactToastify.css';
 
 const httpLink = createHttpLink({

@@ -12,6 +12,7 @@ import Table from '../Components/Table';
 import InputOperations from './InputOptions';
 import CategorySelect from './CategorySelect';
 import InputCurrency from '../../../components/InputCurrency';
+import DatePicker from './DatePicker';
 import { Operation } from '../../../models';
 
 const DataContainer = () => {
@@ -30,6 +31,7 @@ const DataContainer = () => {
           categoryId: operation.category ? operation.category.id : '',
           value: value,
           isPaid: operation.isPaid,
+          paidAt: operation.paidAt,
         },
       });
     } catch (err) {
@@ -48,6 +50,7 @@ const DataContainer = () => {
           categoryId: operation.category ? operation.category.id : '',
           value: operation.value,
           isPaid: operation.isPaid,
+          paidAt: operation.paidAt,
         },
       });
     } catch (err) {
@@ -69,6 +72,7 @@ const DataContainer = () => {
           categoryId: operation.category ? operation.category.id : '',
           value: operation.value,
           isPaid: checked,
+          paidAt: operation.paidAt,
         },
       });
     } catch (err) {
@@ -92,9 +96,7 @@ const DataContainer = () => {
                   />
                 </Table.Cell>
                 <Table.Cell>
-                  <InputOperations
-                    value={`${date.day}`.padStart(2, '0') + '/' + `${date.month}`.padStart(2, '0')}
-                  />
+                  <DatePicker operation={operation} />
                 </Table.Cell>
                 <Table.Cell>
                   <InputOperations

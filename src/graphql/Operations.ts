@@ -41,6 +41,7 @@ export const UPDATE_OPERATION = gql`
     $type: TransactionType!
     $value: Float!
     $isPaid: Boolean!
+    $paidAt: DateTime!
   ) {
     updateOneOperation(
       where: { id: $id }
@@ -51,6 +52,7 @@ export const UPDATE_OPERATION = gql`
         categoryId: $categoryId
         value: $value
         isPaid: $isPaid
+        paidAt: $paidAt
       }
     ) {
       id
