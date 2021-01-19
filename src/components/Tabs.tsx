@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
-import { TransactionType } from '../../../models';
+import { useOperationsFilters } from '../hooks/useOperationsFilters';
+import { TransactionType } from '../models';
 
 export const Tabs = () => {
   const { currentTransactionType, setCurrentTransactionType } = useOperationsFilters();

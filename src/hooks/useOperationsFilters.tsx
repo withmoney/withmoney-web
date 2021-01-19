@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { DateTime } from 'luxon';
 import { useQuery } from '@apollo/react-hooks';
-import { GET_ACCOUNTS } from '../graphql/AuthGql';
+import { GET_ACCOUNTS } from '../graphql/Accounts';
 import { Me, TransactionType } from '../models';
 
 type Data = {
@@ -33,14 +33,13 @@ export default function OperationsFiltersProvider({ children }: Props) {
   const [currentTransactionType, setCurrentTransactionType] = useState<TransactionType>(
     TransactionType.Deposit,
   );
-
-  const { data } = useQuery<Data>(GET_ACCOUNTS);
+  const { data: accounts } = useQuery<Data>(GET_ACCOUNTS);
 
   useEffect(() => {
-    if (!currentAccountId && data?.me?.accounts?.length) {
-      setCurrentAccountId(data?.me?.accounts[0].id);
+    if (!currentAccountId && accounts?.me?.accounts?.length) {
+      setCurrentAccountId(accounts?.me?.accounts[0].id);
     }
-  }, [currentAccountId, data]);
+  }, [currentAccountId, accounts]);
 
   const goToNextMonth = () => {
     setCurrentDateTime(currentDateTime.plus({ month: 1 }));

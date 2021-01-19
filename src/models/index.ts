@@ -49,11 +49,16 @@ export interface Operation {
   isPaid: boolean;
   type: TransactionType;
   createdAt: string;
+  paidAt: string;
   updatedAt: string;
   deletedAt: string;
   account: Account;
   user: User;
   category: Category;
 }
+
+export type Data = {
+  me: Me;
+};
 
 export interface Me extends User {}

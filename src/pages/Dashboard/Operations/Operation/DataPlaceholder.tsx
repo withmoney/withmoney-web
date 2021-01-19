@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ContentLoader from 'react-content-loader';
-import Table from '../Components/Table';
+import Table from '../../../../components/Table';
 
 type Props = {
   isLoading: boolean;
