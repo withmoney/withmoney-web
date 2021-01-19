@@ -41,7 +41,6 @@ const OperationItem = ({ operation }: OperationItemProps) => {
 
   const handleDateChange = (date: Moment) => {
     handleUpdate({
-      ...operation,
       paidAt: moment(date).format(),
     });
   };
@@ -52,7 +51,7 @@ const OperationItem = ({ operation }: OperationItemProps) => {
         variables: {
           ...operation,
           accountId: operation.account.id,
-          categoryId: operation.category ? operation.category.id : null,
+          categoryId: operation.category ? operation.category.id : '',
           ...newValues,
         },
       });
