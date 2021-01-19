@@ -12,11 +12,12 @@ type Props = {
 };
 
 const DatePicker = ({ operation }: Props) => {
-  const data = moment(operation.paidAt);
+  const data = moment(operation.paidAt).locale(LANG);
   const [date, setDate] = useState<Moment>(data);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
   const { updateOperation } = useUpdateOperation();
-  const format = date.localeData().longDateFormat('L').slice(0, 5);
+  const format = date.localeData().longDateFormat('L');
 
   const updateDate = (date: Moment) => {
     setDate(date);
@@ -38,7 +39,7 @@ const DatePicker = ({ operation }: Props) => {
     <SingleDatePicker
       noBorder={true}
       block={true}
-      date={date.locale(LANG)}
+      date={date}
       onDateChange={(date) => updateDate(moment(date))}
       focused={isOpen}
       onFocusChange={({ focused }) => setIsOpen(focused)}
