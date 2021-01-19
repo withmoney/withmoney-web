@@ -1,33 +1,28 @@
 import React from 'react';
-import styled from 'styled-components';
+import { Switch, Route } from 'react-router-dom';
+import { useSidebarCollapse } from '../../hooks/useSidebarCollapse';
+import { Content, Page, Wrapper } from './style/Operations.style';
 import SideBar from './SideBar';
 import NavBar from './NavBar';
-import Wrapper from './Wrapper';
-import ContentPage from './Operations/ContentPage';
+import Operations from './Operations';
+import Reports from './Reports';
 
 const Dashboard = () => {
+  const { isSidebarOpen } = useSidebarCollapse();
   return (
-    <DashboardContainer>
+    <Page>
+      <NavBar />
       <Wrapper>
-        <NavBar />
-        <Content>
-          <SideBar />
-          <ContentPage />
+        <SideBar />
+        <Content isSidebarOpen={isSidebarOpen}>
+          <Switch>
+            <Route path="/dashboard" component={Operations} />
+            <Route path="/reports" component={Reports} />
+          </Switch>
         </Content>
       </Wrapper>
-    </DashboardContainer>
+    </Page>
   );
 };
-
-const DashboardContainer = styled.div`
-  display: flex;
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-grow: 1;
-  margin-top: 15px;
-  position: relative;
-`;
 
 export default Dashboard;

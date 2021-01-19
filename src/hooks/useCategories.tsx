@@ -1,16 +1,11 @@
 import { useApolloClient, useMutation } from '@apollo/client';
 import { useOperationsFilters } from './useOperationsFilters';
 import { CATEGORY_SEARCH, CREATE_CATEGORY, ALL_CATEGORY } from '../graphql/Categories';
-import { Me, TransactionType } from '../models';
+import { Me, Category } from '../models';
 
 type Data = {
   me: Me;
 };
-
-interface Category {
-  name: string;
-  type: TransactionType;
-}
 
 export const useFilterCategories = () => {
   const client = useApolloClient();
@@ -35,9 +30,16 @@ export const useFilterCategories = () => {
   return filterCategory;
 };
 
+type CreateOneCategoryMutationData = {
+  createOneCategory: Category;
+};
+
 export function useCreateCategory() {
-  const [createCategory, { data, error }] = useMutation<Category>(CREATE_CATEGORY, {
-    refetchQueries: [{ query: ALL_CATEGORY }],
-  });
+  const [createCategory, { data, error }] = useMutation<CreateOneCategoryMutationData>(
+    CREATE_CATEGORY,
+    {
+      refetchQueries: [{ query: ALL_CATEGORY }],
+    },
+  );
   return { createCategory, data, error };
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Table from '../Components/Table';
+import Table from '../../../../components/Table';
 
-const TransactionPlaceholder = () => {
+const OperationPlaceholder = () => {
   return (
     <Table.Foot>
       <Table.Row>
@@ -40,4 +40,4 @@ const CheckBox = styled.input.attrs({ type: 'checkbox' })`
     #f4f4f4;
 `;
 
-export default TransactionPlaceholder;
+export default OperationPlaceholder;

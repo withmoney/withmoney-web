@@ -6,7 +6,7 @@ type Props = {
 };
 
 const Table = ({ children }: Props) => {
-  return <table>{children}</table>;
+  return <TableStyled>{children}</TableStyled>;
 };
 
 Table.Header = styled.thead``;
@@ -16,14 +16,17 @@ Table.Row = styled.tr`
   margin-bottom: 10px;
 `;
 
+const TableStyled = styled.table`
+  width: 100%;
+  table-layout: fixed;
+`;
+
 type PropsCell = {
   width?: number;
-  minWidth?: number;
 };
 
 Table.Cell = styled.td<PropsCell>`
   width: ${({ width }) => (width ? `${width}px` : null)};
-  min-width: ${({ minWidth }) => (minWidth ? `${minWidth}px` : null)};
   font-weight: normal;
   text-align: start;
   padding-right: 15px;

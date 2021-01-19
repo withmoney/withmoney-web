@@ -1,10 +1,10 @@
 import React from 'react';
-import Text from '../../../components/Text';
-import { currencyFormat } from '../../../utils/currency';
-import { LANG, CURRENCY } from '../../../constants/currency';
-import { useOperations } from '../../../hooks/useOperations';
-import { TransactionType } from '../../../models';
-import { getTotalOperations } from '../../../utils/calcOperations';
+import Text from '../../../../components/Text';
+import { currencyFormat } from '../../../../utils/currency';
+import { LANG, CURRENCY } from '../../../../constants/currency';
+import { useOperations } from '../../../../hooks/useOperations';
+import { TransactionType } from '../../../../models';
+import { getTotalOperations } from '../../../../utils/calcOperations';
 import {
   InfoContainer,
   InfoWrapper,
