@@ -51,6 +51,8 @@ const OperationItem = ({ operation }: OperationItemProps) => {
       await updateOperation({
         variables: {
           ...operation,
+          accountId: operation.account.id,
+          categoryId: operation.category ? operation.category.id : null,
           ...newValues,
         },
       });

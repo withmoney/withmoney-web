@@ -45,6 +45,7 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
         updateOperation({
           variables: {
             ...operation,
+            accountId: operation.account.id,
             categoryId: category.id,
           },
         });
@@ -61,6 +62,7 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
         updateOperation({
           variables: {
             ...operation,
+            accountId: operation.account.id,
             categoryId: data.value,
           },
         });

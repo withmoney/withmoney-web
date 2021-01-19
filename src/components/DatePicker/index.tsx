@@ -5,7 +5,6 @@ import { LANG } from '../../constants/currency';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import './react_dates_overrides.css';
-import { useUpdateOperation } from '../../hooks/useOperations';
 
 type Props = {
   id: string;
@@ -18,7 +17,6 @@ const DatePicker = ({ id, defaultValue, onDateChange }: Props) => {
   const [date, setDate] = useState<Moment>(value);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const { updateOperation } = useUpdateOperation();
   const format = date.localeData().longDateFormat('L');
 
   const handleDateChange = (date: Moment | null) => {
