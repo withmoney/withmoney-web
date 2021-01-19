@@ -19,20 +19,22 @@ const DatePicker = ({ operation }: Props) => {
   const { updateOperation } = useUpdateOperation();
   const format = date.localeData().longDateFormat('L');
 
-  const updateDate = (date: Moment) => {
-    setDate(date);
-    updateOperation({
-      variables: {
-        id: operation.id,
-        name: operation.name,
-        type: operation.type,
-        accountId: operation.account.id,
-        categoryId: operation.category ? operation.category.id : '',
-        value: operation.value,
-        isPaid: operation.isPaid,
-        paidAt: moment(date).format(),
-      },
-    });
+  const updateDate = (date: Moment | null) => {
+    if (date) {
+      setDate(date);
+      updateOperation({
+        variables: {
+          id: operation.id,
+          name: operation.name,
+          type: operation.type,
+          accountId: operation.account.id,
+          categoryId: operation.category ? operation.category.id : '',
+          value: operation.value,
+          isPaid: operation.isPaid,
+          paidAt: moment(date).format(),
+        },
+      });
+    }
   };
 
   return (
@@ -40,13 +42,14 @@ const DatePicker = ({ operation }: Props) => {
       noBorder={true}
       block={true}
       date={date}
-      onDateChange={(date) => updateDate(moment(date))}
+      onDateChange={updateDate}
       focused={isOpen}
       onFocusChange={({ focused }) => setIsOpen(focused)}
       id={operation.id}
       numberOfMonths={1}
       horizontalMargin={50}
       displayFormat={format}
+      isOutsideRange={() => false}
     />
   );
 };

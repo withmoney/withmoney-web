@@ -9,6 +9,7 @@ import SidebarProvider from './hooks/useSidebarCollapse';
 import OperationsFiltersProvider from './hooks/useOperationsFilters';
 import 'react-dates/initialize';
 import 'react-toastify/dist/ReactToastify.css';
+import 'nprogress/nprogress.css';
 
 const httpLink = createHttpLink({
   uri: process.env.APOLLO_SERVER_API,

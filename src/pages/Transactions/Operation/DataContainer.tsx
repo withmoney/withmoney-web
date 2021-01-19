@@ -1,5 +1,4 @@
 import React from 'react';
-import { DateTime } from 'luxon';
 import debounce from 'lodash.debounce';
 import { toast } from 'react-toastify';
 import { useUpdateOperation } from '../../../hooks/useOperations';
@@ -86,31 +85,30 @@ const DataContainer = () => {
         data.me.operations
           .filter((operation) => operation.type === currentTransactionType)
           .map((operation) => {
-            const date = DateTime.fromISO(operation.paidAt);
             return (
               <Table.Row key={operation.id}>
-                <Table.Cell>
+                <Table.Cell width={80}>
                   <CheckBox
                     onChange={(event) => toggleInputIsPaid(event, operation)}
                     checked={operation.isPaid}
                   />
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell width={130}>
                   <DatePicker operation={operation} />
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell minWidth={200}>
                   <InputOperations
                     onChange={(value) => toggleInputName(value, operation)}
                     value={operation.name}
                   />
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell minWidth={200}>
                   <CategorySelect
                     OperationData={operation}
                     CategoryId={operation.category ? operation.category.id : ''}
                   />
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell minWidth={200}>
                   <InputCurrency
                     onChange={(value: number) => toggleInputCurrency(value, operation)}
                     value={operation.value}
@@ -118,7 +116,7 @@ const DataContainer = () => {
                     lang={LANG}
                   />
                 </Table.Cell>
-                <Table.Cell>
+                <Table.Cell minWidth={80} width={80}>
                   <Button variation="danger">Delete</Button>
                 </Table.Cell>
               </Table.Row>

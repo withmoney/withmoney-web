@@ -6,7 +6,7 @@ export const GET_OPERATIONS = gql`
     me {
       operations(
         where: {
-          createdAt: { gte: $startDateTime, lte: $endDateTime }
+          paidAt: { gte: $startDateTime, lte: $endDateTime }
           accountId: { equals: $accountId }
         }
         orderBy: [{ paidAt: asc }]

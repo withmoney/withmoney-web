@@ -16,7 +16,6 @@ const Operation = () => {
       <Tabs />
       <OperationContainer>
         <Table>
-          <Table.Config />
           <EntranceTitle />
           <EntranceData />
           <EntranceLoad />
