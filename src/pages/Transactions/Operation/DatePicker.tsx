@@ -16,6 +16,7 @@ const DatePicker = ({ operation }: Props) => {
   const [date, setDate] = useState<Moment>(data);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { updateOperation } = useUpdateOperation();
+  const format = date.localeData().longDateFormat('L').slice(0, 5);
 
   const updateDate = (date: Moment) => {
     setDate(date);
@@ -44,7 +45,7 @@ const DatePicker = ({ operation }: Props) => {
       id={operation.id}
       numberOfMonths={1}
       horizontalMargin={50}
-      displayFormat="D/MM"
+      displayFormat={format}
     />
   );
 };
