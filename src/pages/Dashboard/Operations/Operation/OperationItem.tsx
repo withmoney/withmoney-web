@@ -2,10 +2,9 @@ import React from 'react';
 import debounce from 'lodash.debounce';
 import { toast } from 'react-toastify';
 import moment, { Moment } from 'moment';
-
 import { useUpdateOperation } from '../../../../hooks/useOperations';
 import { LANG, CURRENCY } from '../../../../constants/currency';
-import Button from '../../../../components/Button';
+import ButtonIcon from '../../../../components/ButtonIcon';
 import CheckBox from '../../../../components/Checkbox';
 import Table from '../../../../components/Table';
 import DatePicker from '../../../../components/DatePicker';
@@ -13,12 +12,15 @@ import InputOperations from './InputOptions';
 import CategorySelect from './CategorySelect';
 import InputCurrency from '../../../../components/InputCurrency';
 import { Operation } from '../../../../models';
+import { TrashFill } from '@styled-icons/bootstrap';
 
 type OperationItemProps = {
   operation: Operation;
+  modalIsOpen: (value: boolean) => void;
+  deleteOperation: (value: Operation) => void;
 };
 
-const OperationItem = ({ operation }: OperationItemProps) => {
+const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationItemProps) => {
   const { updateOperation } = useUpdateOperation();
 
   const toggleInputCurrency = debounce((value: number) => {
@@ -89,8 +91,16 @@ const OperationItem = ({ operation }: OperationItemProps) => {
           lang={LANG}
         />
       </Table.Cell>
-      <Table.Cell width={100}>
-        <Button variation="danger">Delete</Button>
+      <Table.Cell width={10}>
+        <ButtonIcon
+          variation="danger"
+          onClick={() => {
+            deleteOperation(operation);
+            modalIsOpen(true);
+          }}
+        >
+          <TrashFill style={{ width: '18px' }} />
+        </ButtonIcon>
       </Table.Cell>
     </Table.Row>
   );

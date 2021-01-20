@@ -2,7 +2,12 @@ import { useEffect } from 'react';
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import nprogress from 'nprogress';
 import { useOperationsFilters } from './useOperationsFilters';
-import { GET_OPERATIONS, UPDATE_OPERATION } from '../graphql/Operations';
+import {
+  DELETE_OPERATION,
+  GET_OPERATIONS,
+  UPDATE_OPERATION,
+  RESTORE_OPERATION,
+} from '../graphql/Operations';
 import { Data } from '../models';
 
 export function useOperations() {
@@ -61,4 +66,56 @@ export function useUpdateOperation() {
   }, [loading]);
 
   return { updateOperation, data, error };
+}
+
+export function useDeleteOperation() {
+  const { currentDateTime, currentAccountId } = useOperationsFilters();
+  const [deleteOperation, { data, error, loading }] = useMutation(DELETE_OPERATION, {
+    refetchQueries: [
+      {
+        query: GET_OPERATIONS,
+        variables: {
+          startDateTime: currentDateTime?.startOf('month'),
+          endDateTime: currentDateTime?.endOf('month'),
+          accountId: currentAccountId,
+        },
+      },
+    ],
+  });
+
+  useEffect(() => {
+    if (loading) {
+      nprogress.start();
+    } else {
+      nprogress.done();
+    }
+  }, [loading]);
+
+  return { deleteOperation, data, error };
+}
+
+export function useRestoreOperation() {
+  const { currentDateTime, currentAccountId } = useOperationsFilters();
+  const [restoreOperation, { data, error, loading }] = useMutation(RESTORE_OPERATION, {
+    refetchQueries: [
+      {
+        query: GET_OPERATIONS,
+        variables: {
+          startDateTime: currentDateTime?.startOf('month'),
+          endDateTime: currentDateTime?.endOf('month'),
+          accountId: currentAccountId,
+        },
+      },
+    ],
+  });
+
+  useEffect(() => {
+    if (loading) {
+      nprogress.start();
+    } else {
+      nprogress.done();
+    }
+  }, [loading]);
+
+  return { restoreOperation, data, error };
 }

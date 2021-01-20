@@ -1,26 +1,95 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
 import { Plus } from '@styled-icons/evaicons-solid';
+import { toast } from 'react-toastify';
+import Modal from 'react-modal';
 import { Tabs } from '../../../components/Tabs';
+import Text from '../../../components/Text';
 import Table from '../../../components/Table';
 import Button from '../../../components/Button';
-import { useOperations } from '../../../hooks/useOperations';
 import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
 import DataPlaceholder from './Operation/DataPlaceholder';
 import OperationItem from './Operation/OperationItem';
 import FooterContainer from './Operation/FooterContainer';
 import OperationPlaceholder from './Operation/OperationPlaceholder';
-import Container from './style/Container.style';
+import { Operation } from '../../../models';
+import {
+  Container,
+  CustomStyles,
+  ModelHeader,
+  ModelBody,
+  OperationContainer,
+  ButtonContent,
+} from './style/Operations.style';
+import {
+  useOperations,
+  useDeleteOperation,
+  useRestoreOperation,
+} from '../../../hooks/useOperations';
 
 const Operations = () => {
   const { data, loading } = useOperations();
   const { currentTransactionType } = useOperationsFilters();
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [selectOperation, setSelectOperation] = useState<Operation>();
+  const { deleteOperation } = useDeleteOperation();
+  const { restoreOperation } = useRestoreOperation();
+
+  const handleRestoreOperation = () => {
+    restoreOperation({ variables: { id: selectOperation?.id } });
+  };
+
+  const handleDeleteOperation = () => {
+    try {
+      deleteOperation({
+        variables: {
+          id: selectOperation?.id,
+        },
+      });
+      setModalIsOpen(false);
+      toast.dark('Operation deleted click here to restore!', {
+        position: toast.POSITION.BOTTOM_LEFT,
+        autoClose: 15000,
+        onClick: handleRestoreOperation,
+      });
+    } catch (err) {
+      toast.error(err);
+    }
+  };
+
+  const changeButtonText = () => {
+    switch (currentTransactionType) {
+      case 'Deposit':
+        return 'Add Entrance';
+      case 'CreditCard':
+        return 'Add Credit';
+      case 'FixedExpense':
+        return 'Add Recurrent';
+      case 'VariableExpense':
+        return 'Add Unforeseen';
+      default:
+        'Deposit';
+    }
+  };
 
   const operations =
     data?.me?.operations?.filter((operation) => operation.type === currentTransactionType) || [];
 
   return (
     <Container>
+      <Modal style={CustomStyles} isOpen={modalIsOpen}>
+        <ModelHeader>
+          <Text bold>
+            Are you sure that you want to delete&nbsp;
+            {selectOperation?.name.length ? selectOperation.name : 'untitled operation'}?
+          </Text>
+        </ModelHeader>
+        <ModelBody>
+          <Button onClick={handleDeleteOperation} variation="danger">
+            Yes
+          </Button>
+          <Button onClick={() => setModalIsOpen(false)}>No</Button>
+        </ModelBody>
+      </Modal>
       <Tabs />
       <OperationContainer>
         <Table>
@@ -38,7 +107,12 @@ const Operations = () => {
             <DataPlaceholder isLoading={loading} />
             {!!operations.length &&
               operations.map((operation) => (
-                <OperationItem key={operation.id} operation={operation} />
+                <OperationItem
+                  modalIsOpen={setModalIsOpen}
+                  deleteOperation={setSelectOperation}
+                  key={operation.id}
+                  operation={operation}
+                />
               ))}
           </Table.Body>
           {!loading && !operations.length && <OperationPlaceholder />}
@@ -46,7 +120,7 @@ const Operations = () => {
         <ButtonContent>
           <Button rounded variation="light">
             <Plus />
-            <span>Add Entrance</span>
+            <span>{changeButtonText()}</span>
           </Button>
         </ButtonContent>
       </OperationContainer>
@@ -54,19 +128,5 @@ const Operations = () => {
     </Container>
   );
 };
-
-const OperationContainer = styled.div`
-  display: flex;
-  margin-bottom: 15px;
-  flex-direction: column;
-  padding: 30px;
-  background-color: #ffff;
-`;
-
-const ButtonContent = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-`;
 
 export default Operations;

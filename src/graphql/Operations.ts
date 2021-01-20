@@ -7,6 +7,7 @@ export const GET_OPERATIONS = gql`
       operations(
         where: {
           paidAt: { gte: $startDateTime, lte: $endDateTime }
+          deletedAt: { equals: null }
           accountId: { equals: $accountId }
         }
         orderBy: [{ paidAt: asc }]
@@ -55,6 +56,24 @@ export const UPDATE_OPERATION = gql`
         paidAt: $paidAt
       }
     ) {
+      id
+      name
+    }
+  }
+`;
+
+export const DELETE_OPERATION = gql`
+  mutation deleteOperation($id: String!) {
+    deleteOneOperation(where: { id: $id }) {
+      id
+      name
+    }
+  }
+`;
+
+export const RESTORE_OPERATION = gql`
+  mutation restoreOperation($id: String!) {
+    restoreOneOperation(where: { id: $id }) {
       id
       name
     }
