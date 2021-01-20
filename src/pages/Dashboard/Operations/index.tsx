@@ -84,10 +84,12 @@ const Operations = () => {
           </Text>
         </ModelHeader>
         <ModelBody>
-          <Button onClick={handleDeleteOperation} variation="danger">
+          <Button type="button" onClick={handleDeleteOperation} variation="danger">
             Yes
           </Button>
-          <Button onClick={() => setModalIsOpen(false)}>No</Button>
+          <Button type="button" onClick={() => setModalIsOpen(false)}>
+            No
+          </Button>
         </ModelBody>
       </Modal>
       <Tabs />
@@ -118,7 +120,7 @@ const Operations = () => {
           {!loading && !operations.length && <OperationPlaceholder />}
         </Table>
         <ButtonContent>
-          <Button rounded variation="light">
+          <Button type="button" rounded variation="light">
             <Plus />
             <span>{changeButtonText()}</span>
           </Button>

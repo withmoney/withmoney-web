@@ -93,6 +93,7 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
       </Table.Cell>
       <Table.Cell width={10}>
         <ButtonIcon
+          type="button"
           variation="danger"
           onClick={() => {
             deleteOperation(operation);
