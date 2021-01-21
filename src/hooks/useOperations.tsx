@@ -1,18 +1,15 @@
 import { useEffect } from 'react';
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
-import nprogress from 'nprogress';
+import NProgress from 'nprogress';
 import { useOperationsFilters } from './useOperationsFilters';
-import {
-  DELETE_OPERATION,
-  GET_OPERATIONS,
-  UPDATE_OPERATION,
-  RESTORE_OPERATION,
-} from '../graphql/Operations';
+import { UPDATE_OPERATION, RESTORE_OPERATION } from '../graphql/Operations';
+import { DELETE_OPERATION, GET_OPERATIONS } from '../graphql/Operations';
 import { Data } from '../models';
+
+NProgress.configure({ showSpinner: false, trickleSpeed: 200 });
 
 export function useOperations() {
   const { currentDateTime, currentAccountId } = useOperationsFilters();
-
   const [getOperations, operationData] = useLazyQuery<Data>(GET_OPERATIONS, {
     fetchPolicy: 'network-only',
   });
@@ -31,9 +28,9 @@ export function useOperations() {
 
   useEffect(() => {
     if (operationData.loading) {
-      nprogress.start();
+      NProgress.start();
     } else {
-      nprogress.done();
+      NProgress.done();
     }
   }, [operationData.loading]);
 
@@ -59,9 +56,9 @@ export function useUpdateOperation() {
 
   useEffect(() => {
     if (loading) {
-      nprogress.start();
+      NProgress.start();
     } else {
-      nprogress.done();
+      NProgress.done();
     }
   }, [loading]);
 
@@ -85,9 +82,9 @@ export function useDeleteOperation() {
 
   useEffect(() => {
     if (loading) {
-      nprogress.start();
+      NProgress.start();
     } else {
-      nprogress.done();
+      NProgress.done();
     }
   }, [loading]);
 
@@ -111,9 +108,9 @@ export function useRestoreOperation() {
 
   useEffect(() => {
     if (loading) {
-      nprogress.start();
+      NProgress.start();
     } else {
-      nprogress.done();
+      NProgress.done();
     }
   }, [loading]);
 
