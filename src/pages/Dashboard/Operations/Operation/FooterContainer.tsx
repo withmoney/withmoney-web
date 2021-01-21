@@ -5,13 +5,8 @@ import { LANG, CURRENCY } from '../../../../constants/currency';
 import { useOperations } from '../../../../hooks/useOperations';
 import { TransactionType } from '../../../../models';
 import { getTotalOperations } from '../../../../utils/calcOperations';
-import {
-  InfoContainer,
-  InfoWrapper,
-  Info,
-  InfoTitle,
-  InfoValue,
-} from './style/FooterContainer.style';
+import { InfoContainer, InfoWrapper, Info } from './style/FooterContainer.style';
+import { InfoTitle, InfoValue } from './style/FooterContainer.style';
 
 const FooterContainer = () => {
   const { data } = useOperations();

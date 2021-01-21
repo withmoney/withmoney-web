@@ -44,6 +44,7 @@ const DeleteOperationModal = ({ modalIsOpen, operation, setIsOpenModal }: Props)
     }
   };
 
+  Modal.setAppElement('body');
   return (
     <>
       <Modal style={CustomStyles} isOpen={modalIsOpen}>
@@ -55,7 +56,7 @@ const DeleteOperationModal = ({ modalIsOpen, operation, setIsOpenModal }: Props)
         </ModalHeader>
         <ModalBody>
           {loading ? (
-            <LoadingSpinner margin="0 45%" />
+            <LoadingSpinner />
           ) : (
             <>
               <Button type="button" onClick={handleDeleteOperation} variation="danger">

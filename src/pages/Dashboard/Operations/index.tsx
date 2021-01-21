@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { Plus } from '@styled-icons/evaicons-solid';
 import { Tabs } from '../../../components/Tabs';
 import Button from '../../../components/Button';
@@ -10,8 +9,9 @@ import FooterContainer from './Operation/FooterContainer';
 import OperationPlaceholder from './Operation/OperationPlaceholder';
 import { Operation, TransactionType } from '../../../models';
 import { Container, OperationContainer, ButtonContent } from './style/Operations.style';
+import { RowHeader, CellHeader } from './Operation/style/OperationSettings';
 import { useOperations } from '../../../hooks/useOperations';
-import DeleteOperationModal from '../../../modals/deleteOperationModal';
+import DeleteOperationModal from '../../../modals/DeleteOperationModal';
 
 const Operations = () => {
   const { data, loading } = useOperations();
@@ -41,14 +41,14 @@ const Operations = () => {
       />
       <Tabs />
       <OperationContainer>
-        <OperationHeader>
-          <HeaderItem>Is Paid?</HeaderItem>
-          <HeaderItem>Date</HeaderItem>
-          <HeaderItem>Name</HeaderItem>
-          <HeaderItem>Category</HeaderItem>
-          <HeaderItem>Value</HeaderItem>
-          <HeaderItem>Action</HeaderItem>
-        </OperationHeader>
+        <RowHeader>
+          <CellHeader width="80px">Is Paid?</CellHeader>
+          <CellHeader width="130px">Date</CellHeader>
+          <CellHeader flex="1">Name</CellHeader>
+          <CellHeader flex="1">Category</CellHeader>
+          <CellHeader width="200px">Value</CellHeader>
+          <CellHeader width="56px">Action</CellHeader>
+        </RowHeader>
         <DataPlaceholder isLoading={loading} />
         {!!operations.length &&
           operations.map((operation) => (
@@ -71,15 +71,5 @@ const Operations = () => {
     </Container>
   );
 };
-
-const HeaderItem = styled.div``;
-
-const OperationHeader = styled.div`
-  display: grid;
-  grid-template-columns: 80px 120px 250px 250px 250px 60px;
-  grid-gap: 15px;
-  justify-content: center;
-  margin-bottom: 10px;
-`;
 
 export default Operations;

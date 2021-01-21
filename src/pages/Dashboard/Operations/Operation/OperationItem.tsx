@@ -1,9 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
 import debounce from 'lodash.debounce';
 import { toast } from 'react-toastify';
 import moment, { Moment } from 'moment';
-import { useUpdateOperation, useDeleteOperation } from '../../../../hooks/useOperations';
+import { useUpdateOperation } from '../../../../hooks/useOperations';
 import { LANG, CURRENCY } from '../../../../constants/currency';
 import ButtonIcon from '../../../../components/ButtonIcon';
 import CheckBox from '../../../../components/Checkbox';
@@ -13,6 +12,7 @@ import CategorySelect from './CategorySelect';
 import InputCurrency from '../../../../components/InputCurrency';
 import { Operation } from '../../../../models';
 import { TrashFill } from '@styled-icons/bootstrap';
+import { Row, Cell } from '../Operation/style/OperationSettings';
 
 type OperationItemProps = {
   operation: Operation;
@@ -22,7 +22,6 @@ type OperationItemProps = {
 
 const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationItemProps) => {
   const { updateOperation } = useUpdateOperation();
-  const { loading } = useDeleteOperation();
   const toggleInputCurrency = debounce((value: number) => {
     handleUpdate({
       value: value,
@@ -67,35 +66,35 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
   };
 
   return (
-    <OperationComponent key={operation.id}>
-      <InputComponent>
+    <Row key={operation.id} alignItems="center">
+      <Cell width="80px">
         <CheckBox onChange={toggleInputIsPaid} checked={operation.isPaid} />
-      </InputComponent>
-      <InputComponent>
+      </Cell>
+      <Cell width="130px">
         <DatePicker
           id={operation.id}
           defaultValue={operation.paidAt}
           onDateChange={handleDateChange}
         />
-      </InputComponent>
-      <InputComponent>
+      </Cell>
+      <Cell flex="1">
         <InputOperations onChange={toggleInputName} value={operation.name} />
-      </InputComponent>
-      <InputComponent>
+      </Cell>
+      <Cell flex="1">
         <CategorySelect
           operation={operation}
           CategoryId={operation.category ? operation.category.id : ''}
         />
-      </InputComponent>
-      <InputComponent>
+      </Cell>
+      <Cell width="200px">
         <InputCurrency
           onChange={toggleInputCurrency}
           value={operation.value}
           currency={CURRENCY}
           lang={LANG}
         />
-      </InputComponent>
-      <InputComponent>
+      </Cell>
+      <Cell width="56px">
         <ButtonIcon
           type="button"
           variation="danger"
@@ -103,21 +102,9 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
         >
           <TrashFill />
         </ButtonIcon>
-      </InputComponent>
-    </OperationComponent>
+      </Cell>
+    </Row>
   );
 };
-
-const InputComponent = styled.div``;
-
-const OperationComponent = styled.div`
-  display: grid;
-  grid-template-columns: 60px 120px 250px 250px 250px 60px;
-  align-items: center;
-  justify-content: center;
-  grid-gap: 15px;
-  margin-bottom: 10px;
-  margin-left: 15px;
-`;
 
 export default OperationItem;

@@ -50,6 +50,7 @@ const AccountTitle = styled.p`
 
 const AccountSelect = styled(Select)`
   height: 40px;
+  width: 150px;
   padding: 5px 10px;
   margin-right: 12px;
 `;

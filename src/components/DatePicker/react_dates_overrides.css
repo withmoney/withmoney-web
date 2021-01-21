@@ -7,7 +7,7 @@
 
 .DateInput_input:focus {
   border-color: var(--button-default-border-focus);
-  box-shadow: var(--input-box-shadow);
+  box-shadow: 0 0 0 2px var(--input-box-shadow);
 }
 .DayPickerKeyboardShortcuts_buttonReset {
   display: none;
