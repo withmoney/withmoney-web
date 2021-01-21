@@ -1,12 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
 import debounce from 'lodash.debounce';
 import { toast } from 'react-toastify';
 import moment, { Moment } from 'moment';
-import { useUpdateOperation } from '../../../../hooks/useOperations';
+import { useUpdateOperation, useDeleteOperation } from '../../../../hooks/useOperations';
 import { LANG, CURRENCY } from '../../../../constants/currency';
 import ButtonIcon from '../../../../components/ButtonIcon';
 import CheckBox from '../../../../components/Checkbox';
-import Table from '../../../../components/Table';
 import DatePicker from '../../../../components/DatePicker';
 import InputOperations from './InputOptions';
 import CategorySelect from './CategorySelect';
@@ -22,7 +22,7 @@ type OperationItemProps = {
 
 const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationItemProps) => {
   const { updateOperation } = useUpdateOperation();
-
+  const { loading } = useDeleteOperation();
   const toggleInputCurrency = debounce((value: number) => {
     handleUpdate({
       value: value,
@@ -61,50 +61,63 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
       toast.error(err.message);
     }
   };
+  const onDeleteOperationClick = (operation: Operation) => {
+    deleteOperation(operation);
+    modalIsOpen(true);
+  };
 
   return (
-    <Table.Row key={operation.id}>
-      <Table.Cell width={80}>
+    <OperationComponent key={operation.id}>
+      <InputComponent>
         <CheckBox onChange={toggleInputIsPaid} checked={operation.isPaid} />
-      </Table.Cell>
-      <Table.Cell width={130}>
+      </InputComponent>
+      <InputComponent>
         <DatePicker
           id={operation.id}
           defaultValue={operation.paidAt}
           onDateChange={handleDateChange}
         />
-      </Table.Cell>
-      <Table.Cell style={{ width: 200 }}>
+      </InputComponent>
+      <InputComponent>
         <InputOperations onChange={toggleInputName} value={operation.name} />
-      </Table.Cell>
-      <Table.Cell style={{ width: 200 }}>
+      </InputComponent>
+      <InputComponent>
         <CategorySelect
           operation={operation}
           CategoryId={operation.category ? operation.category.id : ''}
         />
-      </Table.Cell>
-      <Table.Cell width={150}>
+      </InputComponent>
+      <InputComponent>
         <InputCurrency
           onChange={toggleInputCurrency}
           value={operation.value}
           currency={CURRENCY}
           lang={LANG}
         />
-      </Table.Cell>
-      <Table.Cell width={10}>
+      </InputComponent>
+      <InputComponent>
         <ButtonIcon
           type="button"
           variation="danger"
-          onClick={() => {
-            deleteOperation(operation);
-            modalIsOpen(true);
-          }}
+          onClick={() => onDeleteOperationClick(operation)}
         >
-          <TrashFill style={{ width: '18px' }} />
+          <TrashFill />
         </ButtonIcon>
-      </Table.Cell>
-    </Table.Row>
+      </InputComponent>
+    </OperationComponent>
   );
 };
+
+const InputComponent = styled.div``;
+
+const OperationComponent = styled.div`
+  display: grid;
+  grid-template-columns: 60px 120px 250px 250px 250px 60px;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 15px;
+  margin-bottom: 10px;
+  margin-left: 15px;
+`;
 
 export default OperationItem;

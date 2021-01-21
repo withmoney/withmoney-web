@@ -13,6 +13,7 @@ const LoadingSpinner = styled.div<Props>`
       transform: translateX(15px) translate3d(-50%, -50%, 0) rotate(360deg);
     }
   }
+  position: absolute;
   margin: ${({ margin = '0' }) => margin};
   animation: var(--spinner-animation-time) linear infinite spinner;
   border: solid 5px var(--spinner-border-color);

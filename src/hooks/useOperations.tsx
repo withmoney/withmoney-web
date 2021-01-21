@@ -91,7 +91,7 @@ export function useDeleteOperation() {
     }
   }, [loading]);
 
-  return { deleteOperation, data, error };
+  return { deleteOperation, data, loading, error };
 }
 
 export function useRestoreOperation() {
@@ -117,5 +117,5 @@ export function useRestoreOperation() {
     }
   }, [loading]);
 
-  return { restoreOperation, data, error };
+  return { restoreOperation, data, error, loading };
 }

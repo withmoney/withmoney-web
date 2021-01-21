@@ -2,7 +2,12 @@
   font-size: var(--font-default);
   border: solid 2px var(--input-border-color);
   border-radius: 4px;
-  height: 40px;
+  height: 42px;
+}
+
+.DateInput_input:focus {
+  border-color: var(--button-default-border-focus);
+  box-shadow: var(--input-box-shadow);
 }
 .DayPickerKeyboardShortcuts_buttonReset {
   display: none;
