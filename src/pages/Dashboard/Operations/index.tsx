@@ -1,52 +1,64 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
 import { Plus } from '@styled-icons/evaicons-solid';
 import { Tabs } from '../../../components/Tabs';
-import Table from '../../../components/Table';
 import Button from '../../../components/Button';
-import { useOperations } from '../../../hooks/useOperations';
 import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
 import DataPlaceholder from './Operation/DataPlaceholder';
 import OperationItem from './Operation/OperationItem';
 import FooterContainer from './Operation/FooterContainer';
 import OperationPlaceholder from './Operation/OperationPlaceholder';
-import Container from './style/Container.style';
+import { Operation, TransactionType } from '../../../models';
+import { Container, OperationContainer, ButtonContent } from './style/Operations.style';
+import { RowHeader, CellHeader } from './Operation/style/OperationSettings';
+import { useOperations } from '../../../hooks/useOperations';
+import DeleteOperationModal from '../../../modals/DeleteOperationModal';
+import { addOperationText } from '../../../constants/Transactions';
 
 const Operations = () => {
   const { data, loading } = useOperations();
   const { currentTransactionType } = useOperationsFilters();
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [selectOperation, setSelectOperation] = useState<Operation>();
+
+  const handleOpenModal = (value: boolean) => {
+    setModalIsOpen(value);
+  };
 
   const operations =
     data?.me?.operations?.filter((operation) => operation.type === currentTransactionType) || [];
 
   return (
     <Container>
+      <DeleteOperationModal
+        modalIsOpen={modalIsOpen}
+        operation={selectOperation}
+        setIsOpenModal={handleOpenModal}
+      />
       <Tabs />
       <OperationContainer>
-        <Table>
-          <Table.Header>
-            <Table.Row>
-              <Table.Cell>Is Paid?</Table.Cell>
-              <Table.Cell>Date</Table.Cell>
-              <Table.Cell>Name</Table.Cell>
-              <Table.Cell>Category</Table.Cell>
-              <Table.Cell>Value</Table.Cell>
-              <Table.Cell>Action</Table.Cell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            <DataPlaceholder isLoading={loading} />
-            {!!operations.length &&
-              operations.map((operation) => (
-                <OperationItem key={operation.id} operation={operation} />
-              ))}
-          </Table.Body>
-          {!loading && !operations.length && <OperationPlaceholder />}
-        </Table>
+        <RowHeader>
+          <CellHeader width="80px">Is Paid?</CellHeader>
+          <CellHeader width="130px">Date</CellHeader>
+          <CellHeader flex="1">Name</CellHeader>
+          <CellHeader flex="1">Category</CellHeader>
+          <CellHeader width="200px">Value</CellHeader>
+          <CellHeader width="56px">Action</CellHeader>
+        </RowHeader>
+        <DataPlaceholder isLoading={loading} />
+        {!!operations.length &&
+          operations.map((operation) => (
+            <OperationItem
+              modalIsOpen={setModalIsOpen}
+              deleteOperation={setSelectOperation}
+              key={operation.id}
+              operation={operation}
+            />
+          ))}
+        {!loading && !operations.length && <OperationPlaceholder />}
         <ButtonContent>
-          <Button rounded variation="light">
+          <Button type="button" rounded variation="light">
             <Plus />
-            <span>Add Entrance</span>
+            <span>{addOperationText[currentTransactionType || 'Deposit']}</span>
           </Button>
         </ButtonContent>
       </OperationContainer>
@@ -54,19 +66,5 @@ const Operations = () => {
     </Container>
   );
 };
-
-const OperationContainer = styled.div`
-  display: flex;
-  margin-bottom: 15px;
-  flex-direction: column;
-  padding: 30px;
-  background-color: #ffff;
-`;
-
-const ButtonContent = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-`;
 
 export default Operations;

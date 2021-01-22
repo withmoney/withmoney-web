@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Redirect } from 'react-router-dom';
+import { HashRouter, Switch, Redirect } from 'react-router-dom';
 
 import {
   Login,
@@ -14,7 +14,7 @@ import { AuthenticatedRoute, UnauthenticatedRoute } from './components/Authentic
 
 const Router = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Switch>
         <Redirect exact from="/" to="/signin" />
         <UnauthenticatedRoute path="/signin" component={Login} />
@@ -24,7 +24,7 @@ const Router = () => {
         <UnauthenticatedRoute path="/change-password" component={ChangePassword} />
         <AuthenticatedRoute path="/" component={Dashboard} />
       </Switch>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 

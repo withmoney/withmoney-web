@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ContentLoader from 'react-content-loader';
-import Table from '../../../../components/Table';
+import Flex from '../../../../components/Flex';
 
 type Props = {
   isLoading: boolean;
@@ -9,18 +9,27 @@ type Props = {
 };
 
 const DataPlaceholder = ({ isLoading, rows = 2 }: Props): any => {
-  const tableRows = Array.from({ length: rows });
+  const Rows = Array.from({ length: rows });
   if (!!isLoading) {
-    return tableRows.map((_, rowIndex) => (
-      <Table.Row key={rowIndex}>
-        <Table.Cell>
+    return Rows.map((_, rowIndex) => (
+      <Row key={rowIndex} alignItems="center">
+        <Cell width="80px">
           <CheckBox disabled />
-        </Table.Cell>
-        <LoadingData />
-        <LoadingData />
-        <LoadingData />
-        <LoadingData />
-      </Table.Row>
+        </Cell>
+        <Cell width="130px">
+          <LoadingData />
+        </Cell>
+        <Cell flex="1">
+          <LoadingData />
+        </Cell>
+        <Cell flex="1">
+          <LoadingData />
+        </Cell>
+        <Cell width="200px">
+          <LoadingData />
+        </Cell>
+        <Cell width="56px"></Cell>
+      </Row>
     ));
   }
   return null;
@@ -28,7 +37,7 @@ const DataPlaceholder = ({ isLoading, rows = 2 }: Props): any => {
 
 const LoadingData = () => {
   return (
-    <Table.Cell>
+    <div>
       <ContentLoader
         speed={2}
         width="100%"
@@ -38,7 +47,7 @@ const LoadingData = () => {
       >
         <rect x="0" y="0" rx="3" ry="3" width="100%" height="40" />
       </ContentLoader>
-    </Table.Cell>
+    </div>
   );
 };
 
@@ -47,6 +56,40 @@ const CheckBox = styled.input.attrs({ type: 'checkbox' })`
   height: 23px;
   background: linear-gradient(0deg, #f4f4f4, #f4f4f4), linear-gradient(0deg, #f4f4f4, #f4f4f4),
     #f4f4f4;
+`;
+
+const Row = styled(Flex)`
+  & + & {
+    margin-top: 5px;
+  }
+`;
+
+type PropsCell = {
+  width?: string;
+  flex?: string;
+};
+
+const Cell = styled(Flex)<PropsCell>`
+  width: ${({ width }) => (width ? width : null)};
+  flex: ${({ flex }) => (flex ? flex : null)};
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 0;
+
+  &:first-child {
+    padding-left: 17px;
+  }
+
+  &:last-child {
+    padding-left: 8px;
+  }
+
+  & + & {
+    margin-top: 0;
+  }
+  & > div {
+    width: 100%;
+  }
 `;
 
 export default DataPlaceholder;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useUser } from '../hooks/useUser';
-import LoadingSpiner from '../components/LoadingSpiner';
+import LoadingSpiner from './LoadingSpinner';
 
 type RoutesProps = {
   component: React.ElementType;

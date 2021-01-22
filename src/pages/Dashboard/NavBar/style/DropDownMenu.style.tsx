@@ -9,7 +9,7 @@ export const DropDownMenuButton = styled.button<MenuButtonProps>`
   justify-content: center;
   align-items: center;
   border-radius: var(--dashboard-dropdown-radius);
-  padding: 5px;
+  padding: 5px 10px;
   margin: 5px;
   outline: none;
   border: none;

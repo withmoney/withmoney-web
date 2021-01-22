@@ -7,7 +7,7 @@ import Page from '../../components/Page';
 import Header from '../../components/Header';
 import Form from '../../components/Form';
 import Container from '../../components/Container';
-import LoadingSpinner from '../../components/LoadingSpiner';
+import LoadingSpinner from '../../components/LoadingSpinner';
 import Alert from '../../components/Alert';
 
 const RegistrationVerify = () => {
@@ -43,7 +43,7 @@ const RegistrationVerify = () => {
             </>
           )}
 
-          {loading && <LoadingSpinner margin="auto" />}
+          {loading && <LoadingSpinner position="relative" margin="auto" />}
 
           {error && <Alert isDanger>{error.message}</Alert>}
         </Form>

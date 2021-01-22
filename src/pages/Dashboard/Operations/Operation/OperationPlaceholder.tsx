@@ -1,28 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
-import Table from '../../../../components/Table';
+import { Row, Cell } from '../Operation/style/OperationSettings';
 
 const OperationPlaceholder = () => {
   return (
-    <Table.Foot>
-      <Table.Row>
-        <Table.Cell>
-          <CheckBox disabled />
-        </Table.Cell>
-        <Table.Cell>
-          <CellPlaceholder />
-        </Table.Cell>
-        <Table.Cell>
-          <CellPlaceholder />
-        </Table.Cell>
-        <Table.Cell>
-          <CellPlaceholder />
-        </Table.Cell>
-        <Table.Cell>
-          <CellPlaceholder />
-        </Table.Cell>
-      </Table.Row>
-    </Table.Foot>
+    <Row alignItems="center">
+      <Cell width="80px">
+        <CheckBox disabled />
+      </Cell>
+      <Cell width="130px">
+        <CellPlaceholder />
+      </Cell>
+      <Cell flex="1">
+        <CellPlaceholder />
+      </Cell>
+      <Cell flex="1">
+        <CellPlaceholder />
+      </Cell>
+      <Cell width="200px">
+        <CellPlaceholder />
+      </Cell>
+      <Cell width="56px"></Cell>
+    </Row>
   );
 };
 
