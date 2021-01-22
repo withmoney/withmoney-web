@@ -43,7 +43,7 @@ const RegistrationVerify = () => {
             </>
           )}
 
-          {loading && <LoadingSpinner margin="auto" />}
+          {loading && <LoadingSpinner position="relative" margin="auto" />}
 
           {error && <Alert isDanger>{error.message}</Alert>}
         </Form>

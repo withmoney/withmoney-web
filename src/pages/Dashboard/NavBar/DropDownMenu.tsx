@@ -6,7 +6,7 @@ import { useUser } from '../../../hooks/useUser';
 import { DropDownMenuContent, DropDownMenuButton } from './style/DropDownMenu.style';
 import { Avatar, MenuContainer } from './style/DropDownMenu.style';
 
-const API = 'https://ui-avatars.com/api/?background=E1ECF4&color=363636&name=';
+const API = 'https://ui-avatars.com/api/?background=E7E7E7&color=363636&name=';
 
 const DropDownMenu = () => {
   const ref = useRef();
