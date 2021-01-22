@@ -87,7 +87,7 @@ export const CREATE_OPERATION = gql`
         type: $type
         accountId: $accountID
         paidAt: $paidAt
-        name: "Untitled"
+        name: ""
         isPaid: false
         value: 0
       }

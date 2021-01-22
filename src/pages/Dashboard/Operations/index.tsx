@@ -14,25 +14,28 @@ import { RowHeader, CellHeader } from './Operation/style/OperationSettings';
 import { useOperations, useCreateOperation } from '../../../hooks/useOperations';
 import DeleteOperationModal from '../../../modals/DeleteOperationModal';
 import { addOperationText } from '../../../constants/Transactions';
+import LoadingSpinner from '../../../components/LoadingSpinner';
 
 const Operations = () => {
   const { data, loading } = useOperations();
   const { currentTransactionType, currentAccountId, currentDateTime } = useOperationsFilters();
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [selectOperation, setSelectOperation] = useState<Operation>();
-  const { createOperation } = useCreateOperation();
+  const { createOperation, loading: loadingCreate } = useCreateOperation();
 
   const handleOpenModal = (value: boolean) => {
     setModalIsOpen(value);
   };
 
   const handleCreateOperation = () => {
+    const verify =
+      (currentDateTime?.toISO() || '') > (currentDateTime?.endOf('month').toISO() || '');
     try {
       createOperation({
         variables: {
           type: currentTransactionType,
           accountID: currentAccountId,
-          paidAt: currentDateTime?.endOf('month'),
+          paidAt: verify ? currentDateTime?.endOf('month').toISO() : currentDateTime,
         },
       });
     } catch (err) {
@@ -72,8 +75,18 @@ const Operations = () => {
           ))}
         {!loading && !operations.length && <OperationPlaceholder />}
         <ButtonContent>
-          <Button onClick={handleCreateOperation} type="button" rounded variation="light">
-            <Plus />
+          <Button
+            disabled={loadingCreate}
+            onClick={handleCreateOperation}
+            type="button"
+            rounded
+            variation="light"
+          >
+            {loadingCreate ? (
+              <LoadingSpinner position="relative" top="10px" right="10px" size="20px" />
+            ) : (
+              <Plus />
+            )}
             <span>{addOperationText[currentTransactionType || 'Deposit']}</span>
           </Button>
         </ButtonContent>

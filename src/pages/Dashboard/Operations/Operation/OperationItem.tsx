@@ -78,7 +78,7 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
         />
       </Cell>
       <Cell flex="1">
-        <InputOperations onChange={toggleInputName} value={operation.name} />
+        <InputOperations placeholder="Name" onChange={toggleInputName} value={operation.name} />
       </Cell>
       <Cell flex="1">
         <CategorySelect
