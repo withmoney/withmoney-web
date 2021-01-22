@@ -69,7 +69,6 @@ const DeleteOperationModal = ({ modalIsOpen, operation, setIsOpenModal }: Props)
           )}
         </ModalBody>
       </Modal>
-      ;
     </>
   );
 };

@@ -2,6 +2,7 @@ import { CSSProperties } from 'react';
 const customStyles = {
   container: (provided: CSSProperties, state: any) => ({
     ...provided,
+    minWidth: '100px',
     borderRadius: 'var(--input-border-radius)',
     border: state.isFocused
       ? '2px solid var(--input-border-color-focus)'

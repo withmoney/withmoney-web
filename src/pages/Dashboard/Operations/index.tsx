@@ -12,6 +12,7 @@ import { Container, OperationContainer, ButtonContent } from './style/Operations
 import { RowHeader, CellHeader } from './Operation/style/OperationSettings';
 import { useOperations } from '../../../hooks/useOperations';
 import DeleteOperationModal from '../../../modals/DeleteOperationModal';
+import { addOperationText } from '../../../constants/Transactions';
 
 const Operations = () => {
   const { data, loading } = useOperations();
@@ -19,12 +20,6 @@ const Operations = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [selectOperation, setSelectOperation] = useState<Operation>();
 
-  const addOperationText = {
-    [TransactionType.Deposit]: 'Add Entrance',
-    [TransactionType.FixedExpense]: 'Add Recurrent',
-    [TransactionType.CreditCard]: 'Add Credit',
-    [TransactionType.VariableExpense]: 'Add Unforeseen',
-  };
   const handleOpenModal = (value: boolean) => {
     setModalIsOpen(value);
   };
