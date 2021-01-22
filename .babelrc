@@ -1,8 +1,16 @@
 {
-  "presets": ["@babel/preset-env", "@babel/preset-react"],
+  "presets": [
+    "@babel/preset-env",
+    "@babel/preset-react",
+    "@babel/preset-typescript"
+  ],
   "plugins": [
-    "react-hot-loader/babel",
-    "@babel/plugin-transform-runtime",
-    "@babel/plugin-proposal-class-properties"
+    "babel-plugin-styled-components",
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "regenerator": true
+      }
+    ]
   ]
 }

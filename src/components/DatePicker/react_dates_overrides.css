@@ -1,0 +1,29 @@
+.DateInput_input {
+  font-size: var(--font-default);
+  border: solid 2px var(--input-border-color);
+  border-radius: 4px;
+  height: 42px;
+}
+
+.DateInput_input:focus {
+  border-color: var(--button-default-border-focus);
+  box-shadow: 0 0 0 2px var(--input-box-shadow);
+}
+.DayPickerKeyboardShortcuts_buttonReset {
+  display: none;
+}
+
+.DateInput_input__disabled {
+  background-color: var(--button-primary-color);
+  font-style: normal;
+}
+
+.CalendarDay__selected {
+  background: var(--button-danger-background-color);
+  color: var(--button-primary-color);
+}
+
+.CalendarDay__selected:hover {
+  background: var(--button-danger-background-color-hover);
+  color: var(--button-primary-color);
+}
