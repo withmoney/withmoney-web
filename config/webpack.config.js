@@ -8,7 +8,7 @@ function resolve(dir) {
 }
 
 module.exports = {
-  mode: 'development',
+  mode: process.env.NODE_ENV === 'development' ? 'development' : 'production',
   entry: resolve('src/index.ts'),
   output: {
     filename: 'main.js',
