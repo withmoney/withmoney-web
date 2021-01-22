@@ -3,7 +3,7 @@ import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import NProgress from 'nprogress';
 import { useOperationsFilters } from './useOperationsFilters';
 import { UPDATE_OPERATION, RESTORE_OPERATION } from '../graphql/Operations';
-import { DELETE_OPERATION, GET_OPERATIONS } from '../graphql/Operations';
+import { DELETE_OPERATION, GET_OPERATIONS, CREATE_OPERATION } from '../graphql/Operations';
 import { Data } from '../models';
 
 NProgress.configure({ showSpinner: false, trickleSpeed: 200 });
@@ -115,4 +115,30 @@ export function useRestoreOperation() {
   }, [loading]);
 
   return { restoreOperation, data, error, loading };
+}
+
+export function useCreateOperation() {
+  const { currentDateTime, currentAccountId } = useOperationsFilters();
+  const [createOperation, { data, error, loading }] = useMutation(CREATE_OPERATION, {
+    refetchQueries: [
+      {
+        query: GET_OPERATIONS,
+        variables: {
+          startDateTime: currentDateTime?.startOf('month'),
+          endDateTime: currentDateTime?.endOf('month'),
+          accountId: currentAccountId,
+        },
+      },
+    ],
+  });
+
+  useEffect(() => {
+    if (loading) {
+      NProgress.start();
+    } else {
+      NProgress.done();
+    }
+  }, [loading]);
+
+  return { createOperation, data, error, loading };
 }

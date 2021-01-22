@@ -94,9 +94,9 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
       value={value}
       defaultOptions={defaultOptions}
       defaultValue={defaultValues}
-      aria-label="Category search"
+      aria-label="Select or Create"
       loadOptions={loadOptions}
-      placeholder="Category Select"
+      placeholder="Select or Create"
       onCreateOption={create}
       styles={customStyles}
       onChange={update}
