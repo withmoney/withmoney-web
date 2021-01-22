@@ -10,7 +10,7 @@ export const CustomStyles = {
     padding: '0',
     borderRadius: '8px',
     minWidth: '500px',
-    top: '50%',
+    top: '22%',
     left: '50%',
     right: 'auto',
     bottom: 'auto',

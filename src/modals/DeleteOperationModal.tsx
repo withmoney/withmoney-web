@@ -25,9 +25,10 @@ const DeleteOperationModal = ({ modalIsOpen, operation, setIsOpenModal }: Props)
           id: operation?.id,
         },
       });
-      toast.dark('Operation deleted. Click here to restore!', {
+      toast.error('Operation deleted. Click here to restore!', {
         position: toast.POSITION.BOTTOM_LEFT,
-        autoClose: 15000,
+        autoClose: 10000,
+        draggable: false,
         onClick: handleRestoreOperation,
       });
     } catch (err) {
@@ -56,7 +57,7 @@ const DeleteOperationModal = ({ modalIsOpen, operation, setIsOpenModal }: Props)
         </ModalHeader>
         <ModalBody>
           {loading ? (
-            <LoadingSpinner position="absolute" margin="-1px 200px" />
+            <LoadingSpinner position="relative" top="18px" right="44%" />
           ) : (
             <>
               <Button type="button" onClick={handleDeleteOperation} variation="danger">
