@@ -79,3 +79,21 @@ export const RESTORE_OPERATION = gql`
     }
   }
 `;
+
+export const CREATE_OPERATION = gql`
+  mutation createOperation($type: TransactionType!, $accountID: String!, $paidAt: DateTime!) {
+    createOneOperation(
+      data: {
+        type: $type
+        accountId: $accountID
+        paidAt: $paidAt
+        name: "Untitled"
+        isPaid: false
+        value: 0
+      }
+    ) {
+      id
+      name
+    }
+  }
+`;
