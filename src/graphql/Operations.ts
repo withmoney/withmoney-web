@@ -10,7 +10,7 @@ export const GET_OPERATIONS = gql`
           deletedAt: { equals: null }
           accountId: { equals: $accountId }
         }
-        orderBy: [{ paidAt: asc }]
+        orderBy: [{ paidAt: asc }, { createdAt: asc }]
       ) {
         id
         name
