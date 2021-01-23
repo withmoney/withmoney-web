@@ -56,18 +56,19 @@ const DeleteOperationModal = ({ modalIsOpen, operation, setIsOpenModal }: Props)
           </Text>
         </ModalHeader>
         <ModalBody>
-          {loading ? (
-            <LoadingSpinner position="relative" top="18px" right="44%" />
-          ) : (
-            <>
-              <Button type="button" onClick={handleDeleteOperation} variation="danger">
-                Yes
-              </Button>
-              <Button type="button" onClick={() => setIsOpenModal(false)}>
-                No
-              </Button>
-            </>
-          )}
+          <>
+            <Button
+              disabled={loading}
+              type="button"
+              onClick={handleDeleteOperation}
+              variation="danger"
+            >
+              {loading ? <LoadingSpinner size="20px" /> : 'Yes'}
+            </Button>
+            <Button disabled={loading} type="button" onClick={() => setIsOpenModal(false)}>
+              No
+            </Button>
+          </>
         </ModalBody>
       </Modal>
     </>
