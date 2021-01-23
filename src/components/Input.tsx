@@ -7,6 +7,7 @@ type Props = {
 const Input = styled.input<Props>`
   font-size: var(--font-default);
   width: 100%;
+  height: 42px;
   border-radius: var(--input-border-radius);
   border: 2px solid
     ${({ isInvalid }) =>

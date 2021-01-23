@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useUser } from '../hooks/useUser';
-import LoadingSpiner from './LoadingSpinner';
+import LoadingSpinner from './LoadingSpinner';
+import Flex from './Flex';
 
 type RoutesProps = {
   component: React.ElementType;
@@ -15,7 +16,11 @@ export const AuthenticatedRoute = ({ component: Component, ...rest }: RoutesProp
   let ComponentRender: React.ReactElement;
 
   if (loading) {
-    ComponentRender = <LoadingSpiner margin="50vh 50%" />;
+    ComponentRender = (
+      <Flex isFullHeight justifyContent="center" alignItems="center">
+        <LoadingSpinner />
+      </Flex>
+    );
   } else {
     ComponentRender = logged ? <Component {...rest} /> : <Redirect to={{ pathname: '/signin' }} />;
   }
@@ -29,7 +34,11 @@ export const UnauthenticatedRoute = ({ component: Component, ...rest }: RoutesPr
   let ComponentRender: React.ReactElement;
 
   if (loading) {
-    ComponentRender = <LoadingSpiner margin="50vh 50%" />;
+    ComponentRender = (
+      <Flex isFullHeight justifyContent="center" alignItems="center">
+        <LoadingSpinner />
+      </Flex>
+    );
   } else {
     ComponentRender = logged ? (
       <Redirect to={{ pathname: '/dashboard' }} />
