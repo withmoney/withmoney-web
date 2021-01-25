@@ -82,11 +82,7 @@ const Operations = () => {
             rounded
             variation="light"
           >
-            {loadingCreate ? (
-              <LoadingSpinner position="relative" top="10px" right="10px" size="20px" />
-            ) : (
-              <Plus />
-            )}
+            {loadingCreate ? <LoadingSpinner inButton size="20px" /> : <Plus />}
             <span>{addOperationText[currentTransactionType || 'Deposit']}</span>
           </Button>
         </ButtonContent>

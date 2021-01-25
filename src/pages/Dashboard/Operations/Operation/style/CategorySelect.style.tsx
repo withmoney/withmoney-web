@@ -2,6 +2,7 @@ import { CSSProperties } from 'react';
 const customStyles = {
   container: (provided: CSSProperties, state: any) => ({
     ...provided,
+    height: '42px',
     minWidth: '100px',
     borderRadius: 'var(--input-border-radius)',
     border: state.isFocused
@@ -42,6 +43,10 @@ const customStyles = {
     color: state.isSelected && 'var(--text-default-color)',
     background: state.isSelected ? '#ececec' : 'white',
     border: 'none',
+  }),
+  placeholder: (provided: CSSProperties, state: any) => ({
+    ...provided,
+    minWidth: '150px',
   }),
 };
 

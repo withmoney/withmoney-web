@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
-import { ToastContainer } from 'react-toastify';
 import { setContext } from '@apollo/client/link/context';
 import GlobalStyle from './theme';
 import Routers from './routes';
 import SidebarProvider from './hooks/useSidebarCollapse';
 import OperationsFiltersProvider from './hooks/useOperationsFilters';
+import Toast from './components/Toast';
 
 import 'react-toastify/dist/ReactToastify.css';
 import './nprogress.css';
@@ -47,7 +47,7 @@ const client = new ApolloClient({
 const App = () => (
   <>
     <GlobalStyle />
-    <ToastContainer />
+    <Toast />
     <ApolloProvider client={client}>
       <SidebarProvider>
         <OperationsFiltersProvider>
