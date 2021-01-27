@@ -8,6 +8,7 @@ import Operations from './Operations';
 import Reports from './Reports';
 import Accounts from './Accounts';
 import AddAccount from './Accounts/AddAccount';
+import UpdateAccount from './Accounts/UpdateAccount';
 
 const Dashboard = () => {
   const { isSidebarOpen } = useSidebarCollapse();
@@ -22,6 +23,7 @@ const Dashboard = () => {
             <Route path="/reports" component={Reports} />
             <Route path="/accounts" component={Accounts} />
             <Route path="/createAccount" component={AddAccount} />
+            <Route path="/updateAccount" component={UpdateAccount} />
           </Switch>
         </Content>
       </Wrapper>

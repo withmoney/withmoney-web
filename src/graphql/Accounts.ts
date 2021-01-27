@@ -7,6 +7,7 @@ export const GET_ACCOUNTS = gql`
       accounts(where: { deletedAt: { equals: null } }) {
         id
         name
+        currency
       }
     }
   }
@@ -16,6 +17,15 @@ export const GET_ACCOUNTS = gql`
 export const CREATE_ACCOUNT = gql`
   mutation createAccount($name: String!, $currency: Currency!) {
     createOneAccount(data: { name: $name, currency: $currency }) {
+      id
+      name
+    }
+  }
+`;
+
+export const UPDATE_ACCOUNT = gql`
+  mutation updateAccount($id: String!, $name: String!, $currency: Currency!) {
+    updateOneAccount(where: { id: $id }, data: { name: $name, currency: $currency }) {
       id
       name
     }

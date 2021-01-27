@@ -1,9 +1,4 @@
-export enum CurrenciesTypes {
-  USD = 'USD',
-  BRL = 'BRL',
-  EUR = 'EUR',
-  GBP = 'GBP',
-}
+import { CurrenciesTypes } from '../models';
 
 export const currencies = [
   CurrenciesTypes.USD,

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import styled from 'styled-components';
+import { toast } from 'react-toastify';
 import Header from '../../../../components/Header';
 import Form from '../../../../components/Form';
 import Input from '../../../../components/Input';
@@ -12,18 +12,19 @@ import Flex from '../../../../components/Flex';
 import Select from '../../../../components/Select';
 import { checkAddAccount } from '../../../../schema/checkField';
 import { currencies } from '../../../../constants/Currencies';
-import { useCreateAccount } from '../../../../hooks/useAccounts';
-
-const initialValues = {
-  accountName: '',
-  accountCurrency: '',
-};
+import { useOperationsFilters } from '../../../../hooks/useOperationsFilters';
+import { useUpdateAccount } from '../../../../hooks/useAccounts';
 
 const AddAccount = () => {
-  const [form, setAccountName] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState(initialValues);
+  const { accountToUpdate } = useOperationsFilters();
+  const [form, setForm] = useState({
+    id: accountToUpdate?.id,
+    accountName: accountToUpdate?.name,
+    accountCurrency: accountToUpdate?.currency,
+  });
+  const [formErrors, setFormErrors] = useState({ accountName: '', accountCurrency: '' });
   const [formValidate, setFormValidate] = useState(false);
-  const { createAccount } = useCreateAccount();
+  const { updateAccount } = useUpdateAccount();
   const history = useHistory();
 
   useEffect(() => {
@@ -35,10 +36,11 @@ const AddAccount = () => {
 
   const handleInput = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
-    setAccountName({
+    setForm({
       ...form,
       [name]: value.trim(),
     });
+    console.log(form);
   };
 
   const handleBlur = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -51,14 +53,20 @@ const AddAccount = () => {
     }
   };
 
-  const handleCreateAccount = (event: React.ChangeEvent<HTMLFormElement>) => {
+  const handleUpdateAccount = (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      createAccount({ variables: { name: form.accountName, currency: form.accountCurrency } });
-      toast.success(`Account ${form.accountName} was been created!`, {
-        position: toast.POSITION.BOTTOM_LEFT,
+      updateAccount({
+        variables: {
+          id: form.id,
+          name: form.accountName,
+          currency: form.accountCurrency,
+        },
       });
       history.push('/accounts');
+      toast.success(`Account ${form.accountName} was been updated!`, {
+        position: toast.POSITION.BOTTOM_LEFT,
+      });
     } catch (err) {
       toast.error(err.message);
     }
@@ -68,19 +76,19 @@ const AddAccount = () => {
     <Page>
       <PageHeader>
         <Header margin="auto" as="h3">
-          Add Account
+          Update Account
         </Header>
       </PageHeader>
       <PageBody>
         <Flex>
-          <Form onSubmit={handleCreateAccount}>
+          <Form onSubmit={handleUpdateAccount}>
             <InputGroup>
               <InputControl message={formErrors.accountName} isInvalid={!!formErrors.accountName}>
                 <Input
                   isInvalid={!!formErrors.accountName}
                   type="text"
                   name="accountName"
-                  value={form.accountName}
+                  defaultValue={accountToUpdate?.name}
                   placeholder="Account Name"
                   onBlur={handleBlur}
                   onChange={handleInput}
@@ -90,7 +98,12 @@ const AddAccount = () => {
                 message={formErrors.accountCurrency}
                 isInvalid={!!formErrors.accountCurrency}
               >
-                <Select name="accountCurrency" onChange={handleInput} onBlur={handleBlur}>
+                <Select
+                  defaultValue={accountToUpdate?.currency}
+                  name="accountCurrency"
+                  onChange={handleInput}
+                  onBlur={handleBlur}
+                >
                   <option>Select you currency</option>
                   {currencies.map((currency) => {
                     return (
@@ -103,7 +116,7 @@ const AddAccount = () => {
               </InputControl>
             </InputGroup>
             <Button disabled={!formValidate} type="submit" variation="primary">
-              Create Account
+              Update Account
             </Button>
           </Form>
         </Flex>

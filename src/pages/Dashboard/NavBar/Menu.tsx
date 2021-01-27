@@ -15,16 +15,20 @@ const Menu = ({ menuIsOpen }: Props) => {
     history.push('/');
   };
 
+  const toggleCloseMenu = () => {
+    menuIsOpen(false);
+  };
+
   return (
     <MenuContainer>
       <MenuContent>
-        <ButtonLink onClick={() => menuIsOpen(false)} to="/">
+        <ButtonLink onClick={toggleCloseMenu} to="/">
           Profile
         </ButtonLink>
-        <ButtonLink onClick={() => menuIsOpen(false)} to="/">
+        <ButtonLink onClick={toggleCloseMenu} to="/">
           Change Password
         </ButtonLink>
-        <ButtonLink onClick={() => menuIsOpen(false)} to="/accounts">
+        <ButtonLink onClick={toggleCloseMenu} to="/accounts">
           Accounts
         </ButtonLink>
       </MenuContent>

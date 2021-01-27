@@ -2,13 +2,14 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import { DateTime } from 'luxon';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_ACCOUNTS } from '../graphql/Accounts';
-import { Me, TransactionType } from '../models';
+import { Me, TransactionType, Account } from '../models';
 
 type Data = {
   me: Me;
 };
 
 interface OperationsFiltersContext {
+  accountToUpdate?: Account;
   currentDateTime?: DateTime;
   currentAccountId?: string;
   currentTransactionType?: TransactionType;
@@ -16,6 +17,7 @@ interface OperationsFiltersContext {
   goToPreviewMonth?: () => void;
   setCurrentAccountId: (accountId: string) => void;
   setCurrentTransactionType: (TransactionType: TransactionType) => void;
+  setAccountToUpdate: (id: Account) => void;
 }
 
 type Props = {
@@ -25,11 +27,13 @@ type Props = {
 const OperationsFiltersContext = createContext<OperationsFiltersContext>({
   setCurrentAccountId: () => {},
   setCurrentTransactionType: () => {},
+  setAccountToUpdate: () => {},
 });
 
 export default function OperationsFiltersProvider({ children }: Props) {
   const [currentDateTime, setCurrentDateTime] = useState(DateTime.local());
   const [currentAccountId, setCurrentAccountId] = useState<string | undefined>();
+  const [accountToUpdate, setAccountToUpdate] = useState<Account | undefined>();
   const [currentTransactionType, setCurrentTransactionType] = useState<TransactionType>(
     TransactionType.Deposit,
   );
@@ -52,6 +56,7 @@ export default function OperationsFiltersProvider({ children }: Props) {
   return (
     <OperationsFiltersContext.Provider
       value={{
+        accountToUpdate,
         currentDateTime,
         currentAccountId,
         currentTransactionType,
@@ -59,6 +64,7 @@ export default function OperationsFiltersProvider({ children }: Props) {
         goToPreviewMonth,
         setCurrentAccountId,
         setCurrentTransactionType,
+        setAccountToUpdate,
       }}
     >
       {children}
@@ -69,6 +75,7 @@ export default function OperationsFiltersProvider({ children }: Props) {
 export function useOperationsFilters() {
   const context = useContext(OperationsFiltersContext);
   const {
+    accountToUpdate,
     currentDateTime,
     currentAccountId,
     currentTransactionType,
@@ -76,8 +83,10 @@ export function useOperationsFilters() {
     goToPreviewMonth,
     setCurrentAccountId,
     setCurrentTransactionType,
+    setAccountToUpdate,
   } = context;
   return {
+    accountToUpdate,
     currentDateTime,
     currentAccountId,
     currentTransactionType,
@@ -85,5 +94,6 @@ export function useOperationsFilters() {
     goToPreviewMonth,
     setCurrentAccountId,
     setCurrentTransactionType,
+    setAccountToUpdate,
   };
 }

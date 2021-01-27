@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
-import { TrashFill } from '@styled-icons/bootstrap';
+import { TrashFill, PencilFill } from '@styled-icons/bootstrap';
 import Header from '../../../components/Header';
 import Button from '../../../components/Button';
 import Text from '../../../components/Text';
@@ -10,12 +10,13 @@ import Modal from '../../../modals/DeleteModal';
 import { useAccounts, useDeleteAccount, useRestoreAccount } from '../../../hooks/useAccounts';
 import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
 import { Account } from '../../../models';
+import LoadingData from '../../../components/LoadingData';
 
 const Accounts = () => {
   const history = useHistory();
-  const { data, loading } = useAccounts();
+  const { data, loading, error } = useAccounts();
   const [selectedAccount, setsSelectedAccount] = useState<Account>();
-  const { currentAccountId } = useOperationsFilters();
+  const { currentAccountId, setAccountToUpdate } = useOperationsFilters();
   const [openModal, setOpenModal] = useState(false);
   const { restoreAccount } = useRestoreAccount();
   const { deleteAccount, loading: loadingDelete } = useDeleteAccount();
@@ -49,6 +50,11 @@ const Accounts = () => {
     setOpenModal(true);
   };
 
+  const toggleUpdateAccount = (account: Account) => {
+    setAccountToUpdate(account);
+    history.push('/updateAccount');
+  };
+
   return (
     <Page>
       <Modal
@@ -67,30 +73,65 @@ const Accounts = () => {
         </Button>
       </PageHeader>
       <PageBody>
-        <Content>
-          <Text>Name</Text>
-          <Text>Action</Text>
-        </Content>
+        <Row>
+          <Cell>
+            <Text>Name</Text>
+          </Cell>
+          <Cell>
+            <Text>Currency</Text>
+          </Cell>
+          <Cell>
+            <Text>Action</Text>
+          </Cell>
+        </Row>
+        {loading && <LoadingData />}
         {data?.me.accounts &&
           data.me.accounts.map((account) => (
-            <Content key={account.id}>
-              <Text>{account.name}</Text>
+            <Row key={account.id}>
+              <Cell>
+                <Text>{account.name}</Text>
+              </Cell>
+              <Cell>
+                <Text>{account.currency}</Text>
+              </Cell>
               {account.id === currentAccountId ? (
-                <Button type="button" disabled variation="danger">
-                  <TrashFill />
-                </Button>
+                <Cell>
+                  <Button
+                    style={{ marginRight: '10px' }}
+                    type="button"
+                    disabled
+                    variation="primary"
+                  >
+                    <PencilFill />
+                  </Button>
+                  <Button type="button" disabled variation="danger">
+                    <TrashFill />
+                  </Button>
+                </Cell>
               ) : (
-                <Button
-                  onClick={() => toggleDeleteAccount(account)}
-                  disabled={loading}
-                  type="button"
-                  variation="danger"
-                >
-                  <TrashFill />
-                </Button>
+                <Cell>
+                  <Button
+                    onClick={() => toggleUpdateAccount(account)}
+                    style={{ marginRight: '10px' }}
+                    disabled={loading}
+                    type="button"
+                    variation="primary"
+                  >
+                    <PencilFill />
+                  </Button>
+                  <Button
+                    onClick={() => toggleDeleteAccount(account)}
+                    disabled={loading}
+                    type="button"
+                    variation="danger"
+                  >
+                    <TrashFill />
+                  </Button>
+                </Cell>
               )}
-            </Content>
+            </Row>
           ))}
+        {error && toast.error(error.message)}
       </PageBody>
     </Page>
   );
@@ -111,12 +152,28 @@ const PageBody = styled.div`
   }
 `;
 
-const Content = styled.div`
+const Row = styled.div`
   display: flex;
   height: 45px;
   padding: 13px;
   align-items: center;
   justify-content: space-between;
+`;
+
+const Cell = styled.span`
+  display: flex;
+  justify-content: center;
+  min-width: 150px;
+  &:first-child {
+    width: 100%;
+    justify-content: start;
+  }
+`;
+
+const Placeholder = styled.div`
+  width: 100%;
+  height: 40px;
+  background-color: red;
 `;
 
 const Page = styled.div`
