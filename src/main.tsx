@@ -32,8 +32,11 @@ const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        me: {
-          merge: true,
+        findManyOperation: {
+          merge: false,
+        },
+        findManyAccount: {
+          merge: false,
         },
       },
     },

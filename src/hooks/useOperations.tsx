@@ -17,7 +17,7 @@ export function useOperations() {
   const { currentAccountId } = useAccountFilters();
   const { currentDateTime } = useOperationsFilters();
 
-  const [getOperations, operationData] = useLazyQuery<Data>(GET_OPERATIONS, {
+  const [getOperations, { data, loading, error }] = useLazyQuery<Data>(GET_OPERATIONS, {
     fetchPolicy: 'network-only',
   });
 
@@ -34,16 +34,16 @@ export function useOperations() {
   }, [currentAccountId, currentDateTime]);
 
   useEffect(() => {
-    if (operationData.loading) {
+    if (loading) {
       NProgress.start();
     } else {
       NProgress.done();
     }
-  }, [operationData.loading]);
+  }, [loading]);
 
   if (!currentAccountId) return { data: undefined, loading: true };
 
-  return operationData;
+  return { getOperations, data, loading, error };
 }
 
 export function useUpdateOperation() {

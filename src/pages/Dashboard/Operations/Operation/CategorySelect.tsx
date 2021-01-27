@@ -32,7 +32,7 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
   const { createCategory } = useCreateCategory();
   const { updateOperation } = useUpdateOperation();
   const filterCategory = useFilterCategories();
-  console.log({ allCategories });
+
   const loadOptions = debounce((value: string, callback: any) => {
     filterCategory(value).then((results: Option[]) => callback(results));
   }, 400);
