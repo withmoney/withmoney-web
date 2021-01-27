@@ -1,10 +1,10 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { GET_ACCOUNTS } from '../graphql/Accounts';
-import { Me, Account } from '../models';
+import { Account } from '../models';
 
 type Data = {
-  me: Me;
+  accounts: Account[];
 };
 
 interface AccountFilterContext {
@@ -26,8 +26,8 @@ export default function AccountFiltersProvider({ children }: Props) {
   const { data: accounts } = useQuery<Data>(GET_ACCOUNTS);
 
   useEffect(() => {
-    if (!currentAccountId && accounts?.me?.accounts?.length) {
-      setCurrentAccountId(accounts?.me?.accounts[0].id);
+    if (!currentAccountId && accounts?.accounts?.length) {
+      setCurrentAccountId(accounts?.accounts[0].id);
     }
   }, [currentAccountId, accounts]);
 

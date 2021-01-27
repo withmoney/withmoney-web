@@ -7,7 +7,7 @@ import Input from '../../../../components/Input';
 import { useFilterCategories, useCreateCategory } from '../../../../hooks/useCategories';
 import { useOperationsFilters } from '../../../../hooks/useOperationsFilters';
 import { useUpdateOperation } from '../../../../hooks/useOperations';
-import { Data, Operation, Category } from '../../../../models';
+import { Operation, Category } from '../../../../models';
 import { ALL_CATEGORY } from '../../../../graphql/Categories';
 import customStyles from './style/CategorySelect.style';
 
@@ -21,6 +21,10 @@ type Option = {
   label: string;
 };
 
+type Data = {
+  categories: Category[];
+};
+
 const CategorySelect = ({ CategoryId, operation }: Props) => {
   const [value, setValue] = useState<Option | undefined>();
   const { data: allCategories, loading } = useQuery<Data>(ALL_CATEGORY);
@@ -28,7 +32,7 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
   const { createCategory } = useCreateCategory();
   const { updateOperation } = useUpdateOperation();
   const filterCategory = useFilterCategories();
-
+  console.log({ allCategories });
   const loadOptions = debounce((value: string, callback: any) => {
     filterCategory(value).then((results: Option[]) => callback(results));
   }, 400);
@@ -72,14 +76,14 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
     }
   };
 
-  const defaultValues = allCategories?.me.categories
+  const defaultValues = allCategories?.categories
     .map((category) => ({
       value: category.id,
       label: category.name,
     }))
     .filter((category: Option) => category.value === CategoryId);
 
-  const defaultOptions = allCategories?.me.categories
+  const defaultOptions = allCategories?.categories
     .filter((option: Category) => option.type === currentTransactionType)
     .map((category) => ({
       value: category.id,

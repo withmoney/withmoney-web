@@ -5,9 +5,13 @@ import { useOperationsFilters } from './useOperationsFilters';
 import { useAccountFilters } from './useAccountFilters';
 import { UPDATE_OPERATION, RESTORE_OPERATION } from '../graphql/Operations';
 import { DELETE_OPERATION, GET_OPERATIONS, CREATE_OPERATION } from '../graphql/Operations';
-import { Data } from '../models';
+import { Operation } from '../models';
 
 NProgress.configure({ showSpinner: false, trickleSpeed: 200 });
+
+type Data = {
+  operations: Operation[];
+};
 
 export function useOperations() {
   const { currentAccountId } = useAccountFilters();

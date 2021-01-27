@@ -8,7 +8,7 @@ import { getCalcOperationsByType } from '../../../utils/calcOperations';
 const Information = () => {
   const { data } = useOperations();
 
-  const operations = data?.me?.operations || [];
+  const operations = data?.operations || [];
 
   const [totalPaidDeposit, totalDeposit] = getCalcOperationsByType(
     operations,
