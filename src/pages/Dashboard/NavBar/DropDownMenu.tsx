@@ -27,7 +27,7 @@ const DropDownMenu = () => {
           {data?.me.firstName} {data?.me.lastName}
         </Text>
       </DropDownMenuButton>
-      <MenuContainer ref={ref}>{MenuOpen ? <Menu /> : ''}</MenuContainer>
+      <MenuContainer ref={ref}>{MenuOpen ? <Menu menuIsOpen={setMenuOpen} /> : ''}</MenuContainer>
     </DropDownMenuContent>
   );
 };

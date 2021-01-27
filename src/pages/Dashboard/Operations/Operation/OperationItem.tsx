@@ -60,7 +60,7 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
       toast.error(err.message);
     }
   };
-  const onDeleteOperationClick = (operation: Operation) => {
+  const toggleDeleteOperation = (operation: Operation) => {
     deleteOperation(operation);
     modalIsOpen(true);
   };
@@ -98,7 +98,7 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
         <ButtonIcon
           type="button"
           variation="danger"
-          onClick={() => onDeleteOperationClick(operation)}
+          onClick={() => toggleDeleteOperation(operation)}
         >
           <TrashFill />
         </ButtonIcon>

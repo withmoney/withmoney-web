@@ -5,6 +5,13 @@ export enum TransactionType {
   VariableExpense = 'VariableExpense',
 }
 
+export enum CurrenciesTypes {
+  USD = 'USD',
+  EUR = 'EUR',
+  BRL = 'BRL',
+  GBP = 'GBP',
+}
+
 export interface Account {
   id: string;
   name: string;
@@ -12,6 +19,7 @@ export interface Account {
   createdAt: string;
   updatedAt: string;
   deletedAt: string;
+  currency: CurrenciesTypes;
   user: User;
   operations: Operation[];
 }
