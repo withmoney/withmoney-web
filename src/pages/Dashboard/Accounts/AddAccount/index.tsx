@@ -113,7 +113,6 @@ const AddAccount = () => {
             </Button>
           </Form>
         </Flex>
-        <Flex justifyContent="center"></Flex>
       </PageBody>
     </Page>
   );

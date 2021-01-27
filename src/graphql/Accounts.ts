@@ -4,7 +4,7 @@ import { gql } from '@apollo/client';
 export const GET_ACCOUNTS = gql`
   query getAccounts {
     me {
-      accounts(where: { deletedAt: { equals: null } }) {
+      accounts(where: { deletedAt: { equals: null } }, orderBy: [{ name: asc }]) {
         id
         name
         currency

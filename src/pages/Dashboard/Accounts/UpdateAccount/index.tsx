@@ -99,11 +99,10 @@ const UpdateAccount = () => {
       </PageHeader>
       <PageBody>
         <Flex justifyContent="center">
-          {loading ? (
-            <LoadingSpinner />
-          ) : (
+          {loading && <LoadingSpinner />}
+          {error && <Alert isDanger>{error.message}</Alert>}
+          {data && (
             <Form onSubmit={handleUpdateAccount}>
-              {error && <Alert isDanger>{error.message}</Alert>}
               <InputGroup>
                 <InputControl message={formErrors.accountName} isInvalid={!!formErrors.accountName}>
                   <Input
