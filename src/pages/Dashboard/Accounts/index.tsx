@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import { TrashFill, PencilFill } from '@styled-icons/bootstrap';
 import Header from '../../../components/Header';
 import Button from '../../../components/Button';
+import ButtonLink from '../../../components/ButtonLink';
 import Text from '../../../components/Text';
 import Modal from '../../../modals/DeleteModal';
 import { useAccounts, useDeleteAccount, useRestoreAccount } from '../../../hooks/useAccounts';
-import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
+import { useAccountFilters } from '../../../hooks/useAccountFilters';
 import { Account } from '../../../models';
 import LoadingData from '../../../components/LoadingData';
 
 const Accounts = () => {
-  const history = useHistory();
   const { data, loading, error } = useAccounts();
-  const [selectedAccount, setsSelectedAccount] = useState<Account>();
-  const { currentAccountId, setAccountToUpdate } = useOperationsFilters();
+  const [selectedAccount, setSelectedAccount] = useState<Account>();
+  const { currentAccountId } = useAccountFilters();
   const [openModal, setOpenModal] = useState(false);
   const { restoreAccount } = useRestoreAccount();
   const { deleteAccount, loading: loadingDelete } = useDeleteAccount();
@@ -46,13 +45,8 @@ const Accounts = () => {
   };
 
   const toggleDeleteAccount = (account: Account) => {
-    setsSelectedAccount(account);
+    setSelectedAccount(account);
     setOpenModal(true);
-  };
-
-  const toggleUpdateAccount = (account: Account) => {
-    setAccountToUpdate(account);
-    history.push('/updateAccount');
   };
 
   return (
@@ -68,9 +62,9 @@ const Accounts = () => {
         <Header margin="0" as="h3">
           Accounts
         </Header>
-        <Button type="button" onClick={() => history.push('/createAccount')} variation="primary">
+        <ButtonLink type="button" to="/createAccount" variation="primary">
           Add new
-        </Button>
+        </ButtonLink>
       </PageHeader>
       <PageBody>
         <Row>
@@ -110,15 +104,14 @@ const Accounts = () => {
                 </Cell>
               ) : (
                 <Cell>
-                  <Button
-                    onClick={() => toggleUpdateAccount(account)}
+                  <ButtonLink
                     style={{ marginRight: '10px' }}
-                    disabled={loading}
+                    to={'/updateAccount/' + account.id}
                     type="button"
                     variation="primary"
                   >
                     <PencilFill />
-                  </Button>
+                  </ButtonLink>
                   <Button
                     onClick={() => toggleDeleteAccount(account)}
                     disabled={loading}

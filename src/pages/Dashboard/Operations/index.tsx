@@ -4,6 +4,7 @@ import { Plus } from '@styled-icons/evaicons-solid';
 import { Tabs } from '../../../components/Tabs';
 import Button from '../../../components/Button';
 import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
+import { useAccountFilters } from '../../../hooks/useAccountFilters';
 import DataPlaceholder from './Operation/DataPlaceholder';
 import OperationItem from './Operation/OperationItem';
 import FooterContainer from './Operation/FooterContainer';
@@ -19,7 +20,8 @@ import { useDeleteOperation, useRestoreOperation } from '../../../hooks/useOpera
 
 const Operations = () => {
   const { data, loading } = useOperations();
-  const { currentTransactionType, currentAccountId, currentDateTime } = useOperationsFilters();
+  const { currentTransactionType, currentDateTime } = useOperationsFilters();
+  const { currentAccountId } = useAccountFilters();
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [selectOperation, setSelectOperation] = useState<Operation>();
   const { createOperation, loading: loadingCreate } = useCreateOperation();

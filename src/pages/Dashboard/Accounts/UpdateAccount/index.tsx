@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import Header from '../../../../components/Header';
@@ -12,20 +12,24 @@ import Flex from '../../../../components/Flex';
 import Select from '../../../../components/Select';
 import { checkAddAccount } from '../../../../schema/checkField';
 import { currencies } from '../../../../constants/Currencies';
-import { useOperationsFilters } from '../../../../hooks/useOperationsFilters';
+import { useAccounts } from '../../../../hooks/useAccounts';
 import { useUpdateAccount } from '../../../../hooks/useAccounts';
 
 const AddAccount = () => {
-  const { accountToUpdate } = useOperationsFilters();
+  const history = useHistory();
+  const { id } = useParams<{ id: string }>();
+  const { data } = useAccounts();
+  const account = data?.me.accounts.find((account) => account.id === id);
+
   const [form, setForm] = useState({
-    id: accountToUpdate?.id,
-    accountName: accountToUpdate?.name,
-    accountCurrency: accountToUpdate?.currency,
+    id: id,
+    accountName: account?.name,
+    accountCurrency: account?.currency,
   });
+
   const [formErrors, setFormErrors] = useState({ accountName: '', accountCurrency: '' });
   const [formValidate, setFormValidate] = useState(false);
   const { updateAccount } = useUpdateAccount();
-  const history = useHistory();
 
   useEffect(() => {
     const checkForm = async () => {
@@ -63,10 +67,10 @@ const AddAccount = () => {
           currency: form.accountCurrency,
         },
       });
-      history.push('/accounts');
-      toast.success(`Account ${form.accountName} was been updated!`, {
+      toast.success(`Account ${account?.name} was been updated to ${form.accountName}!`, {
         position: toast.POSITION.BOTTOM_LEFT,
       });
+      history.push('/accounts');
     } catch (err) {
       toast.error(err.message);
     }
@@ -88,7 +92,7 @@ const AddAccount = () => {
                   isInvalid={!!formErrors.accountName}
                   type="text"
                   name="accountName"
-                  defaultValue={accountToUpdate?.name}
+                  defaultValue={account?.name}
                   placeholder="Account Name"
                   onBlur={handleBlur}
                   onChange={handleInput}
@@ -99,12 +103,12 @@ const AddAccount = () => {
                 isInvalid={!!formErrors.accountCurrency}
               >
                 <Select
-                  defaultValue={accountToUpdate?.currency}
+                  defaultValue={form?.accountCurrency}
                   name="accountCurrency"
                   onChange={handleInput}
                   onBlur={handleBlur}
                 >
-                  <option>Select you currency</option>
+                  <option value="">Select you currency</option>
                   {currencies.map((currency) => {
                     return (
                       <option key={currency} value={currency}>

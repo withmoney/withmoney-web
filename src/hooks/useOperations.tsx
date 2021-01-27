@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import NProgress from 'nprogress';
 import { useOperationsFilters } from './useOperationsFilters';
+import { useAccountFilters } from './useAccountFilters';
 import { UPDATE_OPERATION, RESTORE_OPERATION } from '../graphql/Operations';
 import { DELETE_OPERATION, GET_OPERATIONS, CREATE_OPERATION } from '../graphql/Operations';
 import { Data } from '../models';
@@ -9,7 +10,9 @@ import { Data } from '../models';
 NProgress.configure({ showSpinner: false, trickleSpeed: 200 });
 
 export function useOperations() {
-  const { currentDateTime, currentAccountId } = useOperationsFilters();
+  const { currentAccountId } = useAccountFilters();
+  const { currentDateTime } = useOperationsFilters();
+
   const [getOperations, operationData] = useLazyQuery<Data>(GET_OPERATIONS, {
     fetchPolicy: 'network-only',
   });
@@ -40,7 +43,9 @@ export function useOperations() {
 }
 
 export function useUpdateOperation() {
-  const { currentDateTime, currentAccountId } = useOperationsFilters();
+  const { currentDateTime } = useOperationsFilters();
+  const { currentAccountId } = useAccountFilters();
+
   const [updateOperation, { data, error, loading }] = useMutation<Data>(UPDATE_OPERATION, {
     refetchQueries: [
       {
@@ -66,7 +71,9 @@ export function useUpdateOperation() {
 }
 
 export function useDeleteOperation() {
-  const { currentDateTime, currentAccountId } = useOperationsFilters();
+  const { currentDateTime } = useOperationsFilters();
+  const { currentAccountId } = useAccountFilters();
+
   const [deleteOperation, { data, error, loading }] = useMutation(DELETE_OPERATION, {
     refetchQueries: [
       {
@@ -92,7 +99,9 @@ export function useDeleteOperation() {
 }
 
 export function useRestoreOperation() {
-  const { currentDateTime, currentAccountId } = useOperationsFilters();
+  const { currentDateTime } = useOperationsFilters();
+  const { currentAccountId } = useAccountFilters();
+
   const [restoreOperation, { data, error, loading }] = useMutation(RESTORE_OPERATION, {
     refetchQueries: [
       {
@@ -118,7 +127,8 @@ export function useRestoreOperation() {
 }
 
 export function useCreateOperation() {
-  const { currentDateTime, currentAccountId } = useOperationsFilters();
+  const { currentDateTime } = useOperationsFilters();
+  const { currentAccountId } = useAccountFilters();
   const [createOperation, { data, error, loading }] = useMutation(CREATE_OPERATION, {
     refetchQueries: [
       {
