@@ -22,8 +22,8 @@ const Dashboard = () => {
             <Route path="/dashboard" component={Operations} />
             <Route path="/reports" component={Reports} />
             <Route path="/accounts" component={Accounts} />
-            <Route path="/createAccount" component={AddAccount} />
-            <Route path="/updateAccount/:id" component={UpdateAccount} />
+            <Route path="/accounts-new" component={AddAccount} />
+            <Route path="/accounts-edit/:id" component={UpdateAccount} />
           </Switch>
         </Content>
       </Wrapper>

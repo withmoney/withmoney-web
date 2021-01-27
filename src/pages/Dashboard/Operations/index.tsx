@@ -13,7 +13,7 @@ import { Operation } from '../../../models';
 import { Container, OperationContainer, ButtonContent } from './style/Operations.style';
 import { RowHeader, CellHeader } from './Operation/style/OperationSettings';
 import { useOperations, useCreateOperation } from '../../../hooks/useOperations';
-import DeleteOperationModal from '../../../modals/DeleteModal';
+import ConfirmModal from '../../../modals/ConfirmModal';
 import { addOperationText } from '../../../constants/Transactions';
 import LoadingSpinner from '../../../components/LoadingSpinner';
 import { useDeleteOperation, useRestoreOperation } from '../../../hooks/useOperations';
@@ -85,12 +85,13 @@ const Operations = () => {
 
   return (
     <Container>
-      <DeleteOperationModal
-        label="operation"
+      <ConfirmModal
+        label="Are you sure that you want to delete this operation?"
+        confirmButton="danger"
         isOpenModal={modalIsOpen}
         loading={loadingDelete}
         setIsOpenModal={handleOpenModal}
-        handleDelete={handleDeleteOperation}
+        onConfirm={handleDeleteOperation}
       />
       <Tabs />
       <OperationContainer>

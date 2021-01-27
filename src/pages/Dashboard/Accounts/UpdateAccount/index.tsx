@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import Header from '../../../../components/Header';
 import Form from '../../../../components/Form';
@@ -12,33 +11,45 @@ import Flex from '../../../../components/Flex';
 import Select from '../../../../components/Select';
 import { checkAddAccount } from '../../../../schema/checkField';
 import { currencies } from '../../../../constants/Currencies';
-import { useAccounts } from '../../../../hooks/useAccounts';
+import { useUniqueAccounts } from '../../../../hooks/useAccounts';
 import { useUpdateAccount } from '../../../../hooks/useAccounts';
+import { PageHeader, Page, PageBody } from '../styles';
+import LoadingSpinner from '../../../../components/LoadingSpinner';
 
-const AddAccount = () => {
+type Account = {
+  id: string;
+  accountName: string;
+  accountCurrency: string;
+};
+const initialValues = { id: '', accountName: '', accountCurrency: '' };
+
+const UpdateAccount = () => {
   const history = useHistory();
   const { id } = useParams<{ id: string }>();
-  const { data } = useAccounts();
-  const account = data?.me.accounts.find((account) => account.id === id);
-
-  const [form, setForm] = useState({
-    id: id,
-    accountName: account?.name,
-    accountCurrency: account?.currency,
-  });
-
-  const [formErrors, setFormErrors] = useState({ accountName: '', accountCurrency: '' });
+  const { data, loading, error } = useUniqueAccounts(id);
+  const [form, setForm] = useState<Account>(initialValues);
+  const [formErrors, setFormErrors] = useState(initialValues);
   const [formValidate, setFormValidate] = useState(false);
-  const { updateAccount } = useUpdateAccount();
+  const { updateAccount, loading: loadingUpdate } = useUpdateAccount();
+
+  useEffect(() => {
+    if (data) {
+      setForm({
+        id: id,
+        accountName: data?.findUniqueAccount.name,
+        accountCurrency: data?.findUniqueAccount.currency,
+      });
+    }
+  }, [data]);
 
   useEffect(() => {
     const checkForm = async () => {
       setFormValidate(await checkAddAccount.isValid(form));
     };
     checkForm();
-  });
+  }, [form]);
 
-  const handleInput = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
     setForm({
       ...form,
@@ -56,19 +67,22 @@ const AddAccount = () => {
     }
   };
 
-  const handleUpdateAccount = (event: React.ChangeEvent<HTMLFormElement>) => {
+  const handleUpdateAccount = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      updateAccount({
+      await updateAccount({
         variables: {
           id: form.id,
           name: form.accountName,
           currency: form.accountCurrency,
         },
       });
-      toast.success(`Account ${account?.name} was been updated to ${form.accountName}!`, {
-        position: toast.POSITION.BOTTOM_LEFT,
-      });
+      toast.success(
+        `Account ${data.findUniqueAccount.name} was been updated to ${form.accountName}!`,
+        {
+          position: toast.POSITION.BOTTOM_LEFT,
+        },
+      );
       history.push('/accounts');
     } catch (err) {
       toast.error(err.message);
@@ -83,66 +97,53 @@ const AddAccount = () => {
         </Header>
       </PageHeader>
       <PageBody>
-        <Flex>
-          <Form onSubmit={handleUpdateAccount}>
-            <InputGroup>
-              <InputControl message={formErrors.accountName} isInvalid={!!formErrors.accountName}>
-                <Input
-                  isInvalid={!!formErrors.accountName}
-                  type="text"
-                  name="accountName"
-                  defaultValue={account?.name}
-                  placeholder="Account Name"
-                  onBlur={handleBlur}
-                  onChange={handleInput}
-                ></Input>
-              </InputControl>
-              <InputControl
-                message={formErrors.accountCurrency}
-                isInvalid={!!formErrors.accountCurrency}
-              >
-                <Select
-                  defaultValue={form?.accountCurrency}
-                  name="accountCurrency"
-                  onChange={handleInput}
-                  onBlur={handleBlur}
+        <Flex justifyContent="center">
+          {loading ? (
+            <LoadingSpinner />
+          ) : (
+            <Form onSubmit={handleUpdateAccount}>
+              <InputGroup>
+                <InputControl message={formErrors.accountName} isInvalid={!!formErrors.accountName}>
+                  <Input
+                    isInvalid={!!formErrors.accountName}
+                    type="text"
+                    name="accountName"
+                    defaultValue={data?.findUniqueAccount.name}
+                    placeholder="Account Name"
+                    onBlur={handleBlur}
+                    onChange={handleInput}
+                  />
+                </InputControl>
+                <InputControl
+                  message={formErrors.accountCurrency}
+                  isInvalid={!!formErrors.accountCurrency}
                 >
-                  <option value="">Select you currency</option>
-                  {currencies.map((currency) => {
-                    return (
-                      <option key={currency} value={currency}>
-                        {currency}
-                      </option>
-                    );
-                  })}
-                </Select>
-              </InputControl>
-            </InputGroup>
-            <Button disabled={!formValidate} type="submit" variation="primary">
-              Update Account
-            </Button>
-          </Form>
+                  <Select
+                    defaultValue={data?.findUniqueAccount.currency}
+                    name="accountCurrency"
+                    onChange={handleInput}
+                    onBlur={handleBlur}
+                  >
+                    <option value="">Select your currency</option>
+                    {currencies.map((currency) => {
+                      return (
+                        <option key={currency} value={currency}>
+                          {currency}
+                        </option>
+                      );
+                    })}
+                  </Select>
+                </InputControl>
+              </InputGroup>
+              <Button disabled={!formValidate} type="submit" variation="primary">
+                {loadingUpdate ? <LoadingSpinner size="20px" /> : 'Update Account'}
+              </Button>
+            </Form>
+          )}
+          {error && window.alert(error.message)}
         </Flex>
       </PageBody>
     </Page>
   );
 };
-
-const PageHeader = styled.div`
-  display: flex;
-  padding: 18px 44px;
-  background-color: #e4e4e4;
-  justify-content: space-between;
-`;
-
-const PageBody = styled.div`
-  padding: 35px;
-  background-color: #ffff;
-`;
-
-const Page = styled.div`
-  background-color: #fff;
-  height: 100%;
-`;
-
-export default AddAccount;
+export default UpdateAccount;

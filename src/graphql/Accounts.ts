@@ -13,6 +13,17 @@ export const GET_ACCOUNTS = gql`
   }
 `;
 
+export const GET_ONE_ACCOUNT = gql`
+  query getUniqueAccount($id: String!) {
+    findUniqueAccount(where: { id: $id }) {
+      id
+      name
+      currency
+      deletedAt
+    }
+  }
+`;
+
 // mutations
 export const CREATE_ACCOUNT = gql`
   mutation createAccount($name: String!, $currency: Currency!) {

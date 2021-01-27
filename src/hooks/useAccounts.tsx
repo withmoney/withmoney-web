@@ -1,19 +1,25 @@
-import { useQuery, useMutation } from '@apollo/react-hooks';
-import { GET_ACCOUNTS, DELETE_ACCOUNT, RESTORE_ACCOUNT } from '../graphql/Accounts';
+import { useQuery, useMutation, useLazyQuery } from '@apollo/react-hooks';
+import { GET_ACCOUNTS, DELETE_ACCOUNT } from '../graphql/Accounts';
+import { RESTORE_ACCOUNT, GET_ONE_ACCOUNT } from '../graphql/Accounts';
 import { CREATE_ACCOUNT, UPDATE_ACCOUNT } from '../graphql/Accounts';
 import { Data } from '../models';
 
-//get
+//getAll
 export function useAccounts() {
   return useQuery<Data>(GET_ACCOUNTS);
 }
+
+//getOneAccount
+export function useUniqueAccounts(id: string) {
+  return useQuery(GET_ONE_ACCOUNT, { variables: { id } });
+}
 //create
 export const useCreateAccount = () => {
-  const [createAccount, { data, loading }] = useMutation(CREATE_ACCOUNT, {
+  const [createAccount, { data, loading, error }] = useMutation(CREATE_ACCOUNT, {
     refetchQueries: [{ query: GET_ACCOUNTS }],
   });
 
-  return { createAccount, data, loading };
+  return { createAccount, data, loading, error };
 };
 //update
 export const useUpdateAccount = () => {
@@ -25,17 +31,17 @@ export const useUpdateAccount = () => {
 };
 //delete
 export const useDeleteAccount = () => {
-  const [deleteAccount, { data, loading }] = useMutation(DELETE_ACCOUNT, {
+  const [deleteAccount, { data, loading, error }] = useMutation(DELETE_ACCOUNT, {
     refetchQueries: [{ query: GET_ACCOUNTS }],
   });
 
-  return { deleteAccount, data, loading };
+  return { deleteAccount, data, loading, error };
 };
 //restore
 export const useRestoreAccount = () => {
-  const [restoreAccount, { data, loading }] = useMutation(RESTORE_ACCOUNT, {
+  const [restoreAccount, { data, loading, error }] = useMutation(RESTORE_ACCOUNT, {
     refetchQueries: [{ query: GET_ACCOUNTS }],
   });
 
-  return { restoreAccount, data, loading };
+  return { restoreAccount, data, loading, error };
 };

@@ -1,29 +1,29 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { toast } from 'react-toastify';
 import { TrashFill, PencilFill } from '@styled-icons/bootstrap';
 import Header from '../../../components/Header';
 import Button from '../../../components/Button';
 import ButtonLink from '../../../components/ButtonLink';
 import Text from '../../../components/Text';
-import Modal from '../../../modals/DeleteModal';
+import ConfirmModal from '../../../modals/ConfirmModal';
 import { useAccounts, useDeleteAccount, useRestoreAccount } from '../../../hooks/useAccounts';
 import { useAccountFilters } from '../../../hooks/useAccountFilters';
 import { Account } from '../../../models';
 import LoadingData from '../../../components/LoadingData';
+import { Page, PageHeader, Row, Cell, PageBodyColumns } from './styles';
 
 const Accounts = () => {
   const { data, loading, error } = useAccounts();
   const [selectedAccount, setSelectedAccount] = useState<Account>();
   const { currentAccountId } = useAccountFilters();
   const [openModal, setOpenModal] = useState(false);
-  const { restoreAccount } = useRestoreAccount();
+  const { restoreAccount, loading: loadingRestore } = useRestoreAccount();
   const { deleteAccount, loading: loadingDelete } = useDeleteAccount();
 
   //Delete Account
-  const handleDeleteAccount = () => {
+  const handleDeleteAccount = async () => {
     try {
-      deleteAccount({ variables: { id: selectedAccount?.id } });
+      await deleteAccount({ variables: { id: selectedAccount?.id } });
       setOpenModal(false);
       toast.error('Account deleted. Click here to restore!', {
         position: toast.POSITION.BOTTOM_LEFT,
@@ -36,9 +36,14 @@ const Accounts = () => {
     }
   };
   //Restore Account
-  const handleRestoreAccount = () => {
+  const handleRestoreAccount = async () => {
     try {
-      restoreAccount({ variables: { id: selectedAccount?.id } });
+      await restoreAccount({ variables: { id: selectedAccount?.id } });
+      toast.success('Account has been successfully restored!', {
+        position: toast.POSITION.BOTTOM_LEFT,
+        autoClose: 8000,
+        draggable: false,
+      });
     } catch (err) {
       toast.error(err.message);
     }
@@ -51,22 +56,23 @@ const Accounts = () => {
 
   return (
     <Page>
-      <Modal
-        label="account"
+      <ConfirmModal
+        label="Are you sure that you want to delete this account?"
+        confirmButton="danger"
         loading={loadingDelete}
         isOpenModal={openModal}
-        handleDelete={handleDeleteAccount}
+        onConfirm={handleDeleteAccount}
         setIsOpenModal={setOpenModal}
       />
       <PageHeader>
         <Header margin="0" as="h3">
           Accounts
         </Header>
-        <ButtonLink type="button" to="/createAccount" variation="primary">
+        <ButtonLink type="button" to="/accounts-new" variation="primary">
           Add new
         </ButtonLink>
       </PageHeader>
-      <PageBody>
+      <PageBodyColumns>
         <Row>
           <Cell>
             <Text>Name</Text>
@@ -90,14 +96,14 @@ const Accounts = () => {
               </Cell>
               {account.id === currentAccountId ? (
                 <Cell>
-                  <Button
+                  <ButtonLink
                     style={{ marginRight: '10px' }}
                     type="button"
-                    disabled
+                    to={'/accounts-edit/' + account.id}
                     variation="primary"
                   >
                     <PencilFill />
-                  </Button>
+                  </ButtonLink>
                   <Button type="button" disabled variation="danger">
                     <TrashFill />
                   </Button>
@@ -106,7 +112,7 @@ const Accounts = () => {
                 <Cell>
                   <ButtonLink
                     style={{ marginRight: '10px' }}
-                    to={'/updateAccount/' + account.id}
+                    to={'/accounts-edit/' + account.id}
                     type="button"
                     variation="primary"
                   >
@@ -124,54 +130,10 @@ const Accounts = () => {
               )}
             </Row>
           ))}
-        {error && toast.error(error.message)}
-      </PageBody>
+        {error && window.alert(error.message)}
+      </PageBodyColumns>
     </Page>
   );
 };
-
-const PageHeader = styled.div`
-  display: flex;
-  padding: 18px 44px;
-  background-color: #e4e4e4;
-  justify-content: space-between;
-`;
-
-const PageBody = styled.div`
-  padding: 35px;
-  background-color: #ffff;
-  div:nth-child(even) {
-    background-color: rgb(244, 244, 244);
-  }
-`;
-
-const Row = styled.div`
-  display: flex;
-  height: 45px;
-  padding: 13px;
-  align-items: center;
-  justify-content: space-between;
-`;
-
-const Cell = styled.span`
-  display: flex;
-  justify-content: center;
-  min-width: 150px;
-  &:first-child {
-    width: 100%;
-    justify-content: start;
-  }
-`;
-
-const Placeholder = styled.div`
-  width: 100%;
-  height: 40px;
-  background-color: red;
-`;
-
-const Page = styled.div`
-  background-color: #fff;
-  height: 100%;
-`;
 
 export default Accounts;

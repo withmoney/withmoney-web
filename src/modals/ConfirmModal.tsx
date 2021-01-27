@@ -3,27 +3,35 @@ import Modal from 'react-modal';
 import Text from '../components/Text';
 import Button from '../components/Button';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { ModalBody, ModalHeader, CustomStyles } from './DeleteModal.style';
+import { ModalBody, ModalHeader, CustomStyles } from './ConfirmModal.style';
 
 type Props = {
   label?: string;
   loading: boolean;
   isOpenModal: boolean;
-  handleDelete: () => void;
+  confirmButton?: 'primary' | 'danger' | 'light';
+  onConfirm: () => void;
   setIsOpenModal: (value: boolean) => void;
 };
 
-const DeleteModal = ({ loading, isOpenModal, label = '', setIsOpenModal, handleDelete }: Props) => {
+const ConfirmModal = ({
+  confirmButton = 'light',
+  loading,
+  isOpenModal,
+  label = '',
+  setIsOpenModal,
+  onConfirm,
+}: Props) => {
   Modal.setAppElement('body');
   return (
     <>
       <Modal style={CustomStyles} isOpen={isOpenModal}>
         <ModalHeader>
-          <Text bold>Are you sure that you want to delete this {label}?</Text>
+          <Text bold>{label}</Text>
         </ModalHeader>
         <ModalBody>
           <>
-            <Button disabled={loading} type="button" onClick={handleDelete} variation="danger">
+            <Button disabled={loading} type="button" onClick={onConfirm} variation={confirmButton}>
               {loading ? <LoadingSpinner size="20px" /> : 'Yes'}
             </Button>
             <Button disabled={loading} type="button" onClick={() => setIsOpenModal(false)}>
@@ -36,4 +44,4 @@ const DeleteModal = ({ loading, isOpenModal, label = '', setIsOpenModal, handleD
   );
 };
 
-export default DeleteModal;
+export default ConfirmModal;
