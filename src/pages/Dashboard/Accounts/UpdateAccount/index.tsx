@@ -44,7 +44,6 @@ const AddAccount = () => {
       ...form,
       [name]: value.trim(),
     });
-    console.log(form);
   };
 
   const handleBlur = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
