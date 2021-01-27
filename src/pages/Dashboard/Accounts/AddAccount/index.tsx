@@ -13,6 +13,7 @@ import { checkAddAccount } from '../../../../schema/checkField';
 import { currencies } from '../../../../constants/Currencies';
 import { useCreateAccount } from '../../../../hooks/useAccounts';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
+import Alert from '../../../../components/Alert';
 import { PageHeader, Page, PageBody } from '../styles';
 
 const initialValues = {
@@ -77,6 +78,7 @@ const AddAccount = () => {
       <PageBody>
         <Flex>
           <Form onSubmit={handleCreateAccount}>
+            {error && <Alert isDanger>{error.message}</Alert>}
             <InputGroup>
               <InputControl message={formErrors.accountName} isInvalid={!!formErrors.accountName}>
                 <Input
@@ -110,8 +112,8 @@ const AddAccount = () => {
               {loading ? <LoadingSpinner size="20px" /> : 'Create Account'}
             </Button>
           </Form>
-          {error && window.alert(error.message)}
         </Flex>
+        <Flex justifyContent="center"></Flex>
       </PageBody>
     </Page>
   );

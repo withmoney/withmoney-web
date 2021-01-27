@@ -10,6 +10,7 @@ import { useAccounts, useDeleteAccount, useRestoreAccount } from '../../../hooks
 import { useAccountFilters } from '../../../hooks/useAccountFilters';
 import { Account } from '../../../models';
 import LoadingData from '../../../components/LoadingData';
+import Alert from '../../../components/Alert';
 import { Page, PageHeader, Row, Cell, PageBodyColumns } from './styles';
 
 const Accounts = () => {
@@ -94,44 +95,28 @@ const Accounts = () => {
               <Cell>
                 <Text>{account.currency}</Text>
               </Cell>
-              {account.id === currentAccountId ? (
-                <Cell>
-                  <ButtonLink
-                    style={{ marginRight: '10px' }}
-                    type="button"
-                    to={'/accounts-edit/' + account.id}
-                    variation="primary"
-                  >
-                    <PencilFill />
-                  </ButtonLink>
-                  <Button type="button" disabled variation="danger">
-                    <TrashFill />
-                  </Button>
-                </Cell>
-              ) : (
-                <Cell>
-                  <ButtonLink
-                    style={{ marginRight: '10px' }}
-                    to={'/accounts-edit/' + account.id}
-                    type="button"
-                    variation="primary"
-                  >
-                    <PencilFill />
-                  </ButtonLink>
-                  <Button
-                    onClick={() => toggleDeleteAccount(account)}
-                    disabled={loading}
-                    type="button"
-                    variation="danger"
-                  >
-                    <TrashFill />
-                  </Button>
-                </Cell>
-              )}
+              <Cell>
+                <ButtonLink
+                  style={{ marginRight: '10px' }}
+                  to={'/accounts-edit/' + account.id}
+                  type="button"
+                  variation="primary"
+                >
+                  <PencilFill />
+                </ButtonLink>
+                <Button
+                  onClick={() => toggleDeleteAccount(account)}
+                  disabled={loading || account.id === currentAccountId}
+                  type="button"
+                  variation="danger"
+                >
+                  <TrashFill />
+                </Button>
+              </Cell>
             </Row>
           ))}
-        {error && window.alert(error.message)}
       </PageBodyColumns>
+      <PageBodyColumns>{error && <Alert isDanger>{error.message}</Alert>}</PageBodyColumns>
     </Page>
   );
 };

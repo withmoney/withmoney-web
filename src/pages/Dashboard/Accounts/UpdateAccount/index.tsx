@@ -9,6 +9,7 @@ import InputControl from '../../../../components/InputControl';
 import Button from '../../../../components/Button';
 import Flex from '../../../../components/Flex';
 import Select from '../../../../components/Select';
+import Alert from '../../../../components/Alert';
 import { checkAddAccount } from '../../../../schema/checkField';
 import { currencies } from '../../../../constants/Currencies';
 import { useUniqueAccounts } from '../../../../hooks/useAccounts';
@@ -102,6 +103,7 @@ const UpdateAccount = () => {
             <LoadingSpinner />
           ) : (
             <Form onSubmit={handleUpdateAccount}>
+              {error && <Alert isDanger>{error.message}</Alert>}
               <InputGroup>
                 <InputControl message={formErrors.accountName} isInvalid={!!formErrors.accountName}>
                   <Input
@@ -140,7 +142,6 @@ const UpdateAccount = () => {
               </Button>
             </Form>
           )}
-          {error && window.alert(error.message)}
         </Flex>
       </PageBody>
     </Page>
