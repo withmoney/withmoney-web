@@ -1,25 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 import Text from '../../../components/Text';
 import { MenuContainer, MenuButton, Money, MoneyOff } from './style/Menu.style';
 
 const Menu = () => {
-  const [activeMenu, setActiveMenu] = useState('Dashboard');
-
+  const { pathname } = useLocation();
   return (
     <MenuContainer>
-      <MenuButton
-        onClick={() => setActiveMenu('Dashboard')}
-        open={activeMenu === 'Dashboard'}
-        to="/dashboard"
-      >
+      <MenuButton open={pathname === '/dashboard'} to="/dashboard">
         <Money />
         <Text>Dashboard</Text>
       </MenuButton>
-      <MenuButton
-        onClick={() => setActiveMenu('Report')}
-        open={activeMenu === 'Report'}
-        to="/reports"
-      >
+      <MenuButton open={pathname === '/reports'} to="/reports">
         <MoneyOff />
         <Text>Reports</Text>
       </MenuButton>
