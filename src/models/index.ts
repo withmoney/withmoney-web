@@ -66,7 +66,7 @@ export interface Operation {
 }
 
 export type Data = {
-  me: Me;
+  operations: Operation[];
 };
 
 export interface Me extends User {}

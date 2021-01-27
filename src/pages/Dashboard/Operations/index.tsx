@@ -81,7 +81,7 @@ const Operations = () => {
 
   //Filter Operations
   const operations =
-    data?.me?.operations?.filter((operation) => operation.type === currentTransactionType) || [];
+    data?.operations?.filter((operation) => operation.type === currentTransactionType) || [];
 
   return (
     <Container>

@@ -86,8 +86,8 @@ const Accounts = () => {
           </Cell>
         </Row>
         {loading && <LoadingData />}
-        {data?.me.accounts &&
-          data.me.accounts.map((account) => (
+        {data?.accounts &&
+          data.accounts.map((account) => (
             <Row key={account.id}>
               <Cell>
                 <Text>{account.name}</Text>

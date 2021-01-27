@@ -3,12 +3,10 @@ import { gql } from '@apollo/client';
 // query
 export const GET_ACCOUNTS = gql`
   query getAccounts {
-    me {
-      accounts(where: { deletedAt: { equals: null } }, orderBy: [{ name: asc }]) {
-        id
-        name
-        currency
-      }
+    accounts: findManyAccount(where: { deletedAt: { equals: null } }, orderBy: [{ name: asc }]) {
+      id
+      name
+      currency
     }
   }
 `;
