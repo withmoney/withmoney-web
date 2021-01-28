@@ -1,4 +1,5 @@
 import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 import { checkEmailSchema } from '../../schema/auth';
@@ -19,6 +20,7 @@ const ChangePassword = () => {
   const [formErrors, setFormErrors] = useState({ error: '' });
   const [formValidate, setFormValidate] = useState(false);
   const [requestChangePassword, { loading }] = useMutation(REQUEST_CHANGE_PASSWORD);
+  const history = useHistory();
 
   useEffect(() => {
     const checkForm = async () => {
@@ -47,6 +49,7 @@ const ChangePassword = () => {
       try {
         await requestChangePassword({ variables: form });
         toast.success('You will receive an email you are registered!');
+        history.push('/signin');
       } catch (err) {
         toast.error(err.message);
       }
