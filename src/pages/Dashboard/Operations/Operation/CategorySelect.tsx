@@ -7,7 +7,7 @@ import Input from '../../../../components/Input';
 import { useFilterCategories, useCreateCategory } from '../../../../hooks/useCategories';
 import { useOperationsFilters } from '../../../../hooks/useOperationsFilters';
 import { useUpdateOperation } from '../../../../hooks/useOperations';
-import { Data, Operation, Category } from '../../../../models';
+import { Operation, Category } from '../../../../models';
 import { ALL_CATEGORY } from '../../../../graphql/Categories';
 import customStyles from './style/CategorySelect.style';
 
@@ -19,6 +19,10 @@ type Props = {
 type Option = {
   value: string;
   label: string;
+};
+
+type Data = {
+  categories: Category[];
 };
 
 const CategorySelect = ({ CategoryId, operation }: Props) => {
@@ -72,14 +76,14 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
     }
   };
 
-  const defaultValues = allCategories?.me.categories
+  const defaultValues = allCategories?.categories
     .map((category) => ({
       value: category.id,
       label: category.name,
     }))
     .filter((category: Option) => category.value === CategoryId);
 
-  const defaultOptions = allCategories?.me.categories
+  const defaultOptions = allCategories?.categories
     .filter((option: Category) => option.type === currentTransactionType)
     .map((category) => ({
       value: category.id,

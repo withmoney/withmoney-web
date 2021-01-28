@@ -6,6 +6,9 @@ import SideBar from './SideBar';
 import NavBar from './NavBar';
 import Operations from './Operations';
 import Reports from './Reports';
+import Accounts from './Accounts';
+import AddAccount from './Accounts/AddAccount';
+import UpdateAccount from './Accounts/UpdateAccount';
 
 const Dashboard = () => {
   const { isSidebarOpen } = useSidebarCollapse();
@@ -18,6 +21,9 @@ const Dashboard = () => {
           <Switch>
             <Route path="/dashboard" component={Operations} />
             <Route path="/reports" component={Reports} />
+            <Route path="/accounts" component={Accounts} />
+            <Route path="/accounts-new" component={AddAccount} />
+            <Route path="/accounts-edit/:id" component={UpdateAccount} />
           </Switch>
         </Content>
       </Wrapper>

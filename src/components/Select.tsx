@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 const Select = styled.select`
   font-size: var(--font-default);
+  height: 42px;
   border-radius: var(--input-border-radius);
   border: 2px solid var(--input-border-color);
   padding: var(--input-padding-vertical) var(--input-padding-horizontal);

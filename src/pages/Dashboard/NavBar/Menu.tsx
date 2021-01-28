@@ -3,7 +3,11 @@ import { useHistory } from 'react-router-dom';
 import Button from '../../../components/Button';
 import { MenuContainer, MenuContent, ButtonLink } from './style/Menu.style';
 
-const Menu = () => {
+type Props = {
+  menuIsOpen: (value: boolean) => void;
+};
+
+const Menu = ({ menuIsOpen }: Props) => {
   const history = useHistory();
 
   const LogOut = () => {
@@ -11,11 +15,22 @@ const Menu = () => {
     history.push('/');
   };
 
+  const toggleCloseMenu = () => {
+    menuIsOpen(false);
+  };
+
   return (
     <MenuContainer>
       <MenuContent>
-        <ButtonLink to="/">Profile</ButtonLink>
-        <ButtonLink to="/">Change Password</ButtonLink>
+        <ButtonLink onClick={toggleCloseMenu} to="/">
+          Profile
+        </ButtonLink>
+        <ButtonLink onClick={toggleCloseMenu} to="/">
+          Change Password
+        </ButtonLink>
+        <ButtonLink onClick={toggleCloseMenu} to="/accounts">
+          Accounts
+        </ButtonLink>
       </MenuContent>
       <Button onClick={LogOut}>Log out</Button>
     </MenuContainer>

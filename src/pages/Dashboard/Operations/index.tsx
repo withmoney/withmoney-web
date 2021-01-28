@@ -4,6 +4,7 @@ import { Plus } from '@styled-icons/evaicons-solid';
 import { Tabs } from '../../../components/Tabs';
 import Button from '../../../components/Button';
 import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
+import { useAccountFilters } from '../../../hooks/useAccountFilters';
 import DataPlaceholder from './Operation/DataPlaceholder';
 import OperationItem from './Operation/OperationItem';
 import FooterContainer from './Operation/FooterContainer';
@@ -12,21 +13,27 @@ import { Operation } from '../../../models';
 import { Container, OperationContainer, ButtonContent } from './style/Operations.style';
 import { RowHeader, CellHeader } from './Operation/style/OperationSettings';
 import { useOperations, useCreateOperation } from '../../../hooks/useOperations';
-import DeleteOperationModal from '../../../modals/DeleteOperationModal';
+import ConfirmModal from '../../../modals/ConfirmModal';
 import { addOperationText } from '../../../constants/Transactions';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import { useDeleteOperation, useRestoreOperation } from '../../../hooks/useOperations';
 
 const Operations = () => {
   const { data, loading } = useOperations();
-  const { currentTransactionType, currentAccountId, currentDateTime } = useOperationsFilters();
+  const { currentTransactionType, currentDateTime } = useOperationsFilters();
+  const { currentAccountId } = useAccountFilters();
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [selectOperation, setSelectOperation] = useState<Operation>();
   const { createOperation, loading: loadingCreate } = useCreateOperation();
+  const { deleteOperation, loading: loadingDelete } = useDeleteOperation();
+  const { restoreOperation } = useRestoreOperation();
 
+  //openModal
   const handleOpenModal = (value: boolean) => {
     setModalIsOpen(value);
   };
 
+  //CreateOperation
   const handleCreateOperation = () => {
     const verify =
       (currentDateTime?.toISO() || '') > (currentDateTime?.endOf('month').toISO() || '');
@@ -43,15 +50,48 @@ const Operations = () => {
     }
   };
 
+  //DeleteOperation
+  const handleDeleteOperation = async () => {
+    try {
+      await deleteOperation({
+        variables: {
+          id: selectOperation?.id,
+        },
+      });
+      toast.error('Operation deleted. Click here to restore!', {
+        position: toast.POSITION.BOTTOM_LEFT,
+        autoClose: 10000,
+        draggable: false,
+        onClick: handleRestoreOperation,
+      });
+    } catch (err) {
+      toast.error(err.message);
+    }
+    setModalIsOpen(false);
+  };
+
+  //RestoreOperation
+  const handleRestoreOperation = async () => {
+    try {
+      await restoreOperation({ variables: { id: selectOperation?.id } });
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
+  //Filter Operations
   const operations =
-    data?.me?.operations?.filter((operation) => operation.type === currentTransactionType) || [];
+    data?.operations?.filter((operation) => operation.type === currentTransactionType) || [];
 
   return (
     <Container>
-      <DeleteOperationModal
-        modalIsOpen={modalIsOpen}
-        operation={selectOperation}
+      <ConfirmModal
+        label="Are you sure that you want to delete this operation?"
+        confirmButton="danger"
+        isOpenModal={modalIsOpen}
+        loading={loadingDelete}
         setIsOpenModal={handleOpenModal}
+        onConfirm={handleDeleteOperation}
       />
       <Tabs />
       <OperationContainer>

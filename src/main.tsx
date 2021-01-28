@@ -6,6 +6,7 @@ import GlobalStyle from './theme';
 import Routers from './routes';
 import SidebarProvider from './hooks/useSidebarCollapse';
 import OperationsFiltersProvider from './hooks/useOperationsFilters';
+import AccountFiltersProvider from './hooks/useAccountFilters';
 import Toast from './components/Toast';
 
 import 'react-toastify/dist/ReactToastify.css';
@@ -31,8 +32,11 @@ const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        me: {
-          merge: true,
+        findManyOperation: {
+          merge: false,
+        },
+        findManyAccount: {
+          merge: false,
         },
       },
     },
@@ -51,7 +55,9 @@ const App = () => (
     <ApolloProvider client={client}>
       <SidebarProvider>
         <OperationsFiltersProvider>
-          <Routers />
+          <AccountFiltersProvider>
+            <Routers />
+          </AccountFiltersProvider>
         </OperationsFiltersProvider>
       </SidebarProvider>
     </ApolloProvider>

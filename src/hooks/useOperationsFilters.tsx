@@ -1,21 +1,14 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext } from 'react';
 import { DateTime } from 'luxon';
-import { useQuery } from '@apollo/react-hooks';
-import { GET_ACCOUNTS } from '../graphql/Accounts';
-import { Me, TransactionType } from '../models';
-
-type Data = {
-  me: Me;
-};
+import { TransactionType } from '../models';
 
 interface OperationsFiltersContext {
   currentDateTime?: DateTime;
-  currentAccountId?: string;
   currentTransactionType?: TransactionType;
   goToNextMonth?: () => void;
   goToPreviewMonth?: () => void;
-  setCurrentAccountId: (accountId: string) => void;
   setCurrentTransactionType: (TransactionType: TransactionType) => void;
+  setCurrentDateTime: (value: DateTime) => void;
 }
 
 type Props = {
@@ -23,42 +16,23 @@ type Props = {
 };
 
 const OperationsFiltersContext = createContext<OperationsFiltersContext>({
-  setCurrentAccountId: () => {},
   setCurrentTransactionType: () => {},
+  setCurrentDateTime: () => {},
 });
 
 export default function OperationsFiltersProvider({ children }: Props) {
-  const [currentDateTime, setCurrentDateTime] = useState(DateTime.local());
-  const [currentAccountId, setCurrentAccountId] = useState<string | undefined>();
+  const [currentDateTime, setCurrentDateTime] = useState<DateTime>(DateTime.local());
   const [currentTransactionType, setCurrentTransactionType] = useState<TransactionType>(
     TransactionType.Deposit,
   );
-  const { data: accounts } = useQuery<Data>(GET_ACCOUNTS);
-
-  useEffect(() => {
-    if (!currentAccountId && accounts?.me?.accounts?.length) {
-      setCurrentAccountId(accounts?.me?.accounts[0].id);
-    }
-  }, [currentAccountId, accounts]);
-
-  const goToNextMonth = () => {
-    setCurrentDateTime(currentDateTime.plus({ month: 1 }));
-  };
-
-  const goToPreviewMonth = () => {
-    setCurrentDateTime(currentDateTime.plus({ month: -1 }));
-  };
 
   return (
     <OperationsFiltersContext.Provider
       value={{
         currentDateTime,
-        currentAccountId,
         currentTransactionType,
-        goToNextMonth,
-        goToPreviewMonth,
-        setCurrentAccountId,
         setCurrentTransactionType,
+        setCurrentDateTime,
       }}
     >
       {children}
@@ -70,20 +44,14 @@ export function useOperationsFilters() {
   const context = useContext(OperationsFiltersContext);
   const {
     currentDateTime,
-    currentAccountId,
     currentTransactionType,
-    goToNextMonth,
-    goToPreviewMonth,
-    setCurrentAccountId,
     setCurrentTransactionType,
+    setCurrentDateTime,
   } = context;
   return {
     currentDateTime,
-    currentAccountId,
     currentTransactionType,
-    goToNextMonth,
-    goToPreviewMonth,
-    setCurrentAccountId,
     setCurrentTransactionType,
+    setCurrentDateTime,
   };
 }

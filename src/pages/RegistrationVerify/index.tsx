@@ -9,6 +9,7 @@ import Form from '../../components/Form';
 import Container from '../../components/Container';
 import LoadingSpinner from '../../components/LoadingSpinner';
 import Alert from '../../components/Alert';
+import Flex from '../../components/Flex';
 
 const RegistrationVerify = () => {
   const urlQuery = useUrlQuery();
@@ -43,7 +44,11 @@ const RegistrationVerify = () => {
             </>
           )}
 
-          {loading && <LoadingSpinner position="relative" margin="auto" />}
+          {loading && (
+            <Flex justifyContent="center">
+              <LoadingSpinner />
+            </Flex>
+          )}
 
           {error && <Alert isDanger>{error.message}</Alert>}
         </Form>

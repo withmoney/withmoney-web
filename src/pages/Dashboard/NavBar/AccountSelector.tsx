@@ -2,19 +2,19 @@ import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import styled from 'styled-components';
 import Select from '../../../components/Select';
-import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
+import { useAccountFilters } from '../../../hooks/useAccountFilters';
 import { GET_ACCOUNTS } from '../../../graphql/Accounts';
-import { Me } from '../../../models';
+import { Account } from '../../../models';
 
 type Data = {
-  me: Me;
+  accounts: Account[];
 };
 
 const AccountSelector = () => {
   const { data } = useQuery<Data>(GET_ACCOUNTS);
-  const { setCurrentAccountId } = useOperationsFilters();
+  const { setCurrentAccountId } = useAccountFilters();
 
-  const accounts = data?.me.accounts || [];
+  const accounts = data?.accounts || [];
 
   const SelectAccount = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const account = event.target.value;

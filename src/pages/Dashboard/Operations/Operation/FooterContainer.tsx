@@ -10,7 +10,7 @@ import { InfoTitle, InfoValue } from './style/FooterContainer.style';
 
 const FooterContainer = () => {
   const { data } = useOperations();
-  const operations = data?.me?.operations || [];
+  const operations = data?.operations || [];
 
   const totalEntrance = getTotalOperations(operations, TransactionType.Deposit);
   const totalRecurrent = getTotalOperations(operations, TransactionType.FixedExpense);

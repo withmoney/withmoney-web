@@ -1,10 +1,10 @@
 import { useApolloClient, useMutation } from '@apollo/client';
 import { useOperationsFilters } from './useOperationsFilters';
 import { CATEGORY_SEARCH, CREATE_CATEGORY, ALL_CATEGORY } from '../graphql/Categories';
-import { Me, Category } from '../models';
+import { Category } from '../models';
 
 type Data = {
-  me: Me;
+  categories: Category[];
 };
 
 export const useFilterCategories = () => {
@@ -17,8 +17,8 @@ export const useFilterCategories = () => {
       variables: { name: value, type: currentTransactionType },
     });
 
-    if (data?.me) {
-      return data.me.categories.map((category) => ({
+    if (data?.categories) {
+      return data.categories.map((category) => ({
         value: category.id,
         label: category.name,
       }));
