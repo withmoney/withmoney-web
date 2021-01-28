@@ -48,7 +48,7 @@ const Information = () => {
         desired={totalCreditCard}
       />
       <Info
-        variation="Unforeseen"
+        variation="unforeseen"
         name="Unforeseen"
         current={totalPaidVariableExpense}
         desired={totalVariableExpense}
