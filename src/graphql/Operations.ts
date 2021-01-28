@@ -18,15 +18,8 @@ export const GET_OPERATIONS = gql`
       isPaid
       paidAt
       createdAt
-      account {
-        id
-        name
-        currency
-      }
-      category {
-        id
-        name
-      }
+      accountId
+      categoryId
     }
   }
 `;

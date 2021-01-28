@@ -16,9 +16,9 @@ import { Page, PageHeader, Row, Cell, PageBodyColumns } from './styles';
 const Accounts = () => {
   const { data, loading, error } = useAccounts();
   const [selectedAccount, setSelectedAccount] = useState<Account>();
-  const { currentAccountId } = useAccountFilters();
+  const { currentAccount } = useAccountFilters();
   const [openModal, setOpenModal] = useState(false);
-  const { restoreAccount, loading: loadingRestore } = useRestoreAccount();
+  const { restoreAccount } = useRestoreAccount();
   const { deleteAccount, loading: loadingDelete } = useDeleteAccount();
 
   //Delete Account
@@ -106,7 +106,7 @@ const Accounts = () => {
                 </ButtonLink>
                 <Button
                   onClick={() => toggleDeleteAccount(account)}
-                  disabled={loading || account.id === currentAccountId}
+                  disabled={loading || account.id === currentAccount?.id}
                   type="button"
                   variation="danger"
                 >

@@ -13,6 +13,7 @@ import InputCurrency from '../../../../components/InputCurrency';
 import { Operation } from '../../../../models';
 import { TrashFill } from '@styled-icons/bootstrap';
 import { Row, Cell } from '../Operation/style/OperationSettings';
+import { useAccountFilters } from '../../../../hooks/useAccountFilters';
 
 type OperationItemProps = {
   operation: Operation;
@@ -22,6 +23,7 @@ type OperationItemProps = {
 
 const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationItemProps) => {
   const { updateOperation } = useUpdateOperation();
+  const { currentAccount } = useAccountFilters();
   const toggleInputCurrency = debounce((value: number) => {
     handleUpdate({
       value: value,
@@ -51,8 +53,8 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
       await updateOperation({
         variables: {
           ...operation,
-          accountId: operation.account.id,
-          categoryId: operation.category ? operation.category.id : '',
+          accountId: operation.accountId,
+          categoryId: operation.categoryId || null,
           ...newValues,
         },
       });
@@ -81,16 +83,13 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
         <InputOperations placeholder="Name" onChange={toggleInputName} value={operation.name} />
       </Cell>
       <Cell flex="1">
-        <CategorySelect
-          operation={operation}
-          CategoryId={operation.category ? operation.category.id : ''}
-        />
+        <CategorySelect operation={operation} CategoryId={operation.categoryId} />
       </Cell>
       <Cell width="200px">
         <InputCurrency
           onChange={toggleInputCurrency}
           value={operation.value}
-          currency={operation.account.currency}
+          currency={currentAccount?.currency}
           lang={LANG}
         />
       </Cell>

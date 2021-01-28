@@ -59,14 +59,17 @@ export interface Operation {
   createdAt: string;
   paidAt: string;
   updatedAt: string;
-  deletedAt: string;
+  deletedAt: string | null;
   account: Account;
   user: User;
-  category: Category;
+  category: Category | null;
+  categoryId: string | null;
+  accountId: string;
+  userId: string;
 }
 
-export type Data = {
-  operations: Operation[];
-};
-
 export interface Me extends User {}
+
+export type Data = {
+  me: User;
+};

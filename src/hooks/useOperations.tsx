@@ -12,7 +12,7 @@ type Data = {
 };
 
 export function useOperations() {
-  const { currentAccountId } = useAccountFilters();
+  const { currentAccount } = useAccountFilters();
   const { currentDateTime } = useOperationsFilters();
 
   const [getOperations, { data, loading, error }] = useLazyQuery<Data>(GET_OPERATIONS, {
@@ -20,27 +20,27 @@ export function useOperations() {
   });
 
   useEffect(() => {
-    if (currentAccountId) {
+    if (currentAccount) {
       getOperations({
         variables: {
           startDateTime: currentDateTime?.startOf('month'),
           endDateTime: currentDateTime?.endOf('month'),
-          accountId: currentAccountId,
+          accountId: currentAccount?.id,
         },
       });
     }
-  }, [currentAccountId, currentDateTime]);
+  }, [currentAccount, currentDateTime]);
 
   useNProgress(loading);
 
-  if (!currentAccountId) return { data: undefined, loading: true };
+  if (!currentAccount) return { data: undefined, loading: true };
 
   return { getOperations, data, loading, error };
 }
 
 export function useUpdateOperation() {
   const { currentDateTime } = useOperationsFilters();
-  const { currentAccountId } = useAccountFilters();
+  const { currentAccount } = useAccountFilters();
 
   const [updateOperation, { data, error, loading }] = useMutation<Data>(UPDATE_OPERATION, {
     refetchQueries: [
@@ -49,7 +49,7 @@ export function useUpdateOperation() {
         variables: {
           startDateTime: currentDateTime?.startOf('month'),
           endDateTime: currentDateTime?.endOf('month'),
-          accountId: currentAccountId,
+          accountId: currentAccount?.id,
         },
       },
     ],
@@ -62,7 +62,7 @@ export function useUpdateOperation() {
 
 export function useDeleteOperation() {
   const { currentDateTime } = useOperationsFilters();
-  const { currentAccountId } = useAccountFilters();
+  const { currentAccount } = useAccountFilters();
 
   const [deleteOperation, { data, error, loading }] = useMutation(DELETE_OPERATION, {
     refetchQueries: [
@@ -71,7 +71,7 @@ export function useDeleteOperation() {
         variables: {
           startDateTime: currentDateTime?.startOf('month'),
           endDateTime: currentDateTime?.endOf('month'),
-          accountId: currentAccountId,
+          accountId: currentAccount?.id,
         },
       },
     ],
@@ -84,7 +84,7 @@ export function useDeleteOperation() {
 
 export function useRestoreOperation() {
   const { currentDateTime } = useOperationsFilters();
-  const { currentAccountId } = useAccountFilters();
+  const { currentAccount } = useAccountFilters();
 
   const [restoreOperation, { data, error, loading }] = useMutation(RESTORE_OPERATION, {
     refetchQueries: [
@@ -93,7 +93,7 @@ export function useRestoreOperation() {
         variables: {
           startDateTime: currentDateTime?.startOf('month'),
           endDateTime: currentDateTime?.endOf('month'),
-          accountId: currentAccountId,
+          accountId: currentAccount?.id,
         },
       },
     ],
@@ -106,7 +106,7 @@ export function useRestoreOperation() {
 
 export function useCreateOperation() {
   const { currentDateTime } = useOperationsFilters();
-  const { currentAccountId } = useAccountFilters();
+  const { currentAccount } = useAccountFilters();
   const [createOperation, { data, error, loading }] = useMutation(CREATE_OPERATION, {
     refetchQueries: [
       {
@@ -114,7 +114,7 @@ export function useCreateOperation() {
         variables: {
           startDateTime: currentDateTime?.startOf('month'),
           endDateTime: currentDateTime?.endOf('month'),
-          accountId: currentAccountId,
+          accountId: currentAccount?.id,
         },
       },
     ],
