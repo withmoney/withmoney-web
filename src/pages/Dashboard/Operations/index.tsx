@@ -21,7 +21,7 @@ import { useDeleteOperation, useRestoreOperation } from '../../../hooks/useOpera
 const Operations = () => {
   const { data, loading } = useOperations();
   const { currentTransactionType, currentDateTime } = useOperationsFilters();
-  const { currentAccountId } = useAccountFilters();
+  const { currentAccount } = useAccountFilters();
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [selectOperation, setSelectOperation] = useState<Operation>();
   const { createOperation, loading: loadingCreate } = useCreateOperation();
@@ -41,7 +41,7 @@ const Operations = () => {
       createOperation({
         variables: {
           type: currentTransactionType,
-          accountID: currentAccountId,
+          accountID: currentAccount?.id,
           paidAt: verify ? currentDateTime?.endOf('month').toISO() : currentDateTime,
         },
       });

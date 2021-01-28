@@ -8,8 +8,8 @@ type Data = {
 };
 
 interface AccountFilterContext {
-  currentAccountId?: string;
-  setCurrentAccountId: (accountId: string) => void;
+  currentAccount?: Account;
+  setCurrentAccount: (account: Account) => void;
 }
 
 type Props = {
@@ -17,25 +17,25 @@ type Props = {
 };
 
 const AccountFilterContext = createContext<AccountFilterContext>({
-  setCurrentAccountId: () => {},
+  setCurrentAccount: () => {},
 });
 
 export default function AccountFiltersProvider({ children }: Props) {
-  const [currentAccountId, setCurrentAccountId] = useState<string | undefined>();
+  const [currentAccount, setCurrentAccount] = useState<Account | undefined>();
 
   const { data: accounts } = useQuery<Data>(GET_ACCOUNTS);
 
   useEffect(() => {
-    if (!currentAccountId && accounts?.accounts?.length) {
-      setCurrentAccountId(accounts?.accounts[0].id);
+    if (!currentAccount && accounts?.accounts?.length) {
+      setCurrentAccount(accounts?.accounts[0]);
     }
-  }, [currentAccountId, accounts]);
+  }, [currentAccount, accounts]);
 
   return (
     <AccountFilterContext.Provider
       value={{
-        currentAccountId,
-        setCurrentAccountId,
+        currentAccount,
+        setCurrentAccount,
       }}
     >
       {children}
@@ -45,9 +45,9 @@ export default function AccountFiltersProvider({ children }: Props) {
 
 export function useAccountFilters() {
   const context = useContext(AccountFilterContext);
-  const { currentAccountId, setCurrentAccountId } = context;
+  const { currentAccount, setCurrentAccount } = context;
   return {
-    currentAccountId,
-    setCurrentAccountId,
+    currentAccount,
+    setCurrentAccount,
   };
 }
