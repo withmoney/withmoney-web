@@ -21,6 +21,7 @@ export const GET_OPERATIONS = gql`
       account {
         id
         name
+        currency
       }
       category {
         id

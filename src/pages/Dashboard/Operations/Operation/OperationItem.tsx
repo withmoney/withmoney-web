@@ -3,7 +3,7 @@ import debounce from 'lodash.debounce';
 import { toast } from 'react-toastify';
 import moment, { Moment } from 'moment';
 import { useUpdateOperation } from '../../../../hooks/useOperations';
-import { LANG, CURRENCY } from '../../../../constants/currency';
+import { LANG } from '../../../../constants/currency';
 import ButtonIcon from '../../../../components/ButtonIcon';
 import CheckBox from '../../../../components/Checkbox';
 import DatePicker from '../../../../components/DatePicker';
@@ -90,7 +90,7 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
         <InputCurrency
           onChange={toggleInputCurrency}
           value={operation.value}
-          currency={CURRENCY}
+          currency={operation.account.currency}
           lang={LANG}
         />
       </Cell>
