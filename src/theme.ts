@@ -232,14 +232,10 @@ const GlobalStyle = createGlobalStyle`
   --dashboard-progress-bar-entrance: #80DA89;
   --dashboard-progress-bar-recurrent: #DA9680;
   --dashboard-progress-bar-credit: #D3DA80;
-  --dashboard-progress-bar-unforessen: #C380DA;
+  --dashboard-progress-bar-unforeseen: #C380DA;
 
 
   }
-
-  
-
-
   * {
     box-sizing: border-box;
   }

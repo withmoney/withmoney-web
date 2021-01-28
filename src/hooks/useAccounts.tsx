@@ -2,8 +2,12 @@ import { useQuery, useMutation } from '@apollo/react-hooks';
 import { GET_ACCOUNTS, DELETE_ACCOUNT } from '../graphql/Accounts';
 import { RESTORE_ACCOUNT, GET_ONE_ACCOUNT } from '../graphql/Accounts';
 import { CREATE_ACCOUNT, UPDATE_ACCOUNT } from '../graphql/Accounts';
-import { Data } from '../models';
+import { Account } from '../models';
 import useNProgress from './useNProgress';
+
+type Data = {
+  accounts: Account[];
+};
 
 //getAll
 export function useAccounts() {

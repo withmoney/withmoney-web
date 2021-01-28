@@ -18,14 +18,8 @@ export const GET_OPERATIONS = gql`
       isPaid
       paidAt
       createdAt
-      account {
-        id
-        name
-      }
-      category {
-        id
-        name
-      }
+      accountId
+      categoryId
     }
   }
 `;
@@ -35,7 +29,7 @@ export const UPDATE_OPERATION = gql`
   mutation updateOperation(
     $id: String!
     $name: String!
-    $categoryId: String!
+    $categoryId: String
     $accountId: String!
     $type: TransactionType!
     $value: Float!

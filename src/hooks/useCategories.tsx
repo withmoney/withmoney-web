@@ -1,4 +1,4 @@
-import { useApolloClient, useMutation } from '@apollo/client';
+import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { useOperationsFilters } from './useOperationsFilters';
 import { CATEGORY_SEARCH, CREATE_CATEGORY, ALL_CATEGORY } from '../graphql/Categories';
 import { Category } from '../models';
@@ -6,6 +6,10 @@ import { Category } from '../models';
 type Data = {
   categories: Category[];
 };
+
+export function useCategories() {
+  return useQuery<Data>(ALL_CATEGORY);
+}
 
 export const useFilterCategories = () => {
   const client = useApolloClient();

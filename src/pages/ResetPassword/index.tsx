@@ -1,4 +1,5 @@
 import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
 import { useUrlQuery } from '../../hooks/UseURLQuery';
@@ -24,6 +25,7 @@ const ResetPassword = () => {
   const [formErrors, setFormErrors] = useState(initialValues);
   const [formValidate, setFormValidate] = useState(false);
   const [changePassword, { loading }] = useMutation(CHANGE_PASSWORD);
+  const history = useHistory();
 
   useEffect(() => {
     const checkForm = async () => {
@@ -53,6 +55,7 @@ const ResetPassword = () => {
       try {
         await changePassword({ variables: { hash: urlQuery.hash, password: form.password } });
         toast.success('Your password is changed!');
+        history.push('/signin');
       } catch (err) {
         toast.error(err.message);
       }

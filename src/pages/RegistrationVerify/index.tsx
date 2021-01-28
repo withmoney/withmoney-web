@@ -50,7 +50,14 @@ const RegistrationVerify = () => {
             </Flex>
           )}
 
-          {error && <Alert isDanger>{error.message}</Alert>}
+          {error && (
+            <>
+              <Alert isDanger>{error.message}</Alert>
+              <Link to="/signin" variation="danger">
+                Back to login Page
+              </Link>
+            </>
+          )}
         </Form>
       </Container>
     </Page>

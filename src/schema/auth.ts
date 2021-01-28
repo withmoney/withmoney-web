@@ -24,6 +24,7 @@ export const registerSchema = yup.object().shape({
         }),
     ),
   passwordConfirm: yup.string().equals([yup.ref('password'), null], 'Passwords must match'),
+  currency: yup.string().required('Required'),
 });
 
 export const loginSchema = yup.object().shape({

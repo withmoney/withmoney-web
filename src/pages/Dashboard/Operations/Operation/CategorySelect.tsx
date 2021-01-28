@@ -12,7 +12,7 @@ import { ALL_CATEGORY } from '../../../../graphql/Categories';
 import customStyles from './style/CategorySelect.style';
 
 type Props = {
-  CategoryId: string;
+  CategoryId: string | null;
   operation: Operation;
 };
 
@@ -49,7 +49,7 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
         updateOperation({
           variables: {
             ...operation,
-            accountId: operation.account.id,
+            accountId: operation.accountId,
             categoryId: category.id,
           },
         });
@@ -66,7 +66,7 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
         updateOperation({
           variables: {
             ...operation,
-            accountId: operation.account.id,
+            accountId: operation.accountId,
             categoryId: data.value,
           },
         });

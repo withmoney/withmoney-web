@@ -12,13 +12,16 @@ type Data = {
 
 const AccountSelector = () => {
   const { data } = useQuery<Data>(GET_ACCOUNTS);
-  const { setCurrentAccountId } = useAccountFilters();
+  const { setCurrentAccount } = useAccountFilters();
 
   const accounts = data?.accounts || [];
 
   const SelectAccount = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const account = event.target.value;
-    setCurrentAccountId(account);
+    const accountId = event.target.value;
+    const account = accounts.find((account) => account.id === accountId);
+    if (account) {
+      setCurrentAccount(account);
+    }
   };
 
   return (
