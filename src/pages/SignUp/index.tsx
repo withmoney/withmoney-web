@@ -2,7 +2,6 @@ import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
-
 import { registerSchema } from '../../schema/auth';
 import { USER_REGISTER } from '../../graphql/AuthGql';
 import Button from '../../components/Button';
@@ -11,11 +10,13 @@ import Page from '../../components/Page';
 import Header from '../../components/Header';
 import Form from '../../components/Form';
 import Flex from '../../components/Flex';
+import Select from '../../components/Select';
 import Link from '../../components/Link';
 import Container from '../../components/Container';
 import Text from '../../components/Text';
 import InputGroup from '../../components/InputGroup';
 import InputControl from '../../components/InputControl';
+import { currencies } from '../../constants/Currencies';
 
 const initialValues = {
   firstName: '',
@@ -23,6 +24,7 @@ const initialValues = {
   email: '',
   password: '',
   passwordConfirm: '',
+  currency: '',
 };
 
 const SignUp = () => {
@@ -39,7 +41,7 @@ const SignUp = () => {
     checkFormValidate();
   }, [form]);
 
-  const handleInput = async (event: ChangeEvent<HTMLInputElement>) => {
+  const handleInput = async (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
     setForm({
       ...form,
@@ -47,7 +49,7 @@ const SignUp = () => {
     });
   };
 
-  const handleBlur = async (event: ChangeEvent<HTMLInputElement>) => {
+  const handleBlur = async (event: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name } = event.target;
     try {
       await registerSchema.validateAt(event.target.name, form);
@@ -120,6 +122,24 @@ const SignUp = () => {
               onChange={handleInput}
               onBlur={handleBlur}
             />
+          </InputControl>
+
+          <InputControl message={formErrors.currency} isInvalid={!!formErrors.currency}>
+            <Select
+              style={{ width: '100%' }}
+              onBlur={handleBlur}
+              onChange={handleInput}
+              name="currency"
+            >
+              <option>Select your currency</option>
+              {currencies.map((currency) => {
+                return (
+                  <option key={currency} value={currency}>
+                    {currency}
+                  </option>
+                );
+              })}
+            </Select>
           </InputControl>
 
           <InputControl message={formErrors.password} isInvalid={!!formErrors.password}>
