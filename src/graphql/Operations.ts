@@ -29,7 +29,7 @@ export const UPDATE_OPERATION = gql`
   mutation updateOperation(
     $id: String!
     $name: String!
-    $categoryId: String!
+    $categoryId: String
     $accountId: String!
     $type: TransactionType!
     $value: Float!
