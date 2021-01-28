@@ -1,13 +1,11 @@
 import { useEffect } from 'react';
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
-import NProgress from 'nprogress';
 import { useOperationsFilters } from './useOperationsFilters';
 import { useAccountFilters } from './useAccountFilters';
 import { UPDATE_OPERATION, RESTORE_OPERATION } from '../graphql/Operations';
 import { DELETE_OPERATION, GET_OPERATIONS, CREATE_OPERATION } from '../graphql/Operations';
 import { Operation } from '../models';
-
-NProgress.configure({ showSpinner: false, trickleSpeed: 200 });
+import useNProgress from './useNProgress';
 
 type Data = {
   operations: Operation[];
@@ -33,13 +31,7 @@ export function useOperations() {
     }
   }, [currentAccountId, currentDateTime]);
 
-  useEffect(() => {
-    if (loading) {
-      NProgress.start();
-    } else {
-      NProgress.done();
-    }
-  }, [loading]);
+  useNProgress(loading);
 
   if (!currentAccountId) return { data: undefined, loading: true };
 
@@ -63,13 +55,7 @@ export function useUpdateOperation() {
     ],
   });
 
-  useEffect(() => {
-    if (loading) {
-      NProgress.start();
-    } else {
-      NProgress.done();
-    }
-  }, [loading]);
+  useNProgress(loading);
 
   return { updateOperation, data, error };
 }
@@ -91,13 +77,7 @@ export function useDeleteOperation() {
     ],
   });
 
-  useEffect(() => {
-    if (loading) {
-      NProgress.start();
-    } else {
-      NProgress.done();
-    }
-  }, [loading]);
+  useNProgress(loading);
 
   return { deleteOperation, data, loading, error };
 }
@@ -119,13 +99,7 @@ export function useRestoreOperation() {
     ],
   });
 
-  useEffect(() => {
-    if (loading) {
-      NProgress.start();
-    } else {
-      NProgress.done();
-    }
-  }, [loading]);
+  useNProgress(loading);
 
   return { restoreOperation, data, error, loading };
 }
@@ -146,13 +120,7 @@ export function useCreateOperation() {
     ],
   });
 
-  useEffect(() => {
-    if (loading) {
-      NProgress.start();
-    } else {
-      NProgress.done();
-    }
-  }, [loading]);
+  useNProgress(loading);
 
   return { createOperation, data, error, loading };
 }

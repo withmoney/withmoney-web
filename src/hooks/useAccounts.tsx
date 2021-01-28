@@ -1,12 +1,9 @@
-import { useEffect } from 'react';
-import { useQuery, useMutation, useLazyQuery } from '@apollo/react-hooks';
-import NProgress from 'nprogress';
+import { useQuery, useMutation } from '@apollo/react-hooks';
 import { GET_ACCOUNTS, DELETE_ACCOUNT } from '../graphql/Accounts';
 import { RESTORE_ACCOUNT, GET_ONE_ACCOUNT } from '../graphql/Accounts';
 import { CREATE_ACCOUNT, UPDATE_ACCOUNT } from '../graphql/Accounts';
 import { Data } from '../models';
-
-NProgress.configure({ showSpinner: false, trickleSpeed: 200 });
+import useNProgress from './useNProgress';
 
 //getAll
 export function useAccounts() {
@@ -14,16 +11,8 @@ export function useAccounts() {
 }
 
 //getOneAccount
-export function useUniqueAccounts() {
-  const [getUniqueAccount, { data, loading, error }] = useLazyQuery(GET_ONE_ACCOUNT);
-  useEffect(() => {
-    if (loading) {
-      NProgress.start();
-    } else {
-      NProgress.done();
-    }
-  }, [loading]);
-  return { getUniqueAccount, data, loading, error };
+export function useUniqueAccounts(id: string) {
+  return useQuery(GET_ONE_ACCOUNT, { variables: { id } });
 }
 //create
 export const useCreateAccount = () => {
@@ -31,13 +20,7 @@ export const useCreateAccount = () => {
     refetchQueries: [{ query: GET_ACCOUNTS }],
   });
 
-  useEffect(() => {
-    if (loading) {
-      NProgress.start();
-    } else {
-      NProgress.done();
-    }
-  }, [loading]);
+  useNProgress(loading);
 
   return { createAccount, data, loading, error };
 };
@@ -47,13 +30,7 @@ export const useUpdateAccount = () => {
     refetchQueries: [{ query: GET_ACCOUNTS }],
   });
 
-  useEffect(() => {
-    if (loading) {
-      NProgress.start();
-    } else {
-      NProgress.done();
-    }
-  }, [loading]);
+  useNProgress(loading);
 
   return { updateAccount, data, loading, error };
 };
@@ -63,13 +40,7 @@ export const useDeleteAccount = () => {
     refetchQueries: [{ query: GET_ACCOUNTS }],
   });
 
-  useEffect(() => {
-    if (loading) {
-      NProgress.start();
-    } else {
-      NProgress.done();
-    }
-  }, [loading]);
+  useNProgress(loading);
 
   return { deleteAccount, data, loading, error };
 };
@@ -79,13 +50,7 @@ export const useRestoreAccount = () => {
     refetchQueries: [{ query: GET_ACCOUNTS }],
   });
 
-  useEffect(() => {
-    if (loading) {
-      NProgress.start();
-    } else {
-      NProgress.done();
-    }
-  }, [loading]);
+  useNProgress(loading);
 
   return { restoreAccount, data, loading, error };
 };

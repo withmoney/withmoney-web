@@ -27,14 +27,13 @@ const initialValues = { id: '', accountName: '', accountCurrency: '' };
 const UpdateAccount = () => {
   const history = useHistory();
   const { id } = useParams<{ id: string }>();
-  const { getUniqueAccount, data, loading, error } = useUniqueAccounts();
+  const { data, loading, error } = useUniqueAccounts(id);
   const [form, setForm] = useState<Account>(initialValues);
   const [formErrors, setFormErrors] = useState(initialValues);
   const [formValidate, setFormValidate] = useState(false);
   const { updateAccount, loading: loadingUpdate } = useUpdateAccount();
 
   useEffect(() => {
-    getUniqueAccount({ variables: { id } });
     if (data) {
       setForm({
         id: id,
