@@ -1,6 +1,8 @@
 import * as yup from 'yup';
 
-export const checkAddAccount = yup.object().shape({
-  accountName: yup.string().required('Required'),
-  accountCurrency: yup.string().required('Required'),
+const checkFields = yup.object().shape({
+  name: yup.string().required('Required'),
+  typeOrCurrency: yup.string().required('Required'),
 });
+
+export default checkFields;

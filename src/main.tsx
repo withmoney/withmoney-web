@@ -38,6 +38,9 @@ const cache = new InMemoryCache({
         findManyAccount: {
           merge: false,
         },
+        findManyCategory: {
+          merge: false,
+        },
       },
     },
   },

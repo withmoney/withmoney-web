@@ -1,6 +1,8 @@
-import { useApolloClient, useMutation, useQuery } from '@apollo/client';
+import { useApolloClient, useMutation, useLazyQuery, useQuery } from '@apollo/client';
 import { useOperationsFilters } from './useOperationsFilters';
-import { CATEGORY_SEARCH, CREATE_CATEGORY, ALL_CATEGORY } from '../graphql/Categories';
+import { ALL_CATEGORY, RESTORE_CATEGORY, GET_ONE_CATEGORY } from '../graphql/Categories';
+import { CATEGORY_SEARCH, CREATE_CATEGORY, DELETE_CATEGORY } from '../graphql/Categories';
+import { UPDATE_CATEGORY } from '../graphql/Categories';
 import { Category } from '../models';
 
 type Data = {
@@ -8,7 +10,10 @@ type Data = {
 };
 
 export function useCategories() {
-  return useQuery<Data>(ALL_CATEGORY);
+  const [getCategories, { data, loading, error }] = useLazyQuery(ALL_CATEGORY, {
+    fetchPolicy: 'network-only',
+  });
+  return { getCategories, data, loading, error };
 }
 
 export const useFilterCategories = () => {
@@ -34,16 +39,39 @@ export const useFilterCategories = () => {
   return filterCategory;
 };
 
-type CreateOneCategoryMutationData = {
+type CategoryData = {
   createOneCategory: Category;
 };
 
 export function useCreateCategory() {
-  const [createCategory, { data, error }] = useMutation<CreateOneCategoryMutationData>(
-    CREATE_CATEGORY,
-    {
-      refetchQueries: [{ query: ALL_CATEGORY }],
-    },
-  );
-  return { createCategory, data, error };
+  const [createCategory, { data, error, loading }] = useMutation<CategoryData>(CREATE_CATEGORY, {
+    refetchQueries: [{ query: ALL_CATEGORY }],
+  });
+  return { createCategory, data, loading, error };
 }
+
+export function useDeleteCategory() {
+  const [deleteCategory, { data, error, loading }] = useMutation<CategoryData>(DELETE_CATEGORY, {
+    refetchQueries: [{ query: ALL_CATEGORY }],
+  });
+  return { deleteCategory, data, loading, error };
+}
+
+export function useRestoreCategory() {
+  const [restoreCategory, { data, error, loading }] = useMutation<CategoryData>(RESTORE_CATEGORY, {
+    refetchQueries: [{ query: ALL_CATEGORY }],
+  });
+  return { restoreCategory, data, loading, error };
+}
+
+export function useUniqueCategory(id: string) {
+  return useQuery(GET_ONE_CATEGORY, { variables: { id } });
+}
+
+export const useUpdateCategory = () => {
+  const [updateCategory, { data, loading, error }] = useMutation(UPDATE_CATEGORY, {
+    refetchQueries: [{ query: ALL_CATEGORY }],
+  });
+
+  return { updateCategory, data, loading, error };
+};

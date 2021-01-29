@@ -10,7 +10,7 @@ import Button from '../../../../components/Button';
 import Flex from '../../../../components/Flex';
 import Select from '../../../../components/Select';
 import Alert from '../../../../components/Alert';
-import { checkAddAccount } from '../../../../schema/checkField';
+import checkFields from '../../../../schema/checkField';
 import { currencies } from '../../../../constants/Currencies';
 import { useUniqueAccounts } from '../../../../hooks/useAccounts';
 import { useUpdateAccount } from '../../../../hooks/useAccounts';
@@ -19,10 +19,10 @@ import LoadingSpinner from '../../../../components/LoadingSpinner';
 
 type Account = {
   id: string;
-  accountName: string;
-  accountCurrency: string;
+  name: string;
+  typeOrCurrency: string;
 };
-const initialValues = { id: '', accountName: '', accountCurrency: '' };
+const initialValues = { id: '', name: '', typeOrCurrency: '' };
 
 const UpdateAccount = () => {
   const history = useHistory();
@@ -37,15 +37,15 @@ const UpdateAccount = () => {
     if (data) {
       setForm({
         id: id,
-        accountName: data?.findUniqueAccount.name,
-        accountCurrency: data?.findUniqueAccount.currency,
+        name: data?.findUniqueAccount.name,
+        typeOrCurrency: data?.findUniqueAccount.currency,
       });
     }
   }, [data]);
 
   useEffect(() => {
     const checkForm = async () => {
-      setFormValidate(await checkAddAccount.isValid(form));
+      setFormValidate(await checkFields.isValid(form));
     };
     checkForm();
   }, [form]);
@@ -61,7 +61,7 @@ const UpdateAccount = () => {
   const handleBlur = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name } = event.target;
     try {
-      await checkAddAccount.validateAt(name, form);
+      await checkFields.validateAt(name, form);
       setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
       setFormErrors({ ...formErrors, [name]: err.message });
@@ -74,16 +74,13 @@ const UpdateAccount = () => {
       await updateAccount({
         variables: {
           id: form.id,
-          name: form.accountName,
-          currency: form.accountCurrency,
+          name: form.name,
+          currency: form.typeOrCurrency,
         },
       });
-      toast.success(
-        `Account ${data.findUniqueAccount.name} was been updated to ${form.accountName}!`,
-        {
-          position: toast.POSITION.BOTTOM_LEFT,
-        },
-      );
+      toast.success(`Account ${data.findUniqueAccount.name} was been updated to ${form.name}!`, {
+        position: toast.POSITION.BOTTOM_LEFT,
+      });
       history.push('/accounts');
     } catch (err) {
       toast.error(err.message);
@@ -104,11 +101,11 @@ const UpdateAccount = () => {
           {data && (
             <Form onSubmit={handleUpdateAccount}>
               <InputGroup>
-                <InputControl message={formErrors.accountName} isInvalid={!!formErrors.accountName}>
+                <InputControl message={formErrors.name} isInvalid={!!formErrors.name}>
                   <Input
-                    isInvalid={!!formErrors.accountName}
+                    isInvalid={!!formErrors.name}
                     type="text"
-                    name="accountName"
+                    name="name"
                     defaultValue={data?.findUniqueAccount.name}
                     placeholder="Account Name"
                     onBlur={handleBlur}
@@ -116,12 +113,12 @@ const UpdateAccount = () => {
                   />
                 </InputControl>
                 <InputControl
-                  message={formErrors.accountCurrency}
-                  isInvalid={!!formErrors.accountCurrency}
+                  message={formErrors.typeOrCurrency}
+                  isInvalid={!!formErrors.typeOrCurrency}
                 >
                   <Select
                     defaultValue={data?.findUniqueAccount.currency}
-                    name="accountCurrency"
+                    name="typeOrCurrency"
                     onChange={handleInput}
                     onBlur={handleBlur}
                   >

@@ -31,6 +31,9 @@ const Menu = ({ menuIsOpen }: Props) => {
         <ButtonLink onClick={toggleCloseMenu} to="/accounts">
           Accounts
         </ButtonLink>
+        <ButtonLink onClick={toggleCloseMenu} to="/categories">
+          Categories
+        </ButtonLink>
       </MenuContent>
       <Button onClick={LogOut}>Log out</Button>
     </MenuContainer>
