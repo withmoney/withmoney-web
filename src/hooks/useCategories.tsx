@@ -9,11 +9,8 @@ type Data = {
   categories: Category[];
 };
 
-export function useCategories() {
-  const [getCategories, { data, loading, error }] = useLazyQuery(ALL_CATEGORY, {
-    fetchPolicy: 'network-only',
-  });
-  return { getCategories, data, loading, error };
+export function useCategories(options?: any) {
+  return useQuery(ALL_CATEGORY, options);
 }
 
 export const useFilterCategories = () => {

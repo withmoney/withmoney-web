@@ -18,16 +18,14 @@ const initialValues = {
 };
 
 const Categories = () => {
-  const { getCategories, data, loading } = useCategories();
+  const [filter, setFilter] = useState(initialValues);
+  const { data, loading, refetch } = useCategories({
+    variables: { filter: filter.filterName, skip: 0, take: 5 },
+  });
   const { deleteCategory, loading: loadingDelete } = useDeleteCategory();
   const { restoreCategory } = useRestoreCategory();
-  const [filter, setFilter] = useState(initialValues);
   const [openModal, setOpenModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<Category | undefined>();
-
-  useEffect(() => {
-    getCategories({ variables: { filter: filter.filterName, skip: 0, take: 5 } });
-  }, [filter]);
 
   const handleChangeFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -48,6 +46,7 @@ const Categories = () => {
         draggable: false,
         onClick: handleRestoreCategory,
       });
+      await refetch();
     } catch (err) {
       toast.error(err.message);
     }

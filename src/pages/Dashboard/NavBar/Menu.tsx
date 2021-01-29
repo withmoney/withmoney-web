@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import Button from '../../../components/Button';
 import { MenuContainer, MenuContent, ButtonLink } from './style/Menu.style';
@@ -9,7 +10,7 @@ type Props = {
 
 const Menu = ({ menuIsOpen }: Props) => {
   const history = useHistory();
-
+  const location = useLocation();
   const LogOut = () => {
     localStorage.removeItem('withmoney-token');
     history.push('/');
@@ -28,10 +29,18 @@ const Menu = ({ menuIsOpen }: Props) => {
         <ButtonLink onClick={toggleCloseMenu} to="/">
           Change Password
         </ButtonLink>
-        <ButtonLink onClick={toggleCloseMenu} to="/accounts">
+        <ButtonLink
+          className={location.pathname === '/accounts' ? 'disabled' : undefined}
+          onClick={toggleCloseMenu}
+          to="/accounts"
+        >
           Accounts
         </ButtonLink>
-        <ButtonLink onClick={toggleCloseMenu} to="/categories">
+        <ButtonLink
+          className={location.pathname === '/categories' ? 'disabled' : undefined}
+          onClick={toggleCloseMenu}
+          to="/categories"
+        >
           Categories
         </ButtonLink>
       </MenuContent>
