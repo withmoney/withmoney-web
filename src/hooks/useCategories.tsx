@@ -1,4 +1,4 @@
-import { useApolloClient, useMutation, useLazyQuery, useQuery } from '@apollo/client';
+import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { useOperationsFilters } from './useOperationsFilters';
 import { ALL_CATEGORY, RESTORE_CATEGORY, GET_ONE_CATEGORY } from '../graphql/Categories';
 import { CATEGORY_SEARCH, CREATE_CATEGORY, DELETE_CATEGORY } from '../graphql/Categories';

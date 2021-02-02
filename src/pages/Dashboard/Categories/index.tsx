@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { TrashFill, PencilFill } from '@styled-icons/bootstrap';
 import { toast } from 'react-toastify';
 import Header from '../../../components/Header';
@@ -12,16 +12,22 @@ import Button from '../../../components/Button';
 import ButtonLink from '../../../components/ButtonLink';
 import ConfirmModal from '../../../modals/ConfirmModal';
 import { Category } from '../../../models';
+import Pagination from '../../../components/Pagination';
 
 const initialValues = {
   filterName: '',
 };
 
 const Categories = () => {
+  const [page, setPage] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [takePage, setTakePage] = useState(5);
   const [filter, setFilter] = useState(initialValues);
+
   const { data, loading, refetch } = useCategories({
-    variables: { filter: filter.filterName, skip: 0, take: 5 },
+    variables: { filter: filter.filterName, skip: page, take: takePage },
   });
+
   const { deleteCategory, loading: loadingDelete } = useDeleteCategory();
   const { restoreCategory } = useRestoreCategory();
   const [openModal, setOpenModal] = useState(false);
@@ -94,7 +100,7 @@ const Categories = () => {
           onChange={handleChangeFilter}
           value={filter.filterName}
           placeholder="Filter category"
-        ></Input>
+        />
       </PageBody>
       <PageBodyColumns>
         <Row>
@@ -142,6 +148,15 @@ const Categories = () => {
           })
         )}
       </PageBodyColumns>
+      {data?.categories && (
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          setPage={setPage}
+          itemsPerPage={takePage}
+          totalItems={24}
+        />
+      )}
     </Page>
   );
 };
