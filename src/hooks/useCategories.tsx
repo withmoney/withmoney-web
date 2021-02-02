@@ -5,10 +5,6 @@ import { CATEGORY_SEARCH, CREATE_CATEGORY, DELETE_CATEGORY } from '../graphql/Ca
 import { UPDATE_CATEGORY } from '../graphql/Categories';
 import { Category } from '../models';
 
-type Data = {
-  categories: Category[];
-};
-
 export function useCategories(options?: any) {
   return useQuery(ALL_CATEGORY, options);
 }
@@ -18,13 +14,13 @@ export const useFilterCategories = () => {
   const { currentTransactionType } = useOperationsFilters();
 
   async function filterCategory(value: string) {
-    const { data } = await client.query<Data>({
+    const { data } = await client.query({
       query: CATEGORY_SEARCH,
       variables: { name: value, type: currentTransactionType },
     });
 
-    if (data?.categories) {
-      return data.categories.map((category) => ({
+    if (data?.findManyCategory.data) {
+      return data.findManyCategory.data.map((category: Category) => ({
         value: category.id,
         label: category.name,
       }));

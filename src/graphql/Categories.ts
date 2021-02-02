@@ -3,28 +3,39 @@ import { gql } from '@apollo/client';
 // query
 export const CATEGORY_SEARCH = gql`
   query categorySearch($name: String!, $type: TransactionType!) {
-    categories: findManyCategory(
+    findManyCategory(
       where: { name: { contains: $name }, type: { equals: $type }, deletedAt: { equals: null } }
     ) {
-      id
-      name
-      type
+      data {
+        id
+        name
+        type
+      }
     }
   }
 `;
 
 export const ALL_CATEGORY = gql`
-  query filterCategories($filter: String, $skip: Int, $take: Int) {
-    categories: findManyCategory(
-      where: { name: { contains: $filter }, deletedAt: { equals: null } }
-      orderBy: [{ createdAt: desc }]
+  query filterCategories($filter: String, $skip: Int, $take: Int, $filterType: TransactionType) {
+    findManyCategory(
       skip: $skip
       take: $take
+      where: {
+        name: { contains: $filter }
+        type: { equals: $filterType }
+        deletedAt: { equals: null }
+      }
+      orderBy: [{ createdAt: desc }]
     ) {
-      id
-      name
-      type
-      deletedAt
+      data {
+        id
+        name
+        type
+        deletedAt
+      }
+      pagination {
+        totalItems
+      }
     }
   }
 `;

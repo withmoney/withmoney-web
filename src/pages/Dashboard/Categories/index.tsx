@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TrashFill, PencilFill } from '@styled-icons/bootstrap';
 import { toast } from 'react-toastify';
 import Header from '../../../components/Header';
@@ -18,14 +18,15 @@ const initialValues = {
   filterName: '',
 };
 
+const ItemsPerPage = 5;
+
 const Categories = () => {
-  const [page, setPage] = useState(0);
+  const [skipPage, setSkipPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
-  const [takePage, setTakePage] = useState(5);
   const [filter, setFilter] = useState(initialValues);
 
   const { data, loading, refetch } = useCategories({
-    variables: { filter: filter.filterName, skip: page, take: takePage },
+    variables: { filter: filter.filterName, skip: skipPage, take: ItemsPerPage },
   });
 
   const { deleteCategory, loading: loadingDelete } = useDeleteCategory();
@@ -33,12 +34,12 @@ const Categories = () => {
   const [openModal, setOpenModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<Category | undefined>();
 
-  const handleChangeFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeFilter = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
     const { name, value } = event.target;
     setFilter({
       ...filter,
-      [name]: value.trim(),
+      [name]: value,
     });
   };
 
@@ -66,12 +67,13 @@ const Categories = () => {
         autoClose: 8000,
         draggable: false,
       });
+      await refetch();
     } catch (err) {
       toast.error(err.message);
     }
   };
 
-  const toggleDeleteAccount = (category: Category) => {
+  const toggleDeleteCategory = (category: Category) => {
     setSelectedCategory(category);
     setOpenModal(true);
   };
@@ -97,6 +99,7 @@ const Categories = () => {
       <PageBody>
         <Input
           name="filterName"
+          type="text"
           onChange={handleChangeFilter}
           value={filter.filterName}
           placeholder="Filter category"
@@ -117,8 +120,8 @@ const Categories = () => {
         {loading ? (
           <LoadingData />
         ) : (
-          data?.categories &&
-          data.categories.map((category: Category) => {
+          data?.findManyCategory.data &&
+          data.findManyCategory.data.map((category: Category) => {
             return (
               <Row key={category.id}>
                 <Cell>
@@ -136,7 +139,7 @@ const Categories = () => {
                     <PencilFill />
                   </ButtonLink>
                   <Button
-                    onClick={() => toggleDeleteAccount(category)}
+                    onClick={() => toggleDeleteCategory(category)}
                     type="button"
                     variation="danger"
                   >
@@ -148,13 +151,13 @@ const Categories = () => {
           })
         )}
       </PageBodyColumns>
-      {data?.categories && (
+      {data?.findManyCategory.data && (
         <Pagination
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
-          setPage={setPage}
-          itemsPerPage={takePage}
-          totalItems={24}
+          setSkipPage={setSkipPage}
+          itemsPerPage={ItemsPerPage}
+          totalItems={data?.findManyCategory.pagination.totalItems}
         />
       )}
     </Page>

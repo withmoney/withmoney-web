@@ -27,7 +27,7 @@ type Data = {
 
 const CategorySelect = ({ CategoryId, operation }: Props) => {
   const [value, setValue] = useState<Option | undefined>();
-  const { data: allCategories, loading } = useQuery<Data>(ALL_CATEGORY);
+  const { data: allCategories, loading } = useQuery(ALL_CATEGORY);
   const { currentTransactionType } = useOperationsFilters();
   const { createCategory } = useCreateCategory();
   const { updateOperation } = useUpdateOperation();
@@ -76,16 +76,16 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
     }
   };
 
-  const defaultValues = allCategories?.categories
-    .map((category) => ({
+  const defaultValues = allCategories?.findManyCategory.data
+    .map((category: Category) => ({
       value: category.id,
       label: category.name,
     }))
     .filter((category: Option) => category.value === CategoryId);
 
-  const defaultOptions = allCategories?.categories
+  const defaultOptions = allCategories?.findManyCategory.data
     .filter((option: Category) => option.type === currentTransactionType)
-    .map((category) => ({
+    .map((category: Category) => ({
       value: category.id,
       label: category.name,
     }));
