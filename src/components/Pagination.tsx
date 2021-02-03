@@ -18,11 +18,7 @@ const Pagination = ({
   setCurrentPage,
   setSkipPage,
 }: Props) => {
-  const PageNumbers = [];
-
-  for (let i = 0; i < Math.ceil(totalItems / itemsPerPage); ++i) {
-    PageNumbers.push(i);
-  }
+  const PageNumbers = Math.ceil(totalItems / itemsPerPage);
 
   const handleGoToFirstPage = () => {
     setSkipPage(0 * itemsPerPage);
@@ -40,36 +36,35 @@ const Pagination = ({
   };
 
   const handleGoToLastPage = () => {
-    setSkipPage((PageNumbers.length - 1) * itemsPerPage);
-    setCurrentPage(PageNumbers.length - 1);
+    setSkipPage((PageNumbers - 1) * itemsPerPage);
+    setCurrentPage(PageNumbers - 1);
   };
 
   return (
     <Nav justifyContent="center">
-      <NavButton disabled={currentPage <= 0} onClick={() => handleGoToFirstPage()}>
+      <NavButton type="button" disabled={currentPage <= 0} onClick={() => handleGoToFirstPage()}>
         {'<<'}
       </NavButton>
-      <NavButton disabled={currentPage <= 0} onClick={() => handleGoToPreviousPage()}>
+      <NavButton type="button" disabled={currentPage <= 0} onClick={() => handleGoToPreviousPage()}>
         {'<'}
       </NavButton>
-      {PageNumbers.length === 0 && <NavButton disabled>1 / 1</NavButton>}
-      {PageNumbers.map(
-        (number) =>
-          currentPage >= number &&
-          currentPage <= number && (
-            <NavButton disabled key={number}>
-              {number + 1} / {PageNumbers.length}
-            </NavButton>
-          ),
+      {PageNumbers === 0 ? (
+        <NavButton disabled>1 / 1</NavButton>
+      ) : (
+        <NavButton disabled>
+          {currentPage + 1} / {PageNumbers}
+        </NavButton>
       )}
       <NavButton
-        disabled={currentPage >= PageNumbers.length - 1}
+        type="button"
+        disabled={currentPage >= PageNumbers - 1}
         onClick={() => handleGoToNextPage()}
       >
         {'>'}
       </NavButton>
       <NavButton
-        disabled={currentPage >= PageNumbers.length - 1}
+        type="button"
+        disabled={currentPage >= PageNumbers - 1}
         onClick={() => handleGoToLastPage()}
       >
         {'>>'}
