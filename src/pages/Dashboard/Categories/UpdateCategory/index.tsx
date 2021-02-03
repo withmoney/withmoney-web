@@ -42,13 +42,6 @@ const UpdateCategory = () => {
     }
   }, [data]);
 
-  useEffect(() => {
-    const checkForm = async () => {
-      setFormValidate(await checkFields.isValid(form));
-    };
-    checkForm();
-  }, [form]);
-
   const handleInput = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
     setForm({
@@ -62,6 +55,7 @@ const UpdateCategory = () => {
     try {
       await checkFields.validateAt(name, form);
       setFormErrors({ ...formErrors, [name]: '' });
+      setFormValidate(await checkFields.isValid(form));
     } catch (err) {
       setFormErrors({ ...formErrors, [name]: err.message });
     }
