@@ -20,15 +20,8 @@ const Pagination = ({
 }: Props) => {
   const PageNumbers = [];
 
-  for (let i = 0; i <= Math.ceil(totalItems / itemsPerPage) - 1; ++i) {
+  for (let i = 0; i < Math.ceil(totalItems / itemsPerPage); ++i) {
     PageNumbers.push(i);
-  }
-
-  console.log(totalItems);
-
-  if (Math.ceil(totalItems / itemsPerPage) <= 0) {
-    PageNumbers.push(0);
-    setCurrentPage(0);
   }
 
   const handleGoToFirstPage = () => {
@@ -59,6 +52,7 @@ const Pagination = ({
       <NavButton disabled={currentPage <= 0} onClick={() => handleGoToPreviousPage()}>
         {'<'}
       </NavButton>
+      {PageNumbers.length === 0 && <NavButton disabled>1 / 1</NavButton>}
       {PageNumbers.map(
         (number) =>
           currentPage >= number &&

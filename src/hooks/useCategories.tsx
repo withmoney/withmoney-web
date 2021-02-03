@@ -38,7 +38,12 @@ type CategoryData = {
 
 export function useCreateCategory() {
   const [createCategory, { data, error, loading }] = useMutation<CategoryData>(CREATE_CATEGORY, {
-    refetchQueries: [{ query: ALL_CATEGORY }],
+    refetchQueries: [
+      {
+        query: ALL_CATEGORY,
+        variables: { filter: '', skip: 0, take: 0 },
+      },
+    ],
   });
   return { createCategory, data, loading, error };
 }

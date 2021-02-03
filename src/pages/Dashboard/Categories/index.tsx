@@ -24,9 +24,9 @@ const Categories = () => {
   const [skipPage, setSkipPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [filter, setFilter] = useState(initialValues);
-
   const { data, loading, refetch } = useCategories({
     variables: { filter: filter.filterName, skip: skipPage, take: ItemsPerPage },
+    fetchPolicy: 'network-only',
   });
 
   const { deleteCategory, loading: loadingDelete } = useDeleteCategory();
@@ -36,6 +36,8 @@ const Categories = () => {
 
   const handleChangeFilter = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
+    setSkipPage(0);
+    setCurrentPage(0);
     const { name, value } = event.target;
     setFilter({
       ...filter,
@@ -54,6 +56,8 @@ const Categories = () => {
         onClick: handleRestoreCategory,
       });
       await refetch();
+      setSkipPage(0);
+      setCurrentPage(0);
     } catch (err) {
       toast.error(err.message);
     }
@@ -118,7 +122,7 @@ const Categories = () => {
           </Cell>
         </Row>
         {loading ? (
-          <LoadingData />
+          <LoadingData repeat={ItemsPerPage} />
         ) : (
           data?.findManyCategory.data &&
           data.findManyCategory.data.map((category: Category) => {
