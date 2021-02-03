@@ -41,7 +41,6 @@ export function useCreateCategory() {
     refetchQueries: [
       {
         query: ALL_CATEGORY,
-        variables: { filter: '', skip: 0, take: 0 },
       },
     ],
   });
