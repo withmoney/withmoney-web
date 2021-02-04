@@ -30,10 +30,10 @@ const FooterContainer = () => {
               All Incomes <IncomesIcons />
             </Text>
             <Text>
-              Paid Expenses <PaidExpenses />
+              Pending Expenses <PendingExpensesIcons />
             </Text>
             <Text>
-              Pending Expenses <PendingExpensesIcons />
+              Paid Expenses <PaidExpenses />
             </Text>
             <Text>
               All Credit Card Expenses <CreditCardExpenses />
@@ -41,8 +41,8 @@ const FooterContainer = () => {
           </InfoTitle>
           <InfoValue>
             <Text>{currencyFormat(LANG, CURRENCY, AllIncomes)}</Text>
-            <Text>{currencyFormat(LANG, CURRENCY, totalPaidExpenses)}</Text>
             <Text>{currencyFormat(LANG, CURRENCY, totalPendingExpenses)}</Text>
+            <Text>{currencyFormat(LANG, CURRENCY, totalPaidExpenses)}</Text>
             <Text>{currencyFormat(LANG, CURRENCY, totalCreditCardExpenses)}</Text>
           </InfoValue>
         </Info>

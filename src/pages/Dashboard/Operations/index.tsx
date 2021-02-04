@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import styled from 'styled-components';
 import { PlusCircle, MinusCircle } from '@styled-icons/boxicons-regular';
 import { Tabs } from '../../../components/Tabs';
-import Button from '../../../components/Button';
 import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
 import { useAccountFilters } from '../../../hooks/useAccountFilters';
 import DataPlaceholder from './Operation/DataPlaceholder';
@@ -12,6 +10,7 @@ import FooterContainer from './Operation/FooterContainer';
 import OperationPlaceholder from './Operation/OperationPlaceholder';
 import { Operation } from '../../../models';
 import { Container, OperationContainer, ButtonContent } from './style/Operations.style';
+import { OperationButton } from './style/Operations.style';
 import { RowHeader, CellHeader } from './Operation/style/OperationSettings';
 import { useOperations, useCreateOperation } from '../../../hooks/useOperations';
 import ConfirmModal from '../../../modals/ConfirmModal';
@@ -142,21 +141,5 @@ const Operations = () => {
     </Container>
   );
 };
-
-type Props = {
-  color: 'Deposit' | 'FixedExpense' | 'CreditCard' | 'VariableExpense';
-};
-
-const OperationButton = styled(Button)<Props>`
-  border: none;
-  background-color: ${({ color }) => color && `var(--dashboard-progress-bar-${color})`};
-  &:hover {
-    background-color: ${({ color }) => color && `var(--dashboard-progress-bar-${color}-hover)`};
-  }
-
-  svg {
-    width: 100px;
-  }
-`;
 
 export default Operations;
