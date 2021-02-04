@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ArrowCircleDown } from '@styled-icons/fa-solid';
+import { Sync } from '@styled-icons/evaicons-solid';
+import { ShoppingCart, CreditCard } from '@styled-icons/entypo';
 import { useOperationsFilters } from '../hooks/useOperationsFilters';
 import { TransactionType } from '../models';
 
@@ -13,8 +16,10 @@ export const Tabs = () => {
           setCurrentTransactionType(TransactionType.Deposit);
         }}
         open={currentTransactionType === TransactionType.Deposit}
+        operationType={currentTransactionType}
       >
-        Entrance
+        <ArrowCircleDown />
+        Incomes
       </Button>
       <Button
         type="button"
@@ -22,21 +27,27 @@ export const Tabs = () => {
           setCurrentTransactionType(TransactionType.FixedExpense);
         }}
         open={currentTransactionType === TransactionType.FixedExpense}
+        operationType={currentTransactionType}
       >
-        Recurrent
+        <Sync />
+        Recurrent Expenses
       </Button>
       <Button
-        onClick={() => setCurrentTransactionType(TransactionType.CreditCard)}
-        open={currentTransactionType === TransactionType.CreditCard}
+        onClick={() => setCurrentTransactionType(TransactionType.VariableExpense)}
+        open={currentTransactionType === TransactionType.VariableExpense}
+        operationType={currentTransactionType}
       >
-        Credit
+        <ShoppingCart />
+        Other Expenses
       </Button>
       <Button
         type="button"
-        onClick={() => setCurrentTransactionType(TransactionType.VariableExpense)}
-        open={currentTransactionType === TransactionType.VariableExpense}
+        onClick={() => setCurrentTransactionType(TransactionType.CreditCard)}
+        open={currentTransactionType === TransactionType.CreditCard}
+        operationType={currentTransactionType}
       >
-        Unforeseen
+        <CreditCard />
+        Credit Card Expenses
       </Button>
     </ButtonGroup>
   );
@@ -49,17 +60,27 @@ export const ButtonGroup = styled.div`
 `;
 
 type ButtonProps = {
-  open?: boolean;
+  open: boolean;
+  operationType: string | undefined;
 };
 
 export const Button = styled.button<ButtonProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 20px;
   text-decoration: none;
-  background-color: ${({ open }) =>
+  background-color: ${({ open, operationType }) =>
     open ? `var(--dashboard-color-white)` : `var(--dashboard-color-grey)`};
   outline: none;
   border: none;
   cursor: pointer;
+
+  svg {
+    color: ${({ open }) => (open ? 'var(--dashboard-color-white)' : 'rgba(0, 0, 0, 0.5);')};
+    width: 20px;
+    margin-right: 10px;
+  }
 
   &:hover {
     background-color: ${({ open }) =>
