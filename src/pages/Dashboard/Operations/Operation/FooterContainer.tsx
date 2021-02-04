@@ -3,45 +3,58 @@ import Text from '../../../../components/Text';
 import { currencyFormat } from '../../../../utils/currency';
 import { LANG, CURRENCY } from '../../../../constants/currency';
 import { useOperations } from '../../../../hooks/useOperations';
-import { TransactionType } from '../../../../models';
-import { getTotalOperations } from '../../../../utils/calcOperations';
+import { getTotalPendingExpenses } from '../../../../utils/calcOperations';
+import { PlannedBalance, getTotalOperations } from '../../../../utils/calcOperations';
+import { getTotalPaidExpenses, getTotalCreditCardExpenses } from '../../../../utils/calcOperations';
 import { InfoContainer, InfoWrapper, Info } from './style/FooterContainer.style';
+import { IncomesIcons, PaidExpenses, PendingExpensesIcons } from './style/FooterContainer.style';
+import { CreditCardExpenses } from './style/FooterContainer.style';
 import { InfoTitle, InfoValue } from './style/FooterContainer.style';
 
 const FooterContainer = () => {
   const { data } = useOperations();
   const operations = data?.operations || [];
 
-  const totalEntrance = getTotalOperations(operations, TransactionType.Deposit);
-  const totalRecurrent = getTotalOperations(operations, TransactionType.FixedExpense);
-  const totalCredit = getTotalOperations(operations, TransactionType.CreditCard);
-  const totalUnforeseen = getTotalOperations(operations, TransactionType.VariableExpense);
-  const closeBalance = totalEntrance - totalRecurrent - totalCredit - totalUnforeseen;
+  const AllIncomes = getTotalOperations(operations);
+  const totalPaidExpenses = getTotalPaidExpenses(operations);
+  const totalPendingExpenses = getTotalPendingExpenses(operations);
+  const totalCreditCardExpenses = getTotalCreditCardExpenses(operations);
+  const totalPlannedBalance = PlannedBalance(operations);
 
   return (
     <InfoContainer>
       <InfoWrapper>
         <Info style={{ borderBottom: '2px solid #dddd' }}>
           <InfoTitle>
-            <Text>Entrance</Text>
-            <Text>Recurrent</Text>
-            <Text>Credit</Text>
-            <Text>Unforeseen</Text>
+            <Text>
+              All Incomes <IncomesIcons />
+            </Text>
+            <Text>
+              Paid Expenses <PaidExpenses />
+            </Text>
+            <Text>
+              Pending Expenses <PendingExpensesIcons />
+            </Text>
+            <Text>
+              All Credit Card Expenses <CreditCardExpenses />
+            </Text>
           </InfoTitle>
           <InfoValue>
-            <Text>{currencyFormat(LANG, CURRENCY, totalEntrance)}</Text>
-            <Text>{currencyFormat(LANG, CURRENCY, totalRecurrent)}</Text>
-            <Text>{currencyFormat(LANG, CURRENCY, totalCredit)}</Text>
-            <Text>{currencyFormat(LANG, CURRENCY, totalUnforeseen)}</Text>
+            <Text>{currencyFormat(LANG, CURRENCY, AllIncomes)}</Text>
+            <Text>{currencyFormat(LANG, CURRENCY, totalPaidExpenses)}</Text>
+            <Text>{currencyFormat(LANG, CURRENCY, totalPendingExpenses)}</Text>
+            <Text>{currencyFormat(LANG, CURRENCY, totalCreditCardExpenses)}</Text>
           </InfoValue>
         </Info>
         <Info>
           <InfoTitle>
-            <Text bold>Closing balance</Text>
+            <Text style={{ marginRight: '60px' }} bold>
+              Planned Balance
+            </Text>
           </InfoTitle>
           <InfoValue>
-            <Text variation={closeBalance < 0 ? 'danger' : 'default'} bold>
-              {currencyFormat(LANG, CURRENCY, closeBalance)}
+            <Text variation={totalPlannedBalance < 0 ? 'danger' : 'default'} bold>
+              {currencyFormat(LANG, CURRENCY, totalPlannedBalance)}
             </Text>
           </InfoValue>
         </Info>
