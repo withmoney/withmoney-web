@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
-import { Plus } from '@styled-icons/fa-solid';
+import { PlusCircle, MinusCircle } from '@styled-icons/boxicons-regular';
 import { Tabs } from '../../../components/Tabs';
 import Button from '../../../components/Button';
 import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
@@ -125,7 +125,13 @@ const Operations = () => {
             type="button"
             rounded
           >
-            {loadingCreate ? <LoadingSpinner inButton size="20px" /> : <Plus color="blue" />}
+            {loadingCreate ? (
+              <LoadingSpinner inButton size="20px" />
+            ) : currentTransactionType === 'Deposit' ? (
+              <PlusCircle />
+            ) : (
+              <MinusCircle />
+            )}
             <span>
               <Text variation="white">{addOperationText[currentTransactionType || 'Deposit']}</Text>
             </span>
@@ -146,6 +152,10 @@ const OperationButton = styled(Button)<Props>`
   background-color: ${({ color }) => color && `var(--dashboard-progress-bar-${color})`};
   &:hover {
     background-color: ${({ color }) => color && `var(--dashboard-progress-bar-${color}-hover)`};
+  }
+
+  svg {
+    width: 100px;
   }
 `;
 
