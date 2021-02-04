@@ -10,7 +10,7 @@ import Button from '../../../../components/Button';
 import Flex from '../../../../components/Flex';
 import Select from '../../../../components/Select';
 import Alert from '../../../../components/Alert';
-import checkFields from '../../../../schema/checkField';
+import { checkAccounts } from '../../../../schema/checkField';
 import { currencies } from '../../../../constants/Currencies';
 import { useUniqueAccounts } from '../../../../hooks/useAccounts';
 import { useUpdateAccount } from '../../../../hooks/useAccounts';
@@ -20,9 +20,9 @@ import LoadingSpinner from '../../../../components/LoadingSpinner';
 type Account = {
   id: string;
   name: string;
-  typeOrCurrency: string;
+  currency: string;
 };
-const initialValues = { id: '', name: '', typeOrCurrency: '' };
+const initialValues = { id: '', name: '', currency: '' };
 
 const UpdateAccount = () => {
   const history = useHistory();
@@ -38,17 +38,10 @@ const UpdateAccount = () => {
       setForm({
         id: id,
         name: data?.findUniqueAccount.name,
-        typeOrCurrency: data?.findUniqueAccount.currency,
+        currency: data?.findUniqueAccount.currency,
       });
     }
   }, [data]);
-
-  useEffect(() => {
-    const checkForm = async () => {
-      setFormValidate(await checkFields.isValid(form));
-    };
-    checkForm();
-  }, [form]);
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -61,11 +54,12 @@ const UpdateAccount = () => {
   const handleBlur = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name } = event.target;
     try {
-      await checkFields.validateAt(name, form);
+      await checkAccounts.validateAt(name, form);
       setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
       setFormErrors({ ...formErrors, [name]: err.message });
     }
+    setFormValidate(await checkAccounts.isValid(form));
   };
 
   const handleUpdateAccount = async (event: React.ChangeEvent<HTMLFormElement>) => {
@@ -75,7 +69,7 @@ const UpdateAccount = () => {
         variables: {
           id: form.id,
           name: form.name,
-          currency: form.typeOrCurrency,
+          currency: form.currency,
         },
       });
       toast.success(`Account ${data.findUniqueAccount.name} was been updated to ${form.name}!`, {
@@ -112,13 +106,10 @@ const UpdateAccount = () => {
                     onChange={handleInput}
                   />
                 </InputControl>
-                <InputControl
-                  message={formErrors.typeOrCurrency}
-                  isInvalid={!!formErrors.typeOrCurrency}
-                >
+                <InputControl message={formErrors.currency} isInvalid={!!formErrors.currency}>
                   <Select
                     defaultValue={data?.findUniqueAccount.currency}
-                    name="typeOrCurrency"
+                    name="currency"
                     onChange={handleInput}
                     onBlur={handleBlur}
                   >

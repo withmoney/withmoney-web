@@ -8,35 +8,24 @@ type Props = {
   itemsPerPage: number;
   currentPage: number;
   setCurrentPage: (value: number) => void;
-  setSkipPage: (value: number) => void;
 };
 
-const Pagination = ({
-  itemsPerPage,
-  totalItems,
-  currentPage,
-  setCurrentPage,
-  setSkipPage,
-}: Props) => {
+const Pagination = ({ itemsPerPage, totalItems, currentPage, setCurrentPage }: Props) => {
   const PageNumbers = Math.ceil(totalItems / itemsPerPage);
 
   const handleGoToFirstPage = () => {
-    setSkipPage(0 * itemsPerPage);
     setCurrentPage(0);
   };
 
   const handleGoToNextPage = () => {
-    setSkipPage((currentPage + 1) * itemsPerPage);
     setCurrentPage(currentPage + 1);
   };
 
   const handleGoToPreviousPage = () => {
-    setSkipPage((currentPage - 1) * itemsPerPage);
     setCurrentPage(currentPage - 1);
   };
 
   const handleGoToLastPage = () => {
-    setSkipPage((PageNumbers - 1) * itemsPerPage);
     setCurrentPage(PageNumbers - 1);
   };
 

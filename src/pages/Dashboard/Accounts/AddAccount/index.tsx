@@ -9,7 +9,7 @@ import InputControl from '../../../../components/InputControl';
 import Button from '../../../../components/Button';
 import Flex from '../../../../components/Flex';
 import Select from '../../../../components/Select';
-import checkFields from '../../../../schema/checkField';
+import { checkAccounts } from '../../../../schema/checkField';
 import { currencies } from '../../../../constants/Currencies';
 import { useCreateAccount } from '../../../../hooks/useAccounts';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
@@ -18,7 +18,7 @@ import { PageHeader, Page, PageBody } from '../styles';
 
 const initialValues = {
   name: '',
-  typeOrCurrency: '',
+  currency: '',
 };
 
 const AddAccount = () => {
@@ -30,7 +30,7 @@ const AddAccount = () => {
 
   useEffect(() => {
     const checkForm = async () => {
-      setFormValidate(await checkFields.isValid(form));
+      setFormValidate(await checkAccounts.isValid(form));
     };
     checkForm();
   });
@@ -46,7 +46,7 @@ const AddAccount = () => {
   const handleBlur = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name } = event.target;
     try {
-      await checkFields.validateAt(name, form);
+      await checkAccounts.validateAt(name, form);
       setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
       setFormErrors({ ...formErrors, [name]: err.message });
@@ -57,7 +57,7 @@ const AddAccount = () => {
     event.preventDefault();
     try {
       await createAccount({
-        variables: { name: form.name, currency: form.typeOrCurrency },
+        variables: { name: form.name, currency: form.currency },
       });
       toast.success(`Account ${form.name} was been created!`, {
         position: toast.POSITION.BOTTOM_LEFT,
@@ -91,11 +91,8 @@ const AddAccount = () => {
                   onChange={handleInput}
                 />
               </InputControl>
-              <InputControl
-                message={formErrors.typeOrCurrency}
-                isInvalid={!!formErrors.typeOrCurrency}
-              >
-                <Select name="typeOrCurrency" onChange={handleInput} onBlur={handleBlur}>
+              <InputControl message={formErrors.currency} isInvalid={!!formErrors.currency}>
+                <Select name="currency" onChange={handleInput} onBlur={handleBlur}>
                   <option>Select your currency</option>
                   {currencies.map((currency) => {
                     return (

@@ -1,8 +1,11 @@
 import * as yup from 'yup';
 
-const checkFields = yup.object().shape({
+export const checkCategories = yup.object().shape({
   name: yup.string().required('Required'),
-  typeOrCurrency: yup.string().required('Required'),
+  type: yup.string().required('Required'),
 });
 
-export default checkFields;
+export const checkAccounts = yup.object().shape({
+  name: yup.string().required('Required'),
+  currency: yup.string().required('Required'),
+});

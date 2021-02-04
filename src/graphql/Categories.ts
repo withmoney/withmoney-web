@@ -16,15 +16,11 @@ export const CATEGORY_SEARCH = gql`
 `;
 
 export const ALL_CATEGORY = gql`
-  query filterCategories($name: String, $skip: Int, $take: Int, $filterType: TransactionType) {
+  query filterCategories($name: String, $skip: Int, $take: Int, $type: TransactionType) {
     findManyCategory(
       skip: $skip
       take: $take
-      where: {
-        name: { contains: $filter }
-        type: { equals: $filterType }
-        deletedAt: { equals: null }
-      }
+      where: { name: { contains: $name }, type: { equals: $type }, deletedAt: { equals: null } }
       orderBy: [{ createdAt: desc }]
     ) {
       data {

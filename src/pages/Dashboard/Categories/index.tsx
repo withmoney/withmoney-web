@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { TrashFill, PencilFill } from '@styled-icons/bootstrap';
 import { toast } from 'react-toastify';
 import Header from '../../../components/Header';
@@ -21,11 +21,10 @@ const initialValues = {
 const ItemsPerPage = 5;
 
 const Categories = () => {
-  const [skipPage, setSkipPage] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [filter, setFilter] = useState(initialValues);
   const { data, loading, refetch } = useCategories({
-    variables: { filter: filter.filterName, skip: skipPage, take: ItemsPerPage },
+    variables: { name: filter.filterName, skip: currentPage * ItemsPerPage, take: ItemsPerPage },
     fetchPolicy: 'network-only',
   });
 
@@ -36,7 +35,6 @@ const Categories = () => {
 
   const handleChangeFilter = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
-    setSkipPage(0);
     setCurrentPage(0);
     const { name, value } = event.target;
     setFilter({
@@ -56,7 +54,6 @@ const Categories = () => {
         onClick: handleRestoreCategory,
       });
       await refetch();
-      setSkipPage(0);
       setCurrentPage(0);
     } catch (err) {
       toast.error(err.message);
@@ -159,7 +156,6 @@ const Categories = () => {
         <Pagination
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
-          setSkipPage={setSkipPage}
           itemsPerPage={ItemsPerPage}
           totalItems={data?.findManyCategory.pagination.totalItems}
         />

@@ -13,15 +13,15 @@ import LoadingSpinner from '../../../../components/LoadingSpinner';
 import Alert from '../../../../components/Alert';
 import { operationType } from '../../../../constants/Transactions';
 import { useUniqueCategory, useUpdateCategory } from '../../../../hooks/useCategories';
-import checkFields from '../../../../schema/checkField';
+import { checkCategories } from '../../../../schema/checkField';
 
 type Category = {
   id: string;
   name: string;
-  typeOrCurrency: string;
+  type: string;
 };
 
-const initialValues = { id: '', name: '', typeOrCurrency: '' };
+const initialValues = { id: '', name: '', type: '' };
 
 const UpdateCategory = () => {
   const history = useHistory();
@@ -37,7 +37,7 @@ const UpdateCategory = () => {
       setForm({
         id: id,
         name: data?.findUniqueCategory.name,
-        typeOrCurrency: data?.findUniqueCategory.type,
+        type: data?.findUniqueCategory.type,
       });
     }
   }, [data]);
@@ -53,9 +53,9 @@ const UpdateCategory = () => {
   const handleBlur = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name } = event.target;
     try {
-      await checkFields.validateAt(name, form);
+      await checkCategories.validateAt(name, form);
       setFormErrors({ ...formErrors, [name]: '' });
-      setFormValidate(await checkFields.isValid(form));
+      setFormValidate(await checkCategories.isValid(form));
     } catch (err) {
       setFormErrors({ ...formErrors, [name]: err.message });
     }
@@ -68,7 +68,7 @@ const UpdateCategory = () => {
         variables: {
           id,
           name: form.name,
-          type: form.typeOrCurrency,
+          type: form.type,
         },
       });
       toast.success(`Category ${data.findUniqueCategory.name} was been updated to ${form.name}!`, {
@@ -101,16 +101,13 @@ const UpdateCategory = () => {
                   defaultValue={data?.findUniqueCategory.name}
                 />
               </InputControl>
-              <InputControl
-                message={formErrors.typeOrCurrency}
-                isInvalid={!!formErrors.typeOrCurrency}
-              >
+              <InputControl message={formErrors.type} isInvalid={!!formErrors.type}>
                 <Select
                   onBlur={handleBlur}
                   onChange={handleInput}
                   defaultValue={data?.findUniqueCategory.type}
                   style={{ width: '100%' }}
-                  name="typeOrCurrency"
+                  name="type"
                 >
                   <option value="">Select category type</option>
                   {operationType.map((operation) => (

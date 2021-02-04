@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import Header from '../../../../components/Header';
 import Flex from '../../../../components/Flex';
 import Form from '../../../../components/Form';
@@ -11,13 +12,12 @@ import InputControl from '../../../../components/InputControl';
 import Select from '../../../../components/Select';
 import { PageHeader, Page, PageBody } from '../styles';
 import { operationType } from '../../../../constants/Transactions';
-import checkFields from '../../../../schema/checkField';
+import { checkCategories } from '../../../../schema/checkField';
 import { useCreateCategory } from '../../../../hooks/useCategories';
-import { toast } from 'react-toastify';
 
 const initialValues = {
   name: '',
-  typeOrCurrency: '',
+  type: '',
 };
 
 const AddCategory = () => {
@@ -38,7 +38,7 @@ const AddCategory = () => {
   const handleBlur = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name } = event.target;
     try {
-      await checkFields.validateAt(name, form);
+      await checkCategories.validateAt(name, form);
       setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
       setFormErrors({ ...formErrors, [name]: err.message });
@@ -47,7 +47,7 @@ const AddCategory = () => {
 
   useEffect(() => {
     const checkForm = async () => {
-      setFormValidate(await checkFields.isValid(form));
+      setFormValidate(await checkCategories.isValid(form));
     };
     checkForm();
   });
@@ -55,7 +55,7 @@ const AddCategory = () => {
   const handleCreateCategory = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await createCategory({ variables: { name: form.name, type: form.typeOrCurrency } });
+      await createCategory({ variables: { name: form.name, type: form.type } });
       toast.success(`Category ${form.name} was been created!`, {
         position: toast.POSITION.BOTTOM_LEFT,
       });
@@ -85,12 +85,9 @@ const AddCategory = () => {
               ></Input>
             </InputControl>
 
-            <InputControl
-              message={formErrors.typeOrCurrency}
-              isInvalid={!!formErrors.typeOrCurrency}
-            >
+            <InputControl message={formErrors.type} isInvalid={!!formErrors.type}>
               <Select
-                name="typeOrCurrency"
+                name="type"
                 onBlur={handleBlur}
                 onChange={handleInput}
                 style={{ width: '100%' }}
