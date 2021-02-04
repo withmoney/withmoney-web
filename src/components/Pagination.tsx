@@ -67,7 +67,7 @@ const Pagination = ({
         disabled={currentPage >= PageNumbers - 1}
         onClick={() => handleGoToLastPage()}
       >
-        {'>>'}
+        {'Last Page'}
       </NavButton>
     </Nav>
   );
