@@ -70,6 +70,15 @@ export interface Operation {
 
 export interface Me extends User {}
 
-export type Data = {
-  me: User;
+export interface FindManyCategory {
+  categories: DataCategories;
+}
+
+type DataCategories = {
+  data: Category[];
+  pagination: TotalItems;
+};
+
+type TotalItems = {
+  totalItems: number;
 };
