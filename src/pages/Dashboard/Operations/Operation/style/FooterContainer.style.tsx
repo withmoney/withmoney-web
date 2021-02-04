@@ -33,7 +33,7 @@ export const InfoTitle = styled.div`
 export const InfoValue = styled.div`
   width: 150px;
   ${Text} {
-    padding: 10px 0;
+    padding: 11px 0;
   }
 `;
 
