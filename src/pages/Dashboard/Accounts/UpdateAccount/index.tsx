@@ -10,7 +10,7 @@ import Button from '../../../../components/Button';
 import Flex from '../../../../components/Flex';
 import Select from '../../../../components/Select';
 import Alert from '../../../../components/Alert';
-import { checkAddAccount } from '../../../../schema/checkField';
+import { checkAccounts } from '../../../../schema/checkField';
 import { currencies } from '../../../../constants/Currencies';
 import { useUniqueAccounts } from '../../../../hooks/useAccounts';
 import { useUpdateAccount } from '../../../../hooks/useAccounts';
@@ -19,10 +19,10 @@ import LoadingSpinner from '../../../../components/LoadingSpinner';
 
 type Account = {
   id: string;
-  accountName: string;
-  accountCurrency: string;
+  name: string;
+  currency: string;
 };
-const initialValues = { id: '', accountName: '', accountCurrency: '' };
+const initialValues = { id: '', name: '', currency: '' };
 
 const UpdateAccount = () => {
   const history = useHistory();
@@ -37,18 +37,11 @@ const UpdateAccount = () => {
     if (data) {
       setForm({
         id: id,
-        accountName: data?.findUniqueAccount.name,
-        accountCurrency: data?.findUniqueAccount.currency,
+        name: data?.findUniqueAccount.name,
+        currency: data?.findUniqueAccount.currency,
       });
     }
   }, [data]);
-
-  useEffect(() => {
-    const checkForm = async () => {
-      setFormValidate(await checkAddAccount.isValid(form));
-    };
-    checkForm();
-  }, [form]);
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
@@ -61,29 +54,23 @@ const UpdateAccount = () => {
   const handleBlur = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name } = event.target;
     try {
-      await checkAddAccount.validateAt(name, form);
+      await checkAccounts.validateAt(name, form);
       setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
       setFormErrors({ ...formErrors, [name]: err.message });
     }
+    setFormValidate(await checkAccounts.isValid(form));
   };
 
   const handleUpdateAccount = async (event: React.ChangeEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
       await updateAccount({
-        variables: {
-          id: form.id,
-          name: form.accountName,
-          currency: form.accountCurrency,
-        },
+        variables: form,
       });
-      toast.success(
-        `Account ${data.findUniqueAccount.name} was been updated to ${form.accountName}!`,
-        {
-          position: toast.POSITION.BOTTOM_LEFT,
-        },
-      );
+      toast.success(`Account ${data.findUniqueAccount.name} was been updated to ${form.name}!`, {
+        position: toast.POSITION.BOTTOM_LEFT,
+      });
       history.push('/accounts');
     } catch (err) {
       toast.error(err.message);
@@ -104,24 +91,21 @@ const UpdateAccount = () => {
           {data && (
             <Form onSubmit={handleUpdateAccount}>
               <InputGroup>
-                <InputControl message={formErrors.accountName} isInvalid={!!formErrors.accountName}>
+                <InputControl message={formErrors.name} isInvalid={!!formErrors.name}>
                   <Input
-                    isInvalid={!!formErrors.accountName}
+                    isInvalid={!!formErrors.name}
                     type="text"
-                    name="accountName"
+                    name="name"
                     defaultValue={data?.findUniqueAccount.name}
                     placeholder="Account Name"
                     onBlur={handleBlur}
                     onChange={handleInput}
                   />
                 </InputControl>
-                <InputControl
-                  message={formErrors.accountCurrency}
-                  isInvalid={!!formErrors.accountCurrency}
-                >
+                <InputControl message={formErrors.currency} isInvalid={!!formErrors.currency}>
                   <Select
                     defaultValue={data?.findUniqueAccount.currency}
-                    name="accountCurrency"
+                    name="currency"
                     onChange={handleInput}
                     onBlur={handleBlur}
                   >
