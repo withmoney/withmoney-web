@@ -32,12 +32,8 @@ export const useFilterCategories = () => {
   return filterCategory;
 };
 
-type CategoryData = {
-  operation: Category;
-};
-
 export function useCreateCategory() {
-  const [createCategory, { data, error, loading }] = useMutation<CategoryData>(CREATE_CATEGORY, {
+  const [createCategory, { data, error, loading }] = useMutation(CREATE_CATEGORY, {
     refetchQueries: [
       {
         query: ALL_CATEGORY,
@@ -48,14 +44,14 @@ export function useCreateCategory() {
 }
 
 export function useDeleteCategory() {
-  const [deleteCategory, { data, error, loading }] = useMutation<CategoryData>(DELETE_CATEGORY, {
+  const [deleteCategory, { data, error, loading }] = useMutation(DELETE_CATEGORY, {
     refetchQueries: [{ query: ALL_CATEGORY }],
   });
   return { deleteCategory, data, loading, error };
 }
 
 export function useRestoreCategory() {
-  const [restoreCategory, { data, error, loading }] = useMutation<CategoryData>(RESTORE_CATEGORY, {
+  const [restoreCategory, { data, error, loading }] = useMutation(RESTORE_CATEGORY, {
     refetchQueries: [{ query: ALL_CATEGORY }],
   });
   return { restoreCategory, data, loading, error };

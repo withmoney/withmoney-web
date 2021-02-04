@@ -39,17 +39,15 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
         variables: { name: value, type: currentTransactionType },
       });
 
-      const category = data?.operation;
-
-      if (category) {
+      if (data?.createOneCategory) {
         updateOperation({
           variables: {
             ...operation,
             accountId: operation.accountId,
-            categoryId: category.id,
+            categoryId: data?.createOneCategory.id,
           },
         });
-        setValue({ value: category.id, label: category.name });
+        setValue({ value: data?.createOneCategory.id, label: data?.createOneCategory.name });
       }
     } catch (err) {
       toast.error(err.message);
