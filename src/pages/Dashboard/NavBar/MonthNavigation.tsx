@@ -10,7 +10,10 @@ const MonthNavigation = () => {
   const { currentDateTime, setCurrentDateTime } = useOperationsFilters();
   const { loading } = useOperations();
 
-  const month = currentDateTime?.monthLong;
+  const month = currentDateTime?.monthLong.toString().replace(/^\w/, function (letter) {
+    return letter.toUpperCase();
+  });
+
   const year = currentDateTime?.year;
 
   const goToNextMonth = () => {
@@ -30,10 +33,19 @@ const MonthNavigation = () => {
       <ArrowButton isLoading={loading} onClick={goToPreviewMonth}>
         <ArrowIosBack />
       </ArrowButton>
+      <div
+        style={{
+          width: '150px',
+          display: 'flex',
+          justifyContent: 'center',
+          alignContent: 'center',
+        }}
+      >
+        <Text bold>{`${month} ${year}`}</Text>
+      </div>
       <ArrowButton isLoading={loading} onClick={goToNextMonth}>
         <ArrowIosForward />
       </ArrowButton>
-      <Text>{`${month} ${year}`}</Text>
     </DateContainer>
   );
 };
