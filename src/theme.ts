@@ -229,10 +229,10 @@ const GlobalStyle = createGlobalStyle`
   --dashboard-icon-color: #363636;
   --dashboard-icon-size: 40px;
   --dashboard-empty-progress-bar: #cfcfcf;
-  --dashboard-progress-bar-entrance: #80DA89;
-  --dashboard-progress-bar-recurrent: #DA9680;
-  --dashboard-progress-bar-credit: #D3DA80;
-  --dashboard-progress-bar-unforeseen: #C380DA;
+  --dashboard-progress-bar-Deposit: #53BC5E;
+  --dashboard-progress-bar-FixedExpense: #E98686;
+  --dashboard-progress-bar-CreditCard: #C380DA;
+  --dashboard-progress-bar-VariableExpense: #F5AD40;
 
 
   }

@@ -29,29 +29,24 @@ const Information = () => {
 
   return (
     <InformationContainer>
+      <Info variation="Deposit" name="Incomes" current={totalPaidDeposit} desired={totalDeposit} />
       <Info
-        variation="entrance"
-        name="Entrance"
-        current={totalPaidDeposit}
-        desired={totalDeposit}
-      />
-      <Info
-        variation="recurrent"
-        name="Recurrent"
+        variation="FixedExpense"
+        name="Recurrent Expenses"
         current={totalPaidFixedExpense}
         desired={totalFixedExpense}
       />
       <Info
-        variation="credit"
-        name="Credit"
-        current={totalPaidCreditCard}
-        desired={totalCreditCard}
-      />
-      <Info
-        variation="unforeseen"
-        name="Unforeseen"
+        variation="VariableExpense"
+        name="Other Expenses"
         current={totalPaidVariableExpense}
         desired={totalVariableExpense}
+      />
+      <Info
+        variation="CreditCard"
+        name="Credit Card Expenses"
+        current={totalPaidCreditCard}
+        desired={totalCreditCard}
       />
     </InformationContainer>
   );

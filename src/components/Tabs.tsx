@@ -68,10 +68,11 @@ export const Button = styled.button<ButtonProps>`
   display: flex;
   justify-content: center;
   align-items: center;
+  color: ${({ open }) => (open ? 'var(--dashboard-color-white)' : 'normal')};
   padding: 20px;
   text-decoration: none;
   background-color: ${({ open, operationType }) =>
-    open ? `var(--dashboard-color-white)` : `var(--dashboard-color-grey)`};
+    open ? `var(--dashboard-progress-bar-${operationType})` : `var(--dashboard-color-grey)`};
   outline: none;
   border: none;
   cursor: pointer;
@@ -83,12 +84,16 @@ export const Button = styled.button<ButtonProps>`
   }
 
   &:hover {
-    background-color: ${({ open }) =>
-      open ? 'var(--dashboard-color-white)' : 'var(--dashboard-button-color-hover)'};
+    background-color: ${({ open, operationType }) =>
+      open
+        ? `var(--dashboard-progress-bar-${operationType})`
+        : 'var(--dashboard-button-color-hover)'};
   }
 
   &:active {
-    background-color: ${({ open }) =>
-      open ? 'var(--dashboard-color-white)' : 'var(--dashboard-button-color-active)'};
+    background-color: ${({ open, operationType }) =>
+      open
+        ? `var(--dashboard-progress-bar-${operationType})`
+        : 'var(--dashboard-button-color-active)'};
   }
 `;

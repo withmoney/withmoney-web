@@ -8,7 +8,7 @@ type Props = {
   name: string;
   current: number;
   desired: number;
-  variation: 'entrance' | 'recurrent' | 'credit' | 'unforeseen';
+  variation: 'Deposit' | 'FixedExpense' | 'CreditCard' | 'VariableExpense';
 };
 
 const percentCalc = (current: number, desired: number) => {
