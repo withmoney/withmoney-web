@@ -76,14 +76,14 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
     }
   };
 
-  const defaultValues = allCategories?.findManyCategory.data
+  const defaultValues = allCategories?.categories.data
     .map((category: Category) => ({
       value: category.id,
       label: category.name,
     }))
     .filter((category: Option) => category.value === CategoryId);
 
-  const defaultOptions = allCategories?.findManyCategory.data
+  const defaultOptions = allCategories?.categories.data
     .filter((option: Category) => option.type === currentTransactionType)
     .map((category: Category) => ({
       value: category.id,

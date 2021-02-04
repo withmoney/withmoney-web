@@ -3,15 +3,7 @@ import { useOperationsFilters } from './useOperationsFilters';
 import { ALL_CATEGORY, RESTORE_CATEGORY, GET_ONE_CATEGORY } from '../graphql/Categories';
 import { CATEGORY_SEARCH, CREATE_CATEGORY, DELETE_CATEGORY } from '../graphql/Categories';
 import { UPDATE_CATEGORY } from '../graphql/Categories';
-import { Category } from '../models';
-
-type Data = {
-  findManyCategory: categories;
-};
-
-type categories = {
-  data: Category[];
-};
+import { Category, FindManyCategory } from '../models';
 
 export function useCategories(options?: any) {
   return useQuery(ALL_CATEGORY, options);
@@ -22,13 +14,13 @@ export const useFilterCategories = () => {
   const { currentTransactionType } = useOperationsFilters();
 
   async function filterCategory(value: string) {
-    const { data } = await client.query<Data>({
+    const { data } = await client.query<FindManyCategory>({
       query: CATEGORY_SEARCH,
       variables: { name: value, type: currentTransactionType },
     });
 
-    if (data?.findManyCategory.data) {
-      return data.findManyCategory.data.map((category: Category) => ({
+    if (data?.categories.data) {
+      return data.categories.data.map((category: Category) => ({
         value: category.id,
         label: category.name,
       }));

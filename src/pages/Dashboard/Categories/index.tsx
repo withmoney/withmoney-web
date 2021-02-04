@@ -121,8 +121,8 @@ const Categories = () => {
         {loading ? (
           <LoadingData repeat={ItemsPerPage} />
         ) : (
-          data?.findManyCategory.data &&
-          data.findManyCategory.data.map((category: Category) => {
+          data?.categories.data &&
+          data.categories.data.map((category: Category) => {
             return (
               <Row key={category.id}>
                 <Cell>
@@ -152,12 +152,12 @@ const Categories = () => {
           })
         )}
       </PageBodyColumns>
-      {data?.findManyCategory.data && (
+      {data?.categories.data && (
         <Pagination
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           itemsPerPage={ItemsPerPage}
-          totalItems={data?.findManyCategory.pagination.totalItems}
+          totalItems={data.categories.pagination.totalItems}
         />
       )}
     </Page>

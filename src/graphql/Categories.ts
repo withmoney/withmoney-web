@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 // query
 export const CATEGORY_SEARCH = gql`
   query categorySearch($name: String!, $type: TransactionType!) {
-    findManyCategory(
+    categories: findManyCategory(
       where: { name: { contains: $name }, type: { equals: $type }, deletedAt: { equals: null } }
     ) {
       data {
@@ -17,7 +17,7 @@ export const CATEGORY_SEARCH = gql`
 
 export const ALL_CATEGORY = gql`
   query filterCategories($name: String, $skip: Int, $take: Int, $type: TransactionType) {
-    findManyCategory(
+    categories: findManyCategory(
       skip: $skip
       take: $take
       where: { name: { contains: $name }, type: { equals: $type }, deletedAt: { equals: null } }
