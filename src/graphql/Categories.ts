@@ -16,7 +16,7 @@ export const CATEGORY_SEARCH = gql`
 `;
 
 export const ALL_CATEGORY = gql`
-  query filterCategories($filter: String, $skip: Int, $take: Int, $filterType: TransactionType) {
+  query filterCategories($name: String, $skip: Int, $take: Int, $filterType: TransactionType) {
     findManyCategory(
       skip: $skip
       take: $take
