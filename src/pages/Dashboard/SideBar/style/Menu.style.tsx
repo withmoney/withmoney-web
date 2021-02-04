@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import Link from '../../../../components/Link';
-import { AttachMoney as IconMoney, MoneyOff as IconMoneyOff } from '@styled-icons/material';
+import { AttachMoney as IconMoney } from '@styled-icons/material';
+import { BarGraph } from '@styled-icons/entypo';
 
 export const Money = styled(IconMoney)`
   width: 30px;
   margin-right: 10px;
 `;
 
-export const MoneyOff = styled(IconMoneyOff)`
+export const Graph = styled(BarGraph)`
   width: 30px;
   margin-right: 10px;
 `;
