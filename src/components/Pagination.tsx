@@ -60,7 +60,7 @@ const Pagination = ({
         disabled={currentPage >= PageNumbers - 1}
         onClick={() => handleGoToNextPage()}
       >
-        {'>'}
+        {'Next'}
       </NavButton>
       <NavButton
         type="button"
