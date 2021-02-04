@@ -38,6 +38,7 @@ const GlobalStyle = createGlobalStyle`
     --text-primary-color: #219653;
     --text-light-color: #9AA0A9;
     --text-danger-color: #E98686;
+    --text-white-color: #FFFFFF;
 
     --text-default-color-hover: #636363;
     --text-primary-color-hover: #27a75e;
@@ -233,6 +234,11 @@ const GlobalStyle = createGlobalStyle`
   --dashboard-progress-bar-FixedExpense: #E98686;
   --dashboard-progress-bar-CreditCard: #C380DA;
   --dashboard-progress-bar-VariableExpense: #F5AD40;
+
+  --dashboard-progress-bar-Deposit-hover: #4ab054;
+  --dashboard-progress-bar-FixedExpense-hover: #dd7171;
+  --dashboard-progress-bar-CreditCard-hover: #b86bd2;
+  --dashboard-progress-bar-VariableExpense-hover: #eea332;
 
 
   }

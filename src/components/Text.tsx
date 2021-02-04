@@ -7,7 +7,7 @@ type Props = {
   bold?: boolean;
 };
 
-type Variations = 'primary' | 'danger' | 'light' | 'default';
+type Variations = 'primary' | 'danger' | 'light' | 'white' | 'default';
 
 const Text = styled.p<Props>`
   color: ${({ variation = 'default' }) => `var(--text-${variation}-color)`};

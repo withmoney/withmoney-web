@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { Plus } from '@styled-icons/evaicons-solid';
+import styled from 'styled-components';
+import { Plus } from '@styled-icons/fa-solid';
 import { Tabs } from '../../../components/Tabs';
 import Button from '../../../components/Button';
 import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
@@ -16,6 +17,7 @@ import { useOperations, useCreateOperation } from '../../../hooks/useOperations'
 import ConfirmModal from '../../../modals/ConfirmModal';
 import { addOperationText } from '../../../constants/Transactions';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import Text from '../../../components/Text';
 import { useDeleteOperation, useRestoreOperation } from '../../../hooks/useOperations';
 
 const Operations = () => {
@@ -115,21 +117,38 @@ const Operations = () => {
           ))}
         {!loading && !operations.length && <OperationPlaceholder />}
         <ButtonContent>
-          <Button
+          <OperationButton
+            variation="primary"
+            color={currentTransactionType || 'Deposit'}
             disabled={loadingCreate}
             onClick={handleCreateOperation}
             type="button"
             rounded
-            variation="light"
           >
-            {loadingCreate ? <LoadingSpinner inButton size="20px" /> : <Plus />}
-            <span>{addOperationText[currentTransactionType || 'Deposit']}</span>
-          </Button>
+            {loadingCreate ? <LoadingSpinner inButton size="20px" /> : <Plus color="blue" />}
+            <span>
+              <Text variation="white" bold>
+                {addOperationText[currentTransactionType || 'Deposit']}
+              </Text>
+            </span>
+          </OperationButton>
         </ButtonContent>
       </OperationContainer>
       <FooterContainer />
     </Container>
   );
 };
+
+type Props = {
+  color: 'Deposit' | 'FixedExpense' | 'CreditCard' | 'VariableExpense';
+};
+
+const OperationButton = styled(Button)<Props>`
+  border: none;
+  background-color: ${({ color }) => color && `var(--dashboard-progress-bar-${color})`};
+  &:hover {
+    background-color: ${({ color }) => color && `var(--dashboard-progress-bar-${color}-hover)`};
+  }
+`;
 
 export default Operations;
