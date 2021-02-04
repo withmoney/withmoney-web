@@ -66,11 +66,7 @@ const UpdateAccount = () => {
     event.preventDefault();
     try {
       await updateAccount({
-        variables: {
-          id: form.id,
-          name: form.name,
-          currency: form.currency,
-        },
+        variables: form,
       });
       toast.success(`Account ${data.findUniqueAccount.name} was been updated to ${form.name}!`, {
         position: toast.POSITION.BOTTOM_LEFT,

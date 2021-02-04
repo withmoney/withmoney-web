@@ -57,7 +57,7 @@ const AddAccount = () => {
     event.preventDefault();
     try {
       await createAccount({
-        variables: { name: form.name, currency: form.currency },
+        variables: form,
       });
       toast.success(`Account ${form.name} was been created!`, {
         position: toast.POSITION.BOTTOM_LEFT,

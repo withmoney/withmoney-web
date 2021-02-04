@@ -33,7 +33,7 @@ export const useFilterCategories = () => {
 };
 
 type CategoryData = {
-  createOneCategory: Category;
+  operation: Category;
 };
 
 export function useCreateCategory() {

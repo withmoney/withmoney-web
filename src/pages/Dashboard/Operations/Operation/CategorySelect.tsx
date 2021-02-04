@@ -7,7 +7,7 @@ import Input from '../../../../components/Input';
 import { useFilterCategories, useCreateCategory } from '../../../../hooks/useCategories';
 import { useOperationsFilters } from '../../../../hooks/useOperationsFilters';
 import { useUpdateOperation } from '../../../../hooks/useOperations';
-import { Operation, Category } from '../../../../models';
+import { Operation, FindManyCategory } from '../../../../models';
 import { ALL_CATEGORY } from '../../../../graphql/Categories';
 import customStyles from './style/CategorySelect.style';
 
@@ -21,13 +21,9 @@ type Option = {
   label: string;
 };
 
-type Data = {
-  categories: Category[];
-};
-
 const CategorySelect = ({ CategoryId, operation }: Props) => {
   const [value, setValue] = useState<Option | undefined>();
-  const { data: allCategories, loading } = useQuery(ALL_CATEGORY);
+  const { data: allCategories, loading } = useQuery<FindManyCategory>(ALL_CATEGORY);
   const { currentTransactionType } = useOperationsFilters();
   const { createCategory } = useCreateCategory();
   const { updateOperation } = useUpdateOperation();
@@ -43,7 +39,7 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
         variables: { name: value, type: currentTransactionType },
       });
 
-      const category = data?.createOneCategory;
+      const category = data?.operation;
 
       if (category) {
         updateOperation({
@@ -77,15 +73,15 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
   };
 
   const defaultValues = allCategories?.categories.data
-    .map((category: Category) => ({
+    .map((category) => ({
       value: category.id,
       label: category.name,
     }))
-    .filter((category: Option) => category.value === CategoryId);
+    .filter((category) => category.value === CategoryId);
 
   const defaultOptions = allCategories?.categories.data
-    .filter((option: Category) => option.type === currentTransactionType)
-    .map((category: Category) => ({
+    .filter((option) => option.type === currentTransactionType)
+    .map((category) => ({
       value: category.id,
       label: category.name,
     }));
