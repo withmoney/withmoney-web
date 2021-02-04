@@ -43,7 +43,7 @@ const Pagination = ({
   return (
     <Nav justifyContent="center">
       <NavButton type="button" disabled={currentPage <= 0} onClick={() => handleGoToFirstPage()}>
-        {'<<'}
+        {'First Page'}
       </NavButton>
       <NavButton type="button" disabled={currentPage <= 0} onClick={() => handleGoToPreviousPage()}>
         {'Previous'}
