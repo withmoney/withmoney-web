@@ -240,6 +240,16 @@ const GlobalStyle = createGlobalStyle`
   --dashboard-progress-bar-CreditCard-hover: #b86bd2;
   --dashboard-progress-bar-VariableExpense-hover: #eea332;
 
+  --dashboard-progress-bar-Deposit-disabled: #a0d4a6;
+  --dashboard-progress-bar-FixedExpense-disabled: #ecbaba;
+  --dashboard-progress-bar-CreditCard-disabled: #dbb0ea;
+  --dashboard-progress-bar-VariableExpense-disabled: #f2d09c;
+
+  --dashboard-progress-bar-Deposit-active: #3f9648;
+  --dashboard-progress-bar-FixedExpense-active: #b25b5b;
+  --dashboard-progress-bar-CreditCard-active: #9658ab;
+  --dashboard-progress-bar-VariableExpense-active: #ce8418;
+
 
   }
   * {

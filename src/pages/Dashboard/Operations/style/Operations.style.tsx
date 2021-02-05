@@ -33,11 +33,25 @@ export const OperationButton = styled(Button)<Props>`
     background-color: ${({ color }) => color && `var(--dashboard-progress-bar-${color}-hover)`};
   }
 
+  &:disabled {
+    background-color: ${({ color }) => color && `var(--dashboard-progress-bar-${color}-disabled)`};
+  }
+
+  &:active {
+    background-color: ${({ color }) => color && `var(--dashboard-progress-bar-${color}-active)`};
+  }
+
+  &:focus {
+    box-shadow: none;
+    background-color: ${({ color }) => color && `var(--dashboard-progress-bar-${color})`};
+  }
+
   svg {
     width: 100px;
   }
 
   ${StyledIconBase} {
+    border: none;
     color: ${({ variation = 'default' }) => `var(--button-${variation}-color)`};
     font-size: 22px;
     width: 22px;
