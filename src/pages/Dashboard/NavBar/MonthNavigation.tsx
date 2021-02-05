@@ -1,19 +1,17 @@
 import React from 'react';
 import { ArrowIosBack, ArrowIosForward } from '@styled-icons/evaicons-solid';
 import ArrowButton from './ArrowButton';
+import lodash from 'lodash';
 import Text from '../../../components/Text';
-import { DateContainer } from './style/MonthNavigation.style';
+import { DateContainer, MonthContent } from './style/MonthNavigation.style';
 import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
 import { useOperations } from '../../../hooks/useOperations';
 
 const MonthNavigation = () => {
   const { currentDateTime, setCurrentDateTime } = useOperationsFilters();
   const { loading } = useOperations();
-
-  const month = currentDateTime?.monthLong.toString().replace(/^\w/, function (letter) {
-    return letter.toUpperCase();
-  });
-
+  const month = currentDateTime?.monthLong.toString();
+  const monthCapitalize = lodash.capitalize(month);
   const year = currentDateTime?.year;
 
   const goToNextMonth = () => {
@@ -33,16 +31,9 @@ const MonthNavigation = () => {
       <ArrowButton isLoading={loading} onClick={goToPreviewMonth}>
         <ArrowIosBack />
       </ArrowButton>
-      <div
-        style={{
-          width: '150px',
-          display: 'flex',
-          justifyContent: 'center',
-          alignContent: 'center',
-        }}
-      >
-        <Text bold>{`${month} ${year}`}</Text>
-      </div>
+      <MonthContent>
+        <Text bold>{`${monthCapitalize} ${year}`}</Text>
+      </MonthContent>
       <ArrowButton isLoading={loading} onClick={goToNextMonth}>
         <ArrowIosForward />
       </ArrowButton>
