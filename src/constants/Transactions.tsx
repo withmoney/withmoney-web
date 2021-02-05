@@ -1,10 +1,10 @@
 import { TransactionType } from '../models';
 
 export const addOperationText = {
-  [TransactionType.Deposit]: 'Add Entrance',
-  [TransactionType.FixedExpense]: 'Add Recurrent',
-  [TransactionType.CreditCard]: 'Add Credit',
-  [TransactionType.VariableExpense]: 'Add Unforeseen',
+  [TransactionType.Deposit]: 'Add Income',
+  [TransactionType.FixedExpense]: 'Add Expense',
+  [TransactionType.CreditCard]: 'Add Expense',
+  [TransactionType.VariableExpense]: 'Add Expense',
 };
 
 export const operationType = [

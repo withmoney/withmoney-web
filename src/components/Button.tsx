@@ -58,7 +58,7 @@ const Button = styled.button<Props>`
 
   ${StyledIconBase} {
     color: ${({ variation = 'default' }) => `var(--button-${variation}-color)`};
-    font-size: --font-default;
+    font-size: var(--font-default);
     width: var(--button-icon-width);
   }
 

@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import Text from '../../../../../components/Text';
+import { ArrowCircleDown, ArrowCircleUp, Check } from '@styled-icons/fa-solid/';
+import { CreditCard } from '@styled-icons/boxicons-regular';
 
 export const InfoContainer = styled.div`
   display: flex;
@@ -31,6 +33,30 @@ export const InfoTitle = styled.div`
 export const InfoValue = styled.div`
   width: 150px;
   ${Text} {
-    padding: 10px 0;
+    padding: 11px 0;
   }
+`;
+
+export const IncomesIcons = styled(ArrowCircleDown)`
+  width: 20px;
+  color: var(--dashboard-progress-bar-Deposit);
+  margin-left: 10px;
+`;
+
+export const PaidExpenses = styled(Check)`
+  width: 20px;
+  color: var(--dashboard-progress-bar-VariableExpense);
+  margin-left: 10px;
+`;
+
+export const PendingExpensesIcons = styled(ArrowCircleUp)`
+  width: 20px;
+  color: var(--dashboard-progress-bar-FixedExpense);
+  margin-left: 10px;
+`;
+
+export const CreditCardExpenses = styled(CreditCard)`
+  width: 20px;
+  color: var(--dashboard-progress-bar-CreditCard);
+  margin-left: 10px;
 `;

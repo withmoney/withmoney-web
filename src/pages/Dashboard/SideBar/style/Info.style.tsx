@@ -7,6 +7,7 @@ type ProgressProps = {
 
 export const InfoContainer = styled.div`
   padding: 10px 20px;
+  margin: 5px 0;
 `;
 
 export const ProgressBar = styled.div`
