@@ -14,6 +14,7 @@ const isSidebarOpenContext = createContext<SidebarContext>({
 });
 
 export default function SidebarProvider({ children }: Props) {
+  !localStorage.getItem('sidebarCollapse') && localStorage.setItem('sidebarCollapse', 'true');
   const [isSidebarOpen, setSidebarVisibility] = useState(
     localStorage.getItem('sidebarCollapse') === 'true',
   );
