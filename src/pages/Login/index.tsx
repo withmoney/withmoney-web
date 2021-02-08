@@ -2,6 +2,7 @@ import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import { USER_LOGIN } from '../../graphql/AuthGql';
 import { loginSchema } from '../../schema/auth';
 import Button from '../../components/Button';
@@ -24,7 +25,7 @@ const initialValues = {
 const Login = () => {
   const [userLogin, { loading }] = useMutation(USER_LOGIN);
   const history = useHistory();
-
+  const { t } = useTranslation('login');
   const [form, setForm] = useState(initialValues);
   const [formErrors, setFormErrors] = useState(initialValues);
   const [formValidate, setFormValidate] = useState(false);
@@ -69,7 +70,7 @@ const Login = () => {
         localStorage.setItem('withmoney-token', token);
         history.push('/');
       } catch (err) {
-        toast.error(err.message);
+        toast.error(t(`error.${err.message}`));
       }
     }
   };
@@ -78,12 +79,12 @@ const Login = () => {
     <Page>
       <Container>
         <Header as="h1" align="center">
-          withmoney
+          {t('brand')}
         </Header>
 
         <Form onSubmit={onSubmit}>
           <Header as="h3" align="center">
-            Log in
+            {t('title')}
           </Header>
 
           <InputControl message={formErrors.email} isInvalid={!!formErrors.email}>
@@ -92,7 +93,7 @@ const Login = () => {
                 isInvalid={!!formErrors.email}
                 type="email"
                 name="email"
-                placeholder="Email"
+                placeholder={t('form.email')}
                 disabled={loading}
                 onBlur={handleBlur}
                 onChange={handleInput}
@@ -106,7 +107,7 @@ const Login = () => {
                 isInvalid={!!formErrors.password}
                 type="password"
                 name="password"
-                placeholder="Password"
+                placeholder={t('form.password')}
                 disabled={loading}
                 onChange={handleInput}
                 onBlur={handleBlur}
@@ -116,18 +117,18 @@ const Login = () => {
 
           <Flex justifyContent="space-between">
             <Link to="/change-password" variation="primary">
-              Reset your password
+              {t('resetPassword')}
             </Link>
 
             <Button variation="primary" disabled={!formValidate || loading}>
-              {loading ? 'Sending...' : 'Log in'}
+              {loading ? t('form.loading') : t('form.action')}
             </Button>
           </Flex>
 
           <Flex justifyContent="space-between">
-            <Text>Do you not have an account?</Text>
+            <Text>{t('doYouHaveAccount')}</Text>
             <Link to="/signup" variation="primary">
-              Sign up
+              {t('signUp')}
             </Link>
           </Flex>
         </Form>
