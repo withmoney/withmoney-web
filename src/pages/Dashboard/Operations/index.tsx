@@ -36,11 +36,11 @@ const Operations = () => {
   };
 
   //CreateOperation
-  const handleCreateOperation = () => {
+  const handleCreateOperation = async () => {
     const verify =
       (currentDateTime?.toISO() || '') > (currentDateTime?.endOf('month').toISO() || '');
     try {
-      createOperation({
+      await createOperation({
         variables: {
           type: currentTransactionType,
           accountID: currentAccount?.id,

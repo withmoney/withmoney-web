@@ -119,6 +119,9 @@ const CreditCardModal = ({
             </InputControl>
 
             <Flex justifyContent="flex-end">
+              <Button onClick={() => setIsOpenModal(false)} variation="light" type="button">
+                Cancel
+              </Button>
               <Button
                 disabled={!formValidate || isLoading}
                 onClick={() => formValidate && onConfirm()}
@@ -126,9 +129,6 @@ const CreditCardModal = ({
                 type="button"
               >
                 {isLoading ? <LoadingSpinner size="20px" /> : 'Create'}
-              </Button>
-              <Button onClick={() => setIsOpenModal(false)} variation="light" type="button">
-                no
               </Button>
             </Flex>
           </Form>

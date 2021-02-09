@@ -19,6 +19,7 @@ type Props = {
 
 const CreditCardSelect = ({ operation }: Props) => {
   const { currentAccount } = useAccountFilters();
+  const [value, setValue] = useState<Option | undefined>();
   const { createCreditCard, loading: loadingCreateCard } = useCreateCategory();
   const [form, setForm] = useState(initialValues);
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -60,12 +61,23 @@ const CreditCardSelect = ({ operation }: Props) => {
   // create Credit Card
   const createCard = async () => {
     try {
-      await createCreditCard({
+      const { data: dataCreditCard } = await createCreditCard({
         variables: {
           ...form,
           account: currentAccount?.id,
         },
       });
+
+      if (dataCreditCard?.createOneCreditCard) {
+        const card = dataCreditCard.createOneCreditCard;
+        await updateOperation({
+          variables: {
+            ...operation,
+            creditCardId: card.id,
+          },
+        });
+        setValue({ value: card.id, label: card.name });
+      }
       setModalIsOpen(false);
     } catch (err) {
       toast.error(err.message);
@@ -105,6 +117,7 @@ const CreditCardSelect = ({ operation }: Props) => {
 
       <AsyncCreatableSelect
         cacheOptions
+        value={value}
         defaultOptions={defaultOptions}
         defaultValue={defaultValues}
         loadOptions={loadOptions}

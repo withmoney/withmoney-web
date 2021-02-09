@@ -40,7 +40,7 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
       });
 
       if (data?.createOneCategory) {
-        updateOperation({
+        await updateOperation({
           variables: {
             ...operation,
             accountId: operation.accountId,
