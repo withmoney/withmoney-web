@@ -21,7 +21,7 @@ const CreditCardSelect = ({ operation }: Props) => {
   const { currentAccount } = useAccountFilters();
   const { createCreditCard, loading: loadingCreateCard } = useCreateCategory();
   const [form, setForm] = useState(initialValues);
-  const [modalIsOpen, setModalIsOpen] = useState(true);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const { updateOperation } = useUpdateOperation();
   const filterCards = useFilterCards();
   const { data, loading } = useQuery<CreditCards>(ALL_CARDS, {
@@ -45,7 +45,6 @@ const CreditCardSelect = ({ operation }: Props) => {
 
   // Update CreditCard
   const update = async (data: any) => {
-    console.log(data.value);
     try {
       await updateOperation({
         variables: {
