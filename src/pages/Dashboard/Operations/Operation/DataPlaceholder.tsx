@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import Flex from '../../../../components/Flex';
 import LoadingData from '../../../../components/LoadingData';
+import { TransactionType } from '../../../../models';
+import { useOperationsFilters } from '../../../../hooks/useOperationsFilters';
 
 type Props = {
   isLoading: boolean;
@@ -10,6 +12,7 @@ type Props = {
 
 const DataPlaceholder = ({ isLoading, rows = 2 }: Props): any => {
   const Rows = Array.from({ length: rows });
+  const { currentTransactionType } = useOperationsFilters();
   if (!!isLoading) {
     return Rows.map((_, rowIndex) => (
       <Row key={rowIndex} alignItems="center">
@@ -25,6 +28,11 @@ const DataPlaceholder = ({ isLoading, rows = 2 }: Props): any => {
         <Cell flex="1">
           <LoadingData />
         </Cell>
+        {currentTransactionType === TransactionType.CreditCard && (
+          <Cell width="200px">
+            <LoadingData />
+          </Cell>
+        )}
         <Cell width="200px">
           <LoadingData />
         </Cell>

@@ -9,11 +9,13 @@ import CheckBox from '../../../../components/Checkbox';
 import DatePicker from '../../../../components/DatePicker';
 import InputOperations from './InputOptions';
 import CategorySelect from './CategorySelect';
+import CreditCardSelect from './CreditCardSelect';
 import InputCurrency from '../../../../components/InputCurrency';
 import { Operation } from '../../../../models';
 import { TrashFill } from '@styled-icons/bootstrap';
 import { Row, Cell } from '../Operation/style/OperationSettings';
 import { useAccountFilters } from '../../../../hooks/useAccountFilters';
+import { TransactionType } from '../../../../models';
 
 type OperationItemProps = {
   operation: Operation;
@@ -85,6 +87,11 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
       <Cell flex="1">
         <CategorySelect operation={operation} CategoryId={operation.categoryId} />
       </Cell>
+      {operation.type === TransactionType.CreditCard && (
+        <Cell width="200px">
+          <CreditCardSelect operation={operation} />
+        </Cell>
+      )}
       <Cell width="200px">
         <InputCurrency
           onChange={toggleInputCurrency}

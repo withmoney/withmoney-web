@@ -20,6 +20,7 @@ export const GET_OPERATIONS = gql`
       createdAt
       accountId
       categoryId
+      creditCardId
     }
   }
 `;
@@ -35,6 +36,7 @@ export const UPDATE_OPERATION = gql`
     $value: Float!
     $isPaid: Boolean!
     $paidAt: DateTime!
+    $creditCardId: String
   ) {
     updateOneOperation(
       where: { id: $id }
@@ -46,6 +48,7 @@ export const UPDATE_OPERATION = gql`
         value: $value
         isPaid: $isPaid
         paidAt: $paidAt
+        creditCardId: $creditCardId
       }
     ) {
       id

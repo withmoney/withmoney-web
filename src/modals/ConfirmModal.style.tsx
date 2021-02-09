@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import Button from '../components/Button';
 
-export const CustomStyles = {
+export const stylesConfirmModal = {
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
     justifyContent: 'center',
@@ -11,6 +11,25 @@ export const CustomStyles = {
     borderRadius: '8px',
     minWidth: '500px',
     top: '180px',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+    border: 'none',
+  },
+};
+
+export const stylesCreditCard = {
+  overlay: {
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    justifyContent: 'center',
+  },
+  content: {
+    padding: '0',
+    borderRadius: '8px',
+    minWidth: '500px',
+    top: '300px',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
