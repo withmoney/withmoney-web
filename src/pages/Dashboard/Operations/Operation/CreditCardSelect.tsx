@@ -13,6 +13,7 @@ import CreditCardModal from '../../../../modals/CreditCardModal';
 import { CreditCardBrand } from '../../../../models';
 import { useAccountFilters } from '../../../../hooks/useAccountFilters';
 
+// Props
 type Props = {
   operation: Operation;
 };
@@ -22,12 +23,14 @@ type Option = {
   label: string;
 };
 
+// default Values
 const initialValues = {
   name: '',
   brand: CreditCardBrand.AmericanExpress,
   limit: 0,
 };
 
+// Component
 const CreditCardSelect = ({ operation }: Props) => {
   const { currentAccount } = useAccountFilters();
   const [value, setValue] = useState<Option | undefined>();
@@ -80,14 +83,14 @@ const CreditCardSelect = ({ operation }: Props) => {
       });
 
       if (dataCreditCard?.createOneCreditCard) {
-        const card = dataCreditCard.createOneCreditCard;
+        const creditCard = dataCreditCard.createOneCreditCard;
         await updateOperation({
           variables: {
             ...operation,
-            creditCardId: card.id,
+            creditCardId: creditCard.id,
           },
         });
-        setValue({ value: card.id, label: card.name });
+        setValue({ value: creditCard.id, label: creditCard.name });
       }
       setModalIsOpen(false);
     } catch (err) {
@@ -95,20 +98,20 @@ const CreditCardSelect = ({ operation }: Props) => {
     }
   };
 
-  const defaultValues = data?.allCards.data
-    .map((card) => ({
-      value: card.id,
-      label: card.name,
+  const defaultValues = data?.allCreditCards.data
+    .map((creditCard) => ({
+      value: creditCard.id,
+      label: creditCard.name,
     }))
-    .filter((card) => {
-      return card.value === operation.creditCardId;
+    .filter((creditCard) => {
+      return creditCard.value === operation.creditCardId;
     });
 
-  const defaultOptions = data?.allCards.data
-    .filter((card) => card)
-    .map((card) => ({
-      value: card.id,
-      label: card.name,
+  const defaultOptions = data?.allCreditCards.data
+    .filter((creditCard) => creditCard)
+    .map((creditCard) => ({
+      value: creditCard.id,
+      label: creditCard.name,
     }));
 
   return loading ? (

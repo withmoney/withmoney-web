@@ -104,7 +104,7 @@ export interface FindManyCategory {
 }
 
 export type CreditCards = {
-  allCards: DataCards;
+  allCreditCards: DataCards;
 };
 
 type DataCards = {

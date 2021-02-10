@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import Modal from 'react-modal';
 import AsyncCreatableSelect from 'react-select/creatable';
 import Text from '../components/Text';
 import Button from '../components/Button';
@@ -12,12 +10,34 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import InputCurrency from '../components/InputCurrency';
 import { CreatedCardBrandText } from '../constants/Transactions';
 import { useAccountFilters } from '../hooks/useAccountFilters';
-import { ModalBody, ModalHeader, stylesCreditCard } from './ConfirmModal.style';
+import { ModalBody, ModalHeader, stylesCreditCard, StyledModal, Label } from './ConfirmModal.style';
 import { checkCreditCard } from '../schema/checkField';
 import customStyles from '../pages/Dashboard/Operations/Operation/style/CategorySelect.style';
 import { LANG } from '../constants/currency';
 
-//component
+// Component Props
+type Props = {
+  form: any;
+  isOpenModal: boolean;
+  isLoading: boolean;
+  setIsOpenModal: (value: boolean) => void;
+  setForm: (value: any) => void;
+  onConfirm: () => void;
+};
+
+// default Values
+const initialValues = {
+  name: '',
+  brand: '',
+  limit: '',
+};
+
+const defaultOptions = CreatedCardBrandText.map((creditCard) => ({
+  value: creditCard,
+  label: creditCard,
+}));
+
+//Component
 const CreditCardModal = ({
   form,
   isLoading,
@@ -26,7 +46,7 @@ const CreditCardModal = ({
   onConfirm,
   setForm,
 }: Props) => {
-  Modal.setAppElement('body');
+  StyledModal.setAppElement('body');
   const { currentAccount } = useAccountFilters();
   const [formValidate, setFormValidate] = useState(false);
   const [formErrors, setFormErrors] = useState(initialValues);
@@ -73,7 +93,7 @@ const CreditCardModal = ({
 
   return (
     <>
-      <Modal style={stylesCreditCard} isOpen={isOpenModal}>
+      <StyledModal style={stylesCreditCard} isOpen={isOpenModal}>
         <ModalHeader>
           <Text bold>Create Credit Card</Text>
         </ModalHeader>
@@ -100,8 +120,8 @@ const CreditCardModal = ({
             <InputControl isInvalid={!!formErrors.limit} message={formErrors.limit}>
               <Label>Card Limit</Label>
               <InputCurrency
-                lang={LANG}
                 name="limit"
+                lang={LANG}
                 value={form.limit}
                 onBlur={handleBlur}
                 onChange={handleCurrency}
@@ -125,33 +145,9 @@ const CreditCardModal = ({
             </Flex>
           </Form>
         </ModalBody>
-      </Modal>
+      </StyledModal>
     </>
   );
 };
-
-type Props = {
-  form: any;
-  isOpenModal: boolean;
-  isLoading: boolean;
-  setIsOpenModal: (value: boolean) => void;
-  setForm: (value: any) => void;
-  onConfirm: () => void;
-};
-
-const initialValues = {
-  name: '',
-  brand: '',
-  limit: '',
-};
-
-const defaultOptions = CreatedCardBrandText.map((creditCard) => ({
-  value: creditCard,
-  label: creditCard,
-}));
-
-const Label = styled.label`
-  padding: 5px;
-`;
 
 export default CreditCardModal;
