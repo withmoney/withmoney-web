@@ -103,6 +103,14 @@ export interface FindManyCategory {
   categories: DataCategories;
 }
 
+export type CreditCards = {
+  allCards: DataCards;
+};
+
+type DataCards = {
+  data: CreditCard[];
+};
+
 type DataCategories = {
   data: Category[];
   pagination: TotalItems;

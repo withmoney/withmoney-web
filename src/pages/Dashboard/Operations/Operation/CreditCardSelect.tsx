@@ -5,8 +5,8 @@ import AsyncCreatableSelect from 'react-select/async-creatable';
 import debounce from 'lodash.debounce';
 import { useFilterCards, useCreateCategory } from '../../../../hooks/useCreditCard';
 import customStyles from './style/CategorySelect.style';
-import { ALL_CARDS } from '../../../../graphql/CreditCard';
-import { Operation, CreditCard } from '../../../../models';
+import { CREDIT_CARDS } from '../../../../graphql/CreditCard';
+import { Operation, CreditCards } from '../../../../models';
 import { useUpdateOperation } from '../../../../hooks/useOperations';
 import Input from '../../../../components/Input';
 import CreditCardModal from '../../../../modals/CreditCardModal';
@@ -17,6 +17,17 @@ type Props = {
   operation: Operation;
 };
 
+type Option = {
+  value: string;
+  label: string;
+};
+
+const initialValues = {
+  name: '',
+  brand: CreditCardBrand.AmericanExpress,
+  limit: 0,
+};
+
 const CreditCardSelect = ({ operation }: Props) => {
   const { currentAccount } = useAccountFilters();
   const [value, setValue] = useState<Option | undefined>();
@@ -25,7 +36,7 @@ const CreditCardSelect = ({ operation }: Props) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const { updateOperation } = useUpdateOperation();
   const filterCards = useFilterCards();
-  const { data, loading } = useQuery<CreditCards>(ALL_CARDS, {
+  const { data, loading } = useQuery<CreditCards>(CREDIT_CARDS, {
     variables: { id: currentAccount?.id },
   });
 
@@ -129,25 +140,6 @@ const CreditCardSelect = ({ operation }: Props) => {
       />
     </>
   );
-};
-
-type Option = {
-  value: string;
-  label: string;
-};
-
-type CreditCards = {
-  allCards: DataCards;
-};
-
-type DataCards = {
-  data: CreditCard[];
-};
-
-const initialValues = {
-  name: '',
-  brand: CreditCardBrand.AmericanExpress,
-  limit: 0,
 };
 
 export default CreditCardSelect;

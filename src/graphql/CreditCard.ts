@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 // Queries
-export const ALL_CARDS = gql`
+export const CREDIT_CARDS = gql`
   query getAllCards($id: String!) {
     allCards: findManyCreditCard(
       where: { accountId: { equals: $id }, deletedAt: { equals: null } }

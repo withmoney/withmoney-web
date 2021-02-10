@@ -1,6 +1,6 @@
 import { useApolloClient, useMutation } from '@apollo/client';
 import { useAccountFilters } from './useAccountFilters';
-import { FILTER_CARD, CREATE_CARD, ALL_CARDS } from '../graphql/CreditCard';
+import { FILTER_CARD, CREATE_CARD, CREDIT_CARDS } from '../graphql/CreditCard';
 
 export const useFilterCards = () => {
   const client = useApolloClient();
@@ -31,7 +31,7 @@ export function useCreateCategory() {
   const [createCreditCard, { data, error, loading }] = useMutation(CREATE_CARD, {
     refetchQueries: [
       {
-        query: ALL_CARDS,
+        query: CREDIT_CARDS,
         variables: { id: currentAccount?.id },
       },
     ],
