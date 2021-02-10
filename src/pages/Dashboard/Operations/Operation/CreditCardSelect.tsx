@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useQuery } from '@apollo/client';
 import AsyncCreatableSelect from 'react-select/async-creatable';

@@ -10,7 +10,7 @@ export const stylesConfirmModal = {
     padding: '0',
     borderRadius: '8px',
     minWidth: '500px',
-    top: '180px',
+    top: '200px',
     left: '50%',
     right: 'auto',
     bottom: 'auto',
@@ -36,6 +36,7 @@ export const stylesCreditCard = {
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
     border: 'none',
+    minHeight: '550px',
   },
 };
 

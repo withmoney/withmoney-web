@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Modal from 'react-modal';
+import AsyncCreatableSelect from 'react-select/creatable';
 import Text from '../components/Text';
 import Button from '../components/Button';
 import Form from '../components/Form';
 import Input from '../components/Input';
 import InputControl from '../components/InputControl';
-import Select from '../components/Select';
 import Flex from '../components/Flex';
 import LoadingSpinner from '../components/LoadingSpinner';
 import InputCurrency from '../components/InputCurrency';
@@ -14,22 +14,10 @@ import { CreatedCardBrandText } from '../constants/Transactions';
 import { useAccountFilters } from '../hooks/useAccountFilters';
 import { ModalBody, ModalHeader, stylesCreditCard } from './ConfirmModal.style';
 import { checkCreditCard } from '../schema/checkField';
+import customStyles from '../pages/Dashboard/Operations/Operation/style/CategorySelect.style';
+import { LANG } from '../constants/currency';
 
-type Props = {
-  form: any;
-  isOpenModal: boolean;
-  isLoading: boolean;
-  setIsOpenModal: (value: boolean) => void;
-  setForm: (value: any) => void;
-  onConfirm: () => void;
-};
-
-const initialValues = {
-  name: '',
-  brand: '',
-  limit: '',
-};
-
+//component
 const CreditCardModal = ({
   form,
   isLoading,
@@ -43,25 +31,33 @@ const CreditCardModal = ({
   const [formValidate, setFormValidate] = useState(false);
   const [formErrors, setFormErrors] = useState(initialValues);
 
+  //check form validate
   useEffect(() => {
     const checkForm = async () => {
       setFormValidate(await checkCreditCard.isValid(form));
     };
     checkForm();
   });
-
+  // handle Name input
   const handleInput = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = event.target;
+    const { value } = event.target;
     setForm({
       ...form,
-      [name]: value,
+      name: value,
     });
   };
-
+  // handle currency input
   const handleCurrency = async (value: number) => {
     setForm({
       ...form,
       limit: value,
+    });
+  };
+  // handle creditCard input
+  const handleCreditCard = async (brand: any) => {
+    setForm({
+      ...form,
+      brand: brand.value,
     });
   };
 
@@ -90,29 +86,25 @@ const CreditCardModal = ({
 
             <InputControl isInvalid={!!formErrors.brand} message={formErrors.brand}>
               <Label>Card Flag</Label>
-              <Select
-                onBlur={handleBlur}
-                defaultValue={form.brand}
-                name="brand"
-                onChange={handleInput}
-                style={{ width: '100%' }}
-              >
-                {CreatedCardBrandText.map((brand) => (
-                  <option value={brand} key={brand}>
-                    {brand}
-                  </option>
-                ))}
-              </Select>
+              <AsyncCreatableSelect
+                defaultValue={{
+                  value: form.brand,
+                  label: form.brand,
+                }}
+                onChange={handleCreditCard}
+                styles={customStyles}
+                options={defaultOptions}
+              />
             </InputControl>
 
             <InputControl isInvalid={!!formErrors.limit} message={formErrors.limit}>
               <Label>Card Limit</Label>
               <InputCurrency
-                onBlur={handleBlur}
-                value={form.limit}
+                lang={LANG}
                 name="limit"
+                value={form.limit}
+                onBlur={handleBlur}
                 onChange={handleCurrency}
-                lang="pt-BR"
                 currency={currentAccount?.currency}
                 placeholder="Card limit"
               />
@@ -137,6 +129,26 @@ const CreditCardModal = ({
     </>
   );
 };
+
+type Props = {
+  form: any;
+  isOpenModal: boolean;
+  isLoading: boolean;
+  setIsOpenModal: (value: boolean) => void;
+  setForm: (value: any) => void;
+  onConfirm: () => void;
+};
+
+const initialValues = {
+  name: '',
+  brand: '',
+  limit: '',
+};
+
+const defaultOptions = CreatedCardBrandText.map((creditCard) => ({
+  value: creditCard,
+  label: creditCard,
+}));
 
 const Label = styled.label`
   padding: 5px;
