@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Row, Cell } from '../Operation/style/OperationSettings';
+import { TransactionType } from '../../../../models';
+import { useOperationsFilters } from '../../../../hooks/useOperationsFilters';
 
 const OperationPlaceholder = () => {
+  const { currentTransactionType } = useOperationsFilters();
   return (
     <Row alignItems="center">
       <Cell width="80px">
@@ -17,6 +20,11 @@ const OperationPlaceholder = () => {
       <Cell flex="1">
         <CellPlaceholder />
       </Cell>
+      {currentTransactionType === TransactionType.CreditCard && (
+        <Cell width="200px">
+          <CellPlaceholder />
+        </Cell>
+      )}
       <Cell width="200px">
         <CellPlaceholder />
       </Cell>

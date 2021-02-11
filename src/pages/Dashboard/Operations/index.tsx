@@ -16,6 +16,7 @@ import { useOperations, useCreateOperation } from '../../../hooks/useOperations'
 import ConfirmModal from '../../../modals/ConfirmModal';
 import { addOperationText } from '../../../constants/Transactions';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import { TransactionType } from '../../../models';
 import Text from '../../../components/Text';
 import { useDeleteOperation, useRestoreOperation } from '../../../hooks/useOperations';
 
@@ -35,11 +36,11 @@ const Operations = () => {
   };
 
   //CreateOperation
-  const handleCreateOperation = () => {
+  const handleCreateOperation = async () => {
     const verify =
       (currentDateTime?.toISO() || '') > (currentDateTime?.endOf('month').toISO() || '');
     try {
-      createOperation({
+      await createOperation({
         variables: {
           type: currentTransactionType,
           accountID: currentAccount?.id,
@@ -101,6 +102,9 @@ const Operations = () => {
           <CellHeader width="130px">Date</CellHeader>
           <CellHeader flex="1">Name</CellHeader>
           <CellHeader flex="1">Category</CellHeader>
+          {currentTransactionType === TransactionType.CreditCard && (
+            <CellHeader width="200px">Credit Card</CellHeader>
+          )}
           <CellHeader width="200px">Value</CellHeader>
           <CellHeader width="56px">Action</CellHeader>
         </RowHeader>
