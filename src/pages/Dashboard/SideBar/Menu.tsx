@@ -1,7 +1,8 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import Text from '../../../components/Text';
-import { MenuContainer, MenuButton, Money, MoneyOff } from './style/Menu.style';
+
+import { MenuContainer, MenuButton, Money, Graph } from './style/Menu.style';
 
 const Menu = () => {
   const { pathname } = useLocation();
@@ -12,7 +13,7 @@ const Menu = () => {
         <Text>Dashboard</Text>
       </MenuButton>
       <MenuButton open={pathname === '/reports'} to="/reports">
-        <MoneyOff />
+        <Graph />
         <Text>Reports</Text>
       </MenuButton>
     </MenuContainer>

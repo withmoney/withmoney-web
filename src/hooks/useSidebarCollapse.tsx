@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Props = {
   children: React.ReactNode;
@@ -10,17 +10,18 @@ interface SidebarContext {
 }
 
 const isSidebarOpenContext = createContext<SidebarContext>({
-  isSidebarOpen: localStorage.getItem('sidebarCollapse') === 'true',
+  isSidebarOpen: localStorage.getItem('isSidebarClose') === 'false',
 });
 
 export default function SidebarProvider({ children }: Props) {
   const [isSidebarOpen, setSidebarVisibility] = useState(
-    localStorage.getItem('sidebarCollapse') === 'true',
+    localStorage.getItem('isSidebarClose') === 'false' ||
+      localStorage.getItem('isSidebarClose') === null,
   );
 
   const toggleSidebar = () => {
     setSidebarVisibility(!isSidebarOpen);
-    localStorage.setItem('sidebarCollapse', JSON.stringify(!isSidebarOpen));
+    localStorage.setItem('isSidebarClose', JSON.stringify(isSidebarOpen));
   };
 
   return (

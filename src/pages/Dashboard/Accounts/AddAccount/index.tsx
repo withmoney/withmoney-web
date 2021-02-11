@@ -9,7 +9,7 @@ import InputControl from '../../../../components/InputControl';
 import Button from '../../../../components/Button';
 import Flex from '../../../../components/Flex';
 import Select from '../../../../components/Select';
-import { checkAddAccount } from '../../../../schema/checkField';
+import { checkAccounts } from '../../../../schema/checkField';
 import { currencies } from '../../../../constants/Currencies';
 import { useCreateAccount } from '../../../../hooks/useAccounts';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
@@ -17,8 +17,8 @@ import Alert from '../../../../components/Alert';
 import { PageHeader, Page, PageBody } from '../styles';
 
 const initialValues = {
-  accountName: '',
-  accountCurrency: '',
+  name: '',
+  currency: '',
 };
 
 const AddAccount = () => {
@@ -30,7 +30,7 @@ const AddAccount = () => {
 
   useEffect(() => {
     const checkForm = async () => {
-      setFormValidate(await checkAddAccount.isValid(form));
+      setFormValidate(await checkAccounts.isValid(form));
     };
     checkForm();
   });
@@ -46,7 +46,7 @@ const AddAccount = () => {
   const handleBlur = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name } = event.target;
     try {
-      await checkAddAccount.validateAt(name, form);
+      await checkAccounts.validateAt(name, form);
       setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
       setFormErrors({ ...formErrors, [name]: err.message });
@@ -57,9 +57,9 @@ const AddAccount = () => {
     event.preventDefault();
     try {
       await createAccount({
-        variables: { name: form.accountName, currency: form.accountCurrency },
+        variables: form,
       });
-      toast.success(`Account ${form.accountName} was been created!`, {
+      toast.success(`Account ${form.name} was been created!`, {
         position: toast.POSITION.BOTTOM_LEFT,
       });
       history.push('/accounts');
@@ -80,22 +80,19 @@ const AddAccount = () => {
           <Form onSubmit={handleCreateAccount}>
             {error && <Alert isDanger>{error.message}</Alert>}
             <InputGroup>
-              <InputControl message={formErrors.accountName} isInvalid={!!formErrors.accountName}>
+              <InputControl message={formErrors.name} isInvalid={!!formErrors.name}>
                 <Input
-                  isInvalid={!!formErrors.accountName}
+                  isInvalid={!!formErrors.name}
                   type="text"
-                  name="accountName"
-                  value={form.accountName}
+                  name="name"
+                  value={form.name}
                   placeholder="Account Name"
                   onBlur={handleBlur}
                   onChange={handleInput}
                 />
               </InputControl>
-              <InputControl
-                message={formErrors.accountCurrency}
-                isInvalid={!!formErrors.accountCurrency}
-              >
-                <Select name="accountCurrency" onChange={handleInput} onBlur={handleBlur}>
+              <InputControl message={formErrors.currency} isInvalid={!!formErrors.currency}>
+                <Select name="currency" onChange={handleInput} onBlur={handleBlur}>
                   <option>Select your currency</option>
                   {currencies.map((currency) => {
                     return (

@@ -1,8 +1,27 @@
-import { TransactionType } from '../models';
+import { TransactionType, CreditCardBrand } from '../models';
 
 export const addOperationText = {
-  [TransactionType.Deposit]: 'Add Entrance',
-  [TransactionType.FixedExpense]: 'Add Recurrent',
-  [TransactionType.CreditCard]: 'Add Credit',
-  [TransactionType.VariableExpense]: 'Add Unforeseen',
+  [TransactionType.Deposit]: 'Add Income',
+  [TransactionType.FixedExpense]: 'Add Expense',
+  [TransactionType.CreditCard]: 'Add Expense',
+  [TransactionType.VariableExpense]: 'Add Expense',
 };
+
+export const CreatedCardBrandText = [
+  CreditCardBrand.AmericanExpress,
+  CreditCardBrand.BNDES,
+  CreditCardBrand.Dinners,
+  CreditCardBrand.HiperCard,
+  CreditCardBrand.MasterCard,
+  CreditCardBrand.Visa,
+  CreditCardBrand.SoroCard,
+  CreditCardBrand.ELO,
+  CreditCardBrand.Other,
+];
+
+export const operationType = [
+  [TransactionType.Deposit],
+  [TransactionType.FixedExpense],
+  [TransactionType.CreditCard],
+  [TransactionType.VariableExpense],
+];

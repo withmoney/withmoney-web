@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import Text from '../components/Text';
 import Button from '../components/Button';
 import LoadingSpinner from '../components/LoadingSpinner';
-import { ModalBody, ModalHeader, CustomStyles } from './ConfirmModal.style';
+import { ModalBody, ModalHeader, stylesConfirmModal } from './ConfirmModal.style';
 
 type Props = {
   label?: string;
@@ -25,7 +25,7 @@ const ConfirmModal = ({
   Modal.setAppElement('body');
   return (
     <>
-      <Modal style={CustomStyles} isOpen={isOpenModal}>
+      <Modal style={stylesConfirmModal} isOpen={isOpenModal}>
         <ModalHeader>
           <Text bold>{label}</Text>
         </ModalHeader>

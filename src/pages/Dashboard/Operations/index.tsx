@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
-import { Plus } from '@styled-icons/evaicons-solid';
+import { PlusCircle, MinusCircle } from '@styled-icons/boxicons-regular';
 import { Tabs } from '../../../components/Tabs';
-import Button from '../../../components/Button';
 import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
 import { useAccountFilters } from '../../../hooks/useAccountFilters';
 import DataPlaceholder from './Operation/DataPlaceholder';
@@ -11,11 +10,14 @@ import FooterContainer from './Operation/FooterContainer';
 import OperationPlaceholder from './Operation/OperationPlaceholder';
 import { Operation } from '../../../models';
 import { Container, OperationContainer, ButtonContent } from './style/Operations.style';
+import { OperationButton } from './style/Operations.style';
 import { RowHeader, CellHeader } from './Operation/style/OperationSettings';
 import { useOperations, useCreateOperation } from '../../../hooks/useOperations';
 import ConfirmModal from '../../../modals/ConfirmModal';
 import { addOperationText } from '../../../constants/Transactions';
 import LoadingSpinner from '../../../components/LoadingSpinner';
+import { TransactionType } from '../../../models';
+import Text from '../../../components/Text';
 import { useDeleteOperation, useRestoreOperation } from '../../../hooks/useOperations';
 
 const Operations = () => {
@@ -34,11 +36,11 @@ const Operations = () => {
   };
 
   //CreateOperation
-  const handleCreateOperation = () => {
+  const handleCreateOperation = async () => {
     const verify =
       (currentDateTime?.toISO() || '') > (currentDateTime?.endOf('month').toISO() || '');
     try {
-      createOperation({
+      await createOperation({
         variables: {
           type: currentTransactionType,
           accountID: currentAccount?.id,
@@ -100,6 +102,9 @@ const Operations = () => {
           <CellHeader width="130px">Date</CellHeader>
           <CellHeader flex="1">Name</CellHeader>
           <CellHeader flex="1">Category</CellHeader>
+          {currentTransactionType === TransactionType.CreditCard && (
+            <CellHeader width="200px">Credit Card</CellHeader>
+          )}
           <CellHeader width="200px">Value</CellHeader>
           <CellHeader width="56px">Action</CellHeader>
         </RowHeader>
@@ -115,16 +120,25 @@ const Operations = () => {
           ))}
         {!loading && !operations.length && <OperationPlaceholder />}
         <ButtonContent>
-          <Button
+          <OperationButton
+            variation="primary"
+            color={currentTransactionType || 'Deposit'}
             disabled={loadingCreate}
             onClick={handleCreateOperation}
             type="button"
             rounded
-            variation="light"
           >
-            {loadingCreate ? <LoadingSpinner inButton size="20px" /> : <Plus />}
-            <span>{addOperationText[currentTransactionType || 'Deposit']}</span>
-          </Button>
+            {loadingCreate ? (
+              <LoadingSpinner inButton size="20px" />
+            ) : currentTransactionType === 'Deposit' ? (
+              <PlusCircle />
+            ) : (
+              <MinusCircle />
+            )}
+            <span>
+              <Text variation="white">{addOperationText[currentTransactionType || 'Deposit']}</Text>
+            </span>
+          </OperationButton>
         </ButtonContent>
       </OperationContainer>
       <FooterContainer />

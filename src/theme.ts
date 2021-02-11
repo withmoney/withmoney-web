@@ -38,6 +38,7 @@ const GlobalStyle = createGlobalStyle`
     --text-primary-color: #219653;
     --text-light-color: #9AA0A9;
     --text-danger-color: #E98686;
+    --text-white-color: #FFFFFF;
 
     --text-default-color-hover: #636363;
     --text-primary-color-hover: #27a75e;
@@ -229,10 +230,25 @@ const GlobalStyle = createGlobalStyle`
   --dashboard-icon-color: #363636;
   --dashboard-icon-size: 40px;
   --dashboard-empty-progress-bar: #cfcfcf;
-  --dashboard-progress-bar-entrance: #80DA89;
-  --dashboard-progress-bar-recurrent: #DA9680;
-  --dashboard-progress-bar-credit: #D3DA80;
-  --dashboard-progress-bar-unforeseen: #C380DA;
+  --dashboard-progress-bar-Deposit: #53BC5E;
+  --dashboard-progress-bar-FixedExpense: #E98686;
+  --dashboard-progress-bar-CreditCard: #C380DA;
+  --dashboard-progress-bar-VariableExpense: #F5AD40;
+
+  --dashboard-progress-bar-Deposit-hover: #4ab054;
+  --dashboard-progress-bar-FixedExpense-hover: #dd7171;
+  --dashboard-progress-bar-CreditCard-hover: #b86bd2;
+  --dashboard-progress-bar-VariableExpense-hover: #eea332;
+
+  --dashboard-progress-bar-Deposit-disabled: #a0d4a6;
+  --dashboard-progress-bar-FixedExpense-disabled: #ecbaba;
+  --dashboard-progress-bar-CreditCard-disabled: #dbb0ea;
+  --dashboard-progress-bar-VariableExpense-disabled: #f2d09c;
+
+  --dashboard-progress-bar-Deposit-active: #3f9648;
+  --dashboard-progress-bar-FixedExpense-active: #b25b5b;
+  --dashboard-progress-bar-CreditCard-active: #9658ab;
+  --dashboard-progress-bar-VariableExpense-active: #ce8418;
 
 
   }

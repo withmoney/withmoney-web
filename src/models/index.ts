@@ -12,6 +12,18 @@ export enum CurrenciesTypes {
   GBP = 'GBP',
 }
 
+export enum CreditCardBrand {
+  AmericanExpress = 'AmericanExpress',
+  BNDES = 'BNDES',
+  Dinners = 'Dinners',
+  ELO = 'ELO',
+  HiperCard = 'HiperCard',
+  MasterCard = 'MasterCard',
+  Other = 'Other',
+  SoroCard = 'SoroCard',
+  Visa = 'Visa',
+}
+
 export interface Account {
   id: string;
   name: string;
@@ -66,10 +78,44 @@ export interface Operation {
   categoryId: string | null;
   accountId: string;
   userId: string;
+  creditCardId: String;
+  creditCard: CreditCard;
+}
+
+export interface CreditCard {
+  id: string;
+  name: string;
+  brand: CreditCardBrand;
+  limit: number;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string;
+  user: User;
+  userId: string;
+  account: Account;
+  accountId: string;
+  operations: Operation[];
 }
 
 export interface Me extends User {}
 
-export type Data = {
-  me: User;
+export interface FindManyCategory {
+  categories: DataCategories;
+}
+
+export type CreditCards = {
+  allCreditCards: DataCreditCards;
+};
+
+export type DataCreditCards = {
+  data: CreditCard[];
+};
+
+type DataCategories = {
+  data: Category[];
+  pagination: TotalItems;
+};
+
+type TotalItems = {
+  totalItems: number;
 };

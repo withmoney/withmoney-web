@@ -21,6 +21,7 @@ export const MenuContainer = styled.div`
   padding-bottom: 50px;
   background-color: var(--dashboard-color-white);
   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.25);
+  cursor: default;
 
   ${Button} {
     position: absolute;
@@ -46,7 +47,13 @@ export const MenuContainer = styled.div`
 export const ButtonLink = styled(Link)`
   text-decoration: none;
   padding: 10px;
+  cursor: pointer;
   &:hover {
     background-color: var(--dashboard-color-grey);
+  }
+  &.disabled {
+    pointer-events: none;
+    cursor: default;
+    background-color: var(--dashboard-color-lightgrey);
   }
 `;
