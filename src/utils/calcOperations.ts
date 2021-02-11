@@ -35,7 +35,10 @@ export const getTotalPaidExpenses = (operations: Operation[]) => {
 
 export const getTotalPendingExpenses = (operations: Operation[]) => {
   const operationFiltered = operations.filter(
-    (operation) => operation.type !== TransactionType.Deposit && operation.isPaid === false,
+    (operation) =>
+      operation.type !== TransactionType.Deposit &&
+      operation.type !== TransactionType.CreditCard &&
+      operation.isPaid === false,
   );
   const total = operationFiltered.reduce(sumOperation, 0);
   return total;
