@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { useQuery } from '@apollo/client';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import debounce from 'lodash.debounce';
-import { useFilterCards, useCreateCategory } from '../../../../hooks/useCreditCard';
+import { useFilterCreditCards, useCreateCategory } from '../../../../hooks/useCreditCard';
 import customStyles from './style/CategorySelect.style';
 import { CREDIT_CARDS } from '../../../../graphql/CreditCard';
 import { Operation, CreditCards } from '../../../../models';
@@ -38,14 +38,14 @@ const CreditCardSelect = ({ operation }: Props) => {
   const [form, setForm] = useState(initialValues);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const { updateOperation } = useUpdateOperation();
-  const filterCards = useFilterCards();
+  const filterCreditCards = useFilterCreditCards();
   const { data, loading } = useQuery<CreditCards>(CREDIT_CARDS, {
     variables: { id: currentAccount?.id },
   });
 
-  // filterCards
+  // filterCreditCards
   const loadOptions = debounce((value: string, callback: any) => {
-    filterCards(value).then((results: Option[]) => callback(results));
+    filterCreditCards(value).then((results: Option[]) => callback(results));
   }, 400);
 
   // open Modal

@@ -1,19 +1,24 @@
 import { useApolloClient, useMutation } from '@apollo/client';
 import { useAccountFilters } from './useAccountFilters';
 import { FILTER_CREDIT_CARD, CREATE_CREDIT_CARD, CREDIT_CARDS } from '../graphql/CreditCard';
+import { DataCreditCards } from '../models';
 
-export const useFilterCards = () => {
+type Data = {
+  creditCards: DataCreditCards;
+};
+
+export const useFilterCreditCards = () => {
   const client = useApolloClient();
   const { currentAccount } = useAccountFilters();
 
   async function filterCard(value: string) {
-    const { data } = await client.query({
+    const { data } = await client.query<Data>({
       query: FILTER_CREDIT_CARD,
       variables: { name: value, id: currentAccount?.id },
     });
 
     if (data?.creditCards.data) {
-      return data.creditCards.data.map((creditCard: any) => ({
+      return data.creditCards.data.map((creditCard) => ({
         value: creditCard.id,
         label: creditCard.name,
       }));

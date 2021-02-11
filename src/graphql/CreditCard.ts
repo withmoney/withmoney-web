@@ -2,7 +2,7 @@ import { gql } from '@apollo/client';
 
 // Queries
 export const CREDIT_CARDS = gql`
-  query getAllCards($id: String!) {
+  query getAllCreditCards($id: String!) {
     allCreditCards: findManyCreditCard(
       where: { accountId: { equals: $id }, deletedAt: { equals: null } }
       orderBy: { name: asc }
@@ -18,7 +18,7 @@ export const CREDIT_CARDS = gql`
 `;
 
 export const FILTER_CREDIT_CARD = gql`
-  query filterCard($name: String!, $id: String!) {
+  query filterCreditCard($name: String!, $id: String!) {
     creditCards: findManyCreditCard(
       where: { accountId: { equals: $id }, name: { contains: $name }, deletedAt: { equals: null } }
     ) {

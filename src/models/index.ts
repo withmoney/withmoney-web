@@ -104,10 +104,10 @@ export interface FindManyCategory {
 }
 
 export type CreditCards = {
-  allCreditCards: DataCards;
+  allCreditCards: DataCreditCards;
 };
 
-type DataCards = {
+export type DataCreditCards = {
   data: CreditCard[];
 };
 
