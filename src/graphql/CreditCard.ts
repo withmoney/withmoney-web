@@ -18,7 +18,7 @@ export const CREDIT_CARDS = gql`
 `;
 
 export const FILTER_CREDIT_CARD = gql`
-  query filterCreditCard($name: String!, $id: String!, $skip: Int, $take: Int) {
+  query filterCreditCard($name: String, $id: String, $skip: Int, $take: Int) {
     creditCards: findManyCreditCard(
       skip: $skip
       take: $take
@@ -51,6 +51,29 @@ export const CREATE_CREDIT_CARD = gql`
       name
       limit
       brand
+    }
+  }
+`;
+
+// delete CreditCard
+
+export const DELETE_CREDIT_CARD = gql`
+  mutation deleteCreditCard($id: String!) {
+    deleteOneCreditCard(where: { id: $id }) {
+      id
+      name
+      deletedAt
+    }
+  }
+`;
+
+// restore Credit Card
+
+export const RESTORE_CREDIT_CARD = gql`
+  mutation restoreCreditCard($id: String!) {
+    restoreOneCreditCard(where: { id: $id }) {
+      id
+      name
     }
   }
 `;

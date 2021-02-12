@@ -1,6 +1,7 @@
 import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { useAccountFilters } from './useAccountFilters';
-import { FILTER_CREDIT_CARD, CREATE_CREDIT_CARD, CREDIT_CARDS } from '../graphql/CreditCard';
+import { FILTER_CREDIT_CARD, CREATE_CREDIT_CARD } from '../graphql/CreditCard';
+import { CREDIT_CARDS, DELETE_CREDIT_CARD, RESTORE_CREDIT_CARD } from '../graphql/CreditCard';
 import { DataCreditCards } from '../models';
 
 type Data = {
@@ -35,7 +36,7 @@ export const useFilterCreditCards = () => {
 };
 
 // create CreditCard
-export function useCreateCategory() {
+export function useCreateCreditCard() {
   const { currentAccount } = useAccountFilters();
   const [createCreditCard, { data, error, loading }] = useMutation(CREATE_CREDIT_CARD, {
     refetchQueries: [
@@ -46,4 +47,21 @@ export function useCreateCategory() {
     ],
   });
   return { createCreditCard, data, loading, error };
+}
+
+//delete CreditCard
+export function useDeleteCreditCard() {
+  const [deleteCreditCard, { data, error, loading }] = useMutation(DELETE_CREDIT_CARD, {
+    refetchQueries: [{ query: FILTER_CREDIT_CARD }],
+  });
+  return { deleteCreditCard, data, loading, error };
+}
+
+// restore CreditCard
+
+export function useRestoreCreditCard() {
+  const [restoreCreditCard, { data, error, loading }] = useMutation(RESTORE_CREDIT_CARD, {
+    refetchQueries: [{ query: FILTER_CREDIT_CARD }],
+  });
+  return { restoreCreditCard, data, loading, error };
 }

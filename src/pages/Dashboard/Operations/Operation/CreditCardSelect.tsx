@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { useQuery } from '@apollo/client';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import debounce from 'lodash.debounce';
-import { useFilterCreditCards, useCreateCategory } from '../../../../hooks/useCreditCard';
+import { useFilterCreditCards, useCreateCreditCard } from '../../../../hooks/useCreditCard';
 import customStyles from './style/CategorySelect.style';
 import { CREDIT_CARDS } from '../../../../graphql/CreditCard';
 import { Operation, CreditCards } from '../../../../models';
@@ -34,7 +34,7 @@ const initialValues = {
 const CreditCardSelect = ({ operation }: Props) => {
   const { currentAccount } = useAccountFilters();
   const [value, setValue] = useState<Option | undefined>();
-  const { createCreditCard, loading: loadingCreateCard } = useCreateCategory();
+  const { createCreditCard, loading: loadingCreateCard } = useCreateCreditCard();
   const [form, setForm] = useState(initialValues);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const { updateOperation } = useUpdateOperation();
