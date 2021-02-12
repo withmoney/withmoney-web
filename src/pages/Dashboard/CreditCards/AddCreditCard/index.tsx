@@ -122,6 +122,7 @@ const AddCreditCard = () => {
                 value={form.name}
                 name="name"
                 type="text"
+                placeholder="Credit Card Name"
               />
             </InputControl>
 
