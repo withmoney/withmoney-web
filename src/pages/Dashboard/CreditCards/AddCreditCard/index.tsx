@@ -115,7 +115,7 @@ const AddCreditCard = () => {
           <Form>
             {error && <Alert isDanger>{error.message}</Alert>}
             <InputControl message={formErrors.name} isInvalid={!!formErrors.name}>
-              <Label>Credit card name</Label>
+              <Label>Name</Label>
               <Input
                 onBlur={handleBlur}
                 onChange={handleInput}
