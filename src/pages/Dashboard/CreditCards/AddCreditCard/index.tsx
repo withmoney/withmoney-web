@@ -127,7 +127,7 @@ const AddCreditCard = () => {
             </InputControl>
 
             <InputControl>
-              <Label>Credit card brand</Label>
+              <Label>Brand</Label>
               <AsyncCreatableSelect
                 name="brand"
                 styles={customStyles}
