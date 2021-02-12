@@ -40,6 +40,7 @@ const CreditCardSelect = ({ operation }: Props) => {
   const { updateOperation } = useUpdateOperation();
   const filterCreditCards = useFilterCreditCards();
   const { data, loading } = useQuery<CreditCards>(CREDIT_CARDS, {
+    fetchPolicy: 'network-only',
     variables: { id: currentAccount?.id },
   });
 
@@ -130,7 +131,6 @@ const CreditCardSelect = ({ operation }: Props) => {
       )}
 
       <AsyncCreatableSelect
-        cacheOptions
         value={value}
         defaultOptions={defaultOptions}
         defaultValue={defaultValues}

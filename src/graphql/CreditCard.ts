@@ -1,23 +1,8 @@
 import { gql } from '@apollo/client';
 
 // Queries
-export const CREDIT_CARDS = gql`
-  query getAllCreditCards($id: String!) {
-    creditCards: findManyCreditCard(
-      where: { accountId: { equals: $id }, deletedAt: { equals: null } }
-      orderBy: { name: asc }
-    ) {
-      data {
-        id
-        name
-        brand
-        limit
-      }
-    }
-  }
-`;
 
-export const FILTER_CREDIT_CARD = gql`
+export const CREDIT_CARDS = gql`
   query filterCreditCard($name: String, $id: String, $skip: Int, $take: Int) {
     creditCards: findManyCreditCard(
       skip: $skip

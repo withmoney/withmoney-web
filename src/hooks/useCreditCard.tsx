@@ -1,16 +1,11 @@
 import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { useAccountFilters } from './useAccountFilters';
-import { FILTER_CREDIT_CARD, CREATE_CREDIT_CARD, GET_ONE_CREDIT_CARD } from '../graphql/CreditCard';
-import {
-  CREDIT_CARDS,
-  DELETE_CREDIT_CARD,
-  RESTORE_CREDIT_CARD,
-  UPDATE_CREDIT_CARD,
-} from '../graphql/CreditCard';
+import { CREDIT_CARDS, CREATE_CREDIT_CARD, GET_ONE_CREDIT_CARD } from '../graphql/CreditCard';
+import { DELETE_CREDIT_CARD, RESTORE_CREDIT_CARD, UPDATE_CREDIT_CARD } from '../graphql/CreditCard';
 import { CreditCards } from '../models';
 
 export const useCreditCards = (options?: any) => {
-  return useQuery<CreditCards>(FILTER_CREDIT_CARD, options);
+  return useQuery<CreditCards>(CREDIT_CARDS, options);
 };
 
 export const useFilterCreditCards = () => {
@@ -19,7 +14,7 @@ export const useFilterCreditCards = () => {
 
   async function filterCard(value: string) {
     const { data } = await client.query<CreditCards>({
-      query: FILTER_CREDIT_CARD,
+      query: CREDIT_CARDS,
       variables: { name: value, id: currentAccount?.id },
     });
 
@@ -53,7 +48,7 @@ export function useCreateCreditCard() {
 //delete CreditCard
 export function useDeleteCreditCard() {
   const [deleteCreditCard, { data, error, loading }] = useMutation(DELETE_CREDIT_CARD, {
-    refetchQueries: [{ query: FILTER_CREDIT_CARD }],
+    refetchQueries: [{ query: CREDIT_CARDS }],
   });
   return { deleteCreditCard, data, loading, error };
 }
@@ -62,7 +57,7 @@ export function useDeleteCreditCard() {
 
 export function useRestoreCreditCard() {
   const [restoreCreditCard, { data, error, loading }] = useMutation(RESTORE_CREDIT_CARD, {
-    refetchQueries: [{ query: FILTER_CREDIT_CARD }],
+    refetchQueries: [{ query: CREDIT_CARDS }],
   });
   return { restoreCreditCard, data, loading, error };
 }
@@ -76,7 +71,7 @@ export function useUniqueCreditCard(id: string) {
 // update Credit Card
 export const useUpdateCreditCard = () => {
   const [updateCreditCard, { data, loading, error }] = useMutation(UPDATE_CREDIT_CARD, {
-    refetchQueries: [{ query: FILTER_CREDIT_CARD }],
+    refetchQueries: [{ query: CREDIT_CARDS }],
   });
 
   return { updateCreditCard, data, loading, error };
