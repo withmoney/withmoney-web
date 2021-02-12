@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 // Queries
 export const CREDIT_CARDS = gql`
   query getAllCreditCards($id: String!) {
-    allCreditCards: findManyCreditCard(
+    creditCards: findManyCreditCard(
       where: { accountId: { equals: $id }, deletedAt: { equals: null } }
       orderBy: { name: asc }
     ) {

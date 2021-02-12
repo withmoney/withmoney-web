@@ -7,14 +7,10 @@ import {
   RESTORE_CREDIT_CARD,
   UPDATE_CREDIT_CARD,
 } from '../graphql/CreditCard';
-import { DataCreditCards, FilterCreditCards } from '../models';
-
-type Data = {
-  creditCards: DataCreditCards;
-};
+import { CreditCards } from '../models';
 
 export const useCreditCards = (options?: any) => {
-  return useQuery<FilterCreditCards>(FILTER_CREDIT_CARD, options);
+  return useQuery<CreditCards>(FILTER_CREDIT_CARD, options);
 };
 
 export const useFilterCreditCards = () => {
@@ -22,7 +18,7 @@ export const useFilterCreditCards = () => {
   const { currentAccount } = useAccountFilters();
 
   async function filterCard(value: string) {
-    const { data } = await client.query<Data>({
+    const { data } = await client.query<CreditCards>({
       query: FILTER_CREDIT_CARD,
       variables: { name: value, id: currentAccount?.id },
     });

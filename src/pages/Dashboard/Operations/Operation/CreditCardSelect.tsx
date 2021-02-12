@@ -98,7 +98,7 @@ const CreditCardSelect = ({ operation }: Props) => {
     }
   };
 
-  const defaultValues = data?.allCreditCards.data
+  const defaultValues = data?.creditCards.data
     .map((creditCard) => ({
       value: creditCard.id,
       label: creditCard.name,
@@ -107,7 +107,7 @@ const CreditCardSelect = ({ operation }: Props) => {
       return creditCard.value === operation.creditCardId;
     });
 
-  const defaultOptions = data?.allCreditCards.data
+  const defaultOptions = data?.creditCards.data
     .filter((creditCard) => creditCard)
     .map((creditCard) => ({
       value: creditCard.id,

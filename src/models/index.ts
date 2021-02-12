@@ -97,21 +97,13 @@ export interface CreditCard {
   operations: Operation[];
 }
 
-export interface Pagination {
-  totalItems: number;
-}
-
 export interface Me extends User {}
 
-export interface FindManyCategory {
+export interface Categories {
   categories: DataCategories;
 }
 
 export type CreditCards = {
-  allCreditCards: DataCreditCards;
-};
-
-export type FilterCreditCards = {
   creditCards: DataCreditCards;
 };
 
@@ -120,11 +112,11 @@ export type DataCreditCards = {
   pagination: Pagination;
 };
 
-type DataCategories = {
+export type DataCategories = {
   data: Category[];
-  pagination: TotalItems;
+  pagination: Pagination;
 };
 
-type TotalItems = {
+export interface Pagination {
   totalItems: number;
-};
+}

@@ -1,19 +1,6 @@
 import { gql } from '@apollo/client';
 
 // query
-export const CATEGORY_SEARCH = gql`
-  query categorySearch($name: String!, $type: TransactionType!) {
-    categories: findManyCategory(
-      where: { name: { contains: $name }, type: { equals: $type }, deletedAt: { equals: null } }
-    ) {
-      data {
-        id
-        name
-        type
-      }
-    }
-  }
-`;
 
 export const ALL_CATEGORY = gql`
   query filterCategories($name: String, $skip: Int, $take: Int, $type: TransactionType) {
