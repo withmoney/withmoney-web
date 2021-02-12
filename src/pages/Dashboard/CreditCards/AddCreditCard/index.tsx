@@ -122,7 +122,7 @@ const AddCreditCard = () => {
                 value={form.name}
                 name="name"
                 type="text"
-              ></Input>
+              />
             </InputControl>
 
             <InputControl>
