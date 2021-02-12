@@ -134,7 +134,7 @@ const UpdateCreditCard = () => {
                   onChange={handleInput}
                   name="name"
                   type="text"
-                ></Input>
+                />
               </InputControl>
 
               <InputControl>

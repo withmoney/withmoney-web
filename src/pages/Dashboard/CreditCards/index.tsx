@@ -116,6 +116,7 @@ const CreditCards = () => {
           onChange={handleChangeFilter}
           placeholder="Filter Credit Card"
         />
+
         <PageBodyColumns style={{ padding: '35px 0' }}>
           <Row>
             <Cell>
@@ -132,17 +133,17 @@ const CreditCards = () => {
             </Cell>
           </Row>
           {loading ? (
-            <LoadingData repeat={5} />
+            <LoadingData />
           ) : (
-            data?.creditCards.data &&
-            data.creditCards.data.map((creditCard: CreditCard) => {
+            currentAccount?.currency &&
+            data?.creditCards.data.map((creditCard) => {
               return (
                 <Row key={creditCard.id}>
                   <Cell>
                     <Text>{creditCard.name}</Text>
                   </Cell>
                   <Cell align="flex-end">
-                    <Text>{currencyFormat(LANG, currentAccount?.currency, creditCard.limit)}</Text>
+                    <Text>{currencyFormat(LANG, currentAccount.currency, creditCard.limit)}</Text>
                   </Cell>
                   <Cell>
                     <Text>{creditCard.brand}</Text>
@@ -167,7 +168,15 @@ const CreditCards = () => {
               );
             })
           )}
+          {data?.creditCards.data.length === 0 && (
+            <Row>
+              <Cell>
+                <Text>No credit card data</Text>
+              </Cell>
+            </Row>
+          )}
         </PageBodyColumns>
+
         {data?.creditCards.data && (
           <Pagination
             currentPage={currentPage}

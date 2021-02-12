@@ -7,14 +7,14 @@ import {
   RESTORE_CREDIT_CARD,
   UPDATE_CREDIT_CARD,
 } from '../graphql/CreditCard';
-import { DataCreditCards } from '../models';
+import { DataCreditCards, FilterCreditCards } from '../models';
 
 type Data = {
   creditCards: DataCreditCards;
 };
 
 export const useCreditCards = (options?: any) => {
-  return useQuery(FILTER_CREDIT_CARD, options);
+  return useQuery<FilterCreditCards>(FILTER_CREDIT_CARD, options);
 };
 
 export const useFilterCreditCards = () => {

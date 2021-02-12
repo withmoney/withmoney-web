@@ -1,4 +1,4 @@
-export function currencyFormat(lang: string, currency: string | undefined, number: number) {
+export function currencyFormat(lang: string, currency: string, number: number) {
   return new Intl.NumberFormat(lang, { style: 'currency', currency }).format(number);
 }
 

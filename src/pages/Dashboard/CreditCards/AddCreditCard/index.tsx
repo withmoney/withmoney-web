@@ -114,47 +114,53 @@ const AddCreditCard = () => {
         <Flex justifyContent="center">
           <Form>
             {error && <Alert isDanger>{error.message}</Alert>}
-            <InputControl message={formErrors.name} isInvalid={!!formErrors.name}>
-              <Label>Credit card name</Label>
-              <Input
-                onBlur={handleBlur}
-                onChange={handleInput}
-                value={form.name}
-                name="name"
-                type="text"
-              ></Input>
-            </InputControl>
+            {currentAccount ? (
+              <>
+                <InputControl message={formErrors.name} isInvalid={!!formErrors.name}>
+                  <Label>Credit card name</Label>
+                  <Input
+                    onBlur={handleBlur}
+                    onChange={handleInput}
+                    value={form.name}
+                    name="name"
+                    type="text"
+                  ></Input>
+                </InputControl>
 
-            <InputControl>
-              <Label>Credit card brand</Label>
-              <AsyncCreatableSelect
-                name="brand"
-                styles={customStyles}
-                options={defaultOptions}
-                onChange={handleCreditCard}
-              ></AsyncCreatableSelect>
-            </InputControl>
+                <InputControl>
+                  <Label>Credit card brand</Label>
+                  <AsyncCreatableSelect
+                    name="brand"
+                    styles={customStyles}
+                    options={defaultOptions}
+                    onChange={handleCreditCard}
+                  ></AsyncCreatableSelect>
+                </InputControl>
 
-            <InputControl>
-              <Label>Credit card limit</Label>
-              <InputCurrency
-                name="limit"
-                lang={LANG}
-                value={form.limit}
-                onChange={handleCurrency}
-                currency={currentAccount?.currency}
-              />
-            </InputControl>
-            <Flex justifyContent="flex-end">
-              <Button
-                disabled={!formValidate || loading}
-                onClick={(e) => handleCreateCategory(e)}
-                variation="primary"
-                type="button"
-              >
-                {loading ? <LoadingSpinner size="20px" /> : 'Create'}
-              </Button>
-            </Flex>
+                <InputControl>
+                  <Label>Credit card limit</Label>
+                  <InputCurrency
+                    name="limit"
+                    lang={LANG}
+                    value={form.limit}
+                    onChange={handleCurrency}
+                    currency={currentAccount.currency}
+                  />
+                </InputControl>
+                <Flex justifyContent="flex-end">
+                  <Button
+                    disabled={!formValidate || loading}
+                    onClick={(e) => handleCreateCategory(e)}
+                    variation="primary"
+                    type="button"
+                  >
+                    {loading ? <LoadingSpinner size="20px" /> : 'Create'}
+                  </Button>
+                </Flex>
+              </>
+            ) : (
+              <LoadingSpinner />
+            )}
           </Form>
         </Flex>
       </PageBody>
