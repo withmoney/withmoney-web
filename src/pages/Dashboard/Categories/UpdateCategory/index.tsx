@@ -90,9 +90,9 @@ const UpdateCategory = () => {
       <PageBody>
         <Flex justifyContent="center">
           {loading && <LoadingSpinner />}
-          {error && <Alert isDanger>{error.message}</Alert>}
           {data && (
             <Form onSubmit={handleUpdateCategory}>
+              {error && <Alert isDanger>{error.message}</Alert>}
               <InputControl message={formErrors.name} isInvalid={!!formErrors.name}>
                 <Input
                   name="name"

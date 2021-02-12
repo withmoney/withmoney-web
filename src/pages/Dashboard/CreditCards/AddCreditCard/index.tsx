@@ -112,8 +112,8 @@ const AddCreditCard = () => {
       </PageHeader>
       <PageBody>
         <Flex justifyContent="center">
-          {error && <Alert isDanger>{error.message}</Alert>}
           <Form>
+            {error && <Alert isDanger>{error.message}</Alert>}
             <InputControl message={formErrors.name} isInvalid={!!formErrors.name}>
               <Label>Credit card name</Label>
               <Input
@@ -125,7 +125,7 @@ const AddCreditCard = () => {
               ></Input>
             </InputControl>
 
-            <InputControl message={formErrors.brand} isInvalid={!!formErrors.brand}>
+            <InputControl>
               <Label>Credit card brand</Label>
               <AsyncCreatableSelect
                 name="brand"
@@ -141,7 +141,6 @@ const AddCreditCard = () => {
                 name="limit"
                 lang={LANG}
                 value={form.limit}
-                onBlur={() => {}}
                 onChange={handleCurrency}
                 currency={currentAccount?.currency}
               />
@@ -163,7 +162,7 @@ const AddCreditCard = () => {
   );
 };
 
-export const Label = styled.label`
+const Label = styled.label`
   padding: 5px;
 `;
 

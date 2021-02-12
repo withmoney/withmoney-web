@@ -1,7 +1,12 @@
 import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { useAccountFilters } from './useAccountFilters';
-import { FILTER_CREDIT_CARD, CREATE_CREDIT_CARD } from '../graphql/CreditCard';
-import { CREDIT_CARDS, DELETE_CREDIT_CARD, RESTORE_CREDIT_CARD } from '../graphql/CreditCard';
+import { FILTER_CREDIT_CARD, CREATE_CREDIT_CARD, GET_ONE_CREDIT_CARD } from '../graphql/CreditCard';
+import {
+  CREDIT_CARDS,
+  DELETE_CREDIT_CARD,
+  RESTORE_CREDIT_CARD,
+  UPDATE_CREDIT_CARD,
+} from '../graphql/CreditCard';
 import { DataCreditCards } from '../models';
 
 type Data = {
@@ -65,3 +70,18 @@ export function useRestoreCreditCard() {
   });
   return { restoreCreditCard, data, loading, error };
 }
+
+// get one Credit Card
+
+export function useUniqueCreditCard(id: string) {
+  return useQuery(GET_ONE_CREDIT_CARD, { variables: { id } });
+}
+
+// update Credit Card
+export const useUpdateCreditCard = () => {
+  const [updateCreditCard, { data, loading, error }] = useMutation(UPDATE_CREDIT_CARD, {
+    refetchQueries: [{ query: FILTER_CREDIT_CARD }],
+  });
+
+  return { updateCreditCard, data, loading, error };
+};

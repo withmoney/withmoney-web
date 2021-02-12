@@ -38,6 +38,18 @@ export const FILTER_CREDIT_CARD = gql`
   }
 `;
 
+// find one Credit Card
+export const GET_ONE_CREDIT_CARD = gql`
+  query getUniqueCreditCard($id: String!) {
+    findUniqueCreditCard(where: { id: $id }) {
+      id
+      name
+      limit
+      brand
+    }
+  }
+`;
+
 // Mutations
 
 export const CREATE_CREDIT_CARD = gql`
@@ -64,6 +76,26 @@ export const DELETE_CREDIT_CARD = gql`
       id
       name
       deletedAt
+    }
+  }
+`;
+
+// update Credit Card
+
+export const UPDATE_CREDIT_CARD = gql`
+  mutation updateCreditCard(
+    $id: String!
+    $name: String!
+    $limit: Float!
+    $brand: CreditCardBrand!
+    $account: String!
+  ) {
+    updateOneCreditCard(
+      where: { id: $id }
+      data: { name: $name, limit: $limit, brand: $brand, accountId: $account }
+    ) {
+      id
+      name
     }
   }
 `;
