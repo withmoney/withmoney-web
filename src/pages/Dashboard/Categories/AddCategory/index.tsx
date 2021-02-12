@@ -82,7 +82,7 @@ const AddCategory = () => {
                 onBlur={handleBlur}
                 onChange={handleInput}
                 placeholder="Category name"
-              ></Input>
+              />
             </InputControl>
 
             <InputControl message={formErrors.type} isInvalid={!!formErrors.type}>

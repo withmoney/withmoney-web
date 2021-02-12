@@ -141,7 +141,7 @@ const CreditCards = () => {
                   <Cell>
                     <Text>{creditCard.name}</Text>
                   </Cell>
-                  <Cell>
+                  <Cell align="flex-end">
                     <Text>{currencyFormat(LANG, currentAccount?.currency, creditCard.limit)}</Text>
                   </Cell>
                   <Cell>

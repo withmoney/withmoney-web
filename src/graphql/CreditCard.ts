@@ -23,6 +23,7 @@ export const FILTER_CREDIT_CARD = gql`
       skip: $skip
       take: $take
       where: { accountId: { equals: $id }, name: { contains: $name }, deletedAt: { equals: null } }
+      orderBy: [{ createdAt: desc }]
     ) {
       data {
         id
