@@ -138,7 +138,7 @@ const AddCreditCard = () => {
             </InputControl>
 
             <InputControl>
-              <Label>Credit card limit</Label>
+              <Label>Limit</Label>
               <InputCurrency
                 name="limit"
                 lang={LANG}
