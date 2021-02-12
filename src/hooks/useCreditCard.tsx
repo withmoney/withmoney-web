@@ -1,10 +1,14 @@
-import { useApolloClient, useMutation } from '@apollo/client';
+import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { useAccountFilters } from './useAccountFilters';
 import { FILTER_CREDIT_CARD, CREATE_CREDIT_CARD, CREDIT_CARDS } from '../graphql/CreditCard';
 import { DataCreditCards } from '../models';
 
 type Data = {
   creditCards: DataCreditCards;
+};
+
+export const useCreditCards = (options?: any) => {
+  return useQuery(FILTER_CREDIT_CARD, options);
 };
 
 export const useFilterCreditCards = () => {

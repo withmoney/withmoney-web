@@ -18,8 +18,10 @@ export const CREDIT_CARDS = gql`
 `;
 
 export const FILTER_CREDIT_CARD = gql`
-  query filterCreditCard($name: String!, $id: String!) {
+  query filterCreditCard($name: String!, $id: String!, $skip: Int, $take: Int) {
     creditCards: findManyCreditCard(
+      skip: $skip
+      take: $take
       where: { accountId: { equals: $id }, name: { contains: $name }, deletedAt: { equals: null } }
     ) {
       data {
@@ -27,6 +29,9 @@ export const FILTER_CREDIT_CARD = gql`
         name
         brand
         limit
+      }
+      pagination {
+        totalItems
       }
     }
   }
