@@ -117,7 +117,7 @@ const AddCreditCard = () => {
             {currentAccount ? (
               <>
                 <InputControl message={formErrors.name} isInvalid={!!formErrors.name}>
-                  <Label>Credit card name</Label>
+                  <Label>Name</Label>
                   <Input
                     onBlur={handleBlur}
                     onChange={handleInput}
@@ -128,7 +128,7 @@ const AddCreditCard = () => {
                 </InputControl>
 
                 <InputControl>
-                  <Label>Credit card brand</Label>
+                  <Label>Brand</Label>
                   <AsyncCreatableSelect
                     name="brand"
                     styles={customStyles}
@@ -138,7 +138,7 @@ const AddCreditCard = () => {
                 </InputControl>
 
                 <InputControl>
-                  <Label>Credit card limit</Label>
+                  <Label>Limit</Label>
                   <InputCurrency
                     name="limit"
                     lang={LANG}
