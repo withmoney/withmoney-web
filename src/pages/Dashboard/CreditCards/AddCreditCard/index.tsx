@@ -133,6 +133,7 @@ const AddCreditCard = () => {
                 styles={customStyles}
                 options={defaultOptions}
                 onChange={handleCreditCard}
+                placeholder="Select the Credit Card Brand"
               ></AsyncCreatableSelect>
             </InputControl>
 
