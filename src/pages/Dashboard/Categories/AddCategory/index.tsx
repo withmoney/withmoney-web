@@ -10,7 +10,7 @@ import Alert from '../../../../components/Alert';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
 import InputControl from '../../../../components/InputControl';
 import Select from '../../../../components/Select';
-import { PageHeader, Page, PageBody } from '../styles';
+import { PageHeader, Page, PageBody } from '../../style/SubPages.style';
 import { operationType } from '../../../../constants/Transactions';
 import { checkCategories } from '../../../../schema/checkField';
 import { useCreateCategory } from '../../../../hooks/useCategories';
@@ -82,7 +82,7 @@ const AddCategory = () => {
                 onBlur={handleBlur}
                 onChange={handleInput}
                 placeholder="Category name"
-              ></Input>
+              />
             </InputControl>
 
             <InputControl message={formErrors.type} isInvalid={!!formErrors.type}>

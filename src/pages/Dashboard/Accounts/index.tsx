@@ -11,7 +11,7 @@ import { useAccountFilters } from '../../../hooks/useAccountFilters';
 import { Account } from '../../../models';
 import LoadingData from '../../../components/LoadingData';
 import Alert from '../../../components/Alert';
-import { Page, PageHeader, Row, Cell, PageBodyColumns } from './styles';
+import { Page, PageHeader, Row, Cell, PageBodyColumns } from '../style/SubPages.style';
 
 const Accounts = () => {
   const { data, loading, error } = useAccounts();

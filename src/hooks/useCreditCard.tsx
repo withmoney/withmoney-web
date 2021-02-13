@@ -1,10 +1,11 @@
-import { useApolloClient, useMutation } from '@apollo/client';
+import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { useAccountFilters } from './useAccountFilters';
-import { FILTER_CREDIT_CARD, CREATE_CREDIT_CARD, CREDIT_CARDS } from '../graphql/CreditCard';
-import { DataCreditCards } from '../models';
+import { CREDIT_CARDS, CREATE_CREDIT_CARD, GET_ONE_CREDIT_CARD } from '../graphql/CreditCard';
+import { DELETE_CREDIT_CARD, RESTORE_CREDIT_CARD, UPDATE_CREDIT_CARD } from '../graphql/CreditCard';
+import { CreditCards } from '../models';
 
-type Data = {
-  creditCards: DataCreditCards;
+export const useCreditCards = (options?: any) => {
+  return useQuery<CreditCards>(CREDIT_CARDS, options);
 };
 
 export const useFilterCreditCards = () => {
@@ -12,8 +13,8 @@ export const useFilterCreditCards = () => {
   const { currentAccount } = useAccountFilters();
 
   async function filterCard(value: string) {
-    const { data } = await client.query<Data>({
-      query: FILTER_CREDIT_CARD,
+    const { data } = await client.query<CreditCards>({
+      query: CREDIT_CARDS,
       variables: { name: value, id: currentAccount?.id },
     });
 
@@ -31,7 +32,7 @@ export const useFilterCreditCards = () => {
 };
 
 // create CreditCard
-export function useCreateCategory() {
+export function useCreateCreditCard() {
   const { currentAccount } = useAccountFilters();
   const [createCreditCard, { data, error, loading }] = useMutation(CREATE_CREDIT_CARD, {
     refetchQueries: [
@@ -43,3 +44,35 @@ export function useCreateCategory() {
   });
   return { createCreditCard, data, loading, error };
 }
+
+//delete CreditCard
+export function useDeleteCreditCard() {
+  const [deleteCreditCard, { data, error, loading }] = useMutation(DELETE_CREDIT_CARD, {
+    refetchQueries: [{ query: CREDIT_CARDS }],
+  });
+  return { deleteCreditCard, data, loading, error };
+}
+
+// restore CreditCard
+
+export function useRestoreCreditCard() {
+  const [restoreCreditCard, { data, error, loading }] = useMutation(RESTORE_CREDIT_CARD, {
+    refetchQueries: [{ query: CREDIT_CARDS }],
+  });
+  return { restoreCreditCard, data, loading, error };
+}
+
+// get one Credit Card
+
+export function useUniqueCreditCard(id: string) {
+  return useQuery(GET_ONE_CREDIT_CARD, { variables: { id } });
+}
+
+// update Credit Card
+export const useUpdateCreditCard = () => {
+  const [updateCreditCard, { data, loading, error }] = useMutation(UPDATE_CREDIT_CARD, {
+    refetchQueries: [{ query: CREDIT_CARDS }],
+  });
+
+  return { updateCreditCard, data, loading, error };
+};

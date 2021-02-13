@@ -12,8 +12,8 @@ export const Control = styled.div`
 `;
 
 type Props = {
-  message: string;
-  isInvalid: boolean;
+  message?: string;
+  isInvalid?: boolean;
   children: React.ReactNode;
 };
 
