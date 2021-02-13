@@ -26,9 +26,14 @@ export const Row = styled.div`
   justify-content: space-between;
 `;
 
-export const Cell = styled.span`
+type PropsCell = {
+  align?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
+};
+
+export const Cell = styled.span<PropsCell>`
   display: flex;
-  justify-content: center;
+  justify-content: ${({ align = 'center' }) => align};
+  padding: ${({ align }) => (align ? '30px' : '0')};
   min-width: 150px;
   &:first-child {
     width: 100%;

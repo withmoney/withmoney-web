@@ -14,7 +14,7 @@ import { currencies } from '../../../../constants/Currencies';
 import { useCreateAccount } from '../../../../hooks/useAccounts';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
 import Alert from '../../../../components/Alert';
-import { PageHeader, Page, PageBody } from '../styles';
+import { PageHeader, Page, PageBody } from '../../style/SubPages.style';
 
 const initialValues = {
   name: '',

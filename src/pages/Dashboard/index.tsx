@@ -12,6 +12,9 @@ import AddAccount from './Accounts/AddAccount';
 import AddCategory from './Categories/AddCategory';
 import UpdateAccount from './Accounts/UpdateAccount';
 import UpdateCategory from './Categories/UpdateCategory';
+import CreditCards from './CreditCards';
+import AddCreditCard from './CreditCards/AddCreditCard';
+import UpdateCreditCard from './CreditCards/UpdateCreditCard';
 
 const Dashboard = () => {
   const { isSidebarOpen } = useSidebarCollapse();
@@ -26,10 +29,13 @@ const Dashboard = () => {
             <Route path="/reports" component={Reports} />
             <Route path="/accounts" component={Accounts} />
             <Route path="/categories" component={Categories} />
+            <Route path="/credit-cards" component={CreditCards} />
             <Route path="/accounts-new" component={AddAccount} />
             <Route path="/category-new" component={AddCategory} />
+            <Route path="/credit-card-new" component={AddCreditCard} />
             <Route path="/accounts-edit/:id" component={UpdateAccount} />
             <Route path="/category-edit/:id" component={UpdateCategory} />
+            <Route path="/credit-cards-edit/:id" component={UpdateCreditCard} />
           </Switch>
         </Content>
       </Wrapper>
