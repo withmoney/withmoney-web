@@ -1,9 +1,10 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import Header from '../../../components/Header';
 import Img from '../../../components/Img';
 import Flex from '../../../components/Flex';
-import Button from '../../../components/Button';
+import ButtonLink from '../../../components/ButtonLink';
 import LoadingData from '../../../components/LoadingData';
 import Text from '../../../components/Text';
 import { Page, PageHeader, PageBody } from '../style/SubPages.style';
@@ -38,8 +39,8 @@ const Profile = () => {
               <Text align="center">{`${data?.me.email}`}</Text>
             </TextContent>
             <ButtonContent>
-              <Button> Update Profile</Button>
-              <Button>Change Password</Button>
+              <ButtonLink to="/profile-update"> Update Profile</ButtonLink>
+              <ButtonLink to="/profile-change-password">Change Password</ButtonLink>
             </ButtonContent>
           </Content>
         </Flex>
@@ -65,7 +66,7 @@ const ImgContent = styled.div`
 const ButtonContent = styled.div`
   display: flex;
   justify-content: center;
-  ${Button} {
+  ${ButtonLink} {
     width: 175px;
     margin-right: 15px;
   }

@@ -8,6 +8,8 @@ import Operations from './Operations';
 import Reports from './Reports';
 import Accounts from './Accounts';
 import Profile from './Profile';
+import ProfileUpdate from './ProfileUpdate';
+import ChangePassword from './ChangePassword';
 import Categories from './Categories';
 import AddAccount from './Accounts/AddAccount';
 import AddCategory from './Categories/AddCategory';
@@ -29,6 +31,8 @@ const Dashboard = () => {
             <Route path="/dashboard" component={Operations} />
             <Route path="/reports" component={Reports} />
             <Route path="/profile" component={Profile} />
+            <Route path="/profile-update" component={ProfileUpdate} />
+            <Route path="/profile-change-password" component={ChangePassword} />
             <Route path="/accounts" component={Accounts} />
             <Route path="/categories" component={Categories} />
             <Route path="/credit-cards" component={CreditCards} />

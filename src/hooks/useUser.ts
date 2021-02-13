@@ -11,7 +11,7 @@ const API = 'https://ui-avatars.com/api/?background=E7E7E7&color=363636&name=';
 
 export const useUser = () => {
   const token = localStorage.getItem('withmoney-token') || '';
-  const { data, loading } = useQuery<Data>(GET_ME);
+  const { data, loading, error } = useQuery<Data>(GET_ME);
 
   const getDefaultImage = () => {
     const AVATAR = API + `${data?.me.firstName}+${data?.me.lastName}`;
@@ -25,5 +25,5 @@ export const useUser = () => {
   };
   const logged = !!data?.me?.id && data.me.id === decoded?.userId;
 
-  return { data, logged, loading, getDefaultImage };
+  return { data, logged, loading, error, getDefaultImage };
 };
