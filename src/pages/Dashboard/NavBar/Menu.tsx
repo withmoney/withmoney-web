@@ -23,11 +23,12 @@ const Menu = ({ menuIsOpen }: Props) => {
   return (
     <MenuContainer>
       <MenuContent>
-        <ButtonLink onClick={toggleCloseMenu} to="/">
+        <ButtonLink
+          className={location.pathname === '/profile' ? 'disabled' : undefined}
+          onClick={toggleCloseMenu}
+          to="/profile"
+        >
           Profile
-        </ButtonLink>
-        <ButtonLink onClick={toggleCloseMenu} to="/">
-          Change Password
         </ButtonLink>
         <ButtonLink
           className={location.pathname === '/accounts' ? 'disabled' : undefined}
