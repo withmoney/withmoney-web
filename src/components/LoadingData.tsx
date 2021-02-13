@@ -3,9 +3,10 @@ import ContentLoader from 'react-content-loader';
 
 type Props = {
   repeat?: number;
+  size?: string;
 };
 
-const LoadingData = ({ repeat = 1 }: Props) => {
+const LoadingData = ({ repeat = 1, size }: Props) => {
   const loadData = [];
   for (let i = 0; i < repeat; ++i) {
     loadData.push(i);
@@ -17,13 +18,20 @@ const LoadingData = ({ repeat = 1 }: Props) => {
           <ContentLoader
             key={repeatLoad}
             speed={2}
-            width="100%"
-            height={40}
+            width={size ? size : '100%'}
+            height={size ? size : '40'}
             backgroundColor="#f3f3f3"
             foregroundColor="#c0c0c0"
             style={{ marginBottom: '5px' }}
           >
-            <rect x="0" y="0" rx="3" ry="3" width="100%" height="40" />
+            <rect
+              x="0"
+              y="0"
+              rx="3"
+              ry="3"
+              width={size ? size : '100%'}
+              height={size ? size : '40'}
+            />
           </ContentLoader>
         );
       })}

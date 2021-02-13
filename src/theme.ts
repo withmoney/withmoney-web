@@ -219,13 +219,14 @@ const GlobalStyle = createGlobalStyle`
   --dashboard-color-lightgrey: #dadada;
   --dashboard-border-color: #f2f2f2;
   --dashboard-default-radius: 50%;
+  --dashboard-img-default-radius: 0%;
   /* navBar */
   --dashboard-button-color: #e7e7e7;
   --dashboard-button-color-hover: #dddcdc;
   --dashboard-button-color-active: #cfcfcf;
   --dashboard-button-size: 34px;
   --dashboard-dropdown-radius: 5px;
-  --dashboard-dropdown-avatar-size: 30px;
+  --dashboard-default-img-size: 100px;
   /* sideBar */
   --dashboard-icon-color: #363636;
   --dashboard-icon-size: 40px;
