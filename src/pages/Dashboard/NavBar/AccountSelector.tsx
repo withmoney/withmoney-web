@@ -11,7 +11,7 @@ type Data = {
 };
 
 const AccountSelector = () => {
-  const { data } = useQuery<Data>(GET_ACCOUNTS);
+  const { data } = useQuery<Data>(GET_ACCOUNTS, { fetchPolicy: 'network-only' });
   const { setCurrentAccount } = useAccountFilters();
 
   const accounts = data?.accounts || [];

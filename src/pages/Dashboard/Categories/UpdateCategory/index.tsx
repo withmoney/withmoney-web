@@ -76,7 +76,7 @@ const UpdateCategory = () => {
       });
       history.push('/categories');
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
   };
 
