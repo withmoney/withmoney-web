@@ -13,7 +13,7 @@ import { useAccountFilters } from '../hooks/useAccountFilters';
 import { ModalBody, ModalHeader, stylesCreditCard, StyledModal, Label } from './ConfirmModal.style';
 import { checkCreditCard } from '../schema/checkField';
 import customStyles from '../pages/Dashboard/Operations/Operation/style/CategorySelect.style';
-import { LANG } from '../constants/currency';
+import { LANG } from '../constants/Langs';
 
 // Component Props
 type Props = {

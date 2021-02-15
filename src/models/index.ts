@@ -24,6 +24,11 @@ export enum CreditCardBrand {
   Visa = 'Visa',
 }
 
+export enum Locale {
+  ptBR = 'ptBR',
+  enUS = 'enUS',
+}
+
 export interface Account {
   id: string;
   name: string;
@@ -43,6 +48,7 @@ export interface User {
   lastName: string;
   hasVerifiedEmail: boolean;
   birthDay: string;
+  language: Locale;
   accounts: Account[];
   categories: Category[];
   operations: Operation[];

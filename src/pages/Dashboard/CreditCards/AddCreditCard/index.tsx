@@ -16,7 +16,7 @@ import InputControl from '../../../../components/InputControl';
 import { CreatedCardBrandText } from '../../../../constants/Transactions';
 import customStyles from '../../Operations/Operation/style/CategorySelect.style';
 import { useAccountFilters } from '../../../../hooks/useAccountFilters';
-import { LANG } from '../../../../constants/currency';
+import { LANG } from '../../../../constants/Langs';
 import { useCreateCreditCard } from '../../../../hooks/useCreditCard';
 import { checkCreditCard } from '../../../../schema/checkField';
 
@@ -99,7 +99,7 @@ const AddCreditCard = () => {
       });
       history.push('/credit-cards');
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
   };
 

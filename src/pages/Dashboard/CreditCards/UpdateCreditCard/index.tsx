@@ -14,7 +14,7 @@ import Alert from '../../../../components/Alert';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
 import InputControl from '../../../../components/InputControl';
 import { CreatedCardBrandText } from '../../../../constants/Transactions';
-import { LANG } from '../../../../constants/currency';
+import { LANG } from '../../../../constants/Langs';
 import customStyles from '../../Operations/Operation/style/CategorySelect.style';
 import { checkCreditCard } from '../../../../schema/checkField';
 import { useUniqueCreditCard, useUpdateCreditCard } from '../../../../hooks/useCreditCard';
@@ -109,7 +109,7 @@ const UpdateCreditCard = () => {
       );
       history.push('/credit-cards');
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
   };
 
@@ -145,8 +145,8 @@ const UpdateCreditCard = () => {
                   options={defaultOptions}
                   onChange={handleCreditCard}
                   defaultValue={{
-                    value: data?.findUniqueCreditCard.brand,
-                    label: data?.findUniqueCreditCard.brand,
+                    value: data.findUniqueCreditCard.brand,
+                    label: data.findUniqueCreditCard.brand,
                   }}
                 ></AsyncCreatableSelect>
               </InputControl>

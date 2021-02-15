@@ -1,8 +1,9 @@
 import React from 'react';
 import Text from '../../../components/Text';
 import { currencyFormat } from '../../../utils/currency';
-import { LANG, CURRENCY } from '../../../constants/currency';
+import { LANG } from '../../../constants/Langs';
 import { InfoContainer, ProgressBar, Progress, BalanceContainer } from './style/Info.style';
+import { useAccountFilters } from '../../../hooks/useAccountFilters';
 
 type Props = {
   name: string;
@@ -18,6 +19,7 @@ const percentCalc = (current: number, desired: number) => {
 
 const Info = ({ name, current, desired, variation }: Props) => {
   const percent = percentCalc(current, desired);
+  const { currentAccount } = useAccountFilters();
   return (
     <InfoContainer>
       <Text>{name}</Text>
@@ -25,8 +27,12 @@ const Info = ({ name, current, desired, variation }: Props) => {
         <Progress variation={variation} percent={percent} />
       </ProgressBar>
       <BalanceContainer>
-        <Text>{currencyFormat(LANG, CURRENCY, current)}</Text>
-        <Text>{currencyFormat(LANG, CURRENCY, desired)}</Text>
+        {currentAccount && (
+          <>
+            <Text>{currencyFormat(LANG, currentAccount.currency, current)}</Text>
+            <Text>{currencyFormat(LANG, currentAccount.currency, desired)}</Text>
+          </>
+        )}
       </BalanceContainer>
     </InfoContainer>
   );

@@ -14,7 +14,7 @@ import Button from '../../../components/Button';
 import { CreditCard } from '../../../models';
 import Pagination from '../../../components/Pagination';
 import { currencyFormat } from '../../../utils/currency';
-import { LANG } from '../../../constants/currency';
+import { LANG } from '../../../constants/Langs';
 import ConfirmModal from '../../../modals/ConfirmModal';
 
 const initialValues = {
@@ -66,7 +66,7 @@ const CreditCards = () => {
       await refetch();
       setCurrentPage(0);
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
   };
 
@@ -81,7 +81,7 @@ const CreditCards = () => {
       });
       await refetch();
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
   };
 

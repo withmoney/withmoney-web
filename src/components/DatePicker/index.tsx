@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import moment, { Moment } from 'moment';
 import { SingleDatePicker } from 'react-dates';
-import { LANG } from '../../constants/currency';
+import { LANG } from '../../constants/Langs';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import './react_dates_overrides.css';
