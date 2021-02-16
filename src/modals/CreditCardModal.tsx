@@ -13,7 +13,7 @@ import { useAccountFilters } from '../hooks/useAccountFilters';
 import { ModalBody, ModalHeader, stylesCreditCard, StyledModal, Label } from './ConfirmModal.style';
 import { checkCreditCard } from '../schema/checkField';
 import customStyles from '../pages/Dashboard/Operations/Operation/style/CategorySelect.style';
-import { LANG } from '../constants/currency';
+import { useUserLanguage } from '../hooks/useUser';
 
 // Component Props
 type Props = {
@@ -50,6 +50,7 @@ const CreditCardModal = ({
   const { currentAccount } = useAccountFilters();
   const [formValidate, setFormValidate] = useState(false);
   const [formErrors, setFormErrors] = useState(initialValues);
+  const { value: language } = useUserLanguage();
 
   //check form validate
   useEffect(() => {
@@ -121,7 +122,7 @@ const CreditCardModal = ({
               <Label>Card Limit</Label>
               <InputCurrency
                 name="limit"
-                lang={LANG}
+                lang={language}
                 value={form.limit}
                 onBlur={handleBlur}
                 onChange={handleCurrency}

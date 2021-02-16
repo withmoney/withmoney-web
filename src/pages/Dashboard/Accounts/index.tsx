@@ -33,7 +33,7 @@ const Accounts = () => {
         onClick: () => handleRestoreAccount(),
       });
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
   };
   //Restore Account
@@ -46,7 +46,7 @@ const Accounts = () => {
         draggable: false,
       });
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
   };
 

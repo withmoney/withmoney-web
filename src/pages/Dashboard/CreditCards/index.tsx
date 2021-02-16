@@ -14,7 +14,7 @@ import Button from '../../../components/Button';
 import { CreditCard } from '../../../models';
 import Pagination from '../../../components/Pagination';
 import { currencyFormat } from '../../../utils/currency';
-import { LANG } from '../../../constants/currency';
+import { useUserLanguage } from '../../../hooks/useUser';
 import ConfirmModal from '../../../modals/ConfirmModal';
 
 const initialValues = {
@@ -23,6 +23,7 @@ const initialValues = {
 
 const CreditCards = () => {
   const { currentAccount } = useAccountFilters();
+  const { value: language } = useUserLanguage();
   const [currentPage, setCurrentPage] = useState(0);
   const [ItemsPerPage] = useState(5);
   const [filter, setFilter] = useState(initialValues);
@@ -66,7 +67,7 @@ const CreditCards = () => {
       await refetch();
       setCurrentPage(0);
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
   };
 
@@ -81,7 +82,7 @@ const CreditCards = () => {
       });
       await refetch();
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
   };
 
@@ -143,7 +144,9 @@ const CreditCards = () => {
                     <Text>{creditCard.name}</Text>
                   </Cell>
                   <Cell align="flex-end">
-                    <Text>{currencyFormat(LANG, currentAccount.currency, creditCard.limit)}</Text>
+                    <Text>
+                      {currencyFormat(language, currentAccount.currency, creditCard.limit)}
+                    </Text>
                   </Cell>
                   <Cell>
                     <Text>{creditCard.brand}</Text>
