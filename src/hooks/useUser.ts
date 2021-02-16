@@ -1,7 +1,7 @@
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import jwt from 'jsonwebtoken';
 import { GET_ME } from '../graphql/AuthGql';
-import { UPDATE_USER } from '../graphql/User';
+import { UPDATE_USER, CHANGE_USER_PASSWORD } from '../graphql/User';
 import { User } from '../models';
 
 type Data = {
@@ -35,4 +35,12 @@ export const useUpdateUser = () => {
   });
 
   return { updateUser, data, loading, error };
+};
+
+export const useUserChangePassword = () => {
+  const [changeUserPassword, { data, loading, error }] = useMutation(CHANGE_USER_PASSWORD, {
+    refetchQueries: [{ query: GET_ME }],
+  });
+
+  return { changeUserPassword, data, loading, error };
 };
