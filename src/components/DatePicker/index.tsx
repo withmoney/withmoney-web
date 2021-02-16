@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment, { Moment } from 'moment';
 import { SingleDatePicker } from 'react-dates';
-import { LANG } from '../../constants/Langs';
+import { useUserLanguage } from '../../hooks/useUser';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import './react_dates_overrides.css';
@@ -13,9 +13,17 @@ type Props = {
 };
 
 const DatePicker = ({ id, defaultValue, onDateChange }: Props) => {
-  const value = moment(defaultValue).locale(LANG);
-  const [date, setDate] = useState<Moment>(value);
+  const { value: language } = useUserLanguage();
+
+  const [date, setDate] = useState<Moment>(moment());
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (language) {
+      const time = moment(defaultValue).locale(language);
+      setDate(time);
+    }
+  }, [language]);
 
   const format = date.localeData().longDateFormat('L');
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import Text from '../../../../components/Text';
 import { currencyFormat } from '../../../../utils/currency';
-import { LANG } from '../../../../constants/Langs';
 import { useOperations } from '../../../../hooks/useOperations';
 import { getTotalPendingExpenses } from '../../../../utils/calcOperations';
 import { PlannedBalance, getTotalOperations } from '../../../../utils/calcOperations';
@@ -11,11 +10,12 @@ import { IncomesIcons, PaidExpenses, PendingExpensesIcons } from './style/Footer
 import { CreditCardExpenses } from './style/FooterContainer.style';
 import { InfoTitle, InfoValue } from './style/FooterContainer.style';
 import { useAccountFilters } from '../../../../hooks/useAccountFilters';
+import { useUserLanguage } from '../../../../hooks/useUser';
 
 const FooterContainer = () => {
   const { data } = useOperations();
   const operations = data?.operations || [];
-
+  const { value: language } = useUserLanguage();
   const AllIncomes = getTotalOperations(operations);
   const totalPaidExpenses = getTotalPaidExpenses(operations);
   const totalPendingExpenses = getTotalPendingExpenses(operations);
@@ -42,13 +42,15 @@ const FooterContainer = () => {
             </Text>
           </InfoTitle>
           <InfoValue>
-            {currentAccount && (
+            {currentAccount && language && (
               <>
-                <Text>{currencyFormat(LANG, currentAccount.currency, AllIncomes)}</Text>
-                <Text>{currencyFormat(LANG, currentAccount.currency, totalPendingExpenses)}</Text>
-                <Text>{currencyFormat(LANG, currentAccount.currency, totalPaidExpenses)}</Text>
+                <Text>{currencyFormat(language, currentAccount.currency, AllIncomes)}</Text>
                 <Text>
-                  {currencyFormat(LANG, currentAccount.currency, totalCreditCardExpenses)}
+                  {currencyFormat(language, currentAccount.currency, totalPendingExpenses)}
+                </Text>
+                <Text>{currencyFormat(language, currentAccount.currency, totalPaidExpenses)}</Text>
+                <Text>
+                  {currencyFormat(language, currentAccount.currency, totalCreditCardExpenses)}
                 </Text>
               </>
             )}
@@ -61,9 +63,9 @@ const FooterContainer = () => {
             </Text>
           </InfoTitle>
           <InfoValue>
-            {currentAccount && (
+            {currentAccount && language && (
               <Text variation={totalPlannedBalance < 0 ? 'danger' : 'default'} bold>
-                {currencyFormat(LANG, currentAccount.currency, totalPlannedBalance)}
+                {currencyFormat(language, currentAccount.currency, totalPlannedBalance)}
               </Text>
             )}
           </InfoValue>

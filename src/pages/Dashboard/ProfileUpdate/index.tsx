@@ -12,7 +12,7 @@ import InputGroup from '../../../components/InputGroup';
 import Button from '../../../components/Button';
 import { Page, PageHeader, PageBody } from '../style/SubPages.style';
 import { useUser, useUpdateUser } from '../../../hooks/useUser';
-import { LANGS } from '../../../constants/Langs';
+import { languages, languageLabels } from '../../../constants/Langs';
 import customStyles from '../Operations/Operation/style/CategorySelect.style';
 import { checkUpdateUser } from '../../../schema/checkField';
 
@@ -23,9 +23,9 @@ const initialValues = {
   language: '',
 };
 
-const defaultOptions = LANGS.map((lang) => ({
+const defaultOptions = languages.map((lang) => ({
   value: lang,
-  label: lang,
+  label: languageLabels[lang],
 }));
 
 const ProfileUpdate = () => {
@@ -90,7 +90,7 @@ const ProfileUpdate = () => {
           position: toast.POSITION.BOTTOM_LEFT,
           draggable: false,
         });
-        history.push('/dashboard');
+        history.push('/');
       } else {
         throw new Error('Invalid form!');
       }
@@ -148,18 +148,18 @@ const ProfileUpdate = () => {
                   styles={customStyles}
                   defaultValue={{
                     value: data.me.language,
-                    label: data.me.language,
+                    label: languageLabels[data.me.language],
                   }}
                 ></AsyncCreatableSelect>
               </InputControl>
               <Flex justifyContent="flex-end">
                 <Button
                   onClick={(event) => handleUpdateUser(event)}
-                  disabled={!formValidate}
+                  disabled={!formValidate || loadingUser}
                   variation="primary"
                   type="submit"
                 >
-                  Update
+                  {loadingUser ? 'Updating...' : 'Update'}
                 </Button>
               </Flex>
             </Form>

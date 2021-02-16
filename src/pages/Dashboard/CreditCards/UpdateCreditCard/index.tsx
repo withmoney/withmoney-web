@@ -14,7 +14,7 @@ import Alert from '../../../../components/Alert';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
 import InputControl from '../../../../components/InputControl';
 import { CreatedCardBrandText } from '../../../../constants/Transactions';
-import { LANG } from '../../../../constants/Langs';
+import { useUserLanguage } from '../../../../hooks/useUser';
 import customStyles from '../../Operations/Operation/style/CategorySelect.style';
 import { checkCreditCard } from '../../../../schema/checkField';
 import { useUniqueCreditCard, useUpdateCreditCard } from '../../../../hooks/useCreditCard';
@@ -34,6 +34,7 @@ const defaultOptions = CreatedCardBrandText.map((creditCard) => ({
 const UpdateCreditCard = () => {
   const history = useHistory();
   const { currentAccount } = useAccountFilters();
+  const { value: language } = useUserLanguage();
   const { id } = useParams<{ id: string }>();
   const { data, loading, error } = useUniqueCreditCard(id);
   const [form, setForm] = useState(initialValues);
@@ -123,7 +124,7 @@ const UpdateCreditCard = () => {
       <PageBody>
         <Flex justifyContent="center">
           {loading && <LoadingSpinner />}
-          {data?.findUniqueCreditCard && (
+          {language && data?.findUniqueCreditCard && (
             <Form>
               {error && <Alert isDanger>{error.message}</Alert>}
               <InputControl message={formErrors.name} isInvalid={!!formErrors.name}>
@@ -155,7 +156,7 @@ const UpdateCreditCard = () => {
                 <Label>Credit card limit</Label>
                 <InputCurrency
                   name="limit"
-                  lang={LANG}
+                  lang={language}
                   value={data?.findUniqueCreditCard.limit}
                   onChange={handleCurrency}
                   currency={currentAccount?.currency}

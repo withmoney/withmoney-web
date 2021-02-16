@@ -16,7 +16,7 @@ import InputControl from '../../../../components/InputControl';
 import { CreatedCardBrandText } from '../../../../constants/Transactions';
 import customStyles from '../../Operations/Operation/style/CategorySelect.style';
 import { useAccountFilters } from '../../../../hooks/useAccountFilters';
-import { LANG } from '../../../../constants/Langs';
+import { useUserLanguage } from '../../../../hooks/useUser';
 import { useCreateCreditCard } from '../../../../hooks/useCreditCard';
 import { checkCreditCard } from '../../../../schema/checkField';
 
@@ -33,6 +33,7 @@ const defaultOptions = CreatedCardBrandText.map((creditCard) => ({
 
 const AddCreditCard = () => {
   const { currentAccount } = useAccountFilters();
+  const { value: language } = useUserLanguage();
   const [form, setForm] = useState(initialValues);
   const [formErrors, setFormErrors] = useState(initialValues);
   const [formValidate, setFormValidate] = useState(false);
@@ -114,7 +115,7 @@ const AddCreditCard = () => {
         <Flex justifyContent="center">
           <Form>
             {error && <Alert isDanger>{error.message}</Alert>}
-            {currentAccount ? (
+            {language && currentAccount ? (
               <>
                 <InputControl message={formErrors.name} isInvalid={!!formErrors.name}>
                   <Label>Name</Label>
@@ -141,7 +142,7 @@ const AddCreditCard = () => {
                   <Label>Limit</Label>
                   <InputCurrency
                     name="limit"
-                    lang={LANG}
+                    lang={language}
                     value={form.limit}
                     onChange={handleCurrency}
                     currency={currentAccount.currency}

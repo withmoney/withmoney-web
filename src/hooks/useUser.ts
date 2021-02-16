@@ -1,8 +1,11 @@
+import { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import jwt from 'jsonwebtoken';
 import { GET_ME } from '../graphql/AuthGql';
 import { UPDATE_USER, CHANGE_USER_PASSWORD } from '../graphql/User';
 import { User } from '../models';
+import { languageValue, languageLabels } from '../constants/Langs';
+import { Locale } from '../models';
 
 type Data = {
   me: User;
@@ -43,4 +46,18 @@ export const useUserChangePassword = () => {
   });
 
   return { changeUserPassword, data, loading, error };
+};
+
+export const useUserLanguage = () => {
+  const { data } = useQuery<Data>(GET_ME);
+  const [language, setLanguage] = useState<Locale>();
+
+  useEffect(() => {
+    if (!language && data?.me) {
+      setLanguage(data.me.language);
+    }
+  }, [data]);
+
+  if (language) return { value: languageValue[language], label: languageLabels[language] };
+  else return { value: undefined, label: undefined };
 };
