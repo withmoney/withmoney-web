@@ -40,7 +40,7 @@ const MonthNavigation = () => {
         <ArrowIosBack />
       </ArrowButton>
       <MonthContent>
-        <Text bold>{`${lodash.capitalize(month)} ${year}`}</Text>
+        <Text bold>{`${capitalize(month)} ${year}`}</Text>
       </MonthContent>
       <ArrowButton isLoading={loading} onClick={goToNextMonth}>
         <ArrowIosForward />
