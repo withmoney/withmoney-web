@@ -41,6 +41,9 @@ const cache = new InMemoryCache({
         findManyCategory: {
           merge: false,
         },
+        findManyCreditCard: {
+          merge: false,
+        },
       },
     },
   },

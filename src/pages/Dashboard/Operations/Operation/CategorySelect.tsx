@@ -7,7 +7,7 @@ import Input from '../../../../components/Input';
 import { useFilterCategories, useCreateCategory } from '../../../../hooks/useCategories';
 import { useOperationsFilters } from '../../../../hooks/useOperationsFilters';
 import { useUpdateOperation } from '../../../../hooks/useOperations';
-import { Operation, FindManyCategory } from '../../../../models';
+import { Operation, Categories } from '../../../../models';
 import { ALL_CATEGORY } from '../../../../graphql/Categories';
 import customStyles from './style/CategorySelect.style';
 
@@ -23,7 +23,7 @@ type Option = {
 
 const CategorySelect = ({ CategoryId, operation }: Props) => {
   const [value, setValue] = useState<Option | undefined>();
-  const { data: allCategories, loading } = useQuery<FindManyCategory>(ALL_CATEGORY);
+  const { data: allCategories, loading } = useQuery<Categories>(ALL_CATEGORY);
   const { currentTransactionType } = useOperationsFilters();
   const { createCategory } = useCreateCategory();
   const { updateOperation } = useUpdateOperation();

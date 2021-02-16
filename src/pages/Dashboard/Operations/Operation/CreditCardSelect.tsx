@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { useQuery } from '@apollo/client';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import debounce from 'lodash.debounce';
-import { useFilterCreditCards, useCreateCategory } from '../../../../hooks/useCreditCard';
+import { useFilterCreditCards, useCreateCreditCard } from '../../../../hooks/useCreditCard';
 import customStyles from './style/CategorySelect.style';
 import { CREDIT_CARDS } from '../../../../graphql/CreditCard';
 import { Operation, CreditCards } from '../../../../models';
@@ -34,12 +34,13 @@ const initialValues = {
 const CreditCardSelect = ({ operation }: Props) => {
   const { currentAccount } = useAccountFilters();
   const [value, setValue] = useState<Option | undefined>();
-  const { createCreditCard, loading: loadingCreateCard } = useCreateCategory();
+  const { createCreditCard, loading: loadingCreateCard } = useCreateCreditCard();
   const [form, setForm] = useState(initialValues);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const { updateOperation } = useUpdateOperation();
   const filterCreditCards = useFilterCreditCards();
   const { data, loading } = useQuery<CreditCards>(CREDIT_CARDS, {
+    fetchPolicy: 'network-only',
     variables: { id: currentAccount?.id },
   });
 
@@ -98,7 +99,7 @@ const CreditCardSelect = ({ operation }: Props) => {
     }
   };
 
-  const defaultValues = data?.allCreditCards.data
+  const defaultValues = data?.creditCards.data
     .map((creditCard) => ({
       value: creditCard.id,
       label: creditCard.name,
@@ -107,7 +108,7 @@ const CreditCardSelect = ({ operation }: Props) => {
       return creditCard.value === operation.creditCardId;
     });
 
-  const defaultOptions = data?.allCreditCards.data
+  const defaultOptions = data?.creditCards.data
     .filter((creditCard) => creditCard)
     .map((creditCard) => ({
       value: creditCard.id,
@@ -130,7 +131,6 @@ const CreditCardSelect = ({ operation }: Props) => {
       )}
 
       <AsyncCreatableSelect
-        cacheOptions
         value={value}
         defaultOptions={defaultOptions}
         defaultValue={defaultValues}

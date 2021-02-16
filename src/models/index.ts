@@ -99,23 +99,24 @@ export interface CreditCard {
 
 export interface Me extends User {}
 
-export interface FindManyCategory {
+export interface Categories {
   categories: DataCategories;
 }
 
 export type CreditCards = {
-  allCreditCards: DataCreditCards;
+  creditCards: DataCreditCards;
 };
 
 export type DataCreditCards = {
   data: CreditCard[];
+  pagination: Pagination;
 };
 
-type DataCategories = {
+export type DataCategories = {
   data: Category[];
-  pagination: TotalItems;
+  pagination: Pagination;
 };
 
-type TotalItems = {
+export interface Pagination {
   totalItems: number;
-};
+}
