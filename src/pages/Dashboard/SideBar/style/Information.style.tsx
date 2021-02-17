@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { ArrowDown } from '@styled-icons/fa-solid';
-import { ArrowUp } from '@styled-icons/fa-solid';
+import { ArrowIosUpward } from '@styled-icons/evaicons-solid';
+import { ArrowIosDownward } from '@styled-icons/evaicons-solid';
 
 export const InformationContainer = styled.div`
   display: flex;
@@ -19,8 +19,8 @@ export const ContainerText = styled.div`
   padding-top: 10px;
 `;
 
-export const DownArrow = styled(ArrowDown)`
-  width: 15px;
+export const DownArrow = styled(ArrowIosDownward)`
+  width: 18px;
   color: var(--text-default-color);
 
   &:hover {
@@ -28,8 +28,8 @@ export const DownArrow = styled(ArrowDown)`
   }
 `;
 
-export const UpArrow = styled(ArrowUp)`
-  width: 15px;
+export const UpArrow = styled(ArrowIosUpward)`
+  width: 18px;
   color: var(--text-default-color);
 
   &:hover {
