@@ -12,7 +12,9 @@ const Balance = () => {
   const { value: language } = useUserLanguage();
   const { data } = useOperations();
   const operations = data?.operations || [];
-  const balance = getBalance(operations);
+  const balanceOperations = getBalance(operations);
+  const PreviousBalance = data?.balance.amount || 0;
+  const balance = balanceOperations + PreviousBalance;
 
   return (
     <BalanceContainer>

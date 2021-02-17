@@ -59,7 +59,7 @@ const FooterContainer = () => {
         <Info>
           <InfoTitle>
             <Text style={{ marginRight: '60px' }} bold>
-              Planned Balance
+              Planned Month Balance
             </Text>
           </InfoTitle>
           <InfoValue>
