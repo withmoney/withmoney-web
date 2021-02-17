@@ -13,11 +13,13 @@ const Information = () => {
     <InformationContainer>
       <ContainerText>
         <Text>Credit Cards</Text>
-        <ButtonCards onClick={() => setShow(!show)}>
+        <ButtonCards type="button" onClick={() => setShow(!show)}>
           {show ? <UpArrow /> : <DownArrow />}
         </ButtonCards>
       </ContainerText>
-      {data?.allCreditCardsLimit.length === 0 && !show && <Text>No credit card data</Text>}
+      {data?.allCreditCardsLimit.length === 0 && !show && (
+        <Text variation="light">No credit card data</Text>
+      )}
       {data?.allCreditCardsLimit &&
         show &&
         data.allCreditCardsLimit.map((creditCard) => (

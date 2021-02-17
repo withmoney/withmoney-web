@@ -37,7 +37,9 @@ export const UpArrow = styled(ArrowIosUpward)`
   }
 `;
 
-export const ButtonCards = styled.span`
+export const ButtonCards = styled.button`
   padding: 5px;
-  cursor: pointer;
+  border: none;
+  outline: none;
+  background-color: var(--dashboard-color-white);
 `;
