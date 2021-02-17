@@ -123,6 +123,21 @@ export type DataCategories = {
   pagination: Pagination;
 };
 
+export type AllCreditCardsLimit = {
+  allCreditCardsLimit: CreditCardLimit[];
+};
+
 export interface Pagination {
   totalItems: number;
 }
+
+type CreditCardLimit = {
+  limit: number;
+  currentLimit: number;
+  creditCard: CreditCardInfo;
+};
+
+type CreditCardInfo = {
+  id: string;
+  name: string;
+};
