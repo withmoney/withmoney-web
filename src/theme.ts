@@ -29,7 +29,7 @@ const GlobalStyle = createGlobalStyle`
     --font-h3-margin-bottom: 25px;
 
     /* Text */
-    --text-font-sm: 8px;
+    --text-font-sm: 12px;
     --text-font-md: 16px;
     --text-font-lg: 24px;
     --text-font-xl: 32px;
@@ -235,6 +235,7 @@ const GlobalStyle = createGlobalStyle`
   --dashboard-progress-bar-FixedExpense: #E98686;
   --dashboard-progress-bar-CreditCard: #C380DA;
   --dashboard-progress-bar-VariableExpense: #F5AD40;
+  --dashboard-progress-bar-Danger: #ff0000;
 
   --dashboard-progress-bar-Deposit-hover: #4ab054;
   --dashboard-progress-bar-FixedExpense-hover: #dd7171;

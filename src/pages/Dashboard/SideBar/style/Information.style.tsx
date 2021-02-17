@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { ArrowDown } from '@styled-icons/fa-solid';
+import { ArrowUp } from '@styled-icons/fa-solid';
 
 export const InformationContainer = styled.div`
   display: flex;
@@ -8,4 +10,34 @@ export const InformationContainer = styled.div`
   padding-top: 10px;
   padding-bottom: 20px;
   border-bottom: 2px solid var(--dashboard-border-color);
+`;
+
+export const ContainerText = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 10px;
+`;
+
+export const DownArrow = styled(ArrowDown)`
+  width: 15px;
+  color: var(--text-default-color);
+
+  &:hover {
+    color: var(--text-default-color-hover);
+  }
+`;
+
+export const UpArrow = styled(ArrowUp)`
+  width: 15px;
+  color: var(--text-default-color);
+
+  &:hover {
+    color: var(--text-default-color-hover);
+  }
+`;
+
+export const ButtonCards = styled.span`
+  padding: 5px;
+  cursor: pointer;
 `;

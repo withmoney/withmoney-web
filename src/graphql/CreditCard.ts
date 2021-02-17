@@ -39,7 +39,8 @@ export const ALL_CREDIT_CARDS_LIMIT = gql`
   query {
     allCreditCardsLimit: calcManyCreditCardLimit {
       limit
-      currentLimit
+      limitFree
+      limitBlocked
       creditCard {
         id
         name

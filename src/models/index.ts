@@ -133,7 +133,8 @@ export interface Pagination {
 
 type CreditCardLimit = {
   limit: number;
-  currentLimit: number;
+  limitFree: number;
+  limitBlocked: number;
   creditCard: CreditCardInfo;
 };
 

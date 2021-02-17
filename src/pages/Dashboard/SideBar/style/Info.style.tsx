@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 type ProgressProps = {
-  variation: string;
+  variation?: string;
   percent: string;
 };
 

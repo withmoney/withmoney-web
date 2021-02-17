@@ -77,7 +77,7 @@ export function useUniqueCreditCard(id: string) {
 
 // update Credit Card
 export const useUpdateCreditCard = () => {
-  const [updateCreditCard, { data, loading, error }] = useMutation(ALL_CREDIT_CARDS_LIMIT, {
+  const [updateCreditCard, { data, loading, error }] = useMutation(UPDATE_CREDIT_CARD, {
     refetchQueries: [{ query: CREDIT_CARDS }],
   });
 
