@@ -19,6 +19,7 @@ import customStyles from '../../Operations/Operation/style/CategorySelect.style'
 import { checkCreditCard } from '../../../../schema/checkField';
 import { useUniqueCreditCard, useUpdateCreditCard } from '../../../../hooks/useCreditCard';
 import { useAccountFilters } from '../../../../hooks/useAccountFilters';
+import { ALL_CREDIT_CARDS_LIMIT } from '../../../../graphql/CreditCard';
 
 const initialValues = {
   name: '',
@@ -101,6 +102,7 @@ const UpdateCreditCard = () => {
           limit: form.limit,
           account: currentAccount?.id,
         },
+        refetchQueries: [{ query: ALL_CREDIT_CARDS_LIMIT }],
       });
       toast.success(
         `Credit card ${data.findUniqueCreditCard.name} was been updated to ${form.name}!`,

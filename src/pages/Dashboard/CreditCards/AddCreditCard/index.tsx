@@ -19,6 +19,7 @@ import { useAccountFilters } from '../../../../hooks/useAccountFilters';
 import { useUserLanguage } from '../../../../hooks/useUser';
 import { useCreateCreditCard } from '../../../../hooks/useCreditCard';
 import { checkCreditCard } from '../../../../schema/checkField';
+import { ALL_CREDIT_CARDS_LIMIT } from '../../../../graphql/CreditCard';
 
 const initialValues = {
   name: '',
@@ -94,6 +95,7 @@ const AddCreditCard = () => {
           brand: form.brand,
           account: currentAccount?.id,
         },
+        refetchQueries: [{ query: ALL_CREDIT_CARDS_LIMIT }],
       });
       toast.success(`Credit Card ${form.name} was been created!`, {
         position: toast.POSITION.BOTTOM_LEFT,

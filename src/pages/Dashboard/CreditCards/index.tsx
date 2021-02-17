@@ -16,6 +16,7 @@ import Pagination from '../../../components/Pagination';
 import { currencyFormat } from '../../../utils/currency';
 import { useUserLanguage } from '../../../hooks/useUser';
 import ConfirmModal from '../../../modals/ConfirmModal';
+import { ALL_CREDIT_CARDS_LIMIT } from '../../../graphql/CreditCard';
 
 const initialValues = {
   filterName: '',
@@ -56,7 +57,10 @@ const CreditCards = () => {
   // delete Credit Card
   const handleDelete = async () => {
     try {
-      await deleteCreditCard({ variables: { id: selectedCreditCard?.id } });
+      await deleteCreditCard({
+        variables: { id: selectedCreditCard?.id },
+        refetchQueries: [{ query: ALL_CREDIT_CARDS_LIMIT }],
+      });
       setOpenModal(false);
       toast.error('Credit card deleted. Click here to restore!', {
         position: toast.POSITION.BOTTOM_LEFT,
@@ -74,7 +78,10 @@ const CreditCards = () => {
   // restore Credit Card
   const handleRestoreCreditCard = async () => {
     try {
-      await restoreCreditCard({ variables: { id: selectedCreditCard?.id } });
+      await restoreCreditCard({
+        variables: { id: selectedCreditCard?.id },
+        refetchQueries: [{ query: ALL_CREDIT_CARDS_LIMIT }],
+      });
       toast.success('Credit card has been successfully restored!', {
         position: toast.POSITION.BOTTOM_LEFT,
         autoClose: 8000,
@@ -137,6 +144,7 @@ const CreditCards = () => {
             <LoadingData />
           ) : (
             currentAccount?.currency &&
+            language &&
             data?.creditCards.data.map((creditCard) => {
               return (
                 <Row key={creditCard.id}>

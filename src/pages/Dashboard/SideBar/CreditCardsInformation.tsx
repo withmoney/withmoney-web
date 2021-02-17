@@ -7,7 +7,7 @@ import { useCreditCardsLimit } from '../../../hooks/useCreditCard';
 
 const Information = () => {
   const { data } = useCreditCardsLimit();
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(!data?.allCreditCardsLimit);
 
   return (
     <InformationContainer>
@@ -17,6 +17,7 @@ const Information = () => {
           {show ? <UpArrow /> : <DownArrow />}
         </ButtonCards>
       </ContainerText>
+      {data?.allCreditCardsLimit.length === 0 && !show && <Text>No credit card data</Text>}
       {data?.allCreditCardsLimit &&
         show &&
         data.allCreditCardsLimit.map((creditCard) => (
