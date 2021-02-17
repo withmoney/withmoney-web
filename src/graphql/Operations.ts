@@ -22,6 +22,9 @@ export const GET_OPERATIONS = gql`
       categoryId
       creditCardId
     }
+    balance: calcPreviousBalance(where: { paidAt: { lt: $startDateTime } }) {
+      amount
+    }
   }
 `;
 // mutations

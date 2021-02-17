@@ -9,6 +9,11 @@ import useNProgress from './useNProgress';
 
 type Data = {
   operations: Operation[];
+  balance: Balance;
+};
+
+type Balance = {
+  amount: number;
 };
 
 export function useOperations() {
