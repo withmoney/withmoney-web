@@ -6,7 +6,6 @@ export const MenuContent = styled.div`
   display: flex;
   flex-direction: column;
   text-align: start;
-  border-bottom: solid 2px var(--dashboard-border-color);
   margin: 20px;
   ${Link} {
     margin-bottom: 10px;
