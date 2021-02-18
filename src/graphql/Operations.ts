@@ -22,7 +22,7 @@ export const GET_OPERATIONS = gql`
       categoryId
       creditCardId
     }
-    balance: calcPreviousBalance(where: { paidAt: { lt: $startDateTime } }) {
+    balance: calcPreviousBalance(where: { paidAt: { lt: $startDateTime }, accountId: $accountId }) {
       amount
     }
   }
