@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Text from '../../../components/Text';
 import { currencyFormat } from '../../../utils/currency';
-import {
-  InfoContainer,
-  ProgressBar,
-  ProgressCreditCard,
-  BalanceContainer,
-} from './style/Info.style';
+import { InfoContainer, ProgressBar, Progress, BalanceContainer } from './style/Info.style';
 import { useAccountFilters } from '../../../hooks/useAccountFilters';
 import { useUserLanguage } from '../../../hooks/useUser';
 
@@ -28,14 +23,14 @@ const Info = ({ name, limit, currentLimit }: Props) => {
   const { value: language } = useUserLanguage();
 
   useEffect(() => {
-    if (value <= 20) {
-      setVariation('#53BC5E');
+    if (value <= 30) {
+      setVariation('green');
     } else if (value <= 60) {
-      setVariation('#F5AD40');
+      setVariation('orange');
     } else if (value <= 100) {
-      setVariation('#E98686');
+      setVariation('pink');
     } else {
-      setVariation('#ff0000');
+      setVariation('red');
     }
   }, [value]);
 
@@ -43,7 +38,7 @@ const Info = ({ name, limit, currentLimit }: Props) => {
     <InfoContainer>
       <Text>{name}</Text>
       <ProgressBar>
-        <ProgressCreditCard variation={variation} percent={percent} />
+        <Progress variation={variation} percent={percent} />
       </ProgressBar>
       <BalanceContainer>
         {language && currentAccount && (

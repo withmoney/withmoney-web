@@ -235,7 +235,12 @@ const GlobalStyle = createGlobalStyle`
   --dashboard-progress-bar-FixedExpense: #E98686;
   --dashboard-progress-bar-CreditCard: #C380DA;
   --dashboard-progress-bar-VariableExpense: #F5AD40;
-  --dashboard-progress-bar-Danger: #ff0000;
+  
+  --dashboard-progress-bar-green: #53BC5E;
+  --dashboard-progress-bar-pink: #E98686;
+  --dashboard-progress-bar-purple: #C380DA;
+  --dashboard-progress-bar-orange: #F5AD40;
+  --dashboard-progress-bar-red: #ff0000;
 
   --dashboard-progress-bar-Deposit-hover: #4ab054;
   --dashboard-progress-bar-FixedExpense-hover: #dd7171;
