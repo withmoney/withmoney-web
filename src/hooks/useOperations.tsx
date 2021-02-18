@@ -4,6 +4,7 @@ import { useOperationsFilters } from './useOperationsFilters';
 import { useAccountFilters } from './useAccountFilters';
 import { UPDATE_OPERATION, RESTORE_OPERATION } from '../graphql/Operations';
 import { DELETE_OPERATION, GET_OPERATIONS, CREATE_OPERATION } from '../graphql/Operations';
+import { ALL_CREDIT_CARDS_LIMIT } from '../graphql/CreditCard';
 import { Operation } from '../models';
 import useNProgress from './useNProgress';
 
@@ -49,6 +50,7 @@ export function useUpdateOperation() {
 
   const [updateOperation, { data, error, loading }] = useMutation<Data>(UPDATE_OPERATION, {
     refetchQueries: [
+      { query: ALL_CREDIT_CARDS_LIMIT, variables: { accountId: currentAccount?.id } },
       {
         query: GET_OPERATIONS,
         variables: {
@@ -71,6 +73,7 @@ export function useDeleteOperation() {
 
   const [deleteOperation, { data, error, loading }] = useMutation(DELETE_OPERATION, {
     refetchQueries: [
+      { query: ALL_CREDIT_CARDS_LIMIT, variables: { accountId: currentAccount?.id } },
       {
         query: GET_OPERATIONS,
         variables: {
@@ -93,6 +96,7 @@ export function useRestoreOperation() {
 
   const [restoreOperation, { data, error, loading }] = useMutation(RESTORE_OPERATION, {
     refetchQueries: [
+      { query: ALL_CREDIT_CARDS_LIMIT, variables: { accountId: currentAccount?.id } },
       {
         query: GET_OPERATIONS,
         variables: {
@@ -114,6 +118,7 @@ export function useCreateOperation() {
   const { currentAccount } = useAccountFilters();
   const [createOperation, { data, error, loading }] = useMutation(CREATE_OPERATION, {
     refetchQueries: [
+      { query: ALL_CREDIT_CARDS_LIMIT, variables: { accountId: currentAccount?.id } },
       {
         query: GET_OPERATIONS,
         variables: {

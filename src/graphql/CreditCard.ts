@@ -35,6 +35,20 @@ export const GET_ONE_CREDIT_CARD = gql`
   }
 `;
 
+export const ALL_CREDIT_CARDS_LIMIT = gql`
+  query allCreditCardLimit($accountId: String!) {
+    allCreditCardsLimit: calcManyCreditCardLimit(where: {accountId: $accountId}) {
+    limit
+    limitFree
+    limitBlocked
+    creditCard {
+      id
+      name
+    }
+  }
+}
+`;
+
 // Mutations
 
 export const CREATE_CREDIT_CARD = gql`
