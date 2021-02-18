@@ -11,7 +11,7 @@ type Props = {
 const OperationPlaceholder = ({ onClick }: Props) => {
   const { currentTransactionType } = useOperationsFilters();
   return (
-    <Row cursorHover onClick={() => onClick()} alignItems="center">
+    <Row cursorHover onClick={onClick} alignItems="center">
       <Cell width="80px">
         <CheckBox disabled />
       </Cell>
