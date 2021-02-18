@@ -27,7 +27,7 @@ const Information = () => {
             key={creditCard.creditCard.id}
             name={creditCard.creditCard.name}
             limit={creditCard.limit}
-            currentLimit={creditCard.limitFree}
+            limitFree={creditCard.limitFree}
           />
         ))}
     </InformationContainer>

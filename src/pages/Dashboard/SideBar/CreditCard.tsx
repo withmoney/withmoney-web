@@ -8,7 +8,7 @@ import { useUserLanguage } from '../../../hooks/useUser';
 type Props = {
   name: string;
   limit: number;
-  currentLimit: number;
+  limitFree: number;
 };
 
 const percentCalc = (currentLimit: number, limit: number) => {
@@ -16,8 +16,8 @@ const percentCalc = (currentLimit: number, limit: number) => {
   return { percent: `${result}%`, value: result };
 };
 
-const Info = ({ name, limit, currentLimit }: Props) => {
-  const { percent, value } = percentCalc(currentLimit, limit);
+const Info = ({ name, limit, limitFree }: Props) => {
+  const { percent, value } = percentCalc(limitFree, limit);
   const [variation, setVariation] = useState<string>();
   const { currentAccount } = useAccountFilters();
   const { value: language } = useUserLanguage();
@@ -43,14 +43,14 @@ const Info = ({ name, limit, currentLimit }: Props) => {
       <BalanceContainer>
         {language && currentAccount && (
           <>
-            <Text>{currencyFormat(language, currentAccount.currency, limit - currentLimit)}</Text>
-            <Text>{currencyFormat(language, currentAccount.currency, limit)}</Text>
+            <Text>{currencyFormat(language, currentAccount.currency, limit - limitFree)}</Text>
+            <Text>{currencyFormat(language, currentAccount.currency, limitFree)}</Text>
           </>
         )}
       </BalanceContainer>
       <BalanceContainer>
-        <Text font="sm">Total Limit</Text>
-        <Text font="sm">Limit Available</Text>
+        <Text font="sm">Used Limit</Text>
+        <Text font="sm">Free Limit</Text>
       </BalanceContainer>
     </InfoContainer>
   );
