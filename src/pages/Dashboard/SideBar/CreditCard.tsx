@@ -43,8 +43,8 @@ const Info = ({ name, limit, limitFree }: Props) => {
       <BalanceContainer>
         {language && currentAccount && (
           <>
-            <Text>{currencyFormat(language, currentAccount.currency, limit - limitFree)}</Text>
             <Text>{currencyFormat(language, currentAccount.currency, limitFree)}</Text>
+            <Text>{currencyFormat(language, currentAccount.currency, limit - limitFree)}</Text>
           </>
         )}
       </BalanceContainer>
