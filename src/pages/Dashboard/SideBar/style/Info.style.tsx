@@ -21,6 +21,12 @@ export const Progress = styled.div<ProgressProps>`
   background-color: ${({ variation }) => `var(--dashboard-progress-bar-${variation})`};
 `;
 
+export const ProgressCreditCard = styled.div<ProgressProps>`
+  width: ${({ percent }) => percent};
+  padding: 5px 0;
+  background-color: ${({ variation }) => variation};
+`;
+
 export const BalanceContainer = styled.div`
   display: flex;
   justify-content: space-between;
