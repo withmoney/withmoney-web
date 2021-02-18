@@ -10,7 +10,7 @@ const Menu = () => {
     <MenuContainer>
       <MenuButton open={pathname === '/dashboard'} to="/dashboard">
         <Money />
-        <Text>Dashboard</Text>
+        <Text>Operations</Text>
       </MenuButton>
       <MenuButton open={pathname === '/reports'} to="/reports">
         <Graph />
