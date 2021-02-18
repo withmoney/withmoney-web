@@ -75,6 +75,7 @@
     "@styled-icons/fa-solid": "^10.26.0",
     "@styled-icons/material": "^10.18.0",
     "@testing-library/react": "^10.0.1",
+    "@types/i18next": "^13.0.0",
     "@types/nprogress": "^0.2.0",
     "@types/react-dates": "^21.8.1",
     "@types/react-modal": "^3.10.6",

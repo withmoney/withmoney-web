@@ -17,8 +17,11 @@ export const RowHeader = styled.div`
   display: flex;
   margin-bottom: 10px;
 `;
-
-export const Row = styled(Flex)`
+type RowProps = {
+  cursorHover?: boolean;
+};
+export const Row = styled(Flex)<RowProps>`
+  cursor: ${({ cursorHover }) => (cursorHover ? 'pointer' : 'default')};
   & + & {
     margin-top: 5px;
   }

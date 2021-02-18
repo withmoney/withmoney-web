@@ -4,10 +4,14 @@ import { Row, Cell } from '../Operation/style/OperationSettings';
 import { TransactionType } from '../../../../models';
 import { useOperationsFilters } from '../../../../hooks/useOperationsFilters';
 
-const OperationPlaceholder = () => {
+type Props = {
+  onClick: () => void;
+};
+
+const OperationPlaceholder = ({ onClick }: Props) => {
   const { currentTransactionType } = useOperationsFilters();
   return (
-    <Row alignItems="center">
+    <Row cursorHover onClick={onClick} alignItems="center">
       <Cell width="80px">
         <CheckBox disabled />
       </Cell>
