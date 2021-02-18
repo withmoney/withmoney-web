@@ -41,5 +41,6 @@ export const ButtonCards = styled.button`
   padding: 5px;
   border: none;
   outline: none;
+  cursor: pointer;
   background-color: var(--dashboard-color-white);
 `;

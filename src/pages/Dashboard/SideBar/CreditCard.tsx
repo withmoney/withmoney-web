@@ -23,14 +23,12 @@ const Info = ({ name, limit, limitFree }: Props) => {
   const { value: language } = useUserLanguage();
 
   useEffect(() => {
-    if (value <= 30) {
+    if (value <= 50) {
       setVariation('green');
-    } else if (value <= 60) {
+    } else if (value <= 99) {
       setVariation('orange');
-    } else if (value <= 100) {
+    } else if (value >= 100) {
       setVariation('pink');
-    } else {
-      setVariation('red');
     }
   }, [value]);
 
