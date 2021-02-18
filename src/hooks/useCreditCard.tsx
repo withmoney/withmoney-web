@@ -34,7 +34,10 @@ export const useFilterCreditCards = () => {
 
 // all Credit Cards limit
 export const useCreditCardsLimit = () => {
-  const { data, loading, error } = useQuery<AllCreditCardsLimit>(ALL_CREDIT_CARDS_LIMIT);
+  const { currentAccount } = useAccountFilters();
+  const { data, loading, error } = useQuery<AllCreditCardsLimit>(ALL_CREDIT_CARDS_LIMIT, {
+    variables: { accountId: currentAccount?.id },
+  });
   return { data, loading, error };
 };
 

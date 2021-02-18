@@ -17,7 +17,7 @@ const Information = () => {
           {show ? <UpArrow /> : <DownArrow />}
         </ButtonCards>
       </ContainerText>
-      {data?.allCreditCardsLimit.length === 0 && !show && (
+      {data?.allCreditCardsLimit.length === 0 && show && (
         <Text variation="light">No credit card data</Text>
       )}
       {data?.allCreditCardsLimit &&

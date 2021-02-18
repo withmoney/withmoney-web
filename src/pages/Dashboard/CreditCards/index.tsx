@@ -59,7 +59,9 @@ const CreditCards = () => {
     try {
       await deleteCreditCard({
         variables: { id: selectedCreditCard?.id },
-        refetchQueries: [{ query: ALL_CREDIT_CARDS_LIMIT }],
+        refetchQueries: [
+          { query: ALL_CREDIT_CARDS_LIMIT, variables: { accountId: currentAccount?.id } },
+        ],
       });
       setOpenModal(false);
       toast.error('Credit card deleted. Click here to restore!', {
@@ -80,7 +82,9 @@ const CreditCards = () => {
     try {
       await restoreCreditCard({
         variables: { id: selectedCreditCard?.id },
-        refetchQueries: [{ query: ALL_CREDIT_CARDS_LIMIT }],
+        refetchQueries: [
+          { query: ALL_CREDIT_CARDS_LIMIT, variables: { accountId: currentAccount?.id } },
+        ],
       });
       toast.success('Credit card has been successfully restored!', {
         position: toast.POSITION.BOTTOM_LEFT,

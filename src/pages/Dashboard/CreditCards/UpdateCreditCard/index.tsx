@@ -102,7 +102,9 @@ const UpdateCreditCard = () => {
           limit: form.limit,
           account: currentAccount?.id,
         },
-        refetchQueries: [{ query: ALL_CREDIT_CARDS_LIMIT }],
+        refetchQueries: [
+          { query: ALL_CREDIT_CARDS_LIMIT, variables: { accountId: currentAccount?.id } },
+        ],
       });
       toast.success(
         `Credit card ${data.findUniqueCreditCard.name} was been updated to ${form.name}!`,

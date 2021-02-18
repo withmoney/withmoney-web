@@ -95,7 +95,10 @@ const AddCreditCard = () => {
           brand: form.brand,
           account: currentAccount?.id,
         },
-        refetchQueries: [{ query: ALL_CREDIT_CARDS_LIMIT }],
+
+        refetchQueries: [
+          { query: ALL_CREDIT_CARDS_LIMIT, variables: { accountId: currentAccount?.id } },
+        ],
       });
       toast.success(`Credit Card ${form.name} was been created!`, {
         position: toast.POSITION.BOTTOM_LEFT,
