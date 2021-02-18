@@ -14,8 +14,9 @@ import Button from '../../../components/Button';
 import { CreditCard } from '../../../models';
 import Pagination from '../../../components/Pagination';
 import { currencyFormat } from '../../../utils/currency';
-import { LANG } from '../../../constants/currency';
+import { useUserLanguage } from '../../../hooks/useUser';
 import ConfirmModal from '../../../modals/ConfirmModal';
+import { ALL_CREDIT_CARDS_LIMIT } from '../../../graphql/CreditCard';
 
 const initialValues = {
   filterName: '',
@@ -23,6 +24,7 @@ const initialValues = {
 
 const CreditCards = () => {
   const { currentAccount } = useAccountFilters();
+  const { value: language } = useUserLanguage();
   const [currentPage, setCurrentPage] = useState(0);
   const [ItemsPerPage] = useState(5);
   const [filter, setFilter] = useState(initialValues);
@@ -55,7 +57,12 @@ const CreditCards = () => {
   // delete Credit Card
   const handleDelete = async () => {
     try {
-      await deleteCreditCard({ variables: { id: selectedCreditCard?.id } });
+      await deleteCreditCard({
+        variables: { id: selectedCreditCard?.id },
+        refetchQueries: [
+          { query: ALL_CREDIT_CARDS_LIMIT, variables: { accountId: currentAccount?.id } },
+        ],
+      });
       setOpenModal(false);
       toast.error('Credit card deleted. Click here to restore!', {
         position: toast.POSITION.BOTTOM_LEFT,
@@ -66,14 +73,19 @@ const CreditCards = () => {
       await refetch();
       setCurrentPage(0);
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
   };
 
   // restore Credit Card
   const handleRestoreCreditCard = async () => {
     try {
-      await restoreCreditCard({ variables: { id: selectedCreditCard?.id } });
+      await restoreCreditCard({
+        variables: { id: selectedCreditCard?.id },
+        refetchQueries: [
+          { query: ALL_CREDIT_CARDS_LIMIT, variables: { accountId: currentAccount?.id } },
+        ],
+      });
       toast.success('Credit card has been successfully restored!', {
         position: toast.POSITION.BOTTOM_LEFT,
         autoClose: 8000,
@@ -81,7 +93,7 @@ const CreditCards = () => {
       });
       await refetch();
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
   };
 
@@ -136,6 +148,7 @@ const CreditCards = () => {
             <LoadingData />
           ) : (
             currentAccount?.currency &&
+            language &&
             data?.creditCards.data.map((creditCard) => {
               return (
                 <Row key={creditCard.id}>
@@ -143,7 +156,9 @@ const CreditCards = () => {
                     <Text>{creditCard.name}</Text>
                   </Cell>
                   <Cell align="flex-end">
-                    <Text>{currencyFormat(LANG, currentAccount.currency, creditCard.limit)}</Text>
+                    <Text>
+                      {currencyFormat(language, currentAccount.currency, creditCard.limit)}
+                    </Text>
                   </Cell>
                   <Cell>
                     <Text>{creditCard.brand}</Text>

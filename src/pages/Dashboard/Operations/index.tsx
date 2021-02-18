@@ -48,7 +48,7 @@ const Operations = () => {
         },
       });
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
   };
 
@@ -67,7 +67,7 @@ const Operations = () => {
         onClick: handleRestoreOperation,
       });
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
     setModalIsOpen(false);
   };
@@ -77,7 +77,7 @@ const Operations = () => {
     try {
       await restoreOperation({ variables: { id: selectOperation?.id } });
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
   };
 

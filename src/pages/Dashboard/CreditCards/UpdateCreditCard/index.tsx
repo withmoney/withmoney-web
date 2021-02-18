@@ -14,11 +14,12 @@ import Alert from '../../../../components/Alert';
 import LoadingSpinner from '../../../../components/LoadingSpinner';
 import InputControl from '../../../../components/InputControl';
 import { CreatedCardBrandText } from '../../../../constants/Transactions';
-import { LANG } from '../../../../constants/currency';
+import { useUserLanguage } from '../../../../hooks/useUser';
 import customStyles from '../../Operations/Operation/style/CategorySelect.style';
 import { checkCreditCard } from '../../../../schema/checkField';
 import { useUniqueCreditCard, useUpdateCreditCard } from '../../../../hooks/useCreditCard';
 import { useAccountFilters } from '../../../../hooks/useAccountFilters';
+import { ALL_CREDIT_CARDS_LIMIT } from '../../../../graphql/CreditCard';
 
 const initialValues = {
   name: '',
@@ -34,6 +35,7 @@ const defaultOptions = CreatedCardBrandText.map((creditCard) => ({
 const UpdateCreditCard = () => {
   const history = useHistory();
   const { currentAccount } = useAccountFilters();
+  const { value: language } = useUserLanguage();
   const { id } = useParams<{ id: string }>();
   const { data, loading, error } = useUniqueCreditCard(id);
   const [form, setForm] = useState(initialValues);
@@ -100,6 +102,9 @@ const UpdateCreditCard = () => {
           limit: form.limit,
           account: currentAccount?.id,
         },
+        refetchQueries: [
+          { query: ALL_CREDIT_CARDS_LIMIT, variables: { accountId: currentAccount?.id } },
+        ],
       });
       toast.success(
         `Credit card ${data.findUniqueCreditCard.name} was been updated to ${form.name}!`,
@@ -109,7 +114,7 @@ const UpdateCreditCard = () => {
       );
       history.push('/credit-cards');
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
   };
 
@@ -123,7 +128,7 @@ const UpdateCreditCard = () => {
       <PageBody>
         <Flex justifyContent="center">
           {loading && <LoadingSpinner />}
-          {data?.findUniqueCreditCard && (
+          {language && data?.findUniqueCreditCard && (
             <Form>
               {error && <Alert isDanger>{error.message}</Alert>}
               <InputControl message={formErrors.name} isInvalid={!!formErrors.name}>
@@ -145,8 +150,8 @@ const UpdateCreditCard = () => {
                   options={defaultOptions}
                   onChange={handleCreditCard}
                   defaultValue={{
-                    value: data?.findUniqueCreditCard.brand,
-                    label: data?.findUniqueCreditCard.brand,
+                    value: data.findUniqueCreditCard.brand,
+                    label: data.findUniqueCreditCard.brand,
                   }}
                 ></AsyncCreatableSelect>
               </InputControl>
@@ -155,7 +160,7 @@ const UpdateCreditCard = () => {
                 <Label>Credit card limit</Label>
                 <InputCurrency
                   name="limit"
-                  lang={LANG}
+                  lang={language}
                   value={data?.findUniqueCreditCard.limit}
                   onChange={handleCurrency}
                   currency={currentAccount?.currency}

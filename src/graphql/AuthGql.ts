@@ -7,6 +7,10 @@ export const GET_ME = gql`
       id
       firstName
       lastName
+      email
+      language
+      createdAt
+      deletedAt
     }
   }
 `;

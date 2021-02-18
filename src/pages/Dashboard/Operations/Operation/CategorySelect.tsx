@@ -50,7 +50,7 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
         setValue({ value: data?.createOneCategory.id, label: data?.createOneCategory.name });
       }
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
   };
 
@@ -65,7 +65,7 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
           },
         });
       } catch (err) {
-        toast.error(err.message);
+        toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
       }
     }
   };

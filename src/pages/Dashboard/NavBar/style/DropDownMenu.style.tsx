@@ -33,13 +33,6 @@ export const DropDownMenuContent = styled.div`
   cursor: pointer;
 `;
 
-export const Avatar = styled.img`
-  width: var(--dashboard-dropdown-avatar-size);
-  height: var(--dashboard-dropdown-avatar-size);
-  border-radius: var(--dashboard-default-radius);
-  margin-right: 8px;
-`;
-
 type MenuContainerProps = {
   ref: any;
 };

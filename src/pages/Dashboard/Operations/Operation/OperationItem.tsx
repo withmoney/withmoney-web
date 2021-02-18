@@ -3,7 +3,7 @@ import debounce from 'lodash.debounce';
 import { toast } from 'react-toastify';
 import moment, { Moment } from 'moment';
 import { useUpdateOperation } from '../../../../hooks/useOperations';
-import { LANG } from '../../../../constants/currency';
+import { useUserLanguage } from '../../../../hooks/useUser';
 import ButtonIcon from '../../../../components/ButtonIcon';
 import CheckBox from '../../../../components/Checkbox';
 import DatePicker from '../../../../components/DatePicker';
@@ -16,6 +16,7 @@ import { TrashFill } from '@styled-icons/bootstrap';
 import { Row, Cell } from '../Operation/style/OperationSettings';
 import { useAccountFilters } from '../../../../hooks/useAccountFilters';
 import { TransactionType } from '../../../../models';
+import LoadingData from '../../../../components/LoadingData';
 
 type OperationItemProps = {
   operation: Operation;
@@ -26,6 +27,7 @@ type OperationItemProps = {
 const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationItemProps) => {
   const { updateOperation } = useUpdateOperation();
   const { currentAccount } = useAccountFilters();
+  const { value: language } = useUserLanguage();
   const toggleInputCurrency = debounce((value: number) => {
     handleUpdate({
       value: value,
@@ -61,7 +63,7 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
         },
       });
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
   };
   const toggleDeleteOperation = (operation: Operation) => {
@@ -69,47 +71,51 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
     modalIsOpen(true);
   };
 
-  return (
-    <Row key={operation.id} alignItems="center">
-      <Cell width="80px">
-        <CheckBox onChange={toggleInputIsPaid} checked={operation.isPaid} />
-      </Cell>
-      <Cell width="130px">
-        <DatePicker
-          id={operation.id}
-          defaultValue={operation.paidAt}
-          onDateChange={handleDateChange}
-        />
-      </Cell>
-      <Cell flex="1">
-        <InputOperations placeholder="Name" onChange={toggleInputName} value={operation.name} />
-      </Cell>
-      <Cell flex="1">
-        <CategorySelect operation={operation} CategoryId={operation.categoryId} />
-      </Cell>
-      {operation.type === TransactionType.CreditCard && (
-        <Cell width="200px">
-          <CreditCardSelect operation={operation} />
+  return language && operation ? (
+    <>
+      <Row key={operation.id} alignItems="center">
+        <Cell width="80px">
+          <CheckBox onChange={toggleInputIsPaid} checked={operation.isPaid} />
         </Cell>
-      )}
-      <Cell width="200px">
-        <InputCurrency
-          onChange={toggleInputCurrency}
-          value={operation.value}
-          currency={currentAccount?.currency}
-          lang={LANG}
-        />
-      </Cell>
-      <Cell width="56px">
-        <ButtonIcon
-          type="button"
-          variation="danger"
-          onClick={() => toggleDeleteOperation(operation)}
-        >
-          <TrashFill />
-        </ButtonIcon>
-      </Cell>
-    </Row>
+        <Cell width="130px">
+          <DatePicker
+            id={operation.id}
+            defaultValue={operation.paidAt}
+            onDateChange={handleDateChange}
+          />
+        </Cell>
+        <Cell flex="1">
+          <InputOperations placeholder="Name" onChange={toggleInputName} value={operation.name} />
+        </Cell>
+        <Cell flex="1">
+          <CategorySelect operation={operation} CategoryId={operation.categoryId} />
+        </Cell>
+        {operation.type === TransactionType.CreditCard && (
+          <Cell width="200px">
+            <CreditCardSelect operation={operation} />
+          </Cell>
+        )}
+        <Cell width="200px">
+          <InputCurrency
+            onChange={toggleInputCurrency}
+            value={operation.value}
+            currency={currentAccount?.currency}
+            lang={language}
+          />
+        </Cell>
+        <Cell width="56px">
+          <ButtonIcon
+            type="button"
+            variation="danger"
+            onClick={() => toggleDeleteOperation(operation)}
+          >
+            <TrashFill />
+          </ButtonIcon>
+        </Cell>
+      </Row>
+    </>
+  ) : (
+    <LoadingData />
   );
 };
 

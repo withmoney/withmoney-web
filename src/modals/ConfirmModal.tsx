@@ -31,11 +31,11 @@ const ConfirmModal = ({
         </ModalHeader>
         <ModalBody>
           <>
-            <Button disabled={loading} type="button" onClick={onConfirm} variation={confirmButton}>
-              {loading ? <LoadingSpinner size="20px" /> : 'Yes'}
-            </Button>
             <Button disabled={loading} type="button" onClick={() => setIsOpenModal(false)}>
-              No
+              Cancel
+            </Button>
+            <Button disabled={loading} type="button" onClick={onConfirm} variation={confirmButton}>
+              {loading ? <LoadingSpinner size="20px" /> : 'Delete'}
             </Button>
           </>
         </ModalBody>

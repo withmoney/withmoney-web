@@ -24,6 +24,11 @@ export enum CreditCardBrand {
   Visa = 'Visa',
 }
 
+export enum Locale {
+  ptBR = 'ptBR',
+  enUS = 'enUS',
+}
+
 export interface Account {
   id: string;
   name: string;
@@ -43,6 +48,7 @@ export interface User {
   lastName: string;
   hasVerifiedEmail: boolean;
   birthDay: string;
+  language: Locale;
   accounts: Account[];
   categories: Category[];
   operations: Operation[];
@@ -117,6 +123,22 @@ export type DataCategories = {
   pagination: Pagination;
 };
 
+export type AllCreditCardsLimit = {
+  allCreditCardsLimit: CreditCardLimit[];
+};
+
 export interface Pagination {
   totalItems: number;
 }
+
+type CreditCardLimit = {
+  limit: number;
+  limitFree: number;
+  limitBlocked: number;
+  creditCard: CreditCardInfo;
+};
+
+type CreditCardInfo = {
+  id: string;
+  name: string;
+};

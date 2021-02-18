@@ -16,9 +16,10 @@ import InputControl from '../../../../components/InputControl';
 import { CreatedCardBrandText } from '../../../../constants/Transactions';
 import customStyles from '../../Operations/Operation/style/CategorySelect.style';
 import { useAccountFilters } from '../../../../hooks/useAccountFilters';
-import { LANG } from '../../../../constants/currency';
+import { useUserLanguage } from '../../../../hooks/useUser';
 import { useCreateCreditCard } from '../../../../hooks/useCreditCard';
 import { checkCreditCard } from '../../../../schema/checkField';
+import { ALL_CREDIT_CARDS_LIMIT } from '../../../../graphql/CreditCard';
 
 const initialValues = {
   name: '',
@@ -33,6 +34,7 @@ const defaultOptions = CreatedCardBrandText.map((creditCard) => ({
 
 const AddCreditCard = () => {
   const { currentAccount } = useAccountFilters();
+  const { value: language } = useUserLanguage();
   const [form, setForm] = useState(initialValues);
   const [formErrors, setFormErrors] = useState(initialValues);
   const [formValidate, setFormValidate] = useState(false);
@@ -93,13 +95,17 @@ const AddCreditCard = () => {
           brand: form.brand,
           account: currentAccount?.id,
         },
+
+        refetchQueries: [
+          { query: ALL_CREDIT_CARDS_LIMIT, variables: { accountId: currentAccount?.id } },
+        ],
       });
       toast.success(`Credit Card ${form.name} was been created!`, {
         position: toast.POSITION.BOTTOM_LEFT,
       });
       history.push('/credit-cards');
     } catch (err) {
-      toast.error(err.message);
+      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
     }
   };
 
@@ -114,7 +120,7 @@ const AddCreditCard = () => {
         <Flex justifyContent="center">
           <Form>
             {error && <Alert isDanger>{error.message}</Alert>}
-            {currentAccount ? (
+            {language && currentAccount ? (
               <>
                 <InputControl message={formErrors.name} isInvalid={!!formErrors.name}>
                   <Label>Name</Label>
@@ -141,7 +147,7 @@ const AddCreditCard = () => {
                   <Label>Limit</Label>
                   <InputCurrency
                     name="limit"
-                    lang={LANG}
+                    lang={language}
                     value={form.limit}
                     onChange={handleCurrency}
                     currency={currentAccount.currency}

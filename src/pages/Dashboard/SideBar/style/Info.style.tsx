@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 type ProgressProps = {
-  variation: string;
+  variation?: string;
   percent: string;
 };
 
 export const InfoContainer = styled.div`
-  padding: 10px 20px;
+  padding: 10px 0;
   margin: 5px 0;
 `;
 
@@ -19,6 +19,12 @@ export const Progress = styled.div<ProgressProps>`
   width: ${({ percent }) => percent};
   padding: 5px 0;
   background-color: ${({ variation }) => `var(--dashboard-progress-bar-${variation})`};
+`;
+
+export const ProgressCreditCard = styled.div<ProgressProps>`
+  width: ${({ percent }) => percent};
+  padding: 5px 0;
+  background-color: ${({ variation }) => variation};
 `;
 
 export const BalanceContainer = styled.div`
