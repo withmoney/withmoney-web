@@ -1,4 +1,4 @@
-import { TransactionType, CreditCardBrand } from '../models';
+import { TransactionType, CreditCardBrand } from 'models';
 
 export const addOperationText = {
   [TransactionType.Deposit]: 'Add Income',

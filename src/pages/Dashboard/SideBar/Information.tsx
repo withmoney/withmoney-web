@@ -1,9 +1,9 @@
 import React from 'react';
 import Info from './Info';
 import { InformationContainer } from './style/Information.style';
-import { useOperations } from '../../../hooks/useOperations';
-import { TransactionType } from '../../../models';
-import { getCalcOperationsByType } from '../../../utils/calcOperations';
+import { useOperations } from 'hooks/useOperations';
+import { TransactionType } from 'models';
+import { getCalcOperationsByType } from 'utils/calcOperations';
 
 const Information = () => {
   const { data } = useOperations();

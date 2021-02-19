@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Link from '../../../../components/Link';
-import Button from '../../../../components/Button';
+import Link from 'components/Link';
+import Button from 'components/Button';
 
 export const MenuContent = styled.div`
   display: flex;

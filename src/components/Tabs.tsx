@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { ArrowCircleDown } from '@styled-icons/fa-solid';
 import { Sync } from '@styled-icons/evaicons-solid';
 import { ShoppingCart, CreditCard } from '@styled-icons/entypo';
-import { useOperationsFilters } from '../hooks/useOperationsFilters';
-import { TransactionType } from '../models';
+import { useOperationsFilters } from 'hooks/useOperationsFilters';
+import { TransactionType } from 'models';
 
 export const Tabs = () => {
   const { currentTransactionType, setCurrentTransactionType } = useOperationsFilters();

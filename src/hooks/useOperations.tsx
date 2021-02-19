@@ -2,10 +2,10 @@ import { useEffect } from 'react';
 import { useLazyQuery, useMutation } from '@apollo/react-hooks';
 import { useOperationsFilters } from './useOperationsFilters';
 import { useAccountFilters } from './useAccountFilters';
-import { UPDATE_OPERATION, RESTORE_OPERATION } from '../graphql/Operations';
-import { DELETE_OPERATION, GET_OPERATIONS, CREATE_OPERATION } from '../graphql/Operations';
-import { ALL_CREDIT_CARDS_LIMIT } from '../graphql/CreditCard';
-import { Operation } from '../models';
+import { UPDATE_OPERATION, RESTORE_OPERATION } from 'graphql/Operations';
+import { DELETE_OPERATION, GET_OPERATIONS, CREATE_OPERATION } from 'graphql/Operations';
+import { ALL_CREDIT_CARDS_LIMIT } from 'graphql/CreditCard';
+import { Operation } from 'models';
 import useNProgress from './useNProgress';
 
 type Data = {

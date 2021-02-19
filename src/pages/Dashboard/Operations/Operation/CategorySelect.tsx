@@ -3,12 +3,12 @@ import { useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import debounce from 'lodash.debounce';
-import Input from '../../../../components/Input';
-import { useFilterCategories, useCreateCategory } from '../../../../hooks/useCategories';
-import { useOperationsFilters } from '../../../../hooks/useOperationsFilters';
-import { useUpdateOperation } from '../../../../hooks/useOperations';
-import { Operation, Categories } from '../../../../models';
-import { ALL_CATEGORY } from '../../../../graphql/Categories';
+import Input from 'components/Input';
+import { useFilterCategories, useCreateCategory } from 'hooks/useCategories';
+import { useOperationsFilters } from 'hooks/useOperationsFilters';
+import { useUpdateOperation } from 'hooks/useOperations';
+import { Operation, Categories } from 'models';
+import { ALL_CATEGORY } from 'graphql/Categories';
 import customStyles from './style/CategorySelect.style';
 
 type Props = {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Text from '../components/Text';
+import Text from 'components/Text';
 
 type Props = {
   as?: 'h1' | 'h2' | 'h3';

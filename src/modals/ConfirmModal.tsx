@@ -1,8 +1,8 @@
 import React from 'react';
 import Modal from 'react-modal';
-import Text from '../components/Text';
-import Button from '../components/Button';
-import LoadingSpinner from '../components/LoadingSpinner';
+import Text from 'components/Text';
+import Button from 'components/Button';
+import LoadingSpinner from 'components/LoadingSpinner';
 import { ModalBody, ModalHeader, stylesConfirmModal } from './ConfirmModal.style';
 
 type Props = {

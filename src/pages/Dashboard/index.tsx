@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { useSidebarCollapse } from '../../hooks/useSidebarCollapse';
+import { useSidebarCollapse } from 'hooks/useSidebarCollapse';
 import { Content, Page, Wrapper } from './style/Operations.style';
 import SideBar from './SideBar';
 import NavBar from './NavBar';

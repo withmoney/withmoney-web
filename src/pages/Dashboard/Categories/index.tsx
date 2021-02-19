@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 import { TrashFill, PencilFill } from '@styled-icons/bootstrap';
 import { toast } from 'react-toastify';
-import Header from '../../../components/Header';
-import Text from '../../../components/Text';
-import Input from '../../../components/Input';
-import { Page, PageHeader } from '../style/SubPages.style';
-import { Row, Cell, PageBodyColumns, PageBody } from '../style/SubPages.style';
-import { useCategories } from '../../../hooks/useCategories';
-import { useDeleteCategory, useRestoreCategory } from '../../../hooks/useCategories';
-import LoadingData from '../../../components/LoadingData';
-import Button from '../../../components/Button';
-import ButtonLink from '../../../components/ButtonLink';
-import ConfirmModal from '../../../modals/ConfirmModal';
-import { Category } from '../../../models';
-import Pagination from '../../../components/Pagination';
+import Header from 'components/Header';
+import Text from 'components/Text';
+import Input from 'components/Input';
+import { Page, PageHeader } from 'style/SubPages.style';
+import { Row, Cell, PageBodyColumns, PageBody } from 'style/SubPages.style';
+import { useCategories } from 'hooks/useCategories';
+import { useDeleteCategory, useRestoreCategory } from 'hooks/useCategories';
+import LoadingData from 'components/LoadingData';
+import Button from 'components/Button';
+import ButtonLink from 'components/ButtonLink';
+import ConfirmModal from 'modals/ConfirmModal';
+import { Category } from 'models';
+import Pagination from 'components/Pagination';
 
 const initialValues = {
   filterName: '',

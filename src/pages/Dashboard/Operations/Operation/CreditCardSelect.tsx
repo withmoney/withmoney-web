@@ -3,15 +3,15 @@ import { toast } from 'react-toastify';
 import { useQuery } from '@apollo/client';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import debounce from 'lodash.debounce';
-import { useFilterCreditCards, useCreateCreditCard } from '../../../../hooks/useCreditCard';
+import { useFilterCreditCards, useCreateCreditCard } from 'hooks/useCreditCard';
 import customStyles from './style/CategorySelect.style';
-import { CREDIT_CARDS } from '../../../../graphql/CreditCard';
-import { Operation, CreditCards } from '../../../../models';
-import { useUpdateOperation } from '../../../../hooks/useOperations';
-import Input from '../../../../components/Input';
-import CreditCardModal from '../../../../modals/CreditCardModal';
-import { CreditCardBrand } from '../../../../models';
-import { useAccountFilters } from '../../../../hooks/useAccountFilters';
+import { CREDIT_CARDS } from 'graphql/CreditCard';
+import { Operation, CreditCards } from 'models';
+import { useUpdateOperation } from 'hooks/useOperations';
+import Input from 'components/Input';
+import CreditCardModal from 'modals/CreditCardModal';
+import { CreditCardBrand } from 'models';
+import { useAccountFilters } from 'hooks/useAccountFilters';
 
 // Props
 type Props = {

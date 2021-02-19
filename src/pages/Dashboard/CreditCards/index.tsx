@@ -1,22 +1,22 @@
 import React, { useState } from 'react';
 import { TrashFill, PencilFill } from '@styled-icons/bootstrap';
 import { toast } from 'react-toastify';
-import Header from '../../../components/Header';
-import { Page, PageHeader, PageBody, Row, Cell, PageBodyColumns } from '../style/SubPages.style';
-import ButtonLink from '../../../components/ButtonLink';
-import { useCreditCards, useDeleteCreditCard } from '../../../hooks/useCreditCard';
-import { useRestoreCreditCard } from '../../../hooks/useCreditCard';
-import { useAccountFilters } from '../../../hooks/useAccountFilters';
-import LoadingData from '../../../components/LoadingData';
-import Text from '../../../components/Text';
-import Input from '../../../components/Input';
-import Button from '../../../components/Button';
-import { CreditCard } from '../../../models';
-import Pagination from '../../../components/Pagination';
-import { currencyFormat } from '../../../utils/currency';
-import { useUserLanguage } from '../../../hooks/useUser';
-import ConfirmModal from '../../../modals/ConfirmModal';
-import { ALL_CREDIT_CARDS_LIMIT } from '../../../graphql/CreditCard';
+import Header from 'components/Header';
+import { Page, PageHeader, PageBody, Row, Cell, PageBodyColumns } from 'style/SubPages.style';
+import ButtonLink from 'components/ButtonLink';
+import { useCreditCards, useDeleteCreditCard } from 'hooks/useCreditCard';
+import { useRestoreCreditCard } from 'hooks/useCreditCard';
+import { useAccountFilters } from 'hooks/useAccountFilters';
+import LoadingData from 'components/LoadingData';
+import Text from 'components/Text';
+import Input from 'components/Input';
+import Button from 'components/Button';
+import { CreditCard } from 'models';
+import Pagination from 'components/Pagination';
+import { currencyFormat } from 'utils/currency';
+import { useUserLanguage } from 'hooks/useUser';
+import ConfirmModal from 'modals/ConfirmModal';
+import { ALL_CREDIT_CARDS_LIMIT } from 'graphql/CreditCard';
 
 const initialValues = {
   filterName: '',

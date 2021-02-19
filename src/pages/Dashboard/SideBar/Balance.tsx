@@ -1,11 +1,11 @@
 import React from 'react';
-import Text from '../../../components/Text';
-import { currencyFormat } from '../../../utils/currency';
+import Text from 'components/Text';
+import { currencyFormat } from 'utils/currency';
 import { BalanceContainer } from './style/Balance.style';
-import { useOperations } from '../../../hooks/useOperations';
-import { useAccountFilters } from '../../../hooks/useAccountFilters';
-import { useUserLanguage } from '../../../hooks/useUser';
-import getBalance from '../../../utils/getBalance';
+import { useOperations } from 'hooks/useOperations';
+import { useAccountFilters } from 'hooks/useAccountFilters';
+import { useUserLanguage } from 'hooks/useUser';
+import getBalance from 'utils/getBalance';
 
 const Balance = () => {
   const { currentAccount } = useAccountFilters();

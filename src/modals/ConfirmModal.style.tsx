@@ -1,6 +1,6 @@
 import Modal from 'react-modal';
 import styled from 'styled-components';
-import Button from '../components/Button';
+import Button from 'components/Button';
 
 export const stylesConfirmModal = {
   overlay: {

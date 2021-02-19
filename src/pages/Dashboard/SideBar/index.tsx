@@ -4,7 +4,7 @@ import Information from './Information';
 import Menu from './Menu';
 import Settings from './Settings';
 import CreditCardsInformation from './CreditCardsInformation';
-import { useSidebarCollapse } from '../../../hooks/useSidebarCollapse';
+import { useSidebarCollapse } from 'hooks/useSidebarCollapse';
 import { Container } from './style/index.style';
 
 const SideBar = () => {

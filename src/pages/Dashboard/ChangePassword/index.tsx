@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Header from '../../../components/Header';
-import Flex from '../../../components/Flex';
-import Form from '../../../components/Form';
-import InputControl from '../../../components/InputControl';
-import Input from '../../../components/Input';
-import Button from '../../../components/Button';
-import { Page, PageHeader, PageBody } from '../style/SubPages.style';
-import { useUser, useUserChangePassword } from '../../../hooks/useUser';
-import { checkUpdatePassword } from '../../../schema/checkField';
+import Header from 'components/Header';
+import Flex from 'components/Flex';
+import Form from 'components/Form';
+import InputControl from 'components/InputControl';
+import Input from 'components/Input';
+import Button from 'components/Button';
+import { Page, PageHeader, PageBody } from 'style/SubPages.style';
+import { useUser, useUserChangePassword } from 'hooks/useUser';
+import { checkUpdatePassword } from 'schema/checkField';
 
 const initialValues = {
   currentPassword: '',

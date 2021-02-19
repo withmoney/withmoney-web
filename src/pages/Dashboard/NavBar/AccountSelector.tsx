@@ -1,10 +1,10 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import styled from 'styled-components';
-import Select from '../../../components/Select';
-import { useAccountFilters } from '../../../hooks/useAccountFilters';
-import { GET_ACCOUNTS } from '../../../graphql/Accounts';
-import { Account } from '../../../models';
+import Select from 'components/Select';
+import { useAccountFilters } from 'hooks/useAccountFilters';
+import { GET_ACCOUNTS } from 'graphql/Accounts';
+import { Account } from 'models';
 
 type Data = {
   accounts: Account[];

@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Header from '../../../../components/Header';
-import Form from '../../../../components/Form';
-import Input from '../../../../components/Input';
-import InputGroup from '../../../../components/InputGroup';
-import InputControl from '../../../../components/InputControl';
-import Button from '../../../../components/Button';
-import Flex from '../../../../components/Flex';
-import Select from '../../../../components/Select';
-import Alert from '../../../../components/Alert';
-import { checkAccounts } from '../../../../schema/checkField';
-import { currencies } from '../../../../constants/Currencies';
-import { useUniqueAccounts } from '../../../../hooks/useAccounts';
-import { useUpdateAccount } from '../../../../hooks/useAccounts';
-import { PageHeader, Page, PageBody } from '../../style/SubPages.style';
-import LoadingSpinner from '../../../../components/LoadingSpinner';
+import Header from 'components/Header';
+import Form from 'components/Form';
+import Input from 'components/Input';
+import InputGroup from 'components/InputGroup';
+import InputControl from 'components/InputControl';
+import Button from 'components/Button';
+import Flex from 'components/Flex';
+import Select from 'components/Select';
+import Alert from 'components/Alert';
+import { checkAccounts } from 'schema/checkField';
+import { currencies } from 'constants/Currencies';
+import { useUniqueAccounts } from 'hooks/useAccounts';
+import { useUpdateAccount } from 'hooks/useAccounts';
+import { PageHeader, Page, PageBody } from 'style/SubPages.style';
+import LoadingSpinner from 'components/LoadingSpinner';
 
 type Account = {
   id: string;

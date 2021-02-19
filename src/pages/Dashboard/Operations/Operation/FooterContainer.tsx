@@ -1,16 +1,16 @@
 import React from 'react';
-import Text from '../../../../components/Text';
-import { currencyFormat } from '../../../../utils/currency';
-import { useOperations } from '../../../../hooks/useOperations';
-import { getTotalPendingExpenses } from '../../../../utils/calcOperations';
-import { PlannedBalance, getTotalOperations } from '../../../../utils/calcOperations';
-import { getTotalPaidExpenses, getTotalCreditCardExpenses } from '../../../../utils/calcOperations';
+import Text from 'components/Text';
+import { currencyFormat } from 'utils/currency';
+import { useOperations } from 'hooks/useOperations';
+import { getTotalPendingExpenses } from 'utils/calcOperations';
+import { PlannedBalance, getTotalOperations } from 'utils/calcOperations';
+import { getTotalPaidExpenses, getTotalCreditCardExpenses } from 'utils/calcOperations';
 import { InfoContainer, InfoWrapper, Info } from './style/FooterContainer.style';
 import { IncomesIcons, PaidExpenses, PendingExpensesIcons } from './style/FooterContainer.style';
 import { CreditCardExpenses } from './style/FooterContainer.style';
 import { InfoTitle, InfoValue } from './style/FooterContainer.style';
-import { useAccountFilters } from '../../../../hooks/useAccountFilters';
-import { useUserLanguage } from '../../../../hooks/useUser';
+import { useAccountFilters } from 'hooks/useAccountFilters';
+import { useUserLanguage } from 'hooks/useUser';
 
 const FooterContainer = () => {
   const { data } = useOperations();

@@ -1,9 +1,9 @@
 import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { useOperationsFilters } from './useOperationsFilters';
-import { ALL_CATEGORY, RESTORE_CATEGORY, GET_ONE_CATEGORY } from '../graphql/Categories';
-import { CREATE_CATEGORY, DELETE_CATEGORY } from '../graphql/Categories';
-import { UPDATE_CATEGORY } from '../graphql/Categories';
-import { Category, Categories } from '../models';
+import { ALL_CATEGORY, RESTORE_CATEGORY, GET_ONE_CATEGORY } from 'graphql/Categories';
+import { CREATE_CATEGORY, DELETE_CATEGORY } from 'graphql/Categories';
+import { UPDATE_CATEGORY } from 'graphql/Categories';
+import { Category, Categories } from 'models';
 
 export function useCategories(options?: any) {
   return useQuery(ALL_CATEGORY, options);

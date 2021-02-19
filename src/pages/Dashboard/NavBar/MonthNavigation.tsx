@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { ArrowIosBack, ArrowIosForward } from '@styled-icons/evaicons-solid';
 import ArrowButton from './ArrowButton';
 import capitalize from 'lodash/capitalize';
-import Text from '../../../components/Text';
+import Text from 'components/Text';
 import { DateContainer, MonthContent } from './style/MonthNavigation.style';
-import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
-import { useOperations } from '../../../hooks/useOperations';
-import { useUserLanguage } from '../../../hooks/useUser';
+import { useOperationsFilters } from 'hooks/useOperationsFilters';
+import { useOperations } from 'hooks/useOperations';
+import { useUserLanguage } from 'hooks/useUser';
 
 const MonthNavigation = () => {
   const { currentDateTime, setCurrentDateTime } = useOperationsFilters();

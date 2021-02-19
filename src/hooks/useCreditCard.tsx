@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useApolloClient, useMutation, useQuery, useLazyQuery } from '@apollo/client';
 import { useAccountFilters } from './useAccountFilters';
-import { CREDIT_CARDS, CREATE_CREDIT_CARD, GET_ONE_CREDIT_CARD } from '../graphql/CreditCard';
-import { DELETE_CREDIT_CARD, RESTORE_CREDIT_CARD, UPDATE_CREDIT_CARD } from '../graphql/CreditCard';
-import { ALL_CREDIT_CARDS_LIMIT } from '../graphql/CreditCard';
-import { CreditCards, AllCreditCardsLimit } from '../models';
+import { CREDIT_CARDS, CREATE_CREDIT_CARD, GET_ONE_CREDIT_CARD } from 'graphql/CreditCard';
+import { DELETE_CREDIT_CARD, RESTORE_CREDIT_CARD, UPDATE_CREDIT_CARD } from 'graphql/CreditCard';
+import { ALL_CREDIT_CARDS_LIMIT } from 'graphql/CreditCard';
+import { CreditCards, AllCreditCardsLimit } from 'models';
 
 export const useCreditCards = (options?: any) => {
   return useQuery<CreditCards>(CREDIT_CARDS, options);

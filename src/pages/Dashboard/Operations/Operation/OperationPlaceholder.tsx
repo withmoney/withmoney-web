@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Row, Cell } from '../Operation/style/OperationSettings';
-import { TransactionType } from '../../../../models';
-import { useOperationsFilters } from '../../../../hooks/useOperationsFilters';
+import { Row, Cell } from 'Operation/style/OperationSettings';
+import { TransactionType } from 'models';
+import { useOperationsFilters } from 'hooks/useOperationsFilters';
 
 type Props = {
   onClick: () => void;

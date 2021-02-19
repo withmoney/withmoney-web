@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Text from '../../../components/Text';
-import { currencyFormat } from '../../../utils/currency';
+import Text from 'components/Text';
+import { currencyFormat } from 'utils/currency';
 import { InfoContainer, ProgressBar, Progress, BalanceContainer } from './style/Info.style';
-import { useAccountFilters } from '../../../hooks/useAccountFilters';
-import { useUserLanguage } from '../../../hooks/useUser';
+import { useAccountFilters } from 'hooks/useAccountFilters';
+import { useUserLanguage } from 'hooks/useUser';
 
 type Props = {
   name: string;

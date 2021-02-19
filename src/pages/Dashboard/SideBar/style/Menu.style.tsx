@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Link from '../../../../components/Link';
+import Link from 'components/Link';
 import { AttachMoney as IconMoney } from '@styled-icons/material';
 import { BarGraph } from '@styled-icons/entypo';
 import { UserAccount } from '@styled-icons/boxicons-solid';

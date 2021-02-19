@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
-import Text from '../../../components/Text';
+import Text from 'components/Text';
 import { Accounts, CreditCard, Categories } from './style/Menu.style';
 import { MenuSettings, MenuButton, TextContainer } from './style/Menu.style';
 

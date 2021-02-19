@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { PlusCircle, MinusCircle } from '@styled-icons/boxicons-regular';
-import { Tabs } from '../../../components/Tabs';
-import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
-import { useAccountFilters } from '../../../hooks/useAccountFilters';
+import { Tabs } from 'components/Tabs';
+import { useOperationsFilters } from 'hooks/useOperationsFilters';
+import { useAccountFilters } from 'hooks/useAccountFilters';
 import DataPlaceholder from './Operation/DataPlaceholder';
 import OperationItem from './Operation/OperationItem';
 import FooterContainer from './Operation/FooterContainer';
 import OperationPlaceholder from './Operation/OperationPlaceholder';
-import { Operation } from '../../../models';
+import { Operation } from 'models';
 import { Container, OperationContainer, ButtonContent } from './style/Operations.style';
 import { OperationButton } from './style/Operations.style';
 import { RowHeader, CellHeader } from './Operation/style/OperationSettings';
-import { useOperations, useCreateOperation } from '../../../hooks/useOperations';
-import ConfirmModal from '../../../modals/ConfirmModal';
-import { addOperationText } from '../../../constants/Transactions';
-import LoadingSpinner from '../../../components/LoadingSpinner';
-import { TransactionType } from '../../../models';
-import Text from '../../../components/Text';
-import { useDeleteOperation, useRestoreOperation } from '../../../hooks/useOperations';
+import { useOperations, useCreateOperation } from 'hooks/useOperations';
+import ConfirmModal from 'modals/ConfirmModal';
+import { addOperationText } from 'constants/Transactions';
+import LoadingSpinner from 'components/LoadingSpinner';
+import { TransactionType } from 'models';
+import Text from 'components/Text';
+import { useDeleteOperation, useRestoreOperation } from 'hooks/useOperations';
 
 const Operations = () => {
   const { data, loading } = useOperations();

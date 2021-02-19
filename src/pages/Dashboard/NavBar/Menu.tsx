@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import Button from '../../../components/Button';
+import Button from 'components/Button';
 import { MenuContainer, MenuContent, ButtonLink } from './style/Menu.style';
 
 type Props = {

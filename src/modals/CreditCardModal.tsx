@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import AsyncCreatableSelect from 'react-select/creatable';
-import Text from '../components/Text';
-import Button from '../components/Button';
-import Form from '../components/Form';
-import Input from '../components/Input';
-import InputControl from '../components/InputControl';
-import Flex from '../components/Flex';
-import LoadingSpinner from '../components/LoadingSpinner';
-import InputCurrency from '../components/InputCurrency';
-import { CreatedCardBrandText } from '../constants/Transactions';
-import { useAccountFilters } from '../hooks/useAccountFilters';
+import Text from 'components/Text';
+import Button from 'components/Button';
+import Form from 'components/Form';
+import Input from 'components/Input';
+import InputControl from 'components/InputControl';
+import Flex from 'components/Flex';
+import LoadingSpinner from 'components/LoadingSpinner';
+import InputCurrency from 'components/InputCurrency';
+import { CreatedCardBrandText } from 'constants/Transactions';
+import { useAccountFilters } from 'hooks/useAccountFilters';
 import { ModalBody, ModalHeader, stylesCreditCard, StyledModal, Label } from './ConfirmModal.style';
-import { checkCreditCard } from '../schema/checkField';
-import customStyles from '../pages/Dashboard/Operations/Operation/style/CategorySelect.style';
-import { useUserLanguage } from '../hooks/useUser';
+import { checkCreditCard } from 'schema/checkField';
+import customStyles from 'pages/Dashboard/Operations/Operation/style/CategorySelect.style';
+import { useUserLanguage } from 'hooks/useUser';
 
 // Component Props
 type Props = {

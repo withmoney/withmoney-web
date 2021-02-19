@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Text from '../../../../../components/Text';
+import Text from 'components/Text';
 import { ArrowCircleDown, ArrowCircleUp, Check } from '@styled-icons/fa-solid/';
 import { CreditCard } from '@styled-icons/boxicons-regular';
 

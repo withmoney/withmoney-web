@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import Flex from '../../../../components/Flex';
-import LoadingData from '../../../../components/LoadingData';
-import { TransactionType } from '../../../../models';
-import { useOperationsFilters } from '../../../../hooks/useOperationsFilters';
+import Flex from 'components/Flex';
+import LoadingData from 'components/LoadingData';
+import { TransactionType } from 'models';
+import { useOperationsFilters } from 'hooks/useOperationsFilters';
 
 type Props = {
   isLoading: boolean;

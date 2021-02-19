@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Header from '../../../../components/Header';
-import Flex from '../../../../components/Flex';
-import Form from '../../../../components/Form';
-import Input from '../../../../components/Input';
-import Button from '../../../../components/Button';
-import Alert from '../../../../components/Alert';
-import LoadingSpinner from '../../../../components/LoadingSpinner';
-import InputControl from '../../../../components/InputControl';
-import Select from '../../../../components/Select';
-import { PageHeader, Page, PageBody } from '../../style/SubPages.style';
-import { operationType } from '../../../../constants/Transactions';
-import { checkCategories } from '../../../../schema/checkField';
-import { useCreateCategory } from '../../../../hooks/useCategories';
+import Header from 'components/Header';
+import Flex from 'components/Flex';
+import Form from 'components/Form';
+import Input from 'components/Input';
+import Button from 'components/Button';
+import Alert from 'components/Alert';
+import LoadingSpinner from 'components/LoadingSpinner';
+import InputControl from 'components/InputControl';
+import Select from 'components/Select';
+import { PageHeader, Page, PageBody } from 'style/SubPages.style';
+import { operationType } from 'constants/Transactions';
+import { checkCategories } from 'schema/checkField';
+import { useCreateCategory } from 'hooks/useCategories';
 
 const initialValues = {
   name: '',
