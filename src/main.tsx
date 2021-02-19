@@ -9,6 +9,7 @@ import OperationsFiltersProvider from './hooks/useOperationsFilters';
 import AccountFiltersProvider from './hooks/useAccountFilters';
 import Toast from './components/Toast';
 
+import './lang';
 import 'react-toastify/dist/ReactToastify.css';
 import './nprogress.css';
 

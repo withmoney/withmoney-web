@@ -118,7 +118,7 @@ const Operations = () => {
               operation={operation}
             />
           ))}
-        {!loading && !operations.length && <OperationPlaceholder />}
+        {!loading && !operations.length && <OperationPlaceholder onClick={handleCreateOperation} />}
         <ButtonContent>
           <OperationButton
             variation="primary"

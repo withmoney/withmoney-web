@@ -30,27 +30,6 @@ const Menu = ({ menuIsOpen }: Props) => {
         >
           Profile
         </ButtonLink>
-        <ButtonLink
-          className={location.pathname === '/accounts' ? 'disabled' : undefined}
-          onClick={toggleCloseMenu}
-          to="/accounts"
-        >
-          Accounts
-        </ButtonLink>
-        <ButtonLink
-          className={location.pathname === '/categories' ? 'disabled' : undefined}
-          onClick={toggleCloseMenu}
-          to="/categories"
-        >
-          Categories
-        </ButtonLink>
-        <ButtonLink
-          className={location.pathname === '/credit-cards' ? 'disabled' : undefined}
-          onClick={toggleCloseMenu}
-          to="/credit-cards"
-        >
-          Credit Cards
-        </ButtonLink>
       </MenuContent>
       <Button onClick={LogOut}>Log out</Button>
     </MenuContainer>

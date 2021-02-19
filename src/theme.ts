@@ -40,6 +40,8 @@ const GlobalStyle = createGlobalStyle`
     --text-danger-color: #E98686;
     --text-white-color: #FFFFFF;
 
+    --icon-default-color: #727272;
+
     --text-default-color-hover: #636363;
     --text-primary-color-hover: #27a75e;
     --text-light-color-hover: #a6adb8;

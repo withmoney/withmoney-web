@@ -1,4 +1,5 @@
-import { useApolloClient, useMutation, useQuery } from '@apollo/client';
+import { useEffect } from 'react';
+import { useApolloClient, useMutation, useQuery, useLazyQuery } from '@apollo/client';
 import { useAccountFilters } from './useAccountFilters';
 import { CREDIT_CARDS, CREATE_CREDIT_CARD, GET_ONE_CREDIT_CARD } from '../graphql/CreditCard';
 import { DELETE_CREDIT_CARD, RESTORE_CREDIT_CARD, UPDATE_CREDIT_CARD } from '../graphql/CreditCard';
@@ -35,9 +36,25 @@ export const useFilterCreditCards = () => {
 // all Credit Cards limit
 export const useCreditCardsLimit = () => {
   const { currentAccount } = useAccountFilters();
-  const { data, loading, error } = useQuery<AllCreditCardsLimit>(ALL_CREDIT_CARDS_LIMIT, {
-    variables: { accountId: currentAccount?.id },
-  });
+  const [allCreditCardLimit, { data, loading, error }] = useLazyQuery<AllCreditCardsLimit>(
+    ALL_CREDIT_CARDS_LIMIT,
+    {
+      variables: { accountId: currentAccount?.id },
+    },
+  );
+
+  useEffect(() => {
+    if (currentAccount) {
+      allCreditCardLimit({
+        variables: {
+          variables: { accountId: currentAccount?.id },
+        },
+      });
+    }
+  }, [currentAccount]);
+
+  if (!currentAccount) return { data: undefined, loading: true };
+
   return { data, loading, error };
 };
 

@@ -36,6 +36,10 @@ const Info = ({ name, current, desired, variation }: Props) => {
           </>
         )}
       </BalanceContainer>
+      <BalanceContainer>
+        <Text font="sm">Paid</Text>
+        <Text font="sm">Total</Text>
+      </BalanceContainer>
     </InfoContainer>
   );
 };
