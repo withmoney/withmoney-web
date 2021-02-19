@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Header from 'components/Header';
-import { PageHeader, Page, PageBody } from 'style/SubPages.style';
+import { PageHeader, Page, PageBody } from 'pages/Dashboard/style/SubPages.style';
 import Flex from 'components/Flex';
 import Form from 'components/Form';
 import Input from 'components/Input';
