@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { ArrowCircleDown } from '@styled-icons/fa-solid';
 import { Sync } from '@styled-icons/evaicons-solid';
 import { ShoppingCart, CreditCard } from '@styled-icons/entypo';
@@ -8,6 +9,7 @@ import { TransactionType } from 'models';
 
 export const Tabs = () => {
   const { currentTransactionType, setCurrentTransactionType } = useOperationsFilters();
+  const { t } = useTranslation('operations');
   return (
     <ButtonGroup>
       <Button
@@ -19,7 +21,7 @@ export const Tabs = () => {
         operationType={currentTransactionType}
       >
         <ArrowCircleDown />
-        Incomes
+        {t('incomes')}
       </Button>
       <Button
         type="button"

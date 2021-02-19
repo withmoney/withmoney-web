@@ -14,7 +14,7 @@ import { checkAccounts } from 'schema/checkField';
 import { currencies } from 'constants/Currencies';
 import { useUniqueAccounts } from 'hooks/useAccounts';
 import { useUpdateAccount } from 'hooks/useAccounts';
-import { PageHeader, Page, PageBody } from 'style/SubPages.style';
+import { PageHeader, Page, PageBody } from 'pages/Dashboard/style/SubPages.style';
 import LoadingSpinner from 'components/LoadingSpinner';
 
 type Account = {

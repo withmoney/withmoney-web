@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 import { TrashFill, PencilFill } from '@styled-icons/bootstrap';
 import { toast } from 'react-toastify';
 import Header from 'components/Header';
-import { Page, PageHeader, PageBody, Row, Cell, PageBodyColumns } from 'style/SubPages.style';
+import {
+  Page,
+  PageHeader,
+  PageBody,
+  Row,
+  Cell,
+  PageBodyColumns,
+} from 'pages/Dashboard/style/SubPages.style';
 import ButtonLink from 'components/ButtonLink';
 import { useCreditCards, useDeleteCreditCard } from 'hooks/useCreditCard';
 import { useRestoreCreditCard } from 'hooks/useCreditCard';

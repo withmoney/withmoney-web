@@ -7,7 +7,7 @@ import Form from 'components/Form';
 import InputControl from 'components/InputControl';
 import Input from 'components/Input';
 import Button from 'components/Button';
-import { Page, PageHeader, PageBody } from 'style/SubPages.style';
+import { Page, PageHeader, PageBody } from 'pages/Dashboard/style/SubPages.style';
 import { useUser, useUserChangePassword } from 'hooks/useUser';
 import { checkUpdatePassword } from 'schema/checkField';
 

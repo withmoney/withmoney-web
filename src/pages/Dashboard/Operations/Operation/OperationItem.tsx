@@ -13,7 +13,7 @@ import CreditCardSelect from './CreditCardSelect';
 import InputCurrency from 'components/InputCurrency';
 import { Operation } from 'models';
 import { TrashFill } from '@styled-icons/bootstrap';
-import { Row, Cell } from 'Operation/style/OperationSettings';
+import { Row, Cell } from 'pages/Dashboard/Operations/Operation/style/OperationSettings';
 import { useAccountFilters } from 'hooks/useAccountFilters';
 import { TransactionType } from 'models';
 import LoadingData from 'components/LoadingData';

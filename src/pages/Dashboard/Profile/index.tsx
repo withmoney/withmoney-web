@@ -7,7 +7,7 @@ import Flex from 'components/Flex';
 import ButtonLink from 'components/ButtonLink';
 import LoadingData from 'components/LoadingData';
 import Text from 'components/Text';
-import { Page, PageHeader, PageBody } from 'style/SubPages.style';
+import { Page, PageHeader, PageBody } from 'pages/Dashboard/style/SubPages.style';
 import { useUser } from 'hooks/useUser';
 
 const Profile = () => {
