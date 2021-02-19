@@ -9,6 +9,7 @@ import { Container } from './style/index.style';
 
 const SideBar = () => {
   const { isSidebarOpen } = useSidebarCollapse();
+
   return (
     <Container isSidebarOpen={isSidebarOpen}>
       <Balance />

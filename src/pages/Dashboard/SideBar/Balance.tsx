@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Text from 'components/Text';
 import { currencyFormat } from 'utils/currency';
 import { BalanceContainer } from './style/Balance.style';
@@ -8,6 +9,7 @@ import { useUserLanguage } from 'hooks/useUser';
 import getBalance from 'utils/getBalance';
 
 const Balance = () => {
+  const { t } = useTranslation('sidebar');
   const { currentAccount } = useAccountFilters();
   const { value: language } = useUserLanguage();
   const { data } = useOperations();
@@ -18,7 +20,7 @@ const Balance = () => {
 
   return (
     <BalanceContainer>
-      <Text>Balance</Text>
+      <Text>{t('balance')}</Text>
       <Text variation={balance < 0 ? 'danger' : 'default'} bold>
         {language && currentAccount && currencyFormat(language, currentAccount.currency, balance)}
       </Text>

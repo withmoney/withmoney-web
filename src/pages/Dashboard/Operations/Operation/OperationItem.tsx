@@ -2,6 +2,7 @@ import React from 'react';
 import debounce from 'lodash.debounce';
 import { toast } from 'react-toastify';
 import moment, { Moment } from 'moment';
+import { useTranslation } from 'react-i18next';
 import { useUpdateOperation } from 'hooks/useOperations';
 import { useUserLanguage } from 'hooks/useUser';
 import ButtonIcon from 'components/ButtonIcon';
@@ -25,6 +26,7 @@ type OperationItemProps = {
 };
 
 const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationItemProps) => {
+  const { t } = useTranslation('operations');
   const { updateOperation } = useUpdateOperation();
   const { currentAccount } = useAccountFilters();
   const { value: language } = useUserLanguage();
@@ -85,7 +87,11 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
           />
         </Cell>
         <Cell flex="1">
-          <InputOperations placeholder="Name" onChange={toggleInputName} value={operation.name} />
+          <InputOperations
+            placeholder={t('name')}
+            onChange={toggleInputName}
+            value={operation.name}
+          />
         </Cell>
         <Cell flex="1">
           <CategorySelect operation={operation} CategoryId={operation.categoryId} />

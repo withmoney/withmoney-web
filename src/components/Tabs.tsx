@@ -32,7 +32,7 @@ export const Tabs = () => {
         operationType={currentTransactionType}
       >
         <Sync />
-        Recurrent Expenses
+        {t('recurrentExpenses')}
       </Button>
       <Button
         onClick={() => setCurrentTransactionType(TransactionType.VariableExpense)}
@@ -40,7 +40,8 @@ export const Tabs = () => {
         operationType={currentTransactionType}
       >
         <ShoppingCart />
-        Other Expenses
+
+        {t('otherExpenses')}
       </Button>
       <Button
         type="button"
@@ -49,7 +50,7 @@ export const Tabs = () => {
         operationType={currentTransactionType}
       >
         <CreditCard />
-        Credit Card Expenses
+        {t('creditCardExpenses')}
       </Button>
     </ButtonGroup>
   );

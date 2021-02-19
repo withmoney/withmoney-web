@@ -3,6 +3,7 @@ import { useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import debounce from 'lodash.debounce';
+import { useTranslation } from 'react-i18next';
 import Input from 'components/Input';
 import { useFilterCategories, useCreateCategory } from 'hooks/useCategories';
 import { useOperationsFilters } from 'hooks/useOperationsFilters';
@@ -28,6 +29,7 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
   const { createCategory } = useCreateCategory();
   const { updateOperation } = useUpdateOperation();
   const filterCategory = useFilterCategories();
+  const { t } = useTranslation('categories');
 
   const loadOptions = debounce((value: string, callback: any) => {
     filterCategory(value).then((results: Option[]) => callback(results));
@@ -92,9 +94,9 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
       value={value}
       defaultOptions={defaultOptions}
       defaultValue={defaultValues}
-      aria-label="Select or Create"
+      aria-label={t('placeholderSelector')}
       loadOptions={loadOptions}
-      placeholder="Select or Create"
+      placeholder={t('placeholderSelector')}
       onCreateOption={create}
       styles={customStyles}
       onChange={update}

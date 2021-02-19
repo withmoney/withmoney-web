@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Text from 'components/Text';
 import { currencyFormat } from 'utils/currency';
 import { useOperations } from 'hooks/useOperations';
@@ -13,6 +14,7 @@ import { useAccountFilters } from 'hooks/useAccountFilters';
 import { useUserLanguage } from 'hooks/useUser';
 
 const FooterContainer = () => {
+  const { t } = useTranslation('operations');
   const { data } = useOperations();
   const operations = data?.operations || [];
   const { value: language } = useUserLanguage();
@@ -29,16 +31,18 @@ const FooterContainer = () => {
         <Info style={{ borderBottom: '2px solid #dddd' }}>
           <InfoTitle>
             <Text>
-              All Incomes <IncomesIcons />
+              {t('allIncomes')} <IncomesIcons />
             </Text>
             <Text>
-              Pending Expenses <PendingExpensesIcons />
+              {t('pendingExpenses')}
+              <PendingExpensesIcons />
             </Text>
             <Text>
-              Paid Expenses <PaidExpenses />
+              {t('paidExpenses')} <PaidExpenses />
             </Text>
             <Text>
-              All Credit Card Expenses <CreditCardExpenses />
+              {t('allCreditCardExpenses')}
+              <CreditCardExpenses />
             </Text>
           </InfoTitle>
           <InfoValue>
@@ -58,8 +62,8 @@ const FooterContainer = () => {
         </Info>
         <Info>
           <InfoTitle>
-            <Text style={{ marginRight: '60px' }} bold>
-              Planned Month Balance
+            <Text style={{ marginRight: '55px' }} bold>
+              {t('plannedMonthBalance')}
             </Text>
           </InfoTitle>
           <InfoValue>

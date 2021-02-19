@@ -1,16 +1,18 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import euUS from './enUS';
+import enUS from './enUS';
+import ptBR from './ptBR';
 
 const resources = {
-  euUS,
+  'en-US': enUS,
+  'pt-BR': ptBR,
 };
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
   .init({
     resources,
-    lng: 'euUS',
+    lng: 'en-US',
 
     keySeparator: '.',
 

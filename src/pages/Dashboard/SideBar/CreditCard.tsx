@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Text from 'components/Text';
 import { currencyFormat } from 'utils/currency';
 import { InfoContainer, ProgressBar, Progress, BalanceContainer } from './style/Info.style';
@@ -17,10 +18,12 @@ const percentCalc = (currentLimit: number, limit: number) => {
 };
 
 const Info = ({ name, limit, limitFree }: Props) => {
-  const { percent, value } = percentCalc(limitFree, limit);
+  const { t } = useTranslation('sidebar');
   const [variation, setVariation] = useState<string>();
   const { currentAccount } = useAccountFilters();
   const { value: language } = useUserLanguage();
+
+  const { percent, value } = percentCalc(limitFree, limit);
 
   useEffect(() => {
     if (value <= 50) {
@@ -47,8 +50,8 @@ const Info = ({ name, limit, limitFree }: Props) => {
         )}
       </BalanceContainer>
       <BalanceContainer>
-        <Text font="sm">Used Limit</Text>
-        <Text font="sm">Free Limit</Text>
+        <Text font="sm">{t('usedLimit')}</Text>
+        <Text font="sm">{t('freeLimit')}</Text>
       </BalanceContainer>
     </InfoContainer>
   );

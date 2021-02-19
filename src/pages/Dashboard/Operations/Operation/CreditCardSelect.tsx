@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useQuery } from '@apollo/client';
+import { useTranslation } from 'react-i18next';
 import AsyncCreatableSelect from 'react-select/async-creatable';
 import debounce from 'lodash.debounce';
 import { useFilterCreditCards, useCreateCreditCard } from 'hooks/useCreditCard';
@@ -32,6 +33,7 @@ const initialValues = {
 
 // Component
 const CreditCardSelect = ({ operation }: Props) => {
+  const { t } = useTranslation('creditCards');
   const { currentAccount } = useAccountFilters();
   const [value, setValue] = useState<Option | undefined>();
   const { createCreditCard, loading: loadingCreateCard } = useCreateCreditCard();
@@ -138,8 +140,8 @@ const CreditCardSelect = ({ operation }: Props) => {
         styles={customStyles}
         onCreateOption={openModal}
         onChange={update}
-        aria-label="Select or Create"
-        placeholder="Select or Create"
+        aria-label={t('placeholderSelector')}
+        placeholder={t('placeholderSelector')}
       />
     </>
   );

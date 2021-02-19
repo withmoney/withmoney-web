@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Text from 'components/Text';
 import { currencyFormat } from 'utils/currency';
 import { InfoContainer, ProgressBar, Progress, BalanceContainer } from './style/Info.style';
@@ -18,9 +19,11 @@ const percentCalc = (current: number, desired: number) => {
 };
 
 const Info = ({ name, current, desired, variation }: Props) => {
-  const percent = percentCalc(current, desired);
   const { currentAccount } = useAccountFilters();
   const { value: language } = useUserLanguage();
+  const { t } = useTranslation('sidebar');
+
+  const percent = percentCalc(current, desired);
 
   return (
     <InfoContainer>
@@ -37,8 +40,8 @@ const Info = ({ name, current, desired, variation }: Props) => {
         )}
       </BalanceContainer>
       <BalanceContainer>
-        <Text font="sm">Paid</Text>
-        <Text font="sm">Total</Text>
+        <Text font="sm">{t('paid')}</Text>
+        <Text font="sm">{t('total')}</Text>
       </BalanceContainer>
     </InfoContainer>
   );
