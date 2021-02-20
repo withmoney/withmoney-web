@@ -1,16 +1,18 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
+import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
-import Select from '../../../components/Select';
-import { useAccountFilters } from '../../../hooks/useAccountFilters';
-import { GET_ACCOUNTS } from '../../../graphql/Accounts';
-import { Account } from '../../../models';
+import Select from 'components/Select';
+import { useAccountFilters } from 'hooks/useAccountFilters';
+import { GET_ACCOUNTS } from 'graphql/Accounts';
+import { Account } from 'models';
 
 type Data = {
   accounts: Account[];
 };
 
 const AccountSelector = () => {
+  const { t } = useTranslation('navbar');
   const { data } = useQuery<Data>(GET_ACCOUNTS, { fetchPolicy: 'network-only' });
   const { setCurrentAccount } = useAccountFilters();
 
@@ -26,7 +28,7 @@ const AccountSelector = () => {
 
   return (
     <AccountContainer>
-      <AccountTitle>current Account: </AccountTitle>
+      <AccountTitle>{t('currentAccount')}: </AccountTitle>
       <AccountSelect onChange={(event) => SelectAccount(event)}>
         {!!accounts.length &&
           accounts.map((account) => {

@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { TrashFill, PencilFill } from '@styled-icons/bootstrap';
-import Header from '../../../components/Header';
-import Button from '../../../components/Button';
-import ButtonLink from '../../../components/ButtonLink';
-import Text from '../../../components/Text';
-import ConfirmModal from '../../../modals/ConfirmModal';
-import { useAccounts, useDeleteAccount, useRestoreAccount } from '../../../hooks/useAccounts';
-import { useAccountFilters } from '../../../hooks/useAccountFilters';
-import { Account } from '../../../models';
-import LoadingData from '../../../components/LoadingData';
-import Alert from '../../../components/Alert';
-import { Page, PageHeader, Row, Cell, PageBodyColumns } from '../style/SubPages.style';
+import Header from 'components/Header';
+import Button from 'components/Button';
+import ButtonLink from 'components/ButtonLink';
+import Text from 'components/Text';
+import ConfirmModal from 'modals/ConfirmModal';
+import { useAccounts, useDeleteAccount, useRestoreAccount } from 'hooks/useAccounts';
+import { useAccountFilters } from 'hooks/useAccountFilters';
+import { Account } from 'models';
+import LoadingData from 'components/LoadingData';
+import Alert from 'components/Alert';
+import { Page, PageHeader, Row, Cell, PageBodyColumns } from 'pages/Dashboard/style/SubPages.style';
 
 const Accounts = () => {
   const { data, loading, error } = useAccounts();

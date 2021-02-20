@@ -1,13 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { ArrowCircleDown } from '@styled-icons/fa-solid';
 import { Sync } from '@styled-icons/evaicons-solid';
 import { ShoppingCart, CreditCard } from '@styled-icons/entypo';
-import { useOperationsFilters } from '../hooks/useOperationsFilters';
-import { TransactionType } from '../models';
+import { useOperationsFilters } from 'hooks/useOperationsFilters';
+import { TransactionType } from 'models';
 
 export const Tabs = () => {
   const { currentTransactionType, setCurrentTransactionType } = useOperationsFilters();
+  const { t } = useTranslation('operations');
   return (
     <ButtonGroup>
       <Button
@@ -19,7 +21,7 @@ export const Tabs = () => {
         operationType={currentTransactionType}
       >
         <ArrowCircleDown />
-        Incomes
+        {t('incomes')}
       </Button>
       <Button
         type="button"
@@ -30,7 +32,7 @@ export const Tabs = () => {
         operationType={currentTransactionType}
       >
         <Sync />
-        Recurrent Expenses
+        {t('recurrentExpenses')}
       </Button>
       <Button
         onClick={() => setCurrentTransactionType(TransactionType.VariableExpense)}
@@ -38,7 +40,8 @@ export const Tabs = () => {
         operationType={currentTransactionType}
       >
         <ShoppingCart />
-        Other Expenses
+
+        {t('otherExpenses')}
       </Button>
       <Button
         type="button"
@@ -47,7 +50,7 @@ export const Tabs = () => {
         operationType={currentTransactionType}
       >
         <CreditCard />
-        Credit Card Expenses
+        {t('creditCardExpenses')}
       </Button>
     </ButtonGroup>
   );

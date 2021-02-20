@@ -3,19 +3,19 @@ import { useMutation } from '@apollo/react-hooks';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-import { USER_LOGIN } from '../../graphql/AuthGql';
-import { loginSchema } from '../../schema/auth';
-import Button from '../../components/Button';
-import Input from '../../components/Input';
-import Page from '../../components/Page';
-import Header from '../../components/Header';
-import Form from '../../components/Form';
-import Flex from '../../components/Flex';
-import Link from '../../components/Link';
-import Container from '../../components/Container';
-import Text from '../../components/Text';
-import InputGroup from '../../components/InputGroup';
-import InputControl from '../../components/InputControl';
+import { USER_LOGIN } from 'graphql/AuthGql';
+import { loginSchema } from 'schema/auth';
+import Button from 'components/Button';
+import Input from 'components/Input';
+import Page from 'components/Page';
+import Header from 'components/Header';
+import Form from 'components/Form';
+import Flex from 'components/Flex';
+import Link from 'components/Link';
+import Container from 'components/Container';
+import Text from 'components/Text';
+import InputGroup from 'components/InputGroup';
+import InputControl from 'components/InputControl';
 
 const initialValues = {
   email: '',

@@ -2,21 +2,21 @@ import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/react-hooks';
 import { toast } from 'react-toastify';
-import { registerSchema } from '../../schema/auth';
-import { USER_REGISTER } from '../../graphql/AuthGql';
-import Button from '../../components/Button';
-import Input from '../../components/Input';
-import Page from '../../components/Page';
-import Header from '../../components/Header';
-import Form from '../../components/Form';
-import Flex from '../../components/Flex';
-import Select from '../../components/Select';
-import Link from '../../components/Link';
-import Container from '../../components/Container';
-import Text from '../../components/Text';
-import InputGroup from '../../components/InputGroup';
-import InputControl from '../../components/InputControl';
-import { currencies } from '../../constants/Currencies';
+import { registerSchema } from 'schema/auth';
+import { USER_REGISTER } from 'graphql/AuthGql';
+import Button from 'components/Button';
+import Input from 'components/Input';
+import Page from 'components/Page';
+import Header from 'components/Header';
+import Form from 'components/Form';
+import Flex from 'components/Flex';
+import Select from 'components/Select';
+import Link from 'components/Link';
+import Container from 'components/Container';
+import Text from 'components/Text';
+import InputGroup from 'components/InputGroup';
+import InputControl from 'components/InputControl';
+import { currencies } from 'constants/Currencies';
 
 const initialValues = {
   firstName: '',

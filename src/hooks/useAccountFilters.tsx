@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
-import { GET_ACCOUNTS } from '../graphql/Accounts';
-import { Account } from '../models';
+import { GET_ACCOUNTS } from 'graphql/Accounts';
+import { Account } from 'models';
 
 type Data = {
   accounts: Account[];

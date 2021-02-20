@@ -1,14 +1,14 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import Header from '../../../components/Header';
-import Img from '../../../components/Img';
-import Flex from '../../../components/Flex';
-import ButtonLink from '../../../components/ButtonLink';
-import LoadingData from '../../../components/LoadingData';
-import Text from '../../../components/Text';
-import { Page, PageHeader, PageBody } from '../style/SubPages.style';
-import { useUser } from '../../../hooks/useUser';
+import Header from 'components/Header';
+import Img from 'components/Img';
+import Flex from 'components/Flex';
+import ButtonLink from 'components/ButtonLink';
+import LoadingData from 'components/LoadingData';
+import Text from 'components/Text';
+import { Page, PageHeader, PageBody } from 'pages/Dashboard/style/SubPages.style';
+import { useUser } from 'hooks/useUser';
 
 const Profile = () => {
   const { data, getDefaultImage } = useUser();

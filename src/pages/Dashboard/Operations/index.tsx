@@ -1,24 +1,25 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import { PlusCircle, MinusCircle } from '@styled-icons/boxicons-regular';
-import { Tabs } from '../../../components/Tabs';
-import { useOperationsFilters } from '../../../hooks/useOperationsFilters';
-import { useAccountFilters } from '../../../hooks/useAccountFilters';
+import { Tabs } from 'components/Tabs';
+import { useOperationsFilters } from 'hooks/useOperationsFilters';
+import { useAccountFilters } from 'hooks/useAccountFilters';
 import DataPlaceholder from './Operation/DataPlaceholder';
 import OperationItem from './Operation/OperationItem';
 import FooterContainer from './Operation/FooterContainer';
 import OperationPlaceholder from './Operation/OperationPlaceholder';
-import { Operation } from '../../../models';
+import { Operation } from 'models';
 import { Container, OperationContainer, ButtonContent } from './style/Operations.style';
 import { OperationButton } from './style/Operations.style';
 import { RowHeader, CellHeader } from './Operation/style/OperationSettings';
-import { useOperations, useCreateOperation } from '../../../hooks/useOperations';
-import ConfirmModal from '../../../modals/ConfirmModal';
-import { addOperationText } from '../../../constants/Transactions';
-import LoadingSpinner from '../../../components/LoadingSpinner';
-import { TransactionType } from '../../../models';
-import Text from '../../../components/Text';
-import { useDeleteOperation, useRestoreOperation } from '../../../hooks/useOperations';
+import { useOperations, useCreateOperation } from 'hooks/useOperations';
+import ConfirmModal from 'modals/ConfirmModal';
+import { addOperationText } from 'constants/Transactions';
+import LoadingSpinner from 'components/LoadingSpinner';
+import { TransactionType } from 'models';
+import Text from 'components/Text';
+import { useDeleteOperation, useRestoreOperation } from 'hooks/useOperations';
 
 const Operations = () => {
   const { data, loading } = useOperations();
@@ -29,6 +30,7 @@ const Operations = () => {
   const { createOperation, loading: loadingCreate } = useCreateOperation();
   const { deleteOperation, loading: loadingDelete } = useDeleteOperation();
   const { restoreOperation } = useRestoreOperation();
+  const { t } = useTranslation('operations');
 
   //openModal
   const handleOpenModal = (value: boolean) => {
@@ -60,7 +62,7 @@ const Operations = () => {
           id: selectOperation?.id,
         },
       });
-      toast.error('Operation deleted. Click here to restore!', {
+      toast.error('message.operationDeleted', {
         position: toast.POSITION.BOTTOM_LEFT,
         autoClose: 10000,
         draggable: false,
@@ -88,7 +90,7 @@ const Operations = () => {
   return (
     <Container>
       <ConfirmModal
-        label="Are you sure that you want to delete this operation?"
+        label={t('areYouSureThatYouWantDelete')}
         confirmButton="danger"
         isOpenModal={modalIsOpen}
         loading={loadingDelete}
@@ -98,15 +100,15 @@ const Operations = () => {
       <Tabs />
       <OperationContainer>
         <RowHeader>
-          <CellHeader width="80px">Is Paid?</CellHeader>
-          <CellHeader width="130px">Date</CellHeader>
-          <CellHeader flex="1">Name</CellHeader>
-          <CellHeader flex="1">Category</CellHeader>
+          <CellHeader width="80px">{t('isPaid')}</CellHeader>
+          <CellHeader width="130px">{t('date')}</CellHeader>
+          <CellHeader flex="1">{t('name')}</CellHeader>
+          <CellHeader flex="1">{t('category')}</CellHeader>
           {currentTransactionType === TransactionType.CreditCard && (
-            <CellHeader width="200px">Credit Card</CellHeader>
+            <CellHeader width="200px">{t('creditCard')}</CellHeader>
           )}
-          <CellHeader width="200px">Value</CellHeader>
-          <CellHeader width="56px">Action</CellHeader>
+          <CellHeader width="200px">{t('value')}</CellHeader>
+          <CellHeader width="56px">{t('action')}</CellHeader>
         </RowHeader>
         <DataPlaceholder isLoading={loading} />
         {!!operations.length &&
@@ -136,7 +138,9 @@ const Operations = () => {
               <MinusCircle />
             )}
             <span>
-              <Text variation="white">{addOperationText[currentTransactionType || 'Deposit']}</Text>
+              <Text variation="white">
+                {t(addOperationText[currentTransactionType || 'Deposit'])}
+              </Text>
             </span>
           </OperationButton>
         </ButtonContent>

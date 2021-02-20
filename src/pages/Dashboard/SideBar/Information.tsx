@@ -1,12 +1,14 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Info from './Info';
 import { InformationContainer } from './style/Information.style';
-import { useOperations } from '../../../hooks/useOperations';
-import { TransactionType } from '../../../models';
-import { getCalcOperationsByType } from '../../../utils/calcOperations';
+import { useOperations } from 'hooks/useOperations';
+import { TransactionType } from 'models';
+import { getCalcOperationsByType } from 'utils/calcOperations';
 
 const Information = () => {
   const { data } = useOperations();
+  const { t } = useTranslation('sidebar');
 
   const operations = data?.operations || [];
 
@@ -29,16 +31,21 @@ const Information = () => {
 
   return (
     <InformationContainer>
-      <Info variation="Deposit" name="Incomes" current={totalPaidDeposit} desired={totalDeposit} />
+      <Info
+        variation="Deposit"
+        name={t('incomes')}
+        current={totalPaidDeposit}
+        desired={totalDeposit}
+      />
       <Info
         variation="FixedExpense"
-        name="Recurrent Expenses"
+        name={t('recurrentExpenses')}
         current={totalPaidFixedExpense}
         desired={totalFixedExpense}
       />
       <Info
         variation="VariableExpense"
-        name="Other Expenses"
+        name={t('otherExpenses')}
         current={totalPaidVariableExpense}
         desired={totalVariableExpense}
       />

@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import AsyncCreatableSelect from 'react-select/creatable';
-import Header from '../../../components/Header';
-import Flex from '../../../components/Flex';
-import Form from '../../../components/Form';
-import LoadingSpinner from '../../../components/LoadingSpinner';
-import InputControl from '../../../components/InputControl';
-import Input from '../../../components/Input';
-import InputGroup from '../../../components/InputGroup';
-import Button from '../../../components/Button';
-import { Page, PageHeader, PageBody } from '../style/SubPages.style';
-import { useUser, useUpdateUser } from '../../../hooks/useUser';
-import { languages, languageLabels } from '../../../constants/Langs';
-import customStyles from '../Operations/Operation/style/CategorySelect.style';
-import { checkUpdateUser } from '../../../schema/checkField';
+import Header from 'components/Header';
+import Flex from 'components/Flex';
+import Form from 'components/Form';
+import LoadingSpinner from 'components/LoadingSpinner';
+import InputControl from 'components/InputControl';
+import Input from 'components/Input';
+import InputGroup from 'components/InputGroup';
+import Button from 'components/Button';
+import { Page, PageHeader, PageBody } from 'pages/Dashboard/style/SubPages.style';
+import { useUser, useUpdateUser } from 'hooks/useUser';
+import { languages, languageLabels } from 'constants/Langs';
+import customStyles from 'pages/Dashboard/Operations/Operation/style/CategorySelect.style';
+import { checkUpdateUser } from 'schema/checkField';
 
 const initialValues = {
   firstName: '',

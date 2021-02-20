@@ -1,8 +1,8 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import { MockedProvider } from '@apollo/react-testing';
-import { USER_LOGIN } from '../../src/graphql/AuthGql';
-import { Login } from '../../src/pages';
+import { USER_LOGIN } from 'src/graphql/AuthGql';
+import { Login } from 'src/pages';
 
 const mocks = [
   {

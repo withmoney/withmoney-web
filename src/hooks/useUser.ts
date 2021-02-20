@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/react-hooks';
 import jwt from 'jsonwebtoken';
+import { useTranslation } from 'react-i18next';
 import { GET_ME } from '../graphql/AuthGql';
 import { UPDATE_USER, CHANGE_USER_PASSWORD } from '../graphql/User';
-import { User } from '../models';
 import { languageValue, languageLabels } from '../constants/Langs';
+import { User } from '../models';
 import { Locale } from '../models';
 
 type Data = {
@@ -16,11 +17,19 @@ const API = 'https://ui-avatars.com/api/?background=E7E7E7&color=363636&name=';
 export const useUser = () => {
   const token = localStorage.getItem('withmoney-token') || '';
   const { data, loading, error } = useQuery<Data>(GET_ME);
+  const { i18n } = useTranslation();
 
   const getDefaultImage = () => {
     const AVATAR = API + `${data?.me.firstName}+${data?.me.lastName}`;
     return AVATAR;
   };
+
+  useEffect(() => {
+    if (data?.me?.language) {
+      console.log(data?.me?.language);
+      i18n.changeLanguage(languageValue[data.me.language]);
+    }
+  }, [data]);
 
   if (loading) return { loading };
 

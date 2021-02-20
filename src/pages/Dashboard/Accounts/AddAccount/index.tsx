@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import Header from '../../../../components/Header';
-import Form from '../../../../components/Form';
-import Input from '../../../../components/Input';
-import InputGroup from '../../../../components/InputGroup';
-import InputControl from '../../../../components/InputControl';
-import Button from '../../../../components/Button';
-import Flex from '../../../../components/Flex';
-import Select from '../../../../components/Select';
-import { checkAccounts } from '../../../../schema/checkField';
-import { currencies } from '../../../../constants/Currencies';
-import { useCreateAccount } from '../../../../hooks/useAccounts';
-import LoadingSpinner from '../../../../components/LoadingSpinner';
-import Alert from '../../../../components/Alert';
-import { PageHeader, Page, PageBody } from '../../style/SubPages.style';
+import Header from 'components/Header';
+import Form from 'components/Form';
+import Input from 'components/Input';
+import InputGroup from 'components/InputGroup';
+import InputControl from 'components/InputControl';
+import Button from 'components/Button';
+import Flex from 'components/Flex';
+import Select from 'components/Select';
+import { checkAccounts } from 'schema/checkField';
+import { currencies } from 'constants/Currencies';
+import { useCreateAccount } from 'hooks/useAccounts';
+import LoadingSpinner from 'components/LoadingSpinner';
+import Alert from 'components/Alert';
+import { PageHeader, Page, PageBody } from 'pages/Dashboard/style/SubPages.style';
 
 const initialValues = {
   name: '',

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext } from 'react';
 import { DateTime } from 'luxon';
-import { TransactionType } from '../models';
+import { TransactionType } from 'models';
 
 interface OperationsFiltersContext {
   currentDateTime?: DateTime;

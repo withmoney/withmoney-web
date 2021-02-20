@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { useUser } from '../hooks/useUser';
+import { useUser } from 'hooks/useUser';
 import LoadingSpinner from './LoadingSpinner';
 import Flex from './Flex';
 

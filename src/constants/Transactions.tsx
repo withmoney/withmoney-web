@@ -1,10 +1,10 @@
-import { TransactionType, CreditCardBrand } from '../models';
+import { TransactionType, CreditCardBrand } from 'models';
 
 export const addOperationText = {
-  [TransactionType.Deposit]: 'Add Income',
-  [TransactionType.FixedExpense]: 'Add Expense',
-  [TransactionType.CreditCard]: 'Add Expense',
-  [TransactionType.VariableExpense]: 'Add Expense',
+  [TransactionType.Deposit]: 'addDeposit',
+  [TransactionType.FixedExpense]: 'addFixedExpense',
+  [TransactionType.CreditCard]: 'addCreditCard',
+  [TransactionType.VariableExpense]: 'addVariableExpense',
 };
 
 export const CreatedCardBrandText = [

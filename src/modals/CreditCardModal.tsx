@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import AsyncCreatableSelect from 'react-select/creatable';
-import Text from '../components/Text';
-import Button from '../components/Button';
-import Form from '../components/Form';
-import Input from '../components/Input';
-import InputControl from '../components/InputControl';
-import Flex from '../components/Flex';
-import LoadingSpinner from '../components/LoadingSpinner';
-import InputCurrency from '../components/InputCurrency';
-import { CreatedCardBrandText } from '../constants/Transactions';
-import { useAccountFilters } from '../hooks/useAccountFilters';
+import { useTranslation } from 'react-i18next';
+import Text from 'components/Text';
+import Button from 'components/Button';
+import Form from 'components/Form';
+import Input from 'components/Input';
+import InputControl from 'components/InputControl';
+import Flex from 'components/Flex';
+import LoadingSpinner from 'components/LoadingSpinner';
+import InputCurrency from 'components/InputCurrency';
+import { CreatedCardBrandText } from 'constants/Transactions';
+import { useAccountFilters } from 'hooks/useAccountFilters';
 import { ModalBody, ModalHeader, stylesCreditCard, StyledModal, Label } from './ConfirmModal.style';
-import { checkCreditCard } from '../schema/checkField';
-import customStyles from '../pages/Dashboard/Operations/Operation/style/CategorySelect.style';
-import { useUserLanguage } from '../hooks/useUser';
+import { checkCreditCard } from 'schema/checkField';
+import customStyles from 'pages/Dashboard/Operations/Operation/style/CategorySelect.style';
+import { useUserLanguage } from 'hooks/useUser';
 
 // Component Props
 type Props = {
@@ -46,11 +47,13 @@ const CreditCardModal = ({
   onConfirm,
   setForm,
 }: Props) => {
-  StyledModal.setAppElement('body');
+  const { t } = useTranslation('creditCards');
   const { currentAccount } = useAccountFilters();
   const [formValidate, setFormValidate] = useState(false);
   const [formErrors, setFormErrors] = useState(initialValues);
   const { value: language } = useUserLanguage();
+
+  StyledModal.setAppElement('body');
 
   //check form validate
   useEffect(() => {
@@ -96,17 +99,17 @@ const CreditCardModal = ({
     <>
       <StyledModal style={stylesCreditCard} isOpen={isOpenModal}>
         <ModalHeader>
-          <Text bold>Create Credit Card</Text>
+          <Text bold>{t('modal.title')}</Text>
         </ModalHeader>
         <ModalBody>
           <Form style={{ padding: '0' }}>
             <InputControl isInvalid={!!formErrors.name} message={formErrors.name}>
-              <Label>Card Name</Label>
+              <Label>{t('modal.name')}</Label>
               <Input onBlur={handleBlur} name="name" onChange={handleInput} value={form.name} />
             </InputControl>
 
             <InputControl isInvalid={!!formErrors.brand} message={formErrors.brand}>
-              <Label>Card Flag</Label>
+              <Label>{t('modal.brand')}</Label>
               <AsyncCreatableSelect
                 defaultValue={{
                   value: form.brand,
@@ -119,7 +122,7 @@ const CreditCardModal = ({
             </InputControl>
 
             <InputControl isInvalid={!!formErrors.limit} message={formErrors.limit}>
-              <Label>Card Limit</Label>
+              <Label>{t('modal.limit')}</Label>
               <InputCurrency
                 name="limit"
                 lang={language}
@@ -127,13 +130,13 @@ const CreditCardModal = ({
                 onBlur={handleBlur}
                 onChange={handleCurrency}
                 currency={currentAccount?.currency}
-                placeholder="Card limit"
+                placeholder={t('modal.limit')}
               />
             </InputControl>
 
             <Flex justifyContent="flex-end">
               <Button onClick={() => setIsOpenModal(false)} variation="light" type="button">
-                Cancel
+                {t('modal.cancel')}
               </Button>
               <Button
                 disabled={!formValidate || isLoading}
@@ -141,7 +144,7 @@ const CreditCardModal = ({
                 variation="primary"
                 type="button"
               >
-                {isLoading ? <LoadingSpinner size="20px" /> : 'Create'}
+                {isLoading ? <LoadingSpinner size="20px" /> : t('modal.create')}
               </Button>
             </Flex>
           </Form>
