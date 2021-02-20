@@ -1,5 +1,11 @@
 import styled from 'styled-components';
 
+export const Title = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const PageHeader = styled.div`
   display: flex;
   padding: 18px 44px;

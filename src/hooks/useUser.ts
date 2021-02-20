@@ -26,7 +26,6 @@ export const useUser = () => {
 
   useEffect(() => {
     if (data?.me?.language) {
-      console.log(data?.me?.language);
       i18n.changeLanguage(languageValue[data.me.language]);
     }
   }, [data]);

@@ -31,11 +31,11 @@ const Reports = () => {
           </Text>
         </Title>
         <Title>
-          <Buttons variation="primary" to="/reports">
-            By Category
-          </Buttons>
+          <Buttons to="/reports">By Category</Buttons>
           <Buttons to="/reports-day">By Day</Buttons>
-          <Buttons to="/reports-month">By Month</Buttons>
+          <Buttons variation="primary" to="/reports-month">
+            By Month
+          </Buttons>
         </Title>
       </PageHeader>
       <PageBody></PageBody>

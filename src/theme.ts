@@ -76,7 +76,7 @@ const GlobalStyle = createGlobalStyle`
     --button-light-background-color: #E7E7E7;
     --button-danger-background-color: #E98686;
 
-    --button-default-background-color-hover: #FFFFFF;
+    --button-default-background-color-hover: #F2F2F2;
     --button-primary-background-color-hover: #1C8147;
     --button-light-background-color-hover: #DADADA;
     --button-danger-background-color-hover: #E57070;
