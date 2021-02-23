@@ -17,12 +17,13 @@ const FooterContainer = () => {
   const { t } = useTranslation('operations');
   const { data } = useOperations();
   const operations = data?.operations || [];
+  const previousBalance = data?.balance.amount || 0;
   const { value: language } = useUserLanguage();
   const AllIncomes = getTotalOperations(operations);
   const totalPaidExpenses = getTotalPaidExpenses(operations);
   const totalPendingExpenses = getTotalPendingExpenses(operations);
   const totalCreditCardExpenses = getTotalCreditCardExpenses(operations);
-  const totalPlannedBalance = PlannedBalance(operations);
+  const totalPlannedBalance = PlannedBalance(operations) + previousBalance;
   const { currentAccount } = useAccountFilters();
 
   return (
