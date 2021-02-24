@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 
-export const Title = styled.div`
+export const Content = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
 `;
 
@@ -15,7 +14,6 @@ export const PageHeader = styled.div`
 
 export const PageBody = styled.div`
   padding: 35px;
-  padding-bottom: 0;
   background-color: #ffff;
 `;
 

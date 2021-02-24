@@ -21,9 +21,7 @@ export function useOperations() {
   const { currentAccount } = useAccountFilters();
   const { currentDateTime } = useOperationsFilters();
 
-  const [getOperations, { data, loading, error }] = useLazyQuery<Data>(GET_OPERATIONS, {
-    fetchPolicy: 'network-only',
-  });
+  const [getOperations, { data, loading, error }] = useLazyQuery<Data>(GET_OPERATIONS);
 
   useEffect(() => {
     if (currentAccount) {

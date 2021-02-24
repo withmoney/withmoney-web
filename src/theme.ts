@@ -141,11 +141,11 @@ const GlobalStyle = createGlobalStyle`
     --input-box-shadow-danger: rgba(220, 50, 50, 0.25);
 
     /* CheckBox */
-    --check-box-size: 23px;
+    --check-box-size: 24px;
     --check-box-position-icon-vertical: 24%;
     --check-box-position-icon-horizontal: 5%;
-    --check-box-after-vertical: 54%;
-    --check-box-after-horizontal: 37%;
+    --check-box-after-vertical: 55%;
+    --check-box-after-horizontal: 38%;
     --check-box-after-transform: rotate(45deg);
     --check-box-border-radius: 0.25rem;
 
