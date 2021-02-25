@@ -35,7 +35,7 @@ const PieGraph = ({ incomes }: Props) => {
       {
         name: incomes ? 'Income' : 'Expense',
         type: 'pie',
-        data: data ? data : [{ value: 0, name: 'Loading...' }],
+        data: data.length ? data : [{ value: 0, name: '' }],
         center: ['50%', '50%'],
         radius: [0, '65%'],
 
