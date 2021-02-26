@@ -1,22 +1,26 @@
 import React from 'react';
 import ReactECharts, { EChartsOption } from 'echarts-for-react';
 import { filterCategories } from 'utils/FilterOperations';
+import { TransactionType } from 'models';
+import { currencyFormat } from 'utils/currency';
 
 type Props = {
-  incomes: boolean;
+  type: TransactionType;
+  operations: any;
+  categories: any;
 };
 
-const PieGraph = ({ incomes }: Props) => {
-  const data = filterCategories(incomes);
+const PieGraph = ({ type, operations, categories }: Props) => {
+  const data = filterCategories(type, categories, operations);
 
   const option: EChartsOption = {
     title: {
       show: false,
-      text: `Withmoney ${incomes ? 'Incomes' : 'Expanses'}`,
+      text: `withmoney ${type === TransactionType.Deposit ? 'Incomes' : 'Expanses'}`,
     },
     tooltip: {
       trigger: 'item',
-      formatter: `{a} <br/>{b} : {c} ({d}%)`,
+      formatter: `{a} <br/>{b} ({d}%)`,
     },
     legend: {
       orient: 'horizontal',
@@ -33,16 +37,31 @@ const PieGraph = ({ incomes }: Props) => {
     calculable: true,
     series: [
       {
-        name: incomes ? 'Income' : 'Expense',
+        name: type === TransactionType.Deposit ? 'Income' : 'Expanse',
         type: 'pie',
         data: data.length ? data : [{ value: 0, name: '' }],
         center: ['50%', '50%'],
         radius: [0, '65%'],
 
         label: {
-          formatter: '{b} ({d})%',
+          alignTo: 'edge',
+          trigger: 'item',
+          formatter: '{name|{b}}\n{percent|{d}%}',
           fontSize: 14,
-          fontWeight: 700,
+          minMargin: 20,
+          edgeDistance: 10,
+          lineHeight: 18,
+          rich: {
+            percent: {
+              fontSize: 14,
+              color: '#999',
+            },
+            name: {
+              fontSize: 16,
+              color: '#363636',
+              fontWeight: 700,
+            },
+          },
         },
         emphasis: {
           itemStyle: {

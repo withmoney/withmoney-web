@@ -1,63 +1,62 @@
-import { TransactionType, Category, Operation } from 'models';
-import { useOperations } from 'hooks/useOperations';
-import { useCategories } from 'hooks/useCategories';
+import { TransactionType, Categories, Operation, Operations } from 'models';
 
 type CategoriesFiltered = {
   value: number;
   name: string;
 };
 
-export function filterCategories(incomes: boolean) {
+export function filterCategories(
+  type: TransactionType,
+  categories: Categories | undefined,
+  operations: Operations | undefined,
+) {
   let categoriesFiltered: CategoriesFiltered[] = [];
-  const { data: categories } = useCategories();
-  const { data: operations } = useOperations();
+  let filteredOperations: Operation[];
 
-  // filter noCategory
+  // Filter operations by type | Incomes or Expanses
+  if (type === TransactionType.Deposit) {
+    const filter = operations?.operations.filter(
+      (operation) => operation.type === TransactionType.Deposit && operation,
+    );
+    filteredOperations = filter || [];
+  } else {
+    const filter = operations?.operations.filter(
+      (operation) => operation.type !== TransactionType.Deposit && operation,
+    );
+    filteredOperations = filter || [];
+  }
+
+  // Filter operations that no has category
   const noCategory = operations?.operations.filter((operation) => {
-    if (
-      incomes
-        ? operation.type === TransactionType.Deposit
-        : operation.type !== TransactionType.Deposit
-    )
-      return operation.categoryId === null && operation.value;
+    return operation.categoryId === null && operation.value;
   });
 
   if (noCategory?.length) {
     const value = noCategory.reduce(sumOperation, 0);
-    value > 0 && categoriesFiltered.push({ value: value, name: 'no Category' });
+    if (value > 0) categoriesFiltered.push({ value: value, name: 'no Category' });
   }
 
-  // filterBy Category
-  operations?.operations &&
-    categories?.categories.data.map((category: Category) => {
-      if (
-        incomes
-          ? category.type === TransactionType.Deposit
-          : category.type !== TransactionType.Deposit
-      ) {
-        const operationFiltered = operations.operations.filter((operation) => {
-          if (operation.categoryId === category.id) {
-            return operation;
-          }
-        });
-        const value = operationFiltered.reduce(sumOperation, 0);
-        value > 0 && categoriesFiltered.push({ value: value, name: category.name });
+  // filter operation by category
+  categories?.categories.data.map((category) => {
+    const allOperations = filteredOperations.filter((operation) => {
+      if (operation.categoryId === category.id) {
+        return operation;
       }
     });
 
-  return categoriesFiltered.sort(sortOperations);
+    const value = allOperations.reduce(sumOperation, 0);
+    if (value > 0) categoriesFiltered.push({ value: value, name: category.name });
+  });
+
+  return categoriesFiltered.sort(sortCategories);
 }
 
 const sumOperation = (accumulateValue: number, currentValue: Operation) => {
   return accumulateValue + currentValue.value;
 };
 
-const sortOperations = (a: CategoriesFiltered, b: CategoriesFiltered) => {
-  if (a.value >= b.value) {
-    return -1;
-  }
-  if (b.value >= a.value) {
-    return 1;
-  }
+const sortCategories = (categoryA: CategoriesFiltered, categoryB: CategoriesFiltered) => {
+  if (categoryA.value >= categoryB.value) return -1;
+  if (categoryB.value >= categoryA.value) return 1;
   return 0;
 };

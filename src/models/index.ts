@@ -131,6 +131,15 @@ export interface Pagination {
   totalItems: number;
 }
 
+export interface Operations {
+  operations: Operation[];
+  balance: Balance;
+}
+
+type Balance = {
+  amount: number;
+};
+
 type CreditCardLimit = {
   limit: number;
   limitFree: number;
