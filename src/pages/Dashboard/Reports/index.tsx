@@ -6,7 +6,7 @@ import { Cell, Row } from 'pages/Dashboard/style/SubPages.style';
 import Header from 'components/Header';
 import Text from 'components/Text';
 import Radio from 'components/Radio';
-import PieGraph from './PieGraph';
+import PieGraph from '../../../components/PieGraph';
 import { filterCategories } from 'utils/FilterOperations';
 import { currencyFormat } from 'utils/currency';
 import { ReportButton, Label, Table } from 'pages/Dashboard/Reports/style';

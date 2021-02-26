@@ -2,7 +2,6 @@ import React from 'react';
 import ReactECharts, { EChartsOption } from 'echarts-for-react';
 import { filterCategories } from 'utils/FilterOperations';
 import { TransactionType } from 'models';
-import { currencyFormat } from 'utils/currency';
 
 type Props = {
   type: TransactionType;
