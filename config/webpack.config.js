@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 const DotEnv = require('dotenv-webpack');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir);
@@ -46,6 +47,15 @@ module.exports = {
     }),
     new HTMLWebpackPlugin({
       template: resolve('public/index.html'),
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: 'public/images', to: 'images' },
+        { from: 'public/favicon.ico', to: 'favicon.ico' },
+      ],
+      options: {
+        concurrency: 100,
+      },
     }),
   ],
   devServer: {
