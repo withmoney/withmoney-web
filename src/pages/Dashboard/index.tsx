@@ -6,6 +6,8 @@ import SideBar from './SideBar';
 import NavBar from './NavBar';
 import Operations from './Operations';
 import Reports from './Reports';
+import ReportsDay from './Reports/ReportsDay';
+import ReportsMonth from './Reports/ReportsMonth';
 import Accounts from './Accounts';
 import Profile from './Profile';
 import ProfileUpdate from './ProfileUpdate';
@@ -30,6 +32,8 @@ const Dashboard = () => {
           <Switch>
             <Route path="/dashboard" component={Operations} />
             <Route path="/reports" component={Reports} />
+            <Route path="/reports-day" component={ReportsDay} />
+            <Route path="/reports-month" component={ReportsMonth} />
             <Route path="/profile" component={Profile} />
             <Route path="/profile-update" component={ProfileUpdate} />
             <Route path="/profile-change-password" component={ChangePassword} />

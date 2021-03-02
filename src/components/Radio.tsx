@@ -19,21 +19,21 @@ const Radio = styled.input.attrs({ type: 'radio' })`
   /* --- Radio icon --- */
   &:after {
     content: '';
-    left: var(--radio-position-icon-left);
-    top: var(--radio-position-icon-top);
     position: absolute;
-    width: var(--radio-after-horizontal);
-    height: var(--radio-after-vertical);
-    background: var(--radio-background-color-icon);
-    transition: opacity 0.2s;
-    border-radius: var(--radio-border-radius);
     opacity: 0;
+    top: 7px;
+    left: 7px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--check-box-border-color-after);
   }
 
   /* --- Radio states --- */
   &:checked {
-    background: var(--button-primary-background-color);
+    display: block;
     border: none;
+    background: var(--button-primary-background-color);
     :after {
       opacity: 1;
     }
