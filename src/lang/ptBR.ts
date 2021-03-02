@@ -25,7 +25,7 @@ export default {
     message: {
       operationDeleted: 'Operação Excluída. Clique aqui para restaurar!',
     },
-    areYouSureThatYouWantDelete: 'Tem certeza que você deseja excluir essa operação??',
+    areYouSureThatYouWantDelete: 'Tem certeza que você deseja excluir essa operação?',
     isPaid: 'Pago?',
     date: 'Dia',
     name: 'Nome',
@@ -58,7 +58,7 @@ export default {
     },
   },
   confirmDelete: {
-    cancel: 'cancelar',
+    cancel: 'Cancelar',
     delete: 'Excluir',
   },
   navbar: {

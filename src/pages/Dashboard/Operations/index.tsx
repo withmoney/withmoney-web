@@ -62,7 +62,7 @@ const Operations = () => {
           id: selectOperation?.id,
         },
       });
-      toast.error('message.operationDeleted', {
+      toast.error(t('message.operationDeleted'), {
         position: toast.POSITION.BOTTOM_LEFT,
         autoClose: 10000,
         draggable: false,
