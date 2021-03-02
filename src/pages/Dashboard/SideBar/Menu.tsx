@@ -8,14 +8,13 @@ import { MenuContainer, MenuButton, Money, Graph } from './style/Menu.style';
 const Menu = () => {
   const { pathname } = useLocation();
   const { t } = useTranslation('menu');
-
   return (
     <MenuContainer>
       <MenuButton open={pathname === '/dashboard'} to="/dashboard">
         <Money />
         <Text>{t('operations')}</Text>
       </MenuButton>
-      <MenuButton open={pathname === '/reports'} to="/reports">
+      <MenuButton open={pathname.slice(0, 8) === '/reports'} to="/reports">
         <Graph />
         <Text>{t('reports')}</Text>
       </MenuButton>

@@ -5,25 +5,14 @@ import { useAccountFilters } from './useAccountFilters';
 import { UPDATE_OPERATION, RESTORE_OPERATION } from 'graphql/Operations';
 import { DELETE_OPERATION, GET_OPERATIONS, CREATE_OPERATION } from 'graphql/Operations';
 import { ALL_CREDIT_CARDS_LIMIT } from 'graphql/CreditCard';
-import { Operation } from 'models';
+import { Operations } from 'models';
 import useNProgress from './useNProgress';
-
-type Data = {
-  operations: Operation[];
-  balance: Balance;
-};
-
-type Balance = {
-  amount: number;
-};
 
 export function useOperations() {
   const { currentAccount } = useAccountFilters();
   const { currentDateTime } = useOperationsFilters();
 
-  const [getOperations, { data, loading, error }] = useLazyQuery<Data>(GET_OPERATIONS, {
-    fetchPolicy: 'network-only',
-  });
+  const [getOperations, { data, loading, error }] = useLazyQuery<Operations>(GET_OPERATIONS);
 
   useEffect(() => {
     if (currentAccount) {
@@ -48,7 +37,7 @@ export function useUpdateOperation() {
   const { currentDateTime } = useOperationsFilters();
   const { currentAccount } = useAccountFilters();
 
-  const [updateOperation, { data, error, loading }] = useMutation<Data>(UPDATE_OPERATION, {
+  const [updateOperation, { data, error, loading }] = useMutation<Operations>(UPDATE_OPERATION, {
     refetchQueries: [
       { query: ALL_CREDIT_CARDS_LIMIT, variables: { accountId: currentAccount?.id } },
       {

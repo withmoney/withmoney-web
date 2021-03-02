@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const Content = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
 export const PageHeader = styled.div`
   display: flex;
   padding: 18px 44px;
@@ -9,7 +14,6 @@ export const PageHeader = styled.div`
 
 export const PageBody = styled.div`
   padding: 35px;
-  padding-bottom: 0;
   background-color: #ffff;
 `;
 
