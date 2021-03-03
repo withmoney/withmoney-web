@@ -1,4 +1,4 @@
-import { TransactionType, Categories, Operation, Operations } from 'models';
+import { TransactionType, Category, Operation } from 'models';
 
 type CategoriesFiltered = {
   value: number;
@@ -6,28 +6,21 @@ type CategoriesFiltered = {
 };
 
 export function filterCategories(
-  type: TransactionType,
-  categories: Categories | undefined,
-  operations: Operations | undefined,
+  type: 'incomes' | 'expenses',
+  categories: Category[] = [],
+  operations: Operation[] = [],
 ) {
   let categoriesFiltered: CategoriesFiltered[] = [];
-  let filteredOperations: Operation[];
 
   // Filter operations by type | Incomes or Expanses
-  if (type === TransactionType.Deposit) {
-    const filter = operations?.operations.filter(
-      (operation) => operation.type === TransactionType.Deposit && operation,
-    );
-    filteredOperations = filter || [];
-  } else {
-    const filter = operations?.operations.filter(
-      (operation) => operation.type !== TransactionType.Deposit && operation,
-    );
-    filteredOperations = filter || [];
-  }
+  const filteredOperations = operations.filter((operation) =>
+    type === 'incomes'
+      ? operation.type === TransactionType.Deposit
+      : operation.type !== TransactionType.Deposit,
+  );
 
   // Filter operations that no has category
-  const noCategory = operations?.operations.filter((operation) => {
+  const noCategory = operations.filter((operation) => {
     return operation.categoryId === null && operation.value;
   });
 
@@ -37,7 +30,7 @@ export function filterCategories(
   }
 
   // filter operation by category
-  categories?.categories.data.map((category) => {
+  categories.map((category) => {
     const allOperations = filteredOperations.filter((operation) => {
       if (operation.categoryId === category.id) {
         return operation;
