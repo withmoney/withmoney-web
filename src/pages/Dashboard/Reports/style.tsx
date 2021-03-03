@@ -15,8 +15,6 @@ export const ReportButton = styled(ButtonLink)`
 `;
 
 export const Table = styled(PageBodyColumns)`
-  float: right;
-  width: 48%;
   border: 2px solid #f2f2f2;
   padding: 0;
 `;

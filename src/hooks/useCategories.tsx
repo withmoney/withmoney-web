@@ -6,7 +6,7 @@ import { UPDATE_CATEGORY } from 'graphql/Categories';
 import { Category, Categories } from 'models';
 
 export function useCategories(options?: any) {
-  return useQuery(ALL_CATEGORY, options);
+  return useQuery<Categories>(ALL_CATEGORY, options);
 }
 
 export const useFilterCategories = () => {

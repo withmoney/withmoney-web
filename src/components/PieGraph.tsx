@@ -1,12 +1,13 @@
 import React from 'react';
-import ReactECharts, { EChartsOption } from 'echarts-for-react';
+import { EChartsOption } from 'echarts';
+import ReactECharts from 'echarts-for-react';
 import { filterCategories } from 'utils/FilterOperations';
-import { TransactionType } from 'models';
+import { Operation, Category } from 'models';
 
 type Props = {
-  type: TransactionType;
-  operations: any;
-  categories: any;
+  type: 'incomes' | 'expenses';
+  operations?: Operation[];
+  categories?: Category[];
 };
 
 const PieGraph = ({ type, operations, categories }: Props) => {
@@ -15,7 +16,7 @@ const PieGraph = ({ type, operations, categories }: Props) => {
   const option: EChartsOption = {
     title: {
       show: false,
-      text: `withmoney ${type === TransactionType.Deposit ? 'Incomes' : 'Expanses'}`,
+      text: `withmoney ${type === 'incomes' ? 'Incomes' : 'Expanses'}`,
     },
     tooltip: {
       trigger: 'item',
@@ -36,7 +37,7 @@ const PieGraph = ({ type, operations, categories }: Props) => {
     calculable: true,
     series: [
       {
-        name: type === TransactionType.Deposit ? 'Income' : 'Expanse',
+        name: type === 'incomes' ? 'Income' : 'Expanse',
         type: 'pie',
         data: data.length ? data : [{ value: 0, name: '' }],
         center: ['50%', '50%'],
@@ -70,7 +71,7 @@ const PieGraph = ({ type, operations, categories }: Props) => {
       },
     ],
   };
-  return <ReactECharts style={{ height: '48%', width: '48%', float: 'left' }} option={option} />;
+  return <ReactECharts style={{ height: 800 }} option={option} />;
 };
 
 export default PieGraph;
