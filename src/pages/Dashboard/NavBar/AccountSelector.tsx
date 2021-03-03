@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
@@ -14,8 +14,7 @@ type Data = {
 const AccountSelector = () => {
   const { t } = useTranslation('navbar');
   const { data } = useQuery<Data>(GET_ACCOUNTS, { fetchPolicy: 'network-only' });
-  const { setCurrentAccount } = useAccountFilters();
-
+  const { currentAccount, setCurrentAccount } = useAccountFilters();
   const accounts = data?.accounts || [];
 
   const SelectAccount = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -23,13 +22,14 @@ const AccountSelector = () => {
     const account = accounts.find((account) => account.id === accountId);
     if (account) {
       setCurrentAccount(account);
+      localStorage.setItem('currentAccount', account.id);
     }
   };
 
   return (
     <AccountContainer>
       <AccountTitle>{t('currentAccount')}: </AccountTitle>
-      <AccountSelect onChange={(event) => SelectAccount(event)}>
+      <AccountSelect value={currentAccount?.id} onChange={(event) => SelectAccount(event)}>
         {!!accounts.length &&
           accounts.map((account) => {
             return (
