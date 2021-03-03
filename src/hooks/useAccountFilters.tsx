@@ -23,13 +23,19 @@ const AccountFilterContext = createContext<AccountFilterContext>({
 export default function AccountFiltersProvider({ children }: Props) {
   const [currentAccount, setCurrentAccount] = useState<Account | undefined>();
 
-  const { data: accounts } = useQuery<Data>(GET_ACCOUNTS);
+  const { data } = useQuery<Data>(GET_ACCOUNTS);
 
   useEffect(() => {
-    if (!currentAccount && accounts?.accounts?.length) {
-      setCurrentAccount(accounts?.accounts[0]);
+    if (!currentAccount && data?.accounts?.length) {
+      const currentAccountLS = localStorage.getItem('currentAccount');
+      const account = data.accounts.find((account) => account.id === currentAccountLS);
+      if (account) {
+        setCurrentAccount(account);
+      } else {
+        setCurrentAccount(data?.accounts[0]);
+      }
     }
-  }, [currentAccount, accounts]);
+  }, [data]);
 
   return (
     <AccountFilterContext.Provider
