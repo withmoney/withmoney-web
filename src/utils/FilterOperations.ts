@@ -20,7 +20,7 @@ export function filterCategories(
   );
 
   // Filter operations that no has category
-  const noCategory = operations.filter((operation) => {
+  const noCategory = filteredOperations.filter((operation) => {
     return operation.categoryId === null && operation.value;
   });
 
