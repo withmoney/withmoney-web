@@ -1,6 +1,6 @@
 import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
 import { checkEmailSchema } from 'schema/auth';
 import { REQUEST_CHANGE_PASSWORD } from 'graphql/AuthGql';
