@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { useLazyQuery, useMutation } from '@apollo/react-hooks';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { useOperationsFilters } from './useOperationsFilters';
 import { useAccountFilters } from './useAccountFilters';
 import { UPDATE_OPERATION, RESTORE_OPERATION } from 'graphql/Operations';
 import { DELETE_OPERATION, GET_OPERATIONS, CREATE_OPERATION } from 'graphql/Operations';
 import { ALL_CREDIT_CARDS_LIMIT } from 'graphql/CreditCard';
-import { Operations } from 'models';
+import { Operations, Operation } from 'models';
 import useNProgress from './useNProgress';
 
 export function useOperations() {
@@ -33,23 +33,21 @@ export function useOperations() {
   return { getOperations, data, loading, error };
 }
 
+interface UpdateOperationData {
+  updateOneOperation: Operation;
+}
+
 export function useUpdateOperation() {
-  const { currentDateTime } = useOperationsFilters();
   const { currentAccount } = useAccountFilters();
 
-  const [updateOperation, { data, error, loading }] = useMutation<Operations>(UPDATE_OPERATION, {
-    refetchQueries: [
-      { query: ALL_CREDIT_CARDS_LIMIT, variables: { accountId: currentAccount?.id } },
-      {
-        query: GET_OPERATIONS,
-        variables: {
-          startDateTime: currentDateTime?.startOf('month'),
-          endDateTime: currentDateTime?.endOf('month'),
-          accountId: currentAccount?.id,
-        },
-      },
-    ],
-  });
+  const [updateOperation, { data, error, loading }] = useMutation<UpdateOperationData>(
+    UPDATE_OPERATION,
+    {
+      refetchQueries: [
+        { query: ALL_CREDIT_CARDS_LIMIT, variables: { accountId: currentAccount?.id } },
+      ],
+    },
+  );
 
   useNProgress(loading);
 

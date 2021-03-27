@@ -36,7 +36,7 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
     });
   }, 800);
 
-  const toggleInputName = debounce((value: string) => {
+  const handleInputName = debounce((value: string) => {
     handleUpdate({
       name: value,
     });
@@ -89,7 +89,7 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
         <Cell flex="1">
           <InputOperations
             placeholder={t('name')}
-            onChange={toggleInputName}
+            onChange={handleInputName}
             value={operation.name}
           />
         </Cell>

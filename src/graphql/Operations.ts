@@ -56,6 +56,13 @@ export const UPDATE_OPERATION = gql`
     ) {
       id
       name
+      value
+      type
+      accountId
+      categoryId
+      isPaid
+      paidAt
+      creditCardId
     }
   }
 `;

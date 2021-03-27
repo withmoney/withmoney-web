@@ -6,6 +6,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0 15px;
+  min-width: 900px;
 `;
 
 export const OperationContainer = styled.div`

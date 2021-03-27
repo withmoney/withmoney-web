@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { CHECK_HASH } from 'graphql/AuthGql';
 import { useUrlQuery } from 'hooks/UseURLQuery';
 import Link from 'components/Link';
