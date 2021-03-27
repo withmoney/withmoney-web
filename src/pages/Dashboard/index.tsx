@@ -1,7 +1,10 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
+import styled from 'styled-components';
+
 import { useSidebarCollapse } from 'hooks/useSidebarCollapse';
-import { Content, Page, Wrapper } from './style/Operations.style';
+
+import { Page, Wrapper } from './style/Operations.style';
 import SideBar from './SideBar';
 import NavBar from './NavBar';
 import Operations from './Operations';
@@ -52,5 +55,18 @@ const Dashboard = () => {
     </Page>
   );
 };
+
+type OperationsProps = {
+  isSidebarOpen: boolean;
+};
+
+const Content = styled.div<OperationsProps>`
+  height: 100%;
+  flex: 1;
+  margin-left: ${({ isSidebarOpen }) => (isSidebarOpen ? '300px' : '0')};
+  transition: margin-left 0.2s ease-out;
+  padding: 0 15px;
+  overflow-x: auto;
+`;
 
 export default Dashboard;
