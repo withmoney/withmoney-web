@@ -56,7 +56,7 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
     }
   };
 
-  const update = (data: any) => {
+  const update = (data: { value: string; label: string }) => {
     if (CategoryId !== data.value) {
       try {
         updateOperation({
@@ -66,6 +66,7 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
             categoryId: data.value,
           },
         });
+        setValue(data);
       } catch (err) {
         toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
       }
