@@ -17,21 +17,50 @@ import Text from 'components/Text';
 import InputGroup from 'components/InputGroup';
 import InputControl from 'components/InputControl';
 import { currencies } from 'constants/Currencies';
+import { languages } from 'constants/Langs';
+import { Locale, Currency } from 'models';
 
-const initialValues = {
+const initialValues: Schema = {
   firstName: '',
   lastName: '',
   email: '',
   password: '',
   passwordConfirm: '',
-  currency: '',
+  currency: null,
+  language: (localStorage.getItem('language') as Locale) ?? Locale.enUS,
+};
+
+const formErrorsInitial = Object.keys(initialValues).reduce(
+  (acc, keyName) => ({ ...acc, [keyName]: '' }),
+  {} as { [key in keyof typeof initialValues]: string },
+);
+
+type Schema = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+  currency: Currency | null;
+  language: Locale;
+};
+
+type UserRegisterVariables = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  currency: Currency | null;
+  language: Locale | null;
 };
 
 const SignUp = () => {
-  const [form, setForm] = useState(initialValues);
-  const [formErrors, setFormErrors] = useState(initialValues);
+  const [form, setForm] = useState<Schema>(initialValues);
+  const [formErrors, setFormErrors] = useState<{ [key in keyof typeof initialValues]: string }>(
+    formErrorsInitial,
+  );
   const [formValidate, setFormValidate] = useState(false);
-  const [userRegister, { loading }] = useMutation(USER_REGISTER);
+  const [userRegister, { loading }] = useMutation<string, UserRegisterVariables>(USER_REGISTER);
   const history = useHistory();
 
   useEffect(() => {
@@ -61,7 +90,8 @@ const SignUp = () => {
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (await registerSchema.isValid(form)) {
+
+    if ((await registerSchema.isValid(form)) && form.currency !== null) {
       try {
         await userRegister({ variables: form });
         toast.success(
@@ -141,6 +171,23 @@ const SignUp = () => {
               })}
             </Select>
           </InputControl>
+          <InputControl message={formErrors.language} isInvalid={!!formErrors.language}>
+            <Select
+              style={{ width: '100%' }}
+              onBlur={handleBlur}
+              onChange={handleInput}
+              name="language"
+            >
+              <option>Select your language</option>
+              {languages.map((language) => {
+                return (
+                  <option key={language} value={language}>
+                    {language}
+                  </option>
+                );
+              })}
+            </Select>
+          </InputControl>
 
           <InputControl message={formErrors.password} isInvalid={!!formErrors.password}>
             <Input
@@ -170,7 +217,7 @@ const SignUp = () => {
           </InputControl>
 
           <Flex justifyContent="center">
-            <Button disabled={!formValidate || loading} variation="primary">
+            <Button disabled={loading} variation="primary">
               {loading ? 'Registering...' : 'Register'}
             </Button>
           </Flex>
