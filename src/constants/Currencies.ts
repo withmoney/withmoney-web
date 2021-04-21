@@ -1,8 +1,3 @@
-import { CurrenciesTypes } from '../models';
+import { Currency } from '../models';
 
-export const currencies = [
-  CurrenciesTypes.USD,
-  CurrenciesTypes.BRL,
-  CurrenciesTypes.EUR,
-  CurrenciesTypes.GBP,
-];
+export const currencies = [Currency.USD, Currency.BRL, Currency.EUR, Currency.GBP];

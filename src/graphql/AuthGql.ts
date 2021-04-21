@@ -30,7 +30,8 @@ export const USER_REGISTER = gql`
     $lastName: String!
     $email: String!
     $password: String!
-    $currency: Currency!
+    $currency: Currency
+    $language: Locale
   ) {
     register(
       user: {
@@ -39,6 +40,7 @@ export const USER_REGISTER = gql`
         email: $email
         password: $password
         currency: $currency
+        language: $language
       }
     )
   }
