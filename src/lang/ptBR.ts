@@ -37,7 +37,7 @@ export default {
     addFixedExpense: 'Adicionar Despesa',
     addCreditCard: 'Adicionar Despesa',
     addVariableExpense: 'Adicionar Despesa',
-    allIncomes: 'Todas as Entredas',
+    allIncomes: 'Todas as Entradas',
     pendingExpenses: 'Despesas Pendente',
     paidExpenses: 'Despesas Pagas',
     allCreditCardExpenses: 'Todos Cartões de Crédito',
