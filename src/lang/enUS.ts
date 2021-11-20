@@ -42,6 +42,9 @@ export default {
     paidExpenses: 'Paid Expenses',
     allCreditCardExpenses: 'All Credit Card Expenses',
     plannedMonthBalance: 'Planned Month Balance',
+    hide: 'Hide',
+    show: 'Show',
+    categorySearch: 'Category Search',
   },
   categories: {
     placeholderSelector: 'Select or Create',

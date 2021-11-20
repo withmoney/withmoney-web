@@ -4,10 +4,17 @@ import { useTranslation } from 'react-i18next';
 import { ArrowCircleDown } from '@styled-icons/fa-solid';
 import { Sync } from '@styled-icons/evaicons-solid';
 import { ShoppingCart, CreditCard } from '@styled-icons/entypo';
+import { Filter } from '@styled-icons/fa-solid/Filter';
 import { useOperationsFilters } from 'hooks/useOperationsFilters';
+import ButtonIcon from 'components/ButtonIcon';
 import { TransactionType } from 'models';
 
-export const Tabs = () => {
+type Props = {
+  filterVisibility: boolean;
+  onToggleFilterVisibility: () => void;
+};
+
+export const Tabs = ({ filterVisibility, onToggleFilterVisibility }: Props) => {
   const { currentTransactionType, setCurrentTransactionType } = useOperationsFilters();
   const { t } = useTranslation('operations');
   return (
@@ -52,6 +59,11 @@ export const Tabs = () => {
         <CreditCard />
         {t('creditCardExpenses')}
       </Button>
+      <RightSection>
+        <ButtonIcon type="button" variation="light" onClick={onToggleFilterVisibility}>
+          <Filter size={16} /> <span>{filterVisibility ? t('show') : t('hide')}</span>
+        </ButtonIcon>
+      </RightSection>
     </ButtonGroup>
   );
 };
@@ -99,4 +111,13 @@ export const Button = styled.button<ButtonProps>`
         ? `var(--dashboard-progress-bar-${operationType})`
         : 'var(--dashboard-button-color-active)'};
   }
+`;
+
+const RightSection = styled.div`
+  flex: 1;
+  margin-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 `;
