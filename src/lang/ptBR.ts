@@ -42,6 +42,9 @@ export default {
     paidExpenses: 'Despesas Pagas',
     allCreditCardExpenses: 'Todos Cartões de Crédito',
     plannedMonthBalance: 'Saldo planejado do mês',
+    hide: 'Abrir',
+    show: 'Fechar',
+    categorySearch: 'Pesquisar Categoria',
   },
   categories: {
     placeholderSelector: 'Selecione/Crie',

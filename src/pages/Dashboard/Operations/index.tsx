@@ -21,11 +21,16 @@ import LoadingSpinner from 'components/LoadingSpinner';
 import { TransactionType } from 'models';
 import Text from 'components/Text';
 import { useDeleteOperation, useRestoreOperation } from 'hooks/useOperations';
+import OperationFilter from './OperationFilter';
 
 const Operations = () => {
-  const { data, loading } = useOperations();
+  const [categoryId, setCategoryId] = useState<string | null>(null);
+  const { data, loading } = useOperations({
+    categoryId,
+  });
   const { currentTransactionType, currentDateTime } = useOperationsFilters();
   const { currentAccount } = useAccountFilters();
+  const [filterVisibility, setFilterVisibility] = useState<boolean>(false);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [selectOperation, setSelectOperation] = useState<Operation>();
   const { createOperation, loading: loadingCreate } = useCreateOperation();
@@ -37,6 +42,10 @@ const Operations = () => {
   const handleOpenModal = (value: boolean) => {
     setModalIsOpen(value);
   };
+
+  const toggleFilterVisibility = () => setFilterVisibility(!filterVisibility);
+
+  const onChangeCategoryFilter = (categoryId: string | null) => setCategoryId(categoryId);
 
   //CreateOperation
   const handleCreateOperation = async () => {
@@ -101,8 +110,11 @@ const Operations = () => {
         setIsOpenModal={handleOpenModal}
         onConfirm={handleDeleteOperation}
       />
-      <Tabs />
+      <Tabs filterVisibility={filterVisibility} onToggleFilterVisibility={toggleFilterVisibility} />
       <OperationContainer>
+        {filterVisibility && currentTransactionType && (
+          <OperationFilter type={currentTransactionType} onChange={onChangeCategoryFilter} />
+        )}
         <RowHeader>
           <CellHeader width="80px">{t('isPaid')}</CellHeader>
           <CellHeader width="130px">{t('date')}</CellHeader>

@@ -8,7 +8,7 @@ export const ALL_CATEGORY = gql`
       skip: $skip
       take: $take
       where: { name: { contains: $name }, type: { equals: $type }, deletedAt: { equals: null } }
-      orderBy: [{ createdAt: desc }]
+      orderBy: [{ name: asc }]
     ) {
       data {
         id

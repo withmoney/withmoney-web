@@ -5,26 +5,39 @@ import { useAccountFilters } from './useAccountFilters';
 import { UPDATE_OPERATION, RESTORE_OPERATION } from 'graphql/Operations';
 import { DELETE_OPERATION, GET_OPERATIONS, CREATE_OPERATION } from 'graphql/Operations';
 import { ALL_CREDIT_CARDS_LIMIT } from 'graphql/CreditCard';
-import { Operations, Operation } from 'models';
+import { Operations, Operation, SortOrder } from 'models';
 import useNProgress from './useNProgress';
 
-export function useOperations() {
+type Variables = {
+  categoryId?: string | null;
+};
+
+export function useOperations({ categoryId }: Variables = {}) {
   const { currentAccount } = useAccountFilters();
   const { currentDateTime } = useOperationsFilters();
 
   const [getOperations, { data, loading, error }] = useLazyQuery<Operations>(GET_OPERATIONS);
 
   useEffect(() => {
-    if (currentAccount) {
+    if (currentAccount && currentDateTime) {
       getOperations({
         variables: {
-          startDateTime: currentDateTime?.startOf('month'),
-          endDateTime: currentDateTime?.endOf('month'),
-          accountId: currentAccount?.id,
+          where: {
+            paidAt: {
+              gte: currentDateTime.startOf('month'),
+              lte: currentDateTime.endOf('month'),
+            },
+            deletedAt: { equals: null },
+            accountId: { equals: currentAccount.id },
+            ...(categoryId ? { categoryId: { equals: categoryId } } : {}),
+          },
+          orderBy: [{ paidAt: SortOrder.ASC }, { createdAt: SortOrder.ASC }],
+          startDateTime: currentDateTime.startOf('month'),
+          accountId: currentAccount.id,
         },
       });
     }
-  }, [currentAccount, currentDateTime]);
+  }, [currentAccount, currentDateTime, categoryId]);
 
   useNProgress(loading);
 

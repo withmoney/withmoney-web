@@ -2,15 +2,13 @@ import { gql } from '@apollo/client';
 
 // query
 export const GET_OPERATIONS = gql`
-  query getOperations($startDateTime: DateTime!, $endDateTime: DateTime!, $accountId: String!) {
-    operations: findManyOperation(
-      where: {
-        paidAt: { gte: $startDateTime, lte: $endDateTime }
-        deletedAt: { equals: null }
-        accountId: { equals: $accountId }
-      }
-      orderBy: [{ paidAt: asc }, { createdAt: asc }]
-    ) {
+  query getOperations(
+    $startDateTime: DateTime!
+    $where: OperationWhereInput
+    $orderBy: [OperationOrderByInput!]
+    $accountId: String!
+  ) {
+    operations: findManyOperation(where: $where, orderBy: $orderBy) {
       id
       name
       value

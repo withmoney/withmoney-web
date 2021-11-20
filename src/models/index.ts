@@ -12,6 +12,11 @@ export enum Currency {
   GBP = 'GBP',
 }
 
+export enum SortOrder {
+  ASC = 'asc',
+  DESC = 'desc',
+}
+
 export enum CreditCardBrand {
   AmericanExpress = 'AmericanExpress',
   BNDES = 'BNDES',
