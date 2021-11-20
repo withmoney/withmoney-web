@@ -34,13 +34,13 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
     handleUpdate({
       value: value,
     });
-  }, 800);
+  }, 300);
 
   const handleInputName = debounce((value: string) => {
     handleUpdate({
       name: value,
     });
-  }, 800);
+  }, 300);
 
   const toggleInputIsPaid = ({ target: { checked } }: React.ChangeEvent<HTMLInputElement>) => {
     handleUpdate({
