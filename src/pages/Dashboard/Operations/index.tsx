@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
+import { DateTime } from 'luxon';
 import { PlusCircle, MinusCircle } from '@styled-icons/boxicons-regular';
 import { Tabs } from 'components/Tabs';
 import { useOperationsFilters } from 'hooks/useOperationsFilters';
@@ -39,14 +40,17 @@ const Operations = () => {
 
   //CreateOperation
   const handleCreateOperation = async () => {
-    const verify =
-      (currentDateTime?.toISO() || '') > (currentDateTime?.endOf('month').toISO() || '');
+    if (!currentDateTime) {
+      throw new Error('currentDateTime is undefined');
+    }
+
+    const verify = DateTime.local() > currentDateTime.endOf('month');
     try {
       await createOperation({
         variables: {
           type: currentTransactionType,
           accountID: currentAccount?.id,
-          paidAt: verify ? currentDateTime?.endOf('month').toISO() : currentDateTime,
+          paidAt: verify ? currentDateTime.endOf('month').toISO() : currentDateTime,
         },
       });
     } catch (err) {
