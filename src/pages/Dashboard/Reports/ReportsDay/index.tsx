@@ -22,12 +22,6 @@ const ReportsDay = () => {
     return <div>Carregando...</div>;
   }
 
-  // console.log(currentDateTime.startOf('month').day, currentDateTime.endOf('month').day);
-
-  // console.log(dataOperations);
-
-  // const sufix = currentDateTime.toFormat('/LL/yyyy');
-
   const dataGrouped = groupBy(dataOperations?.operations ?? [], (a) => {
     return DateTime.fromISO(a?.paidAt).toFormat('dd');
   });
@@ -42,7 +36,6 @@ const ReportsDay = () => {
     let saidas = 0;
 
     if (dataGrouped[name]) {
-      console.log(name, dataGrouped[name]);
       const operations = dataGrouped[name];
 
       entradas = operations
@@ -85,7 +78,7 @@ const ReportsDay = () => {
           <ReportButton variation="primary" to="/reports-day">
             By Day
           </ReportButton>
-          <ReportButton to="/reports-month">By Month</ReportButton>
+          {/* <ReportButton to="/reports-month">By Month</ReportButton> */}
         </Content>
       </PageHeader>
       <PageBody>
