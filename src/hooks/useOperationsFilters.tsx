@@ -5,10 +5,12 @@ import { TransactionType } from 'models';
 interface OperationsFiltersContext {
   currentDateTime?: DateTime;
   currentTransactionType?: TransactionType;
+  categoryId: string | null;
   goToNextMonth?: () => void;
   goToPreviewMonth?: () => void;
   setCurrentTransactionType: (TransactionType: TransactionType) => void;
   setCurrentDateTime: (value: DateTime) => void;
+  setCategoryId: (categoryId: string | null) => void;
 }
 
 type Props = {
@@ -16,8 +18,10 @@ type Props = {
 };
 
 const OperationsFiltersContext = createContext<OperationsFiltersContext>({
+  categoryId: null,
   setCurrentTransactionType: () => {},
   setCurrentDateTime: () => {},
+  setCategoryId: () => {},
 });
 
 export default function OperationsFiltersProvider({ children }: Props) {
@@ -25,6 +29,7 @@ export default function OperationsFiltersProvider({ children }: Props) {
   const [currentTransactionType, setCurrentTransactionType] = useState<TransactionType>(
     TransactionType.Deposit,
   );
+  const [categoryId, setCategoryId] = useState<string | null>(null);
 
   return (
     <OperationsFiltersContext.Provider
@@ -33,6 +38,8 @@ export default function OperationsFiltersProvider({ children }: Props) {
         currentTransactionType,
         setCurrentTransactionType,
         setCurrentDateTime,
+        categoryId,
+        setCategoryId,
       }}
     >
       {children}
@@ -41,17 +48,5 @@ export default function OperationsFiltersProvider({ children }: Props) {
 }
 
 export function useOperationsFilters() {
-  const context = useContext(OperationsFiltersContext);
-  const {
-    currentDateTime,
-    currentTransactionType,
-    setCurrentTransactionType,
-    setCurrentDateTime,
-  } = context;
-  return {
-    currentDateTime,
-    currentTransactionType,
-    setCurrentTransactionType,
-    setCurrentDateTime,
-  };
+  return useContext(OperationsFiltersContext);
 }

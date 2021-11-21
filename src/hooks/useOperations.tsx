@@ -8,13 +8,9 @@ import { ALL_CREDIT_CARDS_LIMIT } from 'graphql/CreditCard';
 import { Operations, Operation, SortOrder } from 'models';
 import useNProgress from './useNProgress';
 
-type Variables = {
-  categoryId?: string | null;
-};
-
-export function useOperations({ categoryId }: Variables = {}) {
+export function useOperations() {
   const { currentAccount } = useAccountFilters();
-  const { currentDateTime } = useOperationsFilters();
+  const { currentDateTime, categoryId } = useOperationsFilters();
 
   const [getOperations, { data, loading, error }] = useLazyQuery<Operations>(GET_OPERATIONS);
 

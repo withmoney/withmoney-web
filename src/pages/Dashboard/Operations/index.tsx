@@ -24,11 +24,8 @@ import { useDeleteOperation, useRestoreOperation } from 'hooks/useOperations';
 import OperationFilter from './OperationFilter';
 
 const Operations = () => {
-  const [categoryId, setCategoryId] = useState<string | null>(null);
-  const { data, loading } = useOperations({
-    categoryId,
-  });
-  const { currentTransactionType, currentDateTime } = useOperationsFilters();
+  const { data, loading } = useOperations();
+  const { currentTransactionType, currentDateTime, setCategoryId } = useOperationsFilters();
   const { currentAccount } = useAccountFilters();
   const [filterVisibility, setFilterVisibility] = useState<boolean>(false);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
