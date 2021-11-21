@@ -32,34 +32,53 @@ const FooterContainer = () => {
         <Info style={{ borderBottom: '2px solid #dddd' }}>
           <InfoTitle>
             <Text>
-              {t('allIncomes')} <IncomesIcons />
-            </Text>
-            <Text>
               {t('pendingExpenses')}
               <PendingExpensesIcons />
             </Text>
             <Text>
               {t('paidExpenses')} <PaidExpenses />
             </Text>
+          </InfoTitle>
+          <InfoValue>
+            {currentAccount && language && (
+              <>
+                <Text>
+                  {currencyFormat(language, currentAccount.currency, totalPendingExpenses)}
+                </Text>
+                <Text>{currencyFormat(language, currentAccount.currency, totalPaidExpenses)}</Text>
+              </>
+            )}
+          </InfoValue>
+        </Info>
+        <Info style={{ borderBottom: '2px solid #dddd' }}>
+          <InfoTitle>
+            <Text>
+              {t('allIncomes')} <IncomesIcons />
+            </Text>
+            <Text>
+              {t('allExpenses')}
+              <PendingExpensesIcons />
+            </Text>
             <Text>
               {t('allCreditCardExpenses')}
               <CreditCardExpenses />
             </Text>
           </InfoTitle>
-          <InfoValue>
-            {currentAccount && language && (
-              <>
-                <Text>{currencyFormat(language, currentAccount.currency, AllIncomes)}</Text>
-                <Text>
-                  {currencyFormat(language, currentAccount.currency, totalPendingExpenses)}
-                </Text>
-                <Text>{currencyFormat(language, currentAccount.currency, totalPaidExpenses)}</Text>
-                <Text>
-                  {currencyFormat(language, currentAccount.currency, totalCreditCardExpenses)}
-                </Text>
-              </>
-            )}
-          </InfoValue>
+          {currentAccount && language && (
+            <InfoValue>
+              <Text>{currencyFormat(language, currentAccount.currency, AllIncomes)}</Text>
+              <Text>
+                {currencyFormat(
+                  language,
+                  currentAccount.currency,
+                  totalPaidExpenses + totalPendingExpenses,
+                )}
+              </Text>
+              <Text>
+                {currencyFormat(language, currentAccount.currency, totalCreditCardExpenses)}
+              </Text>
+            </InfoValue>
+          )}
         </Info>
         <Info>
           <InfoTitle>
