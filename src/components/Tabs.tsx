@@ -61,7 +61,7 @@ export const Tabs = ({ filterVisibility, onToggleFilterVisibility }: Props) => {
       </Button>
       <RightSection>
         <ButtonIcon type="button" variation="light" onClick={onToggleFilterVisibility}>
-          <Filter size={16} /> <span>{filterVisibility ? t('show') : t('hide')}</span>
+          <Filter size={16} /> <span>{filterVisibility ? t('hide') : t('show')}</span>
         </ButtonIcon>
       </RightSection>
     </ButtonGroup>

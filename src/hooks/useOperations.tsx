@@ -8,31 +8,27 @@ import { ALL_CREDIT_CARDS_LIMIT } from 'graphql/CreditCard';
 import { Operations, Operation, SortOrder } from 'models';
 import useNProgress from './useNProgress';
 
-type Variables = {
-  categoryId?: string | null;
-};
-
-export function useOperations({ categoryId }: Variables = {}) {
+export function useOperations() {
   const { currentAccount } = useAccountFilters();
-  const { currentDateTime } = useOperationsFilters();
+  const { currentDateTime, categoryId } = useOperationsFilters();
 
   const [getOperations, { data, loading, error }] = useLazyQuery<Operations>(GET_OPERATIONS);
 
   useEffect(() => {
-    if (currentAccount && currentDateTime) {
+    if (currentAccount) {
       getOperations({
         variables: {
           where: {
             paidAt: {
-              gte: currentDateTime.startOf('month'),
-              lte: currentDateTime.endOf('month'),
+              gte: currentDateTime?.startOf('month'),
+              lte: currentDateTime?.endOf('month'),
             },
             deletedAt: { equals: null },
-            accountId: { equals: currentAccount.id },
+            accountId: { equals: currentAccount?.id },
             ...(categoryId ? { categoryId: { equals: categoryId } } : {}),
           },
           orderBy: [{ paidAt: SortOrder.ASC }, { createdAt: SortOrder.ASC }],
-          startDateTime: currentDateTime.startOf('month'),
+          startDateTime: currentDateTime?.startOf('month'),
           accountId: currentAccount.id,
         },
       });
@@ -77,8 +73,16 @@ export function useDeleteOperation() {
       {
         query: GET_OPERATIONS,
         variables: {
+          where: {
+            paidAt: {
+              gte: currentDateTime?.startOf('month'),
+              lte: currentDateTime?.endOf('month'),
+            },
+            deletedAt: { equals: null },
+            accountId: { equals: currentAccount?.id },
+          },
+          orderBy: [{ paidAt: SortOrder.ASC }, { createdAt: SortOrder.ASC }],
           startDateTime: currentDateTime?.startOf('month'),
-          endDateTime: currentDateTime?.endOf('month'),
           accountId: currentAccount?.id,
         },
       },
@@ -100,8 +104,16 @@ export function useRestoreOperation() {
       {
         query: GET_OPERATIONS,
         variables: {
+          where: {
+            paidAt: {
+              gte: currentDateTime?.startOf('month'),
+              lte: currentDateTime?.endOf('month'),
+            },
+            deletedAt: { equals: null },
+            accountId: { equals: currentAccount?.id },
+          },
+          orderBy: [{ paidAt: SortOrder.ASC }, { createdAt: SortOrder.ASC }],
           startDateTime: currentDateTime?.startOf('month'),
-          endDateTime: currentDateTime?.endOf('month'),
           accountId: currentAccount?.id,
         },
       },
@@ -122,8 +134,16 @@ export function useCreateOperation() {
       {
         query: GET_OPERATIONS,
         variables: {
+          where: {
+            paidAt: {
+              gte: currentDateTime?.startOf('month'),
+              lte: currentDateTime?.endOf('month'),
+            },
+            deletedAt: { equals: null },
+            accountId: { equals: currentAccount?.id },
+          },
+          orderBy: [{ paidAt: SortOrder.ASC }, { createdAt: SortOrder.ASC }],
           startDateTime: currentDateTime?.startOf('month'),
-          endDateTime: currentDateTime?.endOf('month'),
           accountId: currentAccount?.id,
         },
       },
