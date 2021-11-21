@@ -7,7 +7,7 @@ import { Cell, Row } from 'pages/Dashboard/style/SubPages.style';
 import Header from 'components/Header';
 import Text from 'components/Text';
 import Radio from 'components/Radio';
-import PieGraph from 'components/PieGraph';
+import PieGraph from 'components/Graphs/PieGraph';
 import Flex from 'components/Flex';
 import { filterCategories } from 'utils/FilterOperations';
 import { currencyFormat } from 'utils/currency';
@@ -53,7 +53,8 @@ const Reports = () => {
           <ReportButton variation="primary" to="/reports">
             By Category
           </ReportButton>
-          {/*<ReportButton to="/reports-day">By Day</ReportButton>
+          <ReportButton to="/reports-day">By Day</ReportButton>
+          {/*
           <ReportButton to="/reports-month">By Month</ReportButton>*/}
         </Content>
       </PageHeader>
