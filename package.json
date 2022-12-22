@@ -87,7 +87,7 @@
     "echarts-for-react": "^3.0.0",
     "graphql": "15.4.0",
     "i18next": "^19.8.7",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
     "luxon": "^1.25.0",
