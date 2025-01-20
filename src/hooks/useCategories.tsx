@@ -1,8 +1,8 @@
 import { QueryHookOptions, useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { useOperationsFilters } from './useOperationsFilters';
-import { ALL_CATEGORY, RESTORE_CATEGORY, GET_ONE_CATEGORY } from 'graphql/Categories';
-import { CREATE_CATEGORY, DELETE_CATEGORY } from 'graphql/Categories';
-import { UPDATE_CATEGORY } from 'graphql/Categories';
+import { ALL_CATEGORY, RESTORE_CATEGORY, GET_ONE_CATEGORY } from 'graphql-service/gqls/Categories';
+import { CREATE_CATEGORY, DELETE_CATEGORY } from 'graphql-service/gqls/Categories';
+import { UPDATE_CATEGORY } from 'graphql-service/gqls/Categories';
 import { Category, Categories } from 'models';
 
 export function useCategories(options?: QueryHookOptions<Categories>) {

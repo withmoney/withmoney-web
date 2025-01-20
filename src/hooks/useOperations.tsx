@@ -2,9 +2,13 @@ import { useEffect } from 'react';
 import { useLazyQuery, useMutation } from '@apollo/client';
 import { useOperationsFilters } from './useOperationsFilters';
 import { useAccountFilters } from './useAccountFilters';
-import { UPDATE_OPERATION, RESTORE_OPERATION } from 'graphql/Operations';
-import { DELETE_OPERATION, GET_OPERATIONS, CREATE_OPERATION } from 'graphql/Operations';
-import { ALL_CREDIT_CARDS_LIMIT } from 'graphql/CreditCard';
+import { UPDATE_OPERATION, RESTORE_OPERATION } from 'graphql-service/gqls/Operations';
+import {
+  DELETE_OPERATION,
+  GET_OPERATIONS,
+  CREATE_OPERATION,
+} from 'graphql-service/gqls/Operations';
+import { ALL_CREDIT_CARDS_LIMIT } from 'graphql-service/gqls/CreditCard';
 import { Operations, Operation, SortOrder } from 'models';
 import useNProgress from './useNProgress';
 

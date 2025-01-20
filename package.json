@@ -26,10 +26,17 @@
     "lint": "eslint .",
     "format": "prettier --write .",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit --project tsconfig.app.json"
+    "typecheck": "tsc --noEmit --project tsconfig.app.json",
+    "generate": "graphql-codegen --config codegen.ts"
   },
   "devDependencies": {
     "@eslint/js": "^9.18.0",
+    "@graphql-codegen/cli": "5.0.3",
+    "@graphql-codegen/client-preset": "4.5.1",
+    "@graphql-codegen/import-types-preset": "^3.0.0",
+    "@graphql-codegen/introspection": "4.0.3",
+    "@graphql-codegen/typescript-react-apollo": "^4.3.2",
+    "@parcel/watcher": "^2.5.0",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/lodash": "^4.17.14",
     "@types/lodash.debounce": "^4.0.6",

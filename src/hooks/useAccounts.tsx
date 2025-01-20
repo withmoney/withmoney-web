@@ -1,7 +1,7 @@
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_ACCOUNTS, DELETE_ACCOUNT } from 'graphql/Accounts';
-import { RESTORE_ACCOUNT, GET_ONE_ACCOUNT } from 'graphql/Accounts';
-import { CREATE_ACCOUNT, UPDATE_ACCOUNT } from 'graphql/Accounts';
+import { GET_ACCOUNTS, DELETE_ACCOUNT } from 'graphql-service/gqls/Accounts';
+import { RESTORE_ACCOUNT, GET_ONE_ACCOUNT } from 'graphql-service/gqls/Accounts';
+import { CREATE_ACCOUNT, UPDATE_ACCOUNT } from 'graphql-service/gqls/Accounts';
 import { Account } from 'models';
 import useNProgress from './useNProgress';
 

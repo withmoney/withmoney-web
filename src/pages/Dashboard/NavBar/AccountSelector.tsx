@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import Select from 'components/Select';
 import { useAccountFilters } from 'hooks/useAccountFilters';
-import { GET_ACCOUNTS } from 'graphql/Accounts';
+import { GET_ACCOUNTS } from 'graphql-service/gqls/Accounts';
 import { Account } from 'models';
 
 type Data = {

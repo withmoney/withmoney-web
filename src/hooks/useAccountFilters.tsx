@@ -1,11 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-import { useQuery } from '@apollo/client';
-import { GET_ACCOUNTS } from 'graphql/Accounts';
+import { useGetAccountsQuery } from 'graphql-service/hooks';
 import { Account } from 'models';
-
-type Data = {
-  accounts: Account[];
-};
 
 interface AccountFilterContext {
   currentAccount?: Account;
@@ -22,17 +17,16 @@ const AccountFilterContext = createContext<AccountFilterContext>({
 
 export default function AccountFiltersProvider({ children }: Props) {
   const [currentAccount, setCurrentAccount] = useState<Account | undefined>();
-
-  const { data } = useQuery<Data>(GET_ACCOUNTS);
+  const { data } = useGetAccountsQuery();
 
   useEffect(() => {
     if (!currentAccount && data?.accounts?.length) {
       const currentAccountLS = localStorage.getItem('currentAccount');
       const account = data.accounts.find((account) => account.id === currentAccountLS);
       if (account) {
-        setCurrentAccount(account);
+        setCurrentAccount(account as unknown as Account);
       } else {
-        setCurrentAccount(data?.accounts[0]);
+        setCurrentAccount(data?.accounts[0] as unknown as Account);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

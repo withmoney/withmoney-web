@@ -9,7 +9,7 @@ import { useFilterCategories, useCreateCategory } from 'hooks/useCategories';
 import { useOperationsFilters } from 'hooks/useOperationsFilters';
 import { useUpdateOperation } from 'hooks/useOperations';
 import { Operation, Categories } from 'models';
-import { ALL_CATEGORY } from 'graphql/Categories';
+import { ALL_CATEGORY } from 'graphql-service/gqls/Categories';
 import customStyles from './style/CategorySelect.style';
 
 type Props = {

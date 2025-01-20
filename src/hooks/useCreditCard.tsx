@@ -7,9 +7,17 @@ import {
   QueryHookOptions,
 } from '@apollo/client';
 import { useAccountFilters } from './useAccountFilters';
-import { CREDIT_CARDS, CREATE_CREDIT_CARD, GET_ONE_CREDIT_CARD } from 'graphql/CreditCard';
-import { DELETE_CREDIT_CARD, RESTORE_CREDIT_CARD, UPDATE_CREDIT_CARD } from 'graphql/CreditCard';
-import { ALL_CREDIT_CARDS_LIMIT } from 'graphql/CreditCard';
+import {
+  CREDIT_CARDS,
+  CREATE_CREDIT_CARD,
+  GET_ONE_CREDIT_CARD,
+} from 'graphql-service/gqls/CreditCard';
+import {
+  DELETE_CREDIT_CARD,
+  RESTORE_CREDIT_CARD,
+  UPDATE_CREDIT_CARD,
+} from 'graphql-service/gqls/CreditCard';
+import { ALL_CREDIT_CARDS_LIMIT } from 'graphql-service/gqls/CreditCard';
 import { CreditCards, AllCreditCardsLimit } from 'models';
 
 export const useCreditCards = (options?: QueryHookOptions<CreditCards>) => {

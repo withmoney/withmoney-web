@@ -23,7 +23,7 @@ import Pagination from 'components/Pagination';
 import { currencyFormat } from 'utils/currency';
 import { useUserLanguage } from 'hooks/useUser';
 import ConfirmModal from 'modals/ConfirmModal';
-import { ALL_CREDIT_CARDS_LIMIT } from 'graphql/CreditCard';
+import { ALL_CREDIT_CARDS_LIMIT } from 'graphql-service/gqls/CreditCard';
 
 const initialValues = {
   filterName: '',

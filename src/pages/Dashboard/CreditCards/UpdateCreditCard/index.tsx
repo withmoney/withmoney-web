@@ -19,7 +19,7 @@ import customStyles from 'pages/Dashboard/Operations/Operation/style/CategorySel
 import { checkCreditCard } from 'schema/checkField';
 import { useUniqueCreditCard, useUpdateCreditCard } from 'hooks/useCreditCard';
 import { useAccountFilters } from 'hooks/useAccountFilters';
-import { ALL_CREDIT_CARDS_LIMIT } from 'graphql/CreditCard';
+import { ALL_CREDIT_CARDS_LIMIT } from 'graphql-service/gqls/CreditCard';
 import { ValueType } from 'react-select';
 
 const initialValues = {

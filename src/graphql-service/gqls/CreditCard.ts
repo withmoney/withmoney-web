@@ -3,7 +3,7 @@ import { gql } from '@apollo/client';
 // Queries
 
 export const CREDIT_CARDS = gql`
-  query filterCreditCard($name: String, $id: String, $skip: Int, $take: Int) {
+  query filterCreditCard($name: String, $id: ID, $skip: Int, $take: Int) {
     creditCards: findManyCreditCard(
       skip: $skip
       take: $take
@@ -36,7 +36,7 @@ export const GET_ONE_CREDIT_CARD = gql`
 `;
 
 export const ALL_CREDIT_CARDS_LIMIT = gql`
-  query allCreditCardLimit($accountId: String!) {
+  query allCreditCardLimit($accountId: ID!) {
     allCreditCardsLimit: calcManyCreditCardLimit(where: { accountId: $accountId }) {
       limit
       limitFree

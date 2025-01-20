@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-import { USER_LOGIN } from 'graphql/AuthGql';
+import { USER_LOGIN } from 'graphql-service/gqls/AuthGql';
 import { loginSchema } from 'schema/auth';
 import Button from 'components/Button';
 import Input from 'components/Input';

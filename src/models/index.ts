@@ -37,13 +37,13 @@ export enum Locale {
 export interface Account {
   id: string;
   name: string;
-  userId: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: string;
+  userId?: string;
+  createdAt?: string;
+  updatedAt?: string;
+  deletedAt?: string;
   currency: Currency;
-  user: User;
-  operations: Operation[];
+  user?: User;
+  operations?: Operation[];
 }
 
 export interface User {
