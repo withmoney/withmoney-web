@@ -22,6 +22,18 @@ const useBreakpoint = () => {
     });
   };
 
+  // useEffect(() => {
+  //   console.log(breakpoint);
+  // }, [
+  //   breakpoint.isBase,
+  //   breakpoint.isSm,
+  //   breakpoint.isMd,
+  //   breakpoint.isLg,
+  //   breakpoint.isXl,
+  //   breakpoint.is2Xl,
+  //   breakpoint,
+  // ]);
+
   useEffect(() => {
     updateBreakpoint();
     window.addEventListener('resize', updateBreakpoint);
