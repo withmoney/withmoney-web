@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import useBreakpoint from './useBreakpoint';
 
 type Props = {
   children: React.ReactNode;
@@ -19,10 +20,18 @@ export default function SidebarProvider({ children }: Props) {
       localStorage.getItem('isSidebarClose') === null,
   );
 
+  const { isBase } = useBreakpoint();
+
   const toggleSidebar = () => {
     setSidebarVisibility(!isSidebarOpen);
     localStorage.setItem('isSidebarClose', JSON.stringify(isSidebarOpen));
   };
+
+  useEffect(() => {
+    if (isBase) {
+      setSidebarVisibility(false);
+    }
+  }, [isBase]);
 
   return (
     <isSidebarOpenContext.Provider
