@@ -72,7 +72,7 @@ const CreditCards = () => {
       });
       setOpenModal(false);
       toast.error('Credit card deleted. Click here to restore!', {
-        position: toast.POSITION.BOTTOM_LEFT,
+        position: 'bottom-left',
         autoClose: 10000,
         draggable: false,
         onClick: handleRestoreCreditCard,
@@ -80,7 +80,7 @@ const CreditCards = () => {
       await refetch();
       setCurrentPage(0);
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
 
@@ -94,13 +94,13 @@ const CreditCards = () => {
         ],
       });
       toast.success('Credit card has been successfully restored!', {
-        position: toast.POSITION.BOTTOM_LEFT,
+        position: 'bottom-left',
         autoClose: 8000,
         draggable: false,
       });
       await refetch();
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
 

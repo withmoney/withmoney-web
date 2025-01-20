@@ -49,7 +49,7 @@ const Categories = () => {
       await deleteCategory({ variables: { id: selectedCategory?.id } });
       setOpenModal(false);
       toast.error('Category deleted. Click here to restore!', {
-        position: toast.POSITION.BOTTOM_LEFT,
+        position: 'bottom-left',
         autoClose: 10000,
         draggable: false,
         onClick: handleRestoreCategory,
@@ -57,7 +57,7 @@ const Categories = () => {
       await refetch();
       setCurrentPage(0);
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
 
@@ -65,13 +65,13 @@ const Categories = () => {
     try {
       await restoreCategory({ variables: { id: selectedCategory?.id } });
       toast.success('Category has been successfully restored!', {
-        position: toast.POSITION.BOTTOM_LEFT,
+        position: 'bottom-left',
         autoClose: 8000,
         draggable: false,
       });
       await refetch();
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
 

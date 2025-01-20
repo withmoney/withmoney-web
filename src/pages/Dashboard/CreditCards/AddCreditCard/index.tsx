@@ -101,11 +101,11 @@ const AddCreditCard = () => {
         ],
       });
       toast.success(`Credit Card ${form.name} was been created!`, {
-        position: toast.POSITION.BOTTOM_LEFT,
+        position: 'bottom-left',
       });
       history.push('/credit-cards');
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
 

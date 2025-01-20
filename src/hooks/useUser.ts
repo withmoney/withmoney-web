@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
+// import { jwtDecode } from 'jwt-decode';
 import { useTranslation } from 'react-i18next';
 import { GET_ME } from '../graphql/AuthGql';
 import { UPDATE_USER, CHANGE_USER_PASSWORD } from '../graphql/User';
@@ -15,7 +16,7 @@ type Data = {
 const API = 'https://ui-avatars.com/api/?background=E7E7E7&color=363636&name=';
 
 export const useUser = () => {
-  const token = localStorage.getItem('withmoney-token') || '';
+  // const token = localStorage.getItem('withmoney-token') || '';
   const { data, loading, error } = useQuery<Data>(GET_ME);
   const { i18n } = useTranslation();
 
@@ -30,12 +31,27 @@ export const useUser = () => {
     }
   }, [data]);
 
+  // useEffect(() => {
+  //   if (token) {
+  //     // debugger;
+  //     try {
+  //       // const decoded = jwtDecode(token) as {
+  //       //   userId: string;
+  //       // };
+  //       // const logged = !!data?.me?.id && data.me.id === decoded?.userId;
+  //       if (logged) {
+  //         setLogged(logged);
+  //       }
+  //     } catch (e) {
+  //       console.error(e);
+  //       // localStorage.removeItem('withmoney-token');
+  //     }
+  //   }
+  // }, [token, data?.me?.id]);
+
   if (loading) return { loading };
 
-  const decoded = jwt.decode(token) as {
-    userId: string;
-  };
-  const logged = !!data?.me?.id && data.me.id === decoded?.userId;
+  const logged = !!data?.me.id;
 
   return { data, logged, loading, error, getDefaultImage };
 };

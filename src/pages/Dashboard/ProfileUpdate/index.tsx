@@ -87,7 +87,7 @@ const ProfileUpdate = () => {
           },
         });
         toast.success('User updated successfully.', {
-          position: toast.POSITION.BOTTOM_LEFT,
+          position: 'bottom-left',
           draggable: false,
         });
         history.push('/');
@@ -95,7 +95,7 @@ const ProfileUpdate = () => {
         throw new Error('Invalid form!');
       }
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
 

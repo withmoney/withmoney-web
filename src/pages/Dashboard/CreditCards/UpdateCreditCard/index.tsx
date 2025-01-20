@@ -109,12 +109,12 @@ const UpdateCreditCard = () => {
       toast.success(
         `Credit card ${data.findUniqueCreditCard.name} was been updated to ${form.name}!`,
         {
-          position: toast.POSITION.BOTTOM_LEFT,
+          position: 'bottom-left',
         },
       );
       history.push('/credit-cards');
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
 

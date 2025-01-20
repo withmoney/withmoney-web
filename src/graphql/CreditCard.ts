@@ -25,7 +25,7 @@ export const CREDIT_CARDS = gql`
 
 // find one Credit Card
 export const GET_ONE_CREDIT_CARD = gql`
-  query getUniqueCreditCard($id: String!) {
+  query getUniqueCreditCard($id: ID!) {
     findUniqueCreditCard(where: { id: $id }) {
       id
       name
@@ -37,16 +37,16 @@ export const GET_ONE_CREDIT_CARD = gql`
 
 export const ALL_CREDIT_CARDS_LIMIT = gql`
   query allCreditCardLimit($accountId: String!) {
-    allCreditCardsLimit: calcManyCreditCardLimit(where: {accountId: $accountId}) {
-    limit
-    limitFree
-    limitBlocked
-    creditCard {
-      id
-      name
+    allCreditCardsLimit: calcManyCreditCardLimit(where: { accountId: $accountId }) {
+      limit
+      limitFree
+      limitBlocked
+      creditCard {
+        id
+        name
+      }
     }
   }
-}
 `;
 
 // Mutations
@@ -70,7 +70,7 @@ export const CREATE_CREDIT_CARD = gql`
 // delete CreditCard
 
 export const DELETE_CREDIT_CARD = gql`
-  mutation deleteCreditCard($id: String!) {
+  mutation deleteCreditCard($id: ID!) {
     deleteOneCreditCard(where: { id: $id }) {
       id
       name
@@ -83,7 +83,7 @@ export const DELETE_CREDIT_CARD = gql`
 
 export const UPDATE_CREDIT_CARD = gql`
   mutation updateCreditCard(
-    $id: String!
+    $id: ID!
     $name: String!
     $limit: Float!
     $brand: CreditCardBrand!
@@ -102,7 +102,7 @@ export const UPDATE_CREDIT_CARD = gql`
 // restore Credit Card
 
 export const RESTORE_CREDIT_CARD = gql`
-  mutation restoreCreditCard($id: String!) {
+  mutation restoreCreditCard($id: ID!) {
     restoreOneCreditCard(where: { id: $id }) {
       id
       name

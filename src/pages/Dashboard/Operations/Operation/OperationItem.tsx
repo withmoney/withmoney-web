@@ -65,7 +65,7 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
         },
       });
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
   const toggleDeleteOperation = (operation: Operation) => {

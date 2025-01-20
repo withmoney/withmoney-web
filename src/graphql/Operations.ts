@@ -29,7 +29,7 @@ export const GET_OPERATIONS = gql`
 
 export const UPDATE_OPERATION = gql`
   mutation updateOperation(
-    $id: String!
+    $id: ID!
     $name: String!
     $categoryId: String
     $accountId: String!
@@ -66,7 +66,7 @@ export const UPDATE_OPERATION = gql`
 `;
 
 export const DELETE_OPERATION = gql`
-  mutation deleteOperation($id: String!) {
+  mutation deleteOperation($id: ID!) {
     deleteOneOperation(where: { id: $id }) {
       id
       name
@@ -75,7 +75,7 @@ export const DELETE_OPERATION = gql`
 `;
 
 export const RESTORE_OPERATION = gql`
-  mutation restoreOperation($id: String!) {
+  mutation restoreOperation($id: ID!) {
     restoreOneOperation(where: { id: $id }) {
       id
       name

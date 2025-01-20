@@ -24,7 +24,7 @@ export const ALL_CATEGORY = gql`
 `;
 
 export const GET_ONE_CATEGORY = gql`
-  query getUniqueCategory($id: String!) {
+  query getUniqueCategory($id: ID!) {
     findUniqueCategory(where: { id: $id }) {
       id
       name
@@ -44,7 +44,7 @@ export const CREATE_CATEGORY = gql`
 `;
 
 export const DELETE_CATEGORY = gql`
-  mutation deleteCategory($id: String!) {
+  mutation deleteCategory($id: ID!) {
     deleteOneCategory(where: { id: $id }) {
       id
       name
@@ -54,7 +54,7 @@ export const DELETE_CATEGORY = gql`
 `;
 
 export const RESTORE_CATEGORY = gql`
-  mutation restoreCategory($id: String!) {
+  mutation restoreCategory($id: ID!) {
     restoreOneCategory(where: { id: $id }) {
       id
       name
@@ -63,7 +63,7 @@ export const RESTORE_CATEGORY = gql`
 `;
 
 export const UPDATE_CATEGORY = gql`
-  mutation updateCategory($id: String!, $name: String!, $type: TransactionType!) {
+  mutation updateCategory($id: ID!, $name: String!, $type: TransactionType!) {
     updateOneCategory(where: { id: $id }, data: { name: $name, type: $type }) {
       id
       name

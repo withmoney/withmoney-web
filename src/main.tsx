@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import GlobalStyle from './theme';
@@ -9,12 +9,14 @@ import OperationsFiltersProvider from './hooks/useOperationsFilters';
 import AccountFiltersProvider from './hooks/useAccountFilters';
 import Toast from './components/Toast';
 
+import { config } from './configs';
+
 import './lang';
 import 'react-toastify/dist/ReactToastify.css';
 import './nprogress.css';
 
 const httpLink = createHttpLink({
-  uri: process.env.APOLLO_SERVER_API,
+  uri: config.APOLLO_SERVER_API,
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -72,4 +74,8 @@ const App = () => (
   </>
 );
 
-ReactDOM.render(<App />, document.querySelector('[root-react]'));
+createRoot(document.getElementById('root')!).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+);

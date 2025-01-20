@@ -71,7 +71,7 @@ const CreditCardSelect = ({ operation }: Props) => {
         },
       });
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
 
@@ -97,7 +97,7 @@ const CreditCardSelect = ({ operation }: Props) => {
       }
       setModalIsOpen(false);
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
 

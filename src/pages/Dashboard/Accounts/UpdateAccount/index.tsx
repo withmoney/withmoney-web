@@ -69,11 +69,11 @@ const UpdateAccount = () => {
         variables: form,
       });
       toast.success(`Account ${data.findUniqueAccount.name} was been updated to ${form.name}!`, {
-        position: toast.POSITION.BOTTOM_LEFT,
+        position: 'bottom-left',
       });
       history.push('/accounts');
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
 

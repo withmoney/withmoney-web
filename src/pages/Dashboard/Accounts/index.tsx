@@ -27,13 +27,13 @@ const Accounts = () => {
       await deleteAccount({ variables: { id: selectedAccount?.id } });
       setOpenModal(false);
       toast.error('Account deleted. Click here to restore!', {
-        position: toast.POSITION.BOTTOM_LEFT,
+        position: 'bottom-left',
         autoClose: 10000,
         draggable: false,
         onClick: () => handleRestoreAccount(),
       });
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
   //Restore Account
@@ -41,12 +41,12 @@ const Accounts = () => {
     try {
       await restoreAccount({ variables: { id: selectedAccount?.id } });
       toast.success('Account has been successfully restored!', {
-        position: toast.POSITION.BOTTOM_LEFT,
+        position: 'bottom-left',
         autoClose: 8000,
         draggable: false,
       });
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
 

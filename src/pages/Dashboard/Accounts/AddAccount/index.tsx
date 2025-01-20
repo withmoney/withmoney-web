@@ -60,11 +60,11 @@ const AddAccount = () => {
         variables: form,
       });
       toast.success(`Account ${form.name} was been created!`, {
-        position: toast.POSITION.BOTTOM_LEFT,
+        position: 'bottom-left',
       });
       history.push('/accounts');
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
 

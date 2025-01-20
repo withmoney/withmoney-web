@@ -60,7 +60,7 @@ const Operations = () => {
         },
       });
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
 
@@ -73,13 +73,13 @@ const Operations = () => {
         },
       });
       toast.error(t('message.operationDeleted'), {
-        position: toast.POSITION.BOTTOM_LEFT,
+        position: 'bottom-left',
         autoClose: 10000,
         draggable: false,
         onClick: handleRestoreOperation,
       });
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
     setModalIsOpen(false);
   };
@@ -89,7 +89,7 @@ const Operations = () => {
     try {
       await restoreOperation({ variables: { id: selectOperation?.id } });
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
 

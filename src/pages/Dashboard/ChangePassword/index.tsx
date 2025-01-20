@@ -56,12 +56,12 @@ const ChangePassword = () => {
         throw new Error('Invalid Password!');
       }
       toast.success('Password was changed successfully', {
-        position: toast.POSITION.BOTTOM_LEFT,
+        position: 'bottom-left',
         draggable: false,
       });
       history.push('/profile');
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
 

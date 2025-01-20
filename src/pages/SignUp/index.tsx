@@ -56,9 +56,8 @@ type UserRegisterVariables = {
 
 const SignUp = () => {
   const [form, setForm] = useState<Schema>(initialValues);
-  const [formErrors, setFormErrors] = useState<{ [key in keyof typeof initialValues]: string }>(
-    formErrorsInitial,
-  );
+  const [formErrors, setFormErrors] =
+    useState<{ [key in keyof typeof initialValues]: string }>(formErrorsInitial);
   const [formValidate, setFormValidate] = useState(false);
   const [userRegister, { loading }] = useMutation<string, UserRegisterVariables>(USER_REGISTER);
   const history = useHistory();
@@ -105,7 +104,7 @@ const SignUp = () => {
   };
 
   return (
-    <Page>
+    <Page aria-label="Sign up page">
       <Container>
         <Header as="h1" align="center">
           withmoney

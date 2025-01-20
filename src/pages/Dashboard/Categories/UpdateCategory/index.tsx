@@ -72,11 +72,11 @@ const UpdateCategory = () => {
         },
       });
       toast.success(`Category ${data.findUniqueCategory.name} was been updated to ${form.name}!`, {
-        position: toast.POSITION.BOTTOM_LEFT,
+        position: 'bottom-left',
       });
       history.push('/categories');
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
 

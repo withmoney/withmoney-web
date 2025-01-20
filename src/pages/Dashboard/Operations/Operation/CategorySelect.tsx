@@ -52,7 +52,7 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
         setValue({ value: data?.createOneCategory.id, label: data?.createOneCategory.name });
       }
     } catch (err) {
-      toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+      toast.error(err.message, { position: 'bottom-left', draggable: false });
     }
   };
 
@@ -68,7 +68,7 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
         });
         setValue(data);
       } catch (err) {
-        toast.error(err.message, { position: toast.POSITION.BOTTOM_LEFT, draggable: false });
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
       }
     }
   };

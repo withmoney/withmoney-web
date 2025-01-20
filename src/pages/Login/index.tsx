@@ -69,14 +69,16 @@ const Login = () => {
 
         localStorage.setItem('withmoney-token', token);
         history.push('/');
+        console.log('Login success');
       } catch (err) {
+        console.error(err);
         toast.error(t(`error.${err.message}`));
       }
     }
   };
 
   return (
-    <Page>
+    <Page aria-label="Login">
       <Container>
         <Header as="h1" align="center">
           {t('brand')}

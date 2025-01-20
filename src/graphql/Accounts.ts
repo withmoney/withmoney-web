@@ -12,7 +12,7 @@ export const GET_ACCOUNTS = gql`
 `;
 
 export const GET_ONE_ACCOUNT = gql`
-  query getUniqueAccount($id: String!) {
+  query getUniqueAccount($id: ID!) {
     findUniqueAccount(where: { id: $id }) {
       id
       name
@@ -33,7 +33,7 @@ export const CREATE_ACCOUNT = gql`
 `;
 
 export const UPDATE_ACCOUNT = gql`
-  mutation updateAccount($id: String!, $name: String!, $currency: Currency!) {
+  mutation updateAccount($id: ID!, $name: String!, $currency: Currency!) {
     updateOneAccount(where: { id: $id }, data: { name: $name, currency: $currency }) {
       id
       name
@@ -42,7 +42,7 @@ export const UPDATE_ACCOUNT = gql`
 `;
 
 export const DELETE_ACCOUNT = gql`
-  mutation deleteAccount($id: String!) {
+  mutation deleteAccount($id: ID!) {
     deleteOneAccount(where: { id: $id }) {
       id
       name
@@ -51,7 +51,7 @@ export const DELETE_ACCOUNT = gql`
 `;
 
 export const RESTORE_ACCOUNT = gql`
-  mutation restoreAccount($id: String!) {
+  mutation restoreAccount($id: ID!) {
     restoreOneAccount(where: { id: $id }) {
       id
       name
