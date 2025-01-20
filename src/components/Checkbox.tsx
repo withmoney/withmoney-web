@@ -23,7 +23,9 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
     position: absolute;
     left: var(--check-box-position-icon-vertical);
     top: var(--check-box-position-icon-horizontal);
-    transition: transform 0.2s ease, opacity 0.2s;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s;
     width: var(--check-box-after-horizontal);
     height: var(--check-box-after-vertical);
     border: 2px solid var(--check-box-border-color-after);

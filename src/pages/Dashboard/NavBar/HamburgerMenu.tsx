@@ -1,4 +1,3 @@
-import React from 'react';
 import Text from 'components/Text';
 import { useSidebarCollapse } from 'hooks/useSidebarCollapse';
 import { MenuContainer, MeuButton, Menu } from './style/HamburgerMenu.style';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { EChartsOption } from 'echarts';
 import ReactECharts from 'echarts-for-react';
 import { filterCategories } from 'utils/FilterOperations';

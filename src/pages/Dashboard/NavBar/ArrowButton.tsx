@@ -1,4 +1,3 @@
-import React from 'react';
 import { ArrowButtonContainer } from './style/ArrowButton.style';
 
 type Props = {

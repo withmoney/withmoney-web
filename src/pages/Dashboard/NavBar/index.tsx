@@ -1,4 +1,3 @@
-import React from 'react';
 import DropDownMenu from './DropDownMenu';
 import MonthNavigation from './MonthNavigation';
 import HamburgerMenu from './HamburgerMenu';

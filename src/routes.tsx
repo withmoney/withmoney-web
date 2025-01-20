@@ -1,4 +1,3 @@
-import React from 'react';
 import { HashRouter, Switch, Redirect } from 'react-router-dom';
 
 import {

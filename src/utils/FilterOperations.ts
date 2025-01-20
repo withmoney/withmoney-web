@@ -10,7 +10,7 @@ export function filterCategories(
   categories: Category[] = [],
   operations: Operation[] = [],
 ) {
-  let categoriesFiltered: CategoriesFiltered[] = [];
+  const categoriesFiltered: CategoriesFiltered[] = [];
 
   // Filter operations by type | Incomes or Expanses
   const filteredOperations = operations.filter((operation) =>

@@ -1,4 +1,3 @@
-import React from 'react';
 import capitalize from 'lodash/capitalize';
 import groupBy from 'lodash/groupBy';
 import { DateTime } from 'luxon';

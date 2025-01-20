@@ -13,7 +13,8 @@ const SwitchButton = styled.input.attrs({ type: 'checkbox' })`
   width: var(--switch-horizontal);
   border: 1px solid var(--switch-border-color-inactive);
   background: var(--switch-background-color-inactive);
-  transition: background var(--switch-transition-background-border),
+  transition:
+    background var(--switch-transition-background-border),
     border-color var(--switch-transition-background-border),
     box-shadow var(--switch-transition-box-shadow);
 
@@ -25,7 +26,8 @@ const SwitchButton = styled.input.attrs({ type: 'checkbox' })`
     left: 0;
     top: 0;
     position: absolute;
-    transition: transform var(--switch-transition-background-border) ease,
+    transition:
+      transform var(--switch-transition-background-border) ease,
       opacity var(--switch-transition-opacity);
 
     left: var(--switch-position-after);

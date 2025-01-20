@@ -1,4 +1,3 @@
-import React from 'react';
 import Balance from './Balance';
 import Information from './Information';
 import Menu from './Menu';

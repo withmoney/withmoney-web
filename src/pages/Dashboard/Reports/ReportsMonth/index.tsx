@@ -1,4 +1,3 @@
-import React from 'react';
 import capitalize from 'lodash/capitalize';
 import { PageHeader, Page, PageBody, Content } from 'pages/Dashboard/style/SubPages.style';
 import { useOperationsFilters } from 'hooks/useOperationsFilters';

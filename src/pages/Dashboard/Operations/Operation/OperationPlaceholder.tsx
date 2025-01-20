@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { Row, Cell } from 'pages/Dashboard/Operations/Operation/style/OperationSettings';
 import { TransactionType } from 'models';

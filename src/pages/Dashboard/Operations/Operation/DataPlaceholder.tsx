@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import Flex from 'components/Flex';
 import LoadingData from 'components/LoadingData';
@@ -13,7 +12,7 @@ type Props = {
 const DataPlaceholder = ({ isLoading, rows = 2 }: Props): any => {
   const Rows = Array.from({ length: rows });
   const { currentTransactionType } = useOperationsFilters();
-  if (!!isLoading) {
+  if (isLoading) {
     return Rows.map((_, rowIndex) => (
       <Row key={rowIndex} alignItems="center">
         <Cell width="80px">

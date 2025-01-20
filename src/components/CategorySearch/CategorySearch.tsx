@@ -1,4 +1,3 @@
-import React from 'react';
 import Async from 'react-select/async';
 import { useTranslation } from 'react-i18next';
 import { OperationVariables, useApolloClient, useQuery, gql } from '@apollo/client';

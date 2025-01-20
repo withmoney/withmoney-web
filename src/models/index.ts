@@ -89,7 +89,7 @@ export interface Operation {
   categoryId: string | null;
   accountId: string;
   userId: string;
-  creditCardId: String;
+  creditCardId: string;
   creditCard: CreditCard;
 }
 
