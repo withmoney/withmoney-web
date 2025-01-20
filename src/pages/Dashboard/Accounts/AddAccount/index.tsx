@@ -49,7 +49,9 @@ const AddAccount = () => {
       await checkAccounts.validateAt(name, form);
       setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
-      setFormErrors({ ...formErrors, [name]: err.message });
+      if (err instanceof Error) {
+        setFormErrors({ ...formErrors, [name]: err.message });
+      }
     }
   };
 
@@ -64,7 +66,9 @@ const AddAccount = () => {
       });
       history.push('/accounts');
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
 

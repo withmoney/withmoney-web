@@ -41,7 +41,9 @@ const AddCategory = () => {
       await checkCategories.validateAt(name, form);
       setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
-      setFormErrors({ ...formErrors, [name]: err.message });
+      if (err instanceof Error) {
+        setFormErrors({ ...formErrors, [name]: err.message });
+      }
     }
   };
 
@@ -61,7 +63,9 @@ const AddCategory = () => {
       });
       history.push('/categories');
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
 

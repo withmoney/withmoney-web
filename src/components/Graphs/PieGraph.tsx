@@ -44,6 +44,8 @@ const PieGraph = ({ type, operations, categories }: Props) => {
 
         label: {
           alignTo: 'edge',
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           trigger: 'item',
           formatter: '{name|{b}}\n{percent|{d}%}',
           fontSize: 14,

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import { DateTime } from 'luxon';
@@ -60,7 +60,9 @@ const Operations = () => {
         },
       });
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
 
@@ -72,14 +74,16 @@ const Operations = () => {
           id: selectOperation?.id,
         },
       });
-      toast.error(t('message.operationDeleted'), {
+      toast.error(t<string>('message.operationDeleted'), {
         position: 'bottom-left',
         autoClose: 10000,
         draggable: false,
         onClick: handleRestoreOperation,
       });
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
     setModalIsOpen(false);
   };
@@ -89,7 +93,9 @@ const Operations = () => {
     try {
       await restoreOperation({ variables: { id: selectOperation?.id } });
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
 

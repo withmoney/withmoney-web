@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
+import { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
@@ -39,7 +39,9 @@ const ChangePassword = () => {
       await checkEmailSchema.validate(form);
       setFormErrors({ error: '' });
     } catch (err) {
-      setFormErrors({ error: err.message });
+      if (err instanceof Error) {
+        setFormErrors({ error: err.message });
+      }
     }
   };
 
@@ -51,7 +53,9 @@ const ChangePassword = () => {
         toast.success('You will receive an email you are registered!');
         history.push('/signin');
       } catch (err) {
-        toast.error(err.message);
+        if (err instanceof Error) {
+          toast.error(err.message);
+        }
       }
     }
   };

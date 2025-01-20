@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import Menu from './Menu';
 import Text from 'components/Text';
 import useClickOutSide from 'hooks/useClickOutSide';
@@ -9,7 +9,7 @@ import Img from 'components/Img';
 import LoadingData from 'components/LoadingData';
 
 const DropDownMenu = () => {
-  const ref = useRef();
+  const ref = useRef<HTMLDivElement>(null);
   const { data, getDefaultImage } = useUser();
   const [MenuOpen, setMenuOpen] = useState(false);
   useClickOutSide(ref, () => setMenuOpen(false));

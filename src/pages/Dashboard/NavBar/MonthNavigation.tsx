@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ArrowIosBack, ArrowIosForward } from '@styled-icons/evaicons-solid';
 import ArrowButton from './ArrowButton';
 import capitalize from 'lodash/capitalize';

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { TrashFill, PencilFill } from '@styled-icons/bootstrap';
 import Header from 'components/Header';
@@ -33,7 +33,9 @@ const Accounts = () => {
         onClick: () => handleRestoreAccount(),
       });
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
   //Restore Account
@@ -46,7 +48,9 @@ const Accounts = () => {
         draggable: false,
       });
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
 

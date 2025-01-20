@@ -8,7 +8,7 @@ export const PageHeader = ({ children }: { children: React.ReactNode }) => (
   <div className="flex justify-between p-[18px_44px] bg-[#e4e4e4]">{children}</div>
 );
 
-export const PageBody = ({ children }: { children: React.ReactNode }) => (
+export const PageBody = ({ children }: { children?: React.ReactNode }) => (
   <div className="p-[35px] bg-white">{children}</div>
 );
 
@@ -35,8 +35,14 @@ export const Cell = ({ align = 'center', children }: CellProps) => (
   </span>
 );
 
-export const PageBodyColumns = ({ children }: { children: React.ReactNode }) => (
-  <div className="p-[35px] bg-white">
+export const PageBodyColumns = ({
+  children,
+  ...props
+}: {
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+}) => (
+  <div className="p-[35px] bg-white" {...props}>
     {React.Children.map(children, (child, index) => (
       <div className={index % 2 === 1 ? 'bg-[rgb(244,244,244)]' : undefined}>{child}</div>
     ))}

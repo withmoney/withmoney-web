@@ -32,7 +32,7 @@ const ReportsMonth = () => {
           </ReportButton>
         </Content>
       </PageHeader>
-      <PageBody></PageBody>
+      <PageBody />
     </Page>
   );
 };

@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
+import { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
@@ -45,7 +45,9 @@ const ResetPassword = () => {
       await checkPasswordSchema.validateAt(event.target.name, form);
       setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
-      setFormErrors({ ...formErrors, [name]: err.message });
+      if (err instanceof Error) {
+        setFormErrors({ ...formErrors, [name]: err.message });
+      }
     }
   };
 
@@ -57,7 +59,9 @@ const ResetPassword = () => {
         toast.success('Your password is changed!');
         history.push('/signin');
       } catch (err) {
-        toast.error(err.message);
+        if (err instanceof Error) {
+          toast.error(err.message);
+        }
       }
     }
   };

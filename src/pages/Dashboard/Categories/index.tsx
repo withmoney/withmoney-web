@@ -57,7 +57,9 @@ const Categories = () => {
       await refetch();
       setCurrentPage(0);
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
 
@@ -71,7 +73,9 @@ const Categories = () => {
       });
       await refetch();
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
+import { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -51,7 +51,9 @@ const Login = () => {
       await loginSchema.validateAt(name, form);
       setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
-      setFormErrors({ ...formErrors, [name]: err.message });
+      if (err instanceof Error) {
+        setFormErrors({ ...formErrors, [name]: err.message });
+      }
     }
   };
 
@@ -72,7 +74,9 @@ const Login = () => {
         console.log('Login success');
       } catch (err) {
         console.error(err);
-        toast.error(t(`error.${err.message}`));
+        if (err instanceof Error) {
+          toast.error(t<string>(`error.${err.message}`));
+        }
       }
     }
   };

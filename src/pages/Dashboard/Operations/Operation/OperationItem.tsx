@@ -64,7 +64,9 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
         },
       });
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
   const toggleDeleteOperation = (operation: Operation) => {
@@ -104,7 +106,7 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
           <InputCurrency
             onChange={toggleInputCurrency}
             value={operation.value}
-            currency={currentAccount?.currency}
+            currency={currentAccount?.currency as string}
             lang={language}
           />
         </Cell>

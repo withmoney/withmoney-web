@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import moment, { Moment } from 'moment';
 import { SingleDatePicker } from 'react-dates';
 import { useUserLanguage } from 'hooks/useUser';
