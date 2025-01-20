@@ -10,7 +10,6 @@ import DataPlaceholder from './Operation/DataPlaceholder';
 import OperationItem from './Operation/OperationItem';
 import FooterContainer from './Operation/FooterContainer';
 import OperationPlaceholder from './Operation/OperationPlaceholder';
-import { Operation } from 'models';
 import { Container, OperationContainer, ButtonContent } from './style/Operations.style';
 import { OperationButton } from './style/Operations.style';
 import { RowHeader, CellHeader } from './Operation/style/OperationSettings';
@@ -18,10 +17,10 @@ import { useOperations, useCreateOperation } from 'hooks/useOperations';
 import ConfirmModal from 'modals/ConfirmModal';
 import { addOperationText } from 'constants/Transactions';
 import LoadingSpinner from 'components/LoadingSpinner';
-import { TransactionType } from 'models';
 import Text from 'components/Text';
 import { useDeleteOperation, useRestoreOperation } from 'hooks/useOperations';
 import OperationFilter from './OperationFilter';
+import { OperationFieldsFragment, TransactionType } from 'graphql-service/types';
 
 const Operations = () => {
   const { data, loading } = useOperations();
@@ -29,7 +28,7 @@ const Operations = () => {
   const { currentAccount } = useAccountFilters();
   const [filterVisibility, setFilterVisibility] = useState<boolean>(false);
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const [selectOperation, setSelectOperation] = useState<Operation>();
+  const [selectOperation, setSelectOperation] = useState<OperationFieldsFragment>();
   const { createOperation, loading: loadingCreate } = useCreateOperation();
   const { deleteOperation, loading: loadingDelete } = useDeleteOperation();
   const { restoreOperation } = useRestoreOperation();

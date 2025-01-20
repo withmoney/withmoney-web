@@ -15,8 +15,8 @@ import { ModalBody, ModalHeader, stylesCreditCard, StyledModal, Label } from './
 import { checkCreditCard } from 'schema/checkField';
 import customStyles from 'pages/Dashboard/Operations/Operation/style/CategorySelect.style';
 import { useUserLanguage } from 'hooks/useUser';
-import { CreditCardBrand } from 'models';
 import { ValueType } from 'react-select';
+import { CreditCardBrand } from 'graphql-service/types';
 
 // Component Props
 type Props = {

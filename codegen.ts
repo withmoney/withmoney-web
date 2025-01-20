@@ -10,6 +10,7 @@ const config: CodegenConfig = {
       plugins: ['typescript', 'typescript-operations'],
       config: {
         scalars: {
+          Date: 'string',
           DateTime: 'string',
           UUID: 'string',
         },

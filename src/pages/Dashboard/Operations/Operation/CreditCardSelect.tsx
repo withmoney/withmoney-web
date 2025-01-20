@@ -8,17 +8,17 @@ import debounce from 'lodash.debounce';
 import { useFilterCreditCards, useCreateCreditCard } from 'hooks/useCreditCard';
 import customStyles from './style/CategorySelect.style';
 import { CREDIT_CARDS } from 'graphql-service/gqls/CreditCard';
-import { Operation, CreditCards } from 'models';
+import { CreditCards } from 'models';
 import { useUpdateOperation } from 'hooks/useOperations';
 import Input from 'components/Input';
 import CreditCardModal from 'modals/CreditCardModal';
-import { CreditCardBrand } from 'models';
 import { useAccountFilters } from 'hooks/useAccountFilters';
 import { ValueType } from 'react-select';
+import { CreditCardBrand, OperationFieldsFragment } from 'graphql-service/types';
 
 // Props
 type Props = {
-  operation: Operation;
+  operation: OperationFieldsFragment;
 };
 
 type Option = {

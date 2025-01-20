@@ -3,7 +3,20 @@ import * as Types from './types';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
-
+export const OperationFieldsFragmentDoc = gql`
+  fragment OperationFields on Operation {
+    id
+    name
+    value
+    type
+    isPaid
+    paidAt
+    createdAt
+    accountId
+    categoryId
+    creditCardId
+  }
+`;
 export const GetAccountsDocument = gql`
   query getAccounts {
     accounts: findManyAccount(where: { deletedAt: { equals: null } }, orderBy: [{ name: asc }]) {
@@ -1481,21 +1494,13 @@ export const GetOperationsDocument = gql`
     $accountId: String!
   ) {
     operations: findManyOperation(where: $where, orderBy: $orderBy) {
-      id
-      name
-      value
-      type
-      isPaid
-      paidAt
-      createdAt
-      accountId
-      categoryId
-      creditCardId
+      ...OperationFields
     }
     balance: calcPreviousBalance(where: { paidAt: { lt: $startDateTime }, accountId: $accountId }) {
       amount
     }
   }
+  ${OperationFieldsFragmentDoc}
 `;
 
 /**

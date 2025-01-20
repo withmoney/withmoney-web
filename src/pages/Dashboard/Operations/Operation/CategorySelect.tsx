@@ -8,13 +8,14 @@ import Input from 'components/Input';
 import { useFilterCategories, useCreateCategory } from 'hooks/useCategories';
 import { useOperationsFilters } from 'hooks/useOperationsFilters';
 import { useUpdateOperation } from 'hooks/useOperations';
-import { Operation, Categories } from 'models';
+import { Categories } from 'models';
 import { ALL_CATEGORY } from 'graphql-service/gqls/Categories';
 import customStyles from './style/CategorySelect.style';
+import { OperationFieldsFragment } from 'graphql-service/types';
 
 type Props = {
   CategoryId: string | null;
-  operation: Operation;
+  operation: OperationFieldsFragment;
 };
 
 type Option = {

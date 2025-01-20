@@ -1,4 +1,5 @@
-import { TransactionType, Category, Operation } from 'models';
+import { OperationFieldsFragment, TransactionType } from 'graphql-service/types';
+import { Category } from 'models';
 
 type CategoriesFiltered = {
   value: number;
@@ -8,7 +9,7 @@ type CategoriesFiltered = {
 export function filterCategories(
   type: 'incomes' | 'expenses',
   categories: Category[] = [],
-  operations: Operation[] = [],
+  operations: OperationFieldsFragment[] = [],
 ) {
   const categoriesFiltered: CategoriesFiltered[] = [];
 
@@ -44,7 +45,7 @@ export function filterCategories(
   return categoriesFiltered.sort(sortCategories);
 }
 
-const sumOperation = (accumulateValue: number, currentValue: Operation) => {
+const sumOperation = (accumulateValue: number, currentValue: OperationFieldsFragment) => {
   return accumulateValue + currentValue.value;
 };
 

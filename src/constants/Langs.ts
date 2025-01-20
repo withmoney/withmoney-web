@@ -1,13 +1,13 @@
-import { Locale } from '../models';
+import { Locale } from 'graphql-service/types';
 
-export const languages = [Locale.enUS, Locale.ptBR];
+export const languages = [Locale.EnUs, Locale.PtBr];
 
 export const languageValue = {
-  [Locale.enUS]: 'en-US',
-  [Locale.ptBR]: 'pt-BR',
+  [Locale.EnUs]: 'en-US',
+  [Locale.PtBr]: 'pt-BR',
 };
 
 export const languageLabels = {
-  [Locale.enUS]: 'English',
-  [Locale.ptBR]: 'Português Brasil',
+  [Locale.EnUs]: 'English',
+  [Locale.PtBr]: 'Português Brasil',
 };

@@ -18,7 +18,8 @@ import InputGroup from 'components/InputGroup';
 import InputControl from 'components/InputControl';
 import { currencies } from 'constants/Currencies';
 import { languages } from 'constants/Langs';
-import { Locale, Currency } from 'models';
+import { Currency, Locale } from 'graphql-service/types';
+// import { Locale, Currency } from 'models';
 
 const initialValues: Schema = {
   firstName: '',
@@ -27,7 +28,7 @@ const initialValues: Schema = {
   password: '',
   passwordConfirm: '',
   currency: null,
-  language: (localStorage.getItem('language') as Locale) ?? Locale.enUS,
+  language: (localStorage.getItem('language') as Locale) ?? Locale.EnUs,
 };
 
 const formErrorsInitial = Object.keys(initialValues).reduce(

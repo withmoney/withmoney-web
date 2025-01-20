@@ -1,18 +1,9 @@
 import { useQuery, useMutation } from '@apollo/client';
-import { GET_ACCOUNTS, DELETE_ACCOUNT } from 'graphql-service/gqls/Accounts';
+import { DELETE_ACCOUNT } from 'graphql-service/gqls/Accounts';
 import { RESTORE_ACCOUNT, GET_ONE_ACCOUNT } from 'graphql-service/gqls/Accounts';
 import { CREATE_ACCOUNT, UPDATE_ACCOUNT } from 'graphql-service/gqls/Accounts';
-import { Account } from 'models';
 import useNProgress from './useNProgress';
-
-type Data = {
-  accounts: Account[];
-};
-
-//getAll
-export function useAccounts() {
-  return useQuery<Data>(GET_ACCOUNTS);
-}
+import { GetAccountsDocument } from 'graphql-service/hooks';
 
 //getOneAccount
 export function useUniqueAccounts(id: string) {
@@ -21,7 +12,7 @@ export function useUniqueAccounts(id: string) {
 //create
 export const useCreateAccount = () => {
   const [createAccount, { data, loading, error }] = useMutation(CREATE_ACCOUNT, {
-    refetchQueries: [{ query: GET_ACCOUNTS }],
+    refetchQueries: [{ query: GetAccountsDocument }],
   });
 
   useNProgress(loading);
@@ -31,7 +22,7 @@ export const useCreateAccount = () => {
 //update
 export const useUpdateAccount = () => {
   const [updateAccount, { data, loading, error }] = useMutation(UPDATE_ACCOUNT, {
-    refetchQueries: [{ query: GET_ACCOUNTS }],
+    refetchQueries: [{ query: GetAccountsDocument }],
   });
 
   useNProgress(loading);
@@ -41,7 +32,7 @@ export const useUpdateAccount = () => {
 //delete
 export const useDeleteAccount = () => {
   const [deleteAccount, { data, loading, error }] = useMutation(DELETE_ACCOUNT, {
-    refetchQueries: [{ query: GET_ACCOUNTS }],
+    refetchQueries: [{ query: GetAccountsDocument }],
   });
 
   useNProgress(loading);
@@ -51,7 +42,7 @@ export const useDeleteAccount = () => {
 //restore
 export const useRestoreAccount = () => {
   const [restoreAccount, { data, loading, error }] = useMutation(RESTORE_ACCOUNT, {
-    refetchQueries: [{ query: GET_ACCOUNTS }],
+    refetchQueries: [{ query: GetAccountsDocument }],
   });
 
   useNProgress(loading);

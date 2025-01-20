@@ -5,8 +5,9 @@ import { OperationVariables, useApolloClient, useQuery, gql } from '@apollo/clie
 import customStyles from 'pages/Dashboard/Operations/Operation/style/CategorySelect.style';
 import LoadingData from 'components/LoadingData';
 
-import { TransactionType, SortOrder, Categories } from 'models';
+import { Categories } from 'models';
 import { ValueType } from 'react-select';
+import { SortOrder, TransactionType } from 'graphql-service/types';
 
 const GET_CATEGORIES = gql`
   query Categories(
@@ -49,7 +50,7 @@ const CategorySearch = ({ type, onChange }: Props) => {
         },
         deletedAt: { equals: null },
       },
-      orderBy: [{ name: SortOrder.ASC }],
+      orderBy: [{ name: SortOrder.Asc }],
     },
   });
 
@@ -81,7 +82,7 @@ const CategorySearch = ({ type, onChange }: Props) => {
         },
         deletedAt: { equals: null },
       },
-      orderBy: [{ name: SortOrder.ASC }],
+      orderBy: [{ name: SortOrder.Asc }],
     });
 
     if (dataCategories?.categories?.data?.length) {

@@ -1,6 +1,6 @@
-import { TransactionType, Operation } from '../models';
+import { OperationFieldsFragment, TransactionType } from 'graphql-service/types';
 
-export default function getBalance(operations: Operation[]): number {
+export default function getBalance(operations: OperationFieldsFragment[]): number {
   return operations.reduce((accumulateValue: number, currentValue) => {
     if (!currentValue.isPaid) return accumulateValue;
 

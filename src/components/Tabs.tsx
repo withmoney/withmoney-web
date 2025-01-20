@@ -6,7 +6,7 @@ import { ShoppingCart, CreditCard } from '@styled-icons/entypo';
 import { Filter } from '@styled-icons/fa-solid/Filter';
 import { useOperationsFilters } from 'hooks/useOperationsFilters';
 import ButtonIcon from 'components/ButtonIcon';
-import { TransactionType } from 'models';
+import { TransactionType } from 'graphql-service/types';
 
 type Props = {
   filterVisibility: boolean;

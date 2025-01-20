@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { Row, Cell } from 'pages/Dashboard/Operations/Operation/style/OperationSettings';
-import { TransactionType } from 'models';
 import { useOperationsFilters } from 'hooks/useOperationsFilters';
+import { TransactionType } from 'graphql-service/types';
 
 type Props = {
   onClick: () => void;

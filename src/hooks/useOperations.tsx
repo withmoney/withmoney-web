@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useLazyQuery, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useOperationsFilters } from './useOperationsFilters';
 import { useAccountFilters } from './useAccountFilters';
 import { UPDATE_OPERATION, RESTORE_OPERATION } from 'graphql-service/gqls/Operations';
@@ -9,14 +9,16 @@ import {
   CREATE_OPERATION,
 } from 'graphql-service/gqls/Operations';
 import { ALL_CREDIT_CARDS_LIMIT } from 'graphql-service/gqls/CreditCard';
-import { Operations, Operation, SortOrder } from 'models';
+import { Operation } from 'models';
 import useNProgress from './useNProgress';
+import { useGetOperationsLazyQuery } from 'graphql-service/hooks';
+import { SortOrder } from 'graphql-service/types';
 
 export function useOperations() {
   const { currentAccount } = useAccountFilters();
   const { currentDateTime, categoryId } = useOperationsFilters();
 
-  const [getOperations, { data, loading, error }] = useLazyQuery<Operations>(GET_OPERATIONS);
+  const [getOperations, { data, loading, error }] = useGetOperationsLazyQuery();
 
   useEffect(() => {
     if (currentAccount) {
@@ -24,15 +26,15 @@ export function useOperations() {
         variables: {
           where: {
             paidAt: {
-              gte: currentDateTime?.startOf('month'),
-              lte: currentDateTime?.endOf('month'),
+              gte: currentDateTime?.startOf('month').toISO(),
+              lte: currentDateTime?.endOf('month').toISO(),
             },
             deletedAt: { equals: null },
             accountId: { equals: currentAccount?.id },
             ...(categoryId ? { categoryId: { equals: categoryId } } : {}),
           },
-          orderBy: [{ paidAt: SortOrder.ASC }, { createdAt: SortOrder.ASC }],
-          startDateTime: currentDateTime?.startOf('month'),
+          orderBy: [{ paidAt: SortOrder.Asc }, { createdAt: SortOrder.Asc }],
+          startDateTime: currentDateTime?.startOf('month').toISO() || new Date().toISOString(),
           accountId: currentAccount.id,
         },
       });
@@ -86,7 +88,7 @@ export function useDeleteOperation() {
             deletedAt: { equals: null },
             accountId: { equals: currentAccount?.id },
           },
-          orderBy: [{ paidAt: SortOrder.ASC }, { createdAt: SortOrder.ASC }],
+          orderBy: [{ paidAt: SortOrder.Asc }, { createdAt: SortOrder.Asc }],
           startDateTime: currentDateTime?.startOf('month'),
           accountId: currentAccount?.id,
         },
@@ -117,7 +119,7 @@ export function useRestoreOperation() {
             deletedAt: { equals: null },
             accountId: { equals: currentAccount?.id },
           },
-          orderBy: [{ paidAt: SortOrder.ASC }, { createdAt: SortOrder.ASC }],
+          orderBy: [{ paidAt: SortOrder.Asc }, { createdAt: SortOrder.Asc }],
           startDateTime: currentDateTime?.startOf('month'),
           accountId: currentAccount?.id,
         },
@@ -147,7 +149,7 @@ export function useCreateOperation() {
             deletedAt: { equals: null },
             accountId: { equals: currentAccount?.id },
           },
-          orderBy: [{ paidAt: SortOrder.ASC }, { createdAt: SortOrder.ASC }],
+          orderBy: [{ paidAt: SortOrder.Asc }, { createdAt: SortOrder.Asc }],
           startDateTime: currentDateTime?.startOf('month'),
           accountId: currentAccount?.id,
         },

@@ -4,8 +4,7 @@ import {
   RowHeader,
   CellHeader,
 } from 'pages/Dashboard/Operations/Operation/style/OperationSettings';
-
-import { TransactionType } from 'models';
+import { TransactionType } from 'graphql-service/types';
 
 type Props = {
   type: TransactionType;

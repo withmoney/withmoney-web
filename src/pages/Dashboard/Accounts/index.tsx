@@ -6,15 +6,16 @@ import Button from 'components/Button';
 import ButtonLink from 'components/ButtonLink';
 import Text from 'components/Text';
 import ConfirmModal from 'modals/ConfirmModal';
-import { useAccounts, useDeleteAccount, useRestoreAccount } from 'hooks/useAccounts';
+import { useDeleteAccount, useRestoreAccount } from 'hooks/useAccounts';
 import { useAccountFilters } from 'hooks/useAccountFilters';
 import { Account } from 'models';
 import LoadingData from 'components/LoadingData';
 import Alert from 'components/Alert';
 import { Page, PageHeader, Row, Cell, PageBodyColumns } from 'pages/Dashboard/style/SubPages.style';
+import { useGetAccountsQuery } from 'graphql-service/hooks';
 
 const Accounts = () => {
-  const { data, loading, error } = useAccounts();
+  const { data, loading, error } = useGetAccountsQuery();
   const [selectedAccount, setSelectedAccount] = useState<Account>();
   const { currentAccount } = useAccountFilters();
   const [openModal, setOpenModal] = useState(false);

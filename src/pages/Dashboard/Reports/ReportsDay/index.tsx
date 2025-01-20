@@ -10,7 +10,7 @@ import { languageValue } from 'constants/Langs';
 import { ReportButton } from 'pages/Dashboard/Reports/style';
 import { useUser } from 'hooks/useUser';
 import { useOperations } from 'hooks/useOperations';
-import { TransactionType } from 'models';
+import { TransactionType } from 'graphql-service/types';
 
 const ReportsDay = () => {
   const { data: dataUser } = useUser();
@@ -22,7 +22,7 @@ const ReportsDay = () => {
   }
 
   const dataGrouped = groupBy(dataOperations?.operations ?? [], (a) => {
-    return DateTime.fromISO(a?.paidAt).toFormat('dd');
+    return DateTime.fromISO(a?.paidAt ?? '').toFormat('dd');
   });
 
   let total = dataOperations?.balance?.amount ?? 0;

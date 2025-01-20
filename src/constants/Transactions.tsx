@@ -1,4 +1,4 @@
-import { TransactionType, CreditCardBrand } from 'models';
+import { CreditCardBrand, TransactionType } from 'graphql-service/types';
 
 export const addOperationText = {
   [TransactionType.Deposit]: 'addDeposit',
@@ -9,13 +9,13 @@ export const addOperationText = {
 
 export const CreatedCardBrandText = [
   CreditCardBrand.AmericanExpress,
-  CreditCardBrand.BNDES,
+  CreditCardBrand.Bndes,
   CreditCardBrand.Dinners,
   CreditCardBrand.HiperCard,
   CreditCardBrand.MasterCard,
   CreditCardBrand.Visa,
   CreditCardBrand.SoroCard,
-  CreditCardBrand.ELO,
+  CreditCardBrand.Elo,
   CreditCardBrand.Other,
 ];
 

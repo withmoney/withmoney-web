@@ -16,7 +16,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean };
   Int: { input: number; output: number };
   Float: { input: number; output: number };
-  Date: { input: any; output: any };
+  Date: { input: string; output: string };
   DateTime: { input: string; output: string };
 };
 
@@ -881,6 +881,20 @@ export type RestoreCreditCardMutationVariables = Exact<{
 export type RestoreCreditCardMutation = {
   __typename?: 'Mutation';
   restoreOneCreditCard?: { __typename?: 'CreditCard'; id: string; name: string } | null;
+};
+
+export type OperationFieldsFragment = {
+  __typename?: 'Operation';
+  id: string;
+  name: string;
+  value: number;
+  type: TransactionType;
+  isPaid: boolean;
+  paidAt?: string | null;
+  createdAt: string;
+  accountId: string;
+  categoryId?: string | null;
+  creditCardId?: string | null;
 };
 
 export type GetOperationsQueryVariables = Exact<{

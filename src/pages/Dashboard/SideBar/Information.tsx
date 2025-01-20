@@ -2,8 +2,8 @@ import { useTranslation } from 'react-i18next';
 import Info from './Info';
 import { InformationContainer } from './style/Information.style';
 import { useOperations } from 'hooks/useOperations';
-import { TransactionType } from 'models';
 import { getCalcOperationsByType } from 'utils/calcOperations';
+import { TransactionType } from 'graphql-service/types';
 
 const Information = () => {
   const { data } = useOperations();

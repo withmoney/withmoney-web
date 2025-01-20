@@ -1,11 +1,12 @@
 import { EChartsOption } from 'echarts';
 import ReactECharts from 'echarts-for-react';
 import { filterCategories } from 'utils/FilterOperations';
-import { Operation, Category } from 'models';
+import { Category } from 'models';
+import { OperationFieldsFragment } from 'graphql-service/types';
 
 type Props = {
   type: 'incomes' | 'expenses';
-  operations?: Operation[];
+  operations?: OperationFieldsFragment[];
   categories?: Category[];
 };
 

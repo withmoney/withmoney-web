@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import Flex from 'components/Flex';
 import LoadingData from 'components/LoadingData';
-import { TransactionType } from 'models';
 import { useOperationsFilters } from 'hooks/useOperationsFilters';
+import { TransactionType } from 'graphql-service/types';
 
 type Props = {
   isLoading: boolean;

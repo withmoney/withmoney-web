@@ -15,13 +15,13 @@ import { Operation } from 'models';
 import { TrashFill } from '@styled-icons/bootstrap';
 import { Row, Cell } from 'pages/Dashboard/Operations/Operation/style/OperationSettings';
 import { useAccountFilters } from 'hooks/useAccountFilters';
-import { TransactionType } from 'models';
 import LoadingData from 'components/LoadingData';
+import { OperationFieldsFragment, TransactionType } from 'graphql-service/types';
 
 type OperationItemProps = {
-  operation: Operation;
+  operation: OperationFieldsFragment;
   modalIsOpen: (value: boolean) => void;
-  deleteOperation: (value: Operation) => void;
+  deleteOperation: (value: OperationFieldsFragment) => void;
 };
 
 const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationItemProps) => {
@@ -69,7 +69,7 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
       }
     }
   };
-  const toggleDeleteOperation = (operation: Operation) => {
+  const toggleDeleteOperation = (operation: OperationFieldsFragment) => {
     deleteOperation(operation);
     modalIsOpen(true);
   };
@@ -83,7 +83,7 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
         <Cell width="130px">
           <DatePicker
             id={operation.id}
-            defaultValue={operation.paidAt}
+            defaultValue={operation.paidAt ?? ''}
             onDateChange={handleDateChange}
           />
         </Cell>
@@ -95,7 +95,7 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
           />
         </Cell>
         <Cell flex="1">
-          <CategorySelect operation={operation} CategoryId={operation.categoryId} />
+          <CategorySelect operation={operation} CategoryId={operation.categoryId ?? null} />
         </Cell>
         {operation.type === TransactionType.CreditCard && (
           <Cell width="200px">

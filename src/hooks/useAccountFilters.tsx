@@ -24,9 +24,9 @@ export default function AccountFiltersProvider({ children }: Props) {
       const currentAccountLS = localStorage.getItem('currentAccount');
       const account = data.accounts.find((account) => account.id === currentAccountLS);
       if (account) {
-        setCurrentAccount(account as unknown as Account);
+        setCurrentAccount(account);
       } else {
-        setCurrentAccount(data?.accounts[0] as unknown as Account);
+        setCurrentAccount(data?.accounts[0]);
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -2,6 +2,19 @@ import { gql } from '@apollo/client';
 
 // query
 export const GET_OPERATIONS = gql`
+  fragment OperationFields on Operation {
+    id
+    name
+    value
+    type
+    isPaid
+    paidAt
+    createdAt
+    accountId
+    categoryId
+    creditCardId
+  }
+
   query getOperations(
     $startDateTime: DateTime!
     $where: OperationWhereInput
@@ -9,16 +22,7 @@ export const GET_OPERATIONS = gql`
     $accountId: String!
   ) {
     operations: findManyOperation(where: $where, orderBy: $orderBy) {
-      id
-      name
-      value
-      type
-      isPaid
-      paidAt
-      createdAt
-      accountId
-      categoryId
-      creditCardId
+      ...OperationFields
     }
     balance: calcPreviousBalance(where: { paidAt: { lt: $startDateTime }, accountId: $accountId }) {
       amount

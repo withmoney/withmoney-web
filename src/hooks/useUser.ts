@@ -7,7 +7,7 @@ import { GET_ME } from '../graphql-service/gqls/AuthGql';
 import { UPDATE_USER, CHANGE_USER_PASSWORD } from '../graphql-service/gqls/User';
 import { languageValue, languageLabels } from '../constants/Langs';
 import { User } from '../models';
-import { Locale } from '../models';
+import { Locale } from 'graphql-service/types';
 
 type Data = {
   me: User;

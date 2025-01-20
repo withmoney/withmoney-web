@@ -1,3 +1,3 @@
-import { Currency } from '../models';
+import { Currency } from 'graphql-service/types';
 
-export const currencies = [Currency.USD, Currency.BRL, Currency.EUR, Currency.GBP];
+export const currencies = [Currency.Usd, Currency.Brl, Currency.Eur, Currency.Gbp];

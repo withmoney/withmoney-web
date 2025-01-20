@@ -1,38 +1,9 @@
-export enum TransactionType {
-  CreditCard = 'CreditCard',
-  Deposit = 'Deposit',
-  FixedExpense = 'FixedExpense',
-  VariableExpense = 'VariableExpense',
-}
+import { Currency, TransactionType, CreditCardBrand, Locale } from 'graphql-service/types';
 
-export enum Currency {
-  USD = 'USD',
-  EUR = 'EUR',
-  BRL = 'BRL',
-  GBP = 'GBP',
-}
-
-export enum SortOrder {
-  ASC = 'asc',
-  DESC = 'desc',
-}
-
-export enum CreditCardBrand {
-  AmericanExpress = 'AmericanExpress',
-  BNDES = 'BNDES',
-  Dinners = 'Dinners',
-  ELO = 'ELO',
-  HiperCard = 'HiperCard',
-  MasterCard = 'MasterCard',
-  Other = 'Other',
-  SoroCard = 'SoroCard',
-  Visa = 'Visa',
-}
-
-export enum Locale {
-  ptBR = 'ptBR',
-  enUS = 'enUS',
-}
+// export enum SortOrder {
+//   ASC = 'asc',
+//   DESC = 'desc',
+// }
 
 export interface Account {
   id: string;

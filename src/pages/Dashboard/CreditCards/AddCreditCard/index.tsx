@@ -21,7 +21,7 @@ import { useCreateCreditCard } from 'hooks/useCreditCard';
 import { checkCreditCard } from 'schema/checkField';
 import { ALL_CREDIT_CARDS_LIMIT } from 'graphql-service/gqls/CreditCard';
 import { ValueType } from 'react-select';
-import { CreditCardBrand } from 'models';
+import { CreditCardBrand } from 'graphql-service/types';
 
 const initialValues = {
   name: '',
