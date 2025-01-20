@@ -1,4 +1,3 @@
-import styled from 'styled-components';
 import Link from 'components/Link';
 import { AttachMoney as IconMoney } from '@styled-icons/material';
 import { BarGraph } from '@styled-icons/entypo';
@@ -6,76 +5,53 @@ import { UserAccount } from '@styled-icons/boxicons-solid';
 import { Category } from '@styled-icons/boxicons-solid';
 import { CreditCardFill } from '@styled-icons/bootstrap';
 
-export const Money = styled(IconMoney)`
-  width: 30px;
-  margin-right: 10px;
-  color: var(--icon-default-color);
-`;
+export const Money = () => (
+  <IconMoney className="w-[30px] mr-[10px] text-[var(--icon-default-color)]" />
+);
 
-export const Accounts = styled(UserAccount)`
-  width: 30px;
-  margin-right: 10px;
-  color: var(--icon-default-color);
-`;
+export const Accounts = () => (
+  <UserAccount className="w-[30px] mr-[10px] text-[var(--icon-default-color)]" />
+);
 
-export const Categories = styled(Category)`
-  width: 30px;
-  margin-right: 10px;
-  color: var(--icon-default-color);
-`;
+export const Categories = () => (
+  <Category className="w-[30px] mr-[10px] text-[var(--icon-default-color)]" />
+);
 
-export const CreditCard = styled(CreditCardFill)`
-  width: 30px;
-  margin-right: 10px;
-  color: var(--icon-default-color);
-`;
+export const CreditCard = () => (
+  <CreditCardFill className="w-[30px] mr-[10px] text-[var(--icon-default-color)]" />
+);
 
-export const Graph = styled(BarGraph)`
-  width: 30px;
-  margin-right: 10px;
-  color: var(--icon-default-color);
-`;
+export const Graph = () => (
+  <BarGraph className="w-[30px] mr-[10px] text-[var(--icon-default-color)]" />
+);
 
-export const MenuContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: var(--dashboard-color-white);
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-bottom: 2px solid var(--dashboard-border-color);
-`;
+export const MenuContainer = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex flex-col bg-[var(--dashboard-color-white)] pt-[20px] pb-[20px] border-b-2 border-[var(--dashboard-border-color)]">
+    {children}
+  </div>
+);
 
-export const MenuSettings = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: var(--dashboard-color-white);
-  padding-bottom: 20px;
-`;
+export const MenuSettings = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex flex-col bg-[var(--dashboard-color-white)] pb-[20px]">{children}</div>
+);
 
 type ButtonProps = {
   open?: boolean;
+  children: React.ReactNode;
+  to: string;
 };
 
-export const MenuButton = styled(Link)<ButtonProps>`
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  background-color: ${({ open }) =>
-    open ? 'var(--dashboard-button-color-hover)' : 'var(--dashboard-color-white)'};
-  padding: 10px 20px;
-  cursor: pointer;
+export const MenuButton = ({ open, children, ...props }: ButtonProps) => (
+  <Link
+    {...props}
+    className={`flex items-center no-underline p-[10px_20px] cursor-pointer ${
+      open ? 'bg-[var(--dashboard-button-color-hover)]' : 'bg-[var(--dashboard-color-white)]'
+    } hover:bg-[var(--dashboard-button-color-hover)] active:bg-[var(--dashboard-button-color-active)]`}
+  >
+    {children}
+  </Link>
+);
 
-  &:hover {
-    background-color: var(--dashboard-button-color-hover);
-  }
-
-  &:active {
-    background-color: var(--dashboard-button-color-active);
-  }
-`;
-
-export const TextContainer = styled.div`
-  display: flex;
-  align-items: flex-start;
-  padding: 10px 20px;
-`;
+export const TextContainer = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex items-start p-[10px_20px]">{children}</div>
+);

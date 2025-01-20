@@ -1,54 +1,44 @@
-import styled from 'styled-components';
+import React from 'react';
 
-export const Content = styled.div`
-  display: flex;
-  align-items: center;
-`;
+export const Content = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex items-center">{children}</div>
+);
 
-export const PageHeader = styled.div`
-  display: flex;
-  padding: 18px 44px;
-  background-color: #e4e4e4;
-  justify-content: space-between;
-`;
+export const PageHeader = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex justify-between p-[18px_44px] bg-[#e4e4e4]">{children}</div>
+);
 
-export const PageBody = styled.div`
-  padding: 35px;
-  background-color: #ffff;
-`;
+export const PageBody = ({ children }: { children: React.ReactNode }) => (
+  <div className="p-[35px] bg-white">{children}</div>
+);
 
-export const Page = styled.div`
-  background-color: #fff;
-  height: 100%;
-`;
+export const Page = ({ children }: { children: React.ReactNode }) => (
+  <div className="bg-white h-full">{children}</div>
+);
 
-export const Row = styled.div`
-  display: flex;
-  height: 45px;
-  padding: 13px;
-  align-items: center;
-  justify-content: space-between;
-`;
+export const Row = ({ children }: { children: React.ReactNode }) => (
+  <div className="flex h-[45px] p-[13px] items-center justify-between">{children}</div>
+);
 
-type PropsCell = {
+type CellProps = {
   align?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
+  children: React.ReactNode;
 };
 
-export const Cell = styled.span<PropsCell>`
-  display: flex;
-  justify-content: ${({ align = 'center' }) => align};
-  padding: ${({ align }) => (align ? '30px' : '0')};
-  min-width: 150px;
-  &:first-child {
-    width: 100%;
-    justify-content: start;
-  }
-`;
+export const Cell = ({ align = 'center', children }: CellProps) => (
+  <span
+    className={`flex justify-${align} ${
+      align ? 'p-[30px]' : 'p-0'
+    } min-w-[150px] first:justify-start first:w-full`}
+  >
+    {children}
+  </span>
+);
 
-export const PageBodyColumns = styled.div`
-  padding: 35px;
-  background-color: #ffff;
-  div:nth-child(even) {
-    background-color: rgb(244, 244, 244);
-  }
-`;
+export const PageBodyColumns = ({ children }: { children: React.ReactNode }) => (
+  <div className="p-[35px] bg-white">
+    {React.Children.map(children, (child, index) => (
+      <div className={index % 2 === 1 ? 'bg-[rgb(244,244,244)]' : undefined}>{child}</div>
+    ))}
+  </div>
+);
