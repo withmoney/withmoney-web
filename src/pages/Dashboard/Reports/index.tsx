@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
-import capitalize from 'lodash/capitalize';
+import { capitalize } from 'lodash';
 import { PageHeader, Page, PageBody, Content } from 'pages/Dashboard/style/SubPages.style';
 import { useOperationsFilters } from 'hooks/useOperationsFilters';
 import { Cell, Row } from 'pages/Dashboard/style/SubPages.style';
@@ -18,7 +18,7 @@ import { languageValue } from 'constants/Langs';
 import { useOperations } from 'hooks/useOperations';
 import { useCategories } from 'hooks/useCategories';
 
-const sumOperation = (accumulateValue: number, category: any) => {
+const sumOperation = (accumulateValue: number, category: { value: number }) => {
   return accumulateValue + category.value;
 };
 

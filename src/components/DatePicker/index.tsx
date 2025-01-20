@@ -23,6 +23,7 @@ const DatePicker = ({ id, defaultValue, onDateChange }: Props) => {
       const time = moment(defaultValue).locale(language);
       setDate(time);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [language]);
 
   const format = date.localeData().longDateFormat('L');

@@ -58,6 +58,7 @@ const client = new ApolloClient({
   connectToDevTools: true,
 });
 
+// eslint-disable-next-line react-refresh/only-export-components
 const App = () => (
   <>
     <GlobalStyle />

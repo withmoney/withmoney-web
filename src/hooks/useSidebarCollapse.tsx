@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 type Props = {
   children: React.ReactNode;
@@ -36,6 +36,7 @@ export default function SidebarProvider({ children }: Props) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useSidebarCollapse() {
   const context = useContext(isSidebarOpenContext);
   const { isSidebarOpen, toggleSidebar } = context;

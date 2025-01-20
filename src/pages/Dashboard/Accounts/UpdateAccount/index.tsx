@@ -41,6 +41,7 @@ const UpdateAccount = () => {
         currency: data?.findUniqueAccount.currency,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -57,7 +58,9 @@ const UpdateAccount = () => {
       await checkAccounts.validateAt(name, form);
       setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
-      setFormErrors({ ...formErrors, [name]: err.message });
+      if (err instanceof Error) {
+        setFormErrors({ ...formErrors, [name]: err.message });
+      }
     }
     setFormValidate(await checkAccounts.isValid(form));
   };
@@ -73,7 +76,9 @@ const UpdateAccount = () => {
       });
       history.push('/accounts');
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
 

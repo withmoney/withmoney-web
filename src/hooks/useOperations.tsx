@@ -33,6 +33,7 @@ export function useOperations() {
         },
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentAccount, currentDateTime, categoryId]);
 
   useNProgress(loading);

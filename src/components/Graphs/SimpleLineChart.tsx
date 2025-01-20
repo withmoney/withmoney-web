@@ -1,6 +1,5 @@
 import {
   ComposedChart,
-  Line,
   Area,
   Bar,
   XAxis,
@@ -8,7 +7,6 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  Scatter,
   ResponsiveContainer,
 } from 'recharts';
 

@@ -34,7 +34,7 @@ export const DropDownMenuContent = styled.div`
 `;
 
 type MenuContainerProps = {
-  ref: any;
+  ref: React.RefObject<HTMLDivElement>;
 };
 
 export const MenuContainer = styled.div<MenuContainerProps>``;

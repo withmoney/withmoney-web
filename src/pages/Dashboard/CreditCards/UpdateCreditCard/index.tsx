@@ -20,6 +20,7 @@ import { checkCreditCard } from 'schema/checkField';
 import { useUniqueCreditCard, useUpdateCreditCard } from 'hooks/useCreditCard';
 import { useAccountFilters } from 'hooks/useAccountFilters';
 import { ALL_CREDIT_CARDS_LIMIT } from 'graphql/CreditCard';
+import { ValueType } from 'react-select';
 
 const initialValues = {
   name: '',
@@ -41,7 +42,7 @@ const UpdateCreditCard = () => {
   const [form, setForm] = useState(initialValues);
   const [formErrors, setFormErrors] = useState(initialValues);
   const [formValidate, setFormValidate] = useState(false);
-  const { updateCreditCard, loading: loadingUpdate } = useUpdateCreditCard();
+  const { updateCreditCard } = useUpdateCreditCard();
 
   // set form
   useEffect(() => {
@@ -72,11 +73,13 @@ const UpdateCreditCard = () => {
   };
 
   // handle creditCard input
-  const handleCreditCard = async (brand: any) => {
-    setForm({
-      ...form,
-      brand: brand.value,
-    });
+  const handleCreditCard = async (brand: ValueType<{ value: string; label: string }, false>) => {
+    if (brand) {
+      setForm({
+        ...form,
+        brand: brand.value,
+      });
+    }
     setFormValidate(await checkCreditCard.isValid(form));
   };
   // handle on bluer field
@@ -87,7 +90,9 @@ const UpdateCreditCard = () => {
       setFormErrors({ ...formErrors, [name]: '' });
       setFormValidate(await checkCreditCard.isValid(form));
     } catch (err) {
-      setFormErrors({ ...formErrors, [name]: err.message });
+      if (err instanceof Error) {
+        setFormErrors({ ...formErrors, [name]: err.message });
+      }
     }
   };
   // create update credit card
@@ -114,7 +119,9 @@ const UpdateCreditCard = () => {
       );
       history.push('/credit-cards');
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
 
@@ -146,6 +153,8 @@ const UpdateCreditCard = () => {
                 <Label>Credit card brand</Label>
                 <AsyncCreatableSelect
                   name="brand"
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
                   styles={customStyles}
                   options={defaultOptions}
                   onChange={handleCreditCard}
@@ -159,11 +168,13 @@ const UpdateCreditCard = () => {
               <InputControl>
                 <Label>Credit card limit</Label>
                 <InputCurrency
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
                   name="limit"
                   lang={language}
                   value={data?.findUniqueCreditCard.limit}
                   onChange={handleCurrency}
-                  currency={currentAccount?.currency}
+                  currency={currentAccount?.currency as string}
                   onBlur={handleBlur}
                 />
               </InputControl>

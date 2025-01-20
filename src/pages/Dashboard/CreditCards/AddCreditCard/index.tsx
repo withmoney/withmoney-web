@@ -20,6 +20,8 @@ import { useUserLanguage } from 'hooks/useUser';
 import { useCreateCreditCard } from 'hooks/useCreditCard';
 import { checkCreditCard } from 'schema/checkField';
 import { ALL_CREDIT_CARDS_LIMIT } from 'graphql/CreditCard';
+import { ValueType } from 'react-select';
+import { CreditCardBrand } from 'models';
 
 const initialValues = {
   name: '',
@@ -67,11 +69,13 @@ const AddCreditCard = () => {
   };
 
   // handle creditCard input
-  const handleCreditCard = async (brand: any) => {
-    setForm({
-      ...form,
-      brand: brand.value,
-    });
+  const handleCreditCard = async (brand: ValueType<{ value: string; label: string }, false>) => {
+    if (brand) {
+      setForm({
+        ...form,
+        brand: brand.value as CreditCardBrand,
+      });
+    }
   };
   // check field validate
   const handleBlur = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -80,7 +84,9 @@ const AddCreditCard = () => {
       await checkCreditCard.validateAt(name, form);
       setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
-      setFormErrors({ ...formErrors, [name]: err.message });
+      if (err instanceof Error) {
+        setFormErrors({ ...formErrors, [name]: err.message });
+      }
     }
   };
 
@@ -105,7 +111,9 @@ const AddCreditCard = () => {
       });
       history.push('/credit-cards');
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
 
@@ -137,6 +145,8 @@ const AddCreditCard = () => {
                   <Label>Brand</Label>
                   <AsyncCreatableSelect
                     name="brand"
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
                     styles={customStyles}
                     options={defaultOptions}
                     onChange={handleCreditCard}
@@ -146,6 +156,8 @@ const AddCreditCard = () => {
                 <InputControl>
                   <Label>Limit</Label>
                   <InputCurrency
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
                     name="limit"
                     lang={language}
                     value={form.limit}

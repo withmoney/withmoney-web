@@ -13,7 +13,9 @@ const InputOperations = ({ value, onChange, ...props }: Props) => {
   const handleChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
     const ChangeName = value;
     setNewValue(ChangeName);
-    onChange ? onChange(ChangeName) : '';
+    if (onChange) {
+      onChange(ChangeName);
+    }
   };
 
   return <Input {...props} type="text" onChange={handleChange} value={newValue} />;

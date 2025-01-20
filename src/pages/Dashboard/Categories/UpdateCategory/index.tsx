@@ -40,6 +40,7 @@ const UpdateCategory = () => {
         type: data?.findUniqueCategory.type,
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -57,7 +58,9 @@ const UpdateCategory = () => {
       setFormErrors({ ...formErrors, [name]: '' });
       setFormValidate(await checkCategories.isValid(form));
     } catch (err) {
-      setFormErrors({ ...formErrors, [name]: err.message });
+      if (err instanceof Error) {
+        setFormErrors({ ...formErrors, [name]: err.message });
+      }
     }
   };
 
@@ -76,7 +79,9 @@ const UpdateCategory = () => {
       });
       history.push('/categories');
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
 

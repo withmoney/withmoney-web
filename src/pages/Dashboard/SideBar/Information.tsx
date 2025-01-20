@@ -48,12 +48,12 @@ const Information = () => {
         current={totalPaidVariableExpense}
         desired={totalVariableExpense}
       />
-      {/* <Info
+      <Info
         variation="CreditCard"
         name="Credit Card Expenses"
         current={totalPaidCreditCard}
         desired={totalCreditCard}
-      /> */}
+      />
     </InformationContainer>
   );
 };

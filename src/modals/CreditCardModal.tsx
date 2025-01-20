@@ -15,14 +15,20 @@ import { ModalBody, ModalHeader, stylesCreditCard, StyledModal, Label } from './
 import { checkCreditCard } from 'schema/checkField';
 import customStyles from 'pages/Dashboard/Operations/Operation/style/CategorySelect.style';
 import { useUserLanguage } from 'hooks/useUser';
+import { CreditCardBrand } from 'models';
+import { ValueType } from 'react-select';
 
 // Component Props
 type Props = {
-  form: any;
+  form: {
+    name: string;
+    brand: CreditCardBrand;
+    limit: number;
+  };
   isOpenModal: boolean;
   isLoading: boolean;
   setIsOpenModal: (value: boolean) => void;
-  setForm: (value: any) => void;
+  setForm: (value: { name: string; brand: CreditCardBrand; limit: number }) => void;
   onConfirm: () => void;
 };
 
@@ -78,11 +84,13 @@ const CreditCardModal = ({
     });
   };
   // handle creditCard input
-  const handleCreditCard = async (brand: any) => {
-    setForm({
-      ...form,
-      brand: brand.value,
-    });
+  const handleCreditCard = async (brand: ValueType<{ value: string; label: string }, false>) => {
+    if (brand) {
+      setForm({
+        ...form,
+        brand: brand.value as CreditCardBrand,
+      });
+    }
   };
 
   const handleBlur = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -91,7 +99,9 @@ const CreditCardModal = ({
       await checkCreditCard.validateAt(name, form);
       setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
-      setFormErrors({ ...formErrors, [name]: err.message });
+      if (err instanceof Error) {
+        setFormErrors({ ...formErrors, [name]: err.message });
+      }
     }
   };
 
@@ -112,10 +122,12 @@ const CreditCardModal = ({
               <Label>{t('modal.brand')}</Label>
               <AsyncCreatableSelect
                 defaultValue={{
-                  value: form.brand,
-                  label: form.brand,
+                  value: form.brand as string,
+                  label: form.brand as string,
                 }}
                 onChange={handleCreditCard}
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 styles={customStyles}
                 options={defaultOptions}
               />
@@ -124,12 +136,14 @@ const CreditCardModal = ({
             <InputControl isInvalid={!!formErrors.limit} message={formErrors.limit}>
               <Label>{t('modal.limit')}</Label>
               <InputCurrency
+                // eslint-disable-next-line
+                // @ts-ignore
                 name="limit"
-                lang={language}
+                lang={language as string}
                 value={form.limit}
                 onBlur={handleBlur}
                 onChange={handleCurrency}
-                currency={currentAccount?.currency}
+                currency={currentAccount?.currency as string}
                 placeholder={t('modal.limit')}
               />
             </InputControl>

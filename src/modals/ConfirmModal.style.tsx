@@ -2,6 +2,7 @@ import Modal from 'react-modal';
 import styled from 'styled-components';
 import Button from 'components/Button';
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const stylesConfirmModal = {
   overlay: {
     backgroundColor: 'rgba(0, 0, 0, 0.3)',
@@ -21,6 +22,7 @@ export const stylesConfirmModal = {
   },
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const stylesCreditCard = {
   overlay: {
     inset: '0px',

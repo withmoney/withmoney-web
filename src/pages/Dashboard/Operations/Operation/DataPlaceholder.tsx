@@ -9,7 +9,7 @@ type Props = {
   rows?: number;
 };
 
-const DataPlaceholder = ({ isLoading, rows = 2 }: Props): any => {
+const DataPlaceholder = ({ isLoading, rows = 2 }: Props) => {
   const Rows = Array.from({ length: rows });
   const { currentTransactionType } = useOperationsFilters();
   if (isLoading) {

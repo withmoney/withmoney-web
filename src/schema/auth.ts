@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 /* @ts-ignore */
 import isStrongPassword from 'validator/lib/isStrongPassword';
 

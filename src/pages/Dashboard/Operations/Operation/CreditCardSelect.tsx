@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { useQuery } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
@@ -13,6 +14,7 @@ import Input from 'components/Input';
 import CreditCardModal from 'modals/CreditCardModal';
 import { CreditCardBrand } from 'models';
 import { useAccountFilters } from 'hooks/useAccountFilters';
+import { ValueType } from 'react-select';
 
 // Props
 type Props = {
@@ -47,7 +49,7 @@ const CreditCardSelect = ({ operation }: Props) => {
   });
 
   // filterCreditCards
-  const loadOptions = debounce((value: string, callback: any) => {
+  const loadOptions = debounce((value: string, callback: (results: Option[]) => void) => {
     filterCreditCards(value).then((results: Option[]) => callback(results));
   }, 400);
 
@@ -62,7 +64,9 @@ const CreditCardSelect = ({ operation }: Props) => {
   };
 
   // Update CreditCard
-  const update = async (data: any) => {
+  const update = async (data: ValueType<{ value: string; label: string }, false>) => {
+    if (!data) return;
+
     try {
       await updateOperation({
         variables: {
@@ -71,7 +75,9 @@ const CreditCardSelect = ({ operation }: Props) => {
         },
       });
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
 
@@ -97,7 +103,9 @@ const CreditCardSelect = ({ operation }: Props) => {
       }
       setModalIsOpen(false);
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
 
@@ -132,11 +140,13 @@ const CreditCardSelect = ({ operation }: Props) => {
         />
       )}
 
+      {/* @ts-ignore */}
       <AsyncCreatableSelect
         value={value}
         defaultOptions={defaultOptions}
         defaultValue={defaultValues}
         loadOptions={loadOptions}
+        // @ts-ignore
         styles={customStyles}
         onCreateOption={openModal}
         onChange={update}

@@ -108,7 +108,7 @@ export interface CreditCard {
   operations: Operation[];
 }
 
-export interface Me extends User {}
+export type Me = User;
 
 export interface Categories {
   categories: DataCategories;

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 import { CHECK_HASH } from 'graphql/AuthGql';
 import { useUrlQuery } from 'hooks/UseURLQuery';
@@ -22,6 +22,7 @@ const RegistrationVerify = () => {
       }
     };
     verify();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

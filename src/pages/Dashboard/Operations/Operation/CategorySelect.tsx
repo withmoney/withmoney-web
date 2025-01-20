@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { toast } from 'react-toastify';
 import AsyncCreatableSelect from 'react-select/async-creatable';
@@ -31,7 +31,7 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
   const filterCategory = useFilterCategories();
   const { t } = useTranslation('categories');
 
-  const loadOptions = debounce((value: string, callback: any) => {
+  const loadOptions = debounce((value: string, callback: (results: Option[]) => void) => {
     filterCategory(value).then((results: Option[]) => callback(results));
   }, 400);
 
@@ -52,7 +52,9 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
         setValue({ value: data?.createOneCategory.id, label: data?.createOneCategory.name });
       }
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
 
@@ -68,7 +70,9 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
         });
         setValue(data);
       } catch (err) {
-        toast.error(err.message, { position: 'bottom-left', draggable: false });
+        if (err instanceof Error) {
+          toast.error(err.message, { position: 'bottom-left', draggable: false });
+        }
       }
     }
   };
@@ -90,6 +94,8 @@ const CategorySelect = ({ CategoryId, operation }: Props) => {
   return loading ? (
     <Input defaultValue="loading" disabled />
   ) : (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     <AsyncCreatableSelect
       cacheOptions
       value={value}

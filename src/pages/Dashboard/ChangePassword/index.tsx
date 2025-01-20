@@ -21,9 +21,9 @@ const ChangePassword = () => {
   const [form, setForm] = useState(initialValues);
   const [formErrors, setFormErrors] = useState(initialValues);
   const [formValidate, setFormValidate] = useState(false);
-  const { data, loading, error } = useUser();
+  const { data } = useUser();
   const history = useHistory();
-  const { changeUserPassword, loading: loadingChangePass } = useUserChangePassword();
+  const { changeUserPassword } = useUserChangePassword();
 
   const handleInput = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -40,7 +40,9 @@ const ChangePassword = () => {
       setFormErrors({ ...formErrors, [name]: '' });
       setFormValidate(await checkUpdatePassword.isValid(form));
     } catch (err) {
-      setFormErrors({ ...formErrors, [name]: err.message });
+      if (err instanceof Error) {
+        setFormErrors({ ...formErrors, [name]: err.message });
+      }
       setFormValidate(await checkUpdatePassword.isValid(form));
     }
   };
@@ -61,7 +63,9 @@ const ChangePassword = () => {
       });
       history.push('/profile');
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
 

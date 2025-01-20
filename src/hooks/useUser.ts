@@ -29,6 +29,7 @@ export const useUser = () => {
     if (data?.me?.language) {
       i18n.changeLanguage(languageValue[data.me.language]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   // useEffect(() => {
@@ -72,7 +73,7 @@ export const useUserChangePassword = () => {
   return { changeUserPassword, data, loading, error };
 };
 
-export const useUserLanguage = () => {
+export const useUserLanguage = (): { value: string | undefined; label: string | undefined } => {
   const { data } = useQuery<Data>(GET_ME);
   const [language, setLanguage] = useState<Locale>();
 
@@ -80,6 +81,7 @@ export const useUserLanguage = () => {
     if (!language && data?.me) {
       setLanguage(data.me.language);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   if (language) return { value: languageValue[language], label: languageLabels[language] };

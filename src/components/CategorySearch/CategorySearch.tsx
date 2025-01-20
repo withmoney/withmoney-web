@@ -6,6 +6,7 @@ import customStyles from 'pages/Dashboard/Operations/Operation/style/CategorySel
 import LoadingData from 'components/LoadingData';
 
 import { TransactionType, SortOrder, Categories } from 'models';
+import { ValueType } from 'react-select';
 
 const GET_CATEGORIES = gql`
   query Categories(
@@ -63,7 +64,7 @@ const CategorySearch = ({ type, onChange }: Props) => {
       variables,
     });
 
-  const handleChange = (option: any) => {
+  const handleChange = (option: ValueType<{ label: string; value: string }, false>) => {
     onChange(option?.value ?? null);
   };
 

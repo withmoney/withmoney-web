@@ -47,6 +47,7 @@ export default function OperationsFiltersProvider({ children }: Props) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useOperationsFilters() {
   return useContext(OperationsFiltersContext);
 }

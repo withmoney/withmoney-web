@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import AsyncCreatableSelect from 'react-select/creatable';
@@ -15,6 +15,7 @@ import { useUser, useUpdateUser } from 'hooks/useUser';
 import { languages, languageLabels } from 'constants/Langs';
 import customStyles from 'pages/Dashboard/Operations/Operation/style/CategorySelect.style';
 import { checkUpdateUser } from 'schema/checkField';
+import { ValueType } from 'react-select';
 
 const initialValues = {
   firstName: '',
@@ -33,7 +34,7 @@ const ProfileUpdate = () => {
   const [formErrors, setFormErrors] = useState(initialValues);
   const [formValidate, setFormValidate] = useState(false);
   const { data, loading } = useUser();
-  const { updateUser, data: dataUser, loading: loadingUser } = useUpdateUser();
+  const { updateUser, loading: loadingUser } = useUpdateUser();
   const history = useHistory();
 
   useEffect(() => {
@@ -55,7 +56,9 @@ const ProfileUpdate = () => {
       setFormErrors({ ...formErrors, [name]: '' });
       setFormValidate(await checkUpdateUser.isValid(form));
     } catch (err) {
-      setFormErrors({ ...formErrors, [name]: err.message });
+      if (err instanceof Error) {
+        setFormErrors({ ...formErrors, [name]: err.message });
+      }
       setFormValidate(await checkUpdateUser.isValid(form));
     }
   };
@@ -69,11 +72,13 @@ const ProfileUpdate = () => {
     });
   };
 
-  const handleLanguage = async (lang: any) => {
-    setForm({
-      ...form,
-      language: lang.value,
-    });
+  const handleLanguage = async (lang: ValueType<{ value: string; label: string }, false>) => {
+    if (lang) {
+      setForm({
+        ...form,
+        language: lang.value,
+      });
+    }
     setFormValidate(await checkUpdateUser.isValid(form));
   };
 
@@ -95,7 +100,9 @@ const ProfileUpdate = () => {
         throw new Error('Invalid form!');
       }
     } catch (err) {
-      toast.error(err.message, { position: 'bottom-left', draggable: false });
+      if (err instanceof Error) {
+        toast.error(err.message, { position: 'bottom-left', draggable: false });
+      }
     }
   };
 
@@ -145,6 +152,8 @@ const ProfileUpdate = () => {
                   name="language"
                   onChange={handleLanguage}
                   options={defaultOptions}
+                  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                  // @ts-ignore
                   styles={customStyles}
                   defaultValue={{
                     value: data.me.language,

@@ -1,4 +1,4 @@
-import React, { FormEvent, useState, ChangeEvent, useEffect } from 'react';
+import { FormEvent, useState, ChangeEvent, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useMutation } from '@apollo/client';
 import { toast } from 'react-toastify';
@@ -58,7 +58,7 @@ const SignUp = () => {
   const [form, setForm] = useState<Schema>(initialValues);
   const [formErrors, setFormErrors] =
     useState<{ [key in keyof typeof initialValues]: string }>(formErrorsInitial);
-  const [formValidate, setFormValidate] = useState(false);
+  const [, setFormValidate] = useState(false);
   const [userRegister, { loading }] = useMutation<string, UserRegisterVariables>(USER_REGISTER);
   const history = useHistory();
 
@@ -83,7 +83,9 @@ const SignUp = () => {
       await registerSchema.validateAt(event.target.name, form);
       setFormErrors({ ...formErrors, [name]: '' });
     } catch (err) {
-      setFormErrors({ ...formErrors, [name]: err.message });
+      if (err instanceof Error) {
+        setFormErrors({ ...formErrors, [name]: err.message });
+      }
     }
   };
 
@@ -98,7 +100,9 @@ const SignUp = () => {
         );
         history.push('/signin');
       } catch (err) {
-        toast.error(err.message);
+        if (err instanceof Error) {
+          toast.error(err.message);
+        }
       }
     }
   };

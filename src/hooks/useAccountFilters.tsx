@@ -35,6 +35,7 @@ export default function AccountFiltersProvider({ children }: Props) {
         setCurrentAccount(data?.accounts[0]);
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data]);
 
   return (
@@ -49,6 +50,7 @@ export default function AccountFiltersProvider({ children }: Props) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAccountFilters() {
   const context = useContext(AccountFilterContext);
   const { currentAccount, setCurrentAccount } = context;
