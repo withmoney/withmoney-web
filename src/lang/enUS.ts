@@ -19,9 +19,7 @@ export default {
   },
   operations: {
     incomes: 'Incomes',
-    recurrentExpenses: 'Recurrent Expenses',
-    otherExpenses: 'Other Expenses',
-    creditCardExpenses: 'Credit Card Expenses',
+    expenses: 'Expenses',
     message: {
       operationDeleted: 'Operation deleted. Click here to restore!',
     },
@@ -33,10 +31,8 @@ export default {
     creditCard: 'Credit Card',
     value: 'Value',
     action: 'Action',
-    addDeposit: 'Add Income',
-    addFixedExpense: 'Add Expense',
-    addCreditCard: 'Add Expense',
-    addVariableExpense: 'Add Expense',
+    addIncome: 'Add Income',
+    addExpense: 'Add Expense',
     allIncomes: 'Total Incomes',
     pendingExpenses: 'Pending Expenses',
     paidExpenses: 'Paid Expenses',
@@ -71,8 +67,7 @@ export default {
   sidebar: {
     balance: 'Balance',
     incomes: 'Incomes',
-    recurrentExpenses: 'Recurrent Expenses',
-    otherExpenses: 'Other Expenses',
+    expenses: 'Expenses',
     paid: 'Paid',
     total: 'Total',
     creditCards: 'Credit Cards',

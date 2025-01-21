@@ -28,7 +28,7 @@ type CellProps = {
 export const Cell = ({ align = 'center', children }: CellProps) => (
   <span
     className={`flex justify-${align} ${
-      align ? 'p-[30px]' : 'p-0'
+      align ? 'p-1' : 'p-0'
     } min-w-[150px] first:justify-start first:w-full`}
   >
     {children}

@@ -1,10 +1,8 @@
 import { CreditCardBrand, TransactionType } from 'graphql-service/types';
 
 export const addOperationText = {
-  [TransactionType.Deposit]: 'addDeposit',
-  [TransactionType.FixedExpense]: 'addFixedExpense',
-  [TransactionType.CreditCard]: 'addCreditCard',
-  [TransactionType.VariableExpense]: 'addVariableExpense',
+  [TransactionType.Income]: 'addIncome',
+  [TransactionType.Expense]: 'addExpense',
 };
 
 export const CreatedCardBrandText = [
@@ -19,9 +17,4 @@ export const CreatedCardBrandText = [
   CreditCardBrand.Other,
 ];
 
-export const operationType = [
-  [TransactionType.Deposit],
-  [TransactionType.FixedExpense],
-  [TransactionType.CreditCard],
-  [TransactionType.VariableExpense],
-];
+export const transactionType = [[TransactionType.Income], [TransactionType.Expense]];

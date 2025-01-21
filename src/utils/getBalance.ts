@@ -4,7 +4,7 @@ export default function getBalance(operations: OperationFieldsFragment[]): numbe
   return operations.reduce((accumulateValue: number, currentValue) => {
     if (!currentValue.isPaid) return accumulateValue;
 
-    if (currentValue.type === TransactionType.Deposit) {
+    if (currentValue.type === TransactionType.Income) {
       return accumulateValue + currentValue.value;
     } else {
       return accumulateValue - currentValue.value;

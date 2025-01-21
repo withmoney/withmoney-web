@@ -38,10 +38,10 @@ const ReportsDay = () => {
       const operations = dataGrouped[name];
 
       entradas = operations
-        .filter((a) => a.type === TransactionType.Deposit)
+        .filter((a) => a.type === TransactionType.Income)
         .reduce((acc, cur) => acc + cur.value, 0);
       saidas = operations
-        .filter((a) => a.type !== TransactionType.Deposit)
+        .filter((a) => a.type !== TransactionType.Income)
         .reduce((acc, cur) => acc + cur.value, 0);
     }
 

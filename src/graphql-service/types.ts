@@ -94,7 +94,7 @@ export type CalcPreviousBalanceWhereInput = {
 
 export type CategoriesResult = {
   __typename?: 'CategoriesResult';
-  data?: Maybe<Array<Maybe<Category>>>;
+  data: Array<Category>;
   pagination?: Maybe<Pagination>;
 };
 
@@ -538,10 +538,8 @@ export type SubscriptionUserUpdatedArgs = {
 };
 
 export enum TransactionType {
-  CreditCard = 'CreditCard',
-  Deposit = 'Deposit',
-  FixedExpense = 'FixedExpense',
-  VariableExpense = 'VariableExpense',
+  Expense = 'Expense',
+  Income = 'Income',
 }
 
 export type TransactionTypeFilter = {
@@ -697,6 +695,16 @@ export type ChangePasswordMutationVariables = Exact<{
 
 export type ChangePasswordMutation = { __typename?: 'Mutation'; changePassword?: string | null };
 
+export type CategoryFieldsFragment = {
+  __typename?: 'Category';
+  id: string;
+  name: string;
+  type: TransactionType;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string | null;
+};
+
 export type FilterCategoriesQueryVariables = Exact<{
   name?: InputMaybe<Scalars['String']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
@@ -708,13 +716,15 @@ export type FilterCategoriesQuery = {
   __typename?: 'Query';
   categories: {
     __typename?: 'CategoriesResult';
-    data?: Array<{
+    data: Array<{
       __typename?: 'Category';
       id: string;
       name: string;
       type: TransactionType;
+      createdAt: string;
+      updatedAt: string;
       deletedAt?: string | null;
-    } | null> | null;
+    }>;
     pagination?: { __typename?: 'Pagination'; totalItems?: number | null } | null;
   };
 };
@@ -734,8 +744,7 @@ export type GetUniqueCategoryQuery = {
 };
 
 export type CreateCategoryMutationVariables = Exact<{
-  name: Scalars['String']['input'];
-  type: TransactionType;
+  input: CategoryCreateInput;
 }>;
 
 export type CreateCategoryMutation = {
@@ -768,8 +777,7 @@ export type RestoreCategoryMutation = {
 
 export type UpdateCategoryMutationVariables = Exact<{
   id: Scalars['ID']['input'];
-  name: Scalars['String']['input'];
-  type: TransactionType;
+  input: CategoryUpdateInput;
 }>;
 
 export type UpdateCategoryMutation = {

@@ -1,5 +1,8 @@
-import { OperationFieldsFragment, TransactionType } from 'graphql-service/types';
-import { Category } from 'models';
+import {
+  CategoryFieldsFragment,
+  OperationFieldsFragment,
+  TransactionType,
+} from 'graphql-service/types';
 
 type CategoriesFiltered = {
   value: number;
@@ -8,7 +11,7 @@ type CategoriesFiltered = {
 
 export function filterCategories(
   type: 'incomes' | 'expenses',
-  categories: Category[] = [],
+  categories: CategoryFieldsFragment[] = [],
   operations: OperationFieldsFragment[] = [],
 ) {
   const categoriesFiltered: CategoriesFiltered[] = [];
@@ -16,8 +19,8 @@ export function filterCategories(
   // Filter operations by type | Incomes or Expanses
   const filteredOperations = operations.filter((operation) =>
     type === 'incomes'
-      ? operation.type === TransactionType.Deposit
-      : operation.type !== TransactionType.Deposit,
+      ? operation.type === TransactionType.Income
+      : operation.type !== TransactionType.Income,
   );
 
   // Filter operations that no has category

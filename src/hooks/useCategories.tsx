@@ -1,28 +1,29 @@
-import { QueryHookOptions, useApolloClient, useMutation, useQuery } from '@apollo/client';
+import { useApolloClient, useMutation, useQuery } from '@apollo/client';
 import { useOperationsFilters } from './useOperationsFilters';
 import { ALL_CATEGORY, RESTORE_CATEGORY, GET_ONE_CATEGORY } from 'graphql-service/gqls/Categories';
 import { CREATE_CATEGORY, DELETE_CATEGORY } from 'graphql-service/gqls/Categories';
 import { UPDATE_CATEGORY } from 'graphql-service/gqls/Categories';
-import { Category, Categories } from 'models';
+import { FilterCategoriesQuery, FilterCategoriesQueryVariables } from 'graphql-service/types';
+import { FilterCategoriesDocument } from 'graphql-service/hooks';
 
-export function useCategories(options?: QueryHookOptions<Categories>) {
-  return useQuery<Categories>(ALL_CATEGORY, options);
-}
+// export function useCategories(options?: QueryHookOptions<Categories>) {
+//   return useQuery<Categories>(ALL_CATEGORY, options);
+// }
 
 export const useFilterCategories = () => {
   const client = useApolloClient();
   const { currentTransactionType } = useOperationsFilters();
 
   async function filterCategory(value: string) {
-    const { data } = await client.query<Categories>({
-      query: ALL_CATEGORY,
+    const { data } = await client.query<FilterCategoriesQuery, FilterCategoriesQueryVariables>({
+      query: FilterCategoriesDocument,
       variables: { name: value, type: currentTransactionType },
     });
 
     if (data?.categories.data) {
-      return data.categories.data.map((category: Category) => ({
-        value: category.id,
-        label: category.name,
+      return data.categories.data.map((category) => ({
+        value: category!.id,
+        label: category!.name,
       }));
     }
 

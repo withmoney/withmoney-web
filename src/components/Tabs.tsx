@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { ArrowCircleDown } from '@styled-icons/fa-solid';
-import { Sync } from '@styled-icons/evaicons-solid';
-import { ShoppingCart, CreditCard } from '@styled-icons/entypo';
+import { ShoppingCart } from '@styled-icons/entypo';
 import { Filter } from '@styled-icons/fa-solid/Filter';
 import { useOperationsFilters } from 'hooks/useOperationsFilters';
 import ButtonIcon from 'components/ButtonIcon';
@@ -21,9 +20,9 @@ export const Tabs = ({ filterVisibility, onToggleFilterVisibility }: Props) => {
       <Button
         type="button"
         onClick={() => {
-          setCurrentTransactionType(TransactionType.Deposit);
+          setCurrentTransactionType(TransactionType.Income);
         }}
-        open={currentTransactionType === TransactionType.Deposit}
+        open={currentTransactionType === TransactionType.Income}
         operationType={currentTransactionType}
       >
         <ArrowCircleDown />
@@ -32,32 +31,15 @@ export const Tabs = ({ filterVisibility, onToggleFilterVisibility }: Props) => {
       <Button
         type="button"
         onClick={() => {
-          setCurrentTransactionType(TransactionType.FixedExpense);
+          setCurrentTransactionType(TransactionType.Expense);
         }}
-        open={currentTransactionType === TransactionType.FixedExpense}
-        operationType={currentTransactionType}
-      >
-        <Sync />
-        {t('recurrentExpenses')}
-      </Button>
-      <Button
-        onClick={() => setCurrentTransactionType(TransactionType.VariableExpense)}
-        open={currentTransactionType === TransactionType.VariableExpense}
+        open={currentTransactionType === TransactionType.Expense}
         operationType={currentTransactionType}
       >
         <ShoppingCart />
+        {t('expenses')}
+      </Button>
 
-        {t('otherExpenses')}
-      </Button>
-      <Button
-        type="button"
-        onClick={() => setCurrentTransactionType(TransactionType.CreditCard)}
-        open={currentTransactionType === TransactionType.CreditCard}
-        operationType={currentTransactionType}
-      >
-        <CreditCard />
-        {t('creditCardExpenses')}
-      </Button>
       <RightSection>
         <ButtonIcon type="button" variation="light" onClick={onToggleFilterVisibility}>
           <Filter size={16} /> <span>{filterVisibility ? t('hide') : t('show')}</span>

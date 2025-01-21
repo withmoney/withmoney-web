@@ -16,7 +16,7 @@ import { useUser } from 'hooks/useUser';
 import { useAccountFilters } from 'hooks/useAccountFilters';
 import { languageValue } from 'constants/Langs';
 import { useOperations } from 'hooks/useOperations';
-import { useCategories } from 'hooks/useCategories';
+import { useFilterCategoriesQuery } from 'graphql-service/hooks';
 
 const sumOperation = (accumulateValue: number, category: { value: number }) => {
   return accumulateValue + category.value;
@@ -25,15 +25,12 @@ const sumOperation = (accumulateValue: number, category: { value: number }) => {
 const Reports = () => {
   const { data } = useUser();
   const { data: dataOperations } = useOperations();
-  const { data: dataCategories } = useCategories();
+  const { data: dataCategories } = useFilterCategoriesQuery();
   const { currentAccount } = useAccountFilters();
   const { currentDateTime } = useOperationsFilters();
   const [filterBy, setFilterBy] = useState<'incomes' | 'expenses'>('expenses');
-  const categories = filterCategories(
-    filterBy,
-    dataCategories?.categories?.data,
-    dataOperations?.operations,
-  );
+  const categoriesList = dataCategories?.categories?.data ?? [];
+  const categories = filterCategories(filterBy, categoriesList, dataOperations?.operations);
 
   return (
     <Page>

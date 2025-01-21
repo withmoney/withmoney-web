@@ -3,6 +3,16 @@ import * as Types from './types';
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
+export const CategoryFieldsFragmentDoc = gql`
+  fragment CategoryFields on Category {
+    id
+    name
+    type
+    createdAt
+    updatedAt
+    deletedAt
+  }
+`;
 export const OperationFieldsFragmentDoc = gql`
   fragment OperationFields on Operation {
     id
@@ -672,16 +682,14 @@ export const FilterCategoriesDocument = gql`
       orderBy: [{ name: asc }]
     ) {
       data {
-        id
-        name
-        type
-        deletedAt
+        ...CategoryFields
       }
       pagination {
         totalItems
       }
     }
   }
+  ${CategoryFieldsFragmentDoc}
 `;
 
 /**
@@ -827,8 +835,8 @@ export type GetUniqueCategoryQueryResult = Apollo.QueryResult<
   Types.GetUniqueCategoryQueryVariables
 >;
 export const CreateCategoryDocument = gql`
-  mutation createCategory($name: String!, $type: TransactionType!) {
-    createOneCategory(data: { name: $name, type: $type }) {
+  mutation CreateCategory($input: CategoryCreateInput!) {
+    createOneCategory(data: $input) {
       id
       name
     }
@@ -852,8 +860,7 @@ export type CreateCategoryMutationFn = Apollo.MutationFunction<
  * @example
  * const [createCategoryMutation, { data, loading, error }] = useCreateCategoryMutation({
  *   variables: {
- *      name: // value for 'name'
- *      type: // value for 'type'
+ *      input: // value for 'input'
  *   },
  * });
  */
@@ -973,8 +980,8 @@ export type RestoreCategoryMutationOptions = Apollo.BaseMutationOptions<
   Types.RestoreCategoryMutationVariables
 >;
 export const UpdateCategoryDocument = gql`
-  mutation updateCategory($id: ID!, $name: String!, $type: TransactionType!) {
-    updateOneCategory(where: { id: $id }, data: { name: $name, type: $type }) {
+  mutation UpdateCategory($id: ID!, $input: CategoryUpdateInput!) {
+    updateOneCategory(where: { id: $id }, data: $input) {
       id
       name
     }
@@ -999,8 +1006,7 @@ export type UpdateCategoryMutationFn = Apollo.MutationFunction<
  * const [updateCategoryMutation, { data, loading, error }] = useUpdateCategoryMutation({
  *   variables: {
  *      id: // value for 'id'
- *      name: // value for 'name'
- *      type: // value for 'type'
+ *      input: // value for 'input'
  *   },
  * });
  */

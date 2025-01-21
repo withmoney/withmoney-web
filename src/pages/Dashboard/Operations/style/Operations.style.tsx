@@ -24,7 +24,7 @@ export const ButtonContent = styled.div`
 `;
 
 type Props = {
-  color: 'Deposit' | 'FixedExpense' | 'CreditCard' | 'VariableExpense';
+  color: 'Income' | 'Expense';
 };
 
 export const OperationButton = styled(Button)<Props>`

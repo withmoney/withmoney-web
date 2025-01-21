@@ -19,9 +19,7 @@ export default {
   },
   operations: {
     incomes: 'Entradas',
-    recurrentExpenses: 'Despesas Recorrentes',
-    otherExpenses: 'Outras Despesas',
-    creditCardExpenses: 'Despesas de Cartões de Créditos',
+    expenses: 'Recorrentes',
     message: {
       operationDeleted: 'Operação Excluída. Clique aqui para restaurar!',
     },
@@ -33,10 +31,8 @@ export default {
     creditCard: 'Cartão de Crédito',
     value: 'Valor',
     action: 'Ação',
-    addDeposit: 'Adicionar Entrada',
-    addFixedExpense: 'Adicionar Despesa',
-    addCreditCard: 'Adicionar Despesa',
-    addVariableExpense: 'Adicionar Despesa',
+    addIncome: 'Adicionar Entrada',
+    addExpense: 'Adicionar Despesa',
     allIncomes: 'Total entradas',
     pendingExpenses: 'Despesas pendentes',
     paidExpenses: 'Despesas pagas',
@@ -71,8 +67,7 @@ export default {
   sidebar: {
     balance: 'Saldo',
     incomes: 'Entradas',
-    recurrentExpenses: 'Despesas Recorrentes',
-    otherExpenses: 'Outras Despesas',
+    expenses: 'Despesas',
     paid: 'Pago',
     total: 'Total',
     creditCards: 'Cartão de Crédito',

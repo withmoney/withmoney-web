@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import Flex from 'components/Flex';
 import LoadingData from 'components/LoadingData';
-import { useOperationsFilters } from 'hooks/useOperationsFilters';
-import { TransactionType } from 'graphql-service/types';
+// import { useOperationsFilters } from 'hooks/useOperationsFilters';
+// import { TransactionType } from 'graphql-service/types';
 
 type Props = {
   isLoading: boolean;
@@ -11,7 +11,8 @@ type Props = {
 
 const DataPlaceholder = ({ isLoading, rows = 2 }: Props) => {
   const Rows = Array.from({ length: rows });
-  const { currentTransactionType } = useOperationsFilters();
+  // const { currentTransactionType } = useOperationsFilters();
+
   if (isLoading) {
     return Rows.map((_, rowIndex) => (
       <Row key={rowIndex} alignItems="center">
@@ -27,11 +28,11 @@ const DataPlaceholder = ({ isLoading, rows = 2 }: Props) => {
         <Cell flex="1">
           <LoadingData />
         </Cell>
-        {currentTransactionType === TransactionType.CreditCard && (
+        {/* {currentTransactionType === TransactionType.CreditCard && (
           <Cell width="200px">
             <LoadingData />
           </Cell>
-        )}
+        )} */}
         <Cell width="200px">
           <LoadingData />
         </Cell>

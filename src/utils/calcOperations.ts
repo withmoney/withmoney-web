@@ -22,7 +22,7 @@ export const getCalcOperationsByType = (
 
 export const getTotalOperations = (operations: OperationFieldsFragment[]) => {
   const operationFiltered = operations.filter(
-    (operation) => operation.type === TransactionType.Deposit,
+    (operation) => operation.type === TransactionType.Income,
   );
   const total = operationFiltered.reduce(sumOperation, 0);
   return total;
@@ -30,10 +30,7 @@ export const getTotalOperations = (operations: OperationFieldsFragment[]) => {
 
 export const getTotalPaidExpenses = (operations: OperationFieldsFragment[]) => {
   const operationFiltered = operations.filter(
-    (operation) =>
-      (operation.type === TransactionType.FixedExpense ||
-        operation.type === TransactionType.VariableExpense) &&
-      operation.isPaid === true,
+    (operation) => operation.type === TransactionType.Expense && operation.isPaid === true,
   );
   const total = operationFiltered.reduce(sumOperation, 0);
   return total;
@@ -41,26 +38,23 @@ export const getTotalPaidExpenses = (operations: OperationFieldsFragment[]) => {
 
 export const getTotalPendingExpenses = (operations: OperationFieldsFragment[]) => {
   const operationFiltered = operations.filter(
-    (operation) =>
-      (operation.type === TransactionType.FixedExpense ||
-        operation.type === TransactionType.VariableExpense) &&
-      operation.isPaid === false,
+    (operation) => operation.type === TransactionType.Expense && operation.isPaid === false,
   );
   const total = operationFiltered.reduce(sumOperation, 0);
   return total;
 };
 
-export const getTotalCreditCardExpenses = (operations: OperationFieldsFragment[]) => {
-  const operationFiltered = operations.filter(
-    (operation) => operation.type === TransactionType.CreditCard,
-  );
-  const total = operationFiltered.reduce(sumOperation, 0);
-  return total;
-};
+// export const getTotalCreditCardExpenses = (operations: OperationFieldsFragment[]) => {
+//   const operationFiltered = operations.filter(
+//     (operation) => operation.type === TransactionType.CreditCard,
+//   );
+//   const total = operationFiltered.reduce(sumOperation, 0);
+//   return total;
+// };
 
 export const PlannedBalance = (operations: OperationFieldsFragment[]) => {
-  const allIncomes = operations.filter((operation) => operation.type === TransactionType.Deposit);
-  const allExpenses = operations.filter((operation) => operation.type !== TransactionType.Deposit);
+  const allIncomes = operations.filter((operation) => operation.type === TransactionType.Income);
+  const allExpenses = operations.filter((operation) => operation.type !== TransactionType.Income);
   const totalAllIncomes = allIncomes.reduce(sumOperation, 0);
   const total = allExpenses.reduce(subOperation, totalAllIncomes);
   return total;

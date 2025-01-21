@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 import { Row, Cell } from 'pages/Dashboard/Operations/Operation/style/OperationSettings';
-import { useOperationsFilters } from 'hooks/useOperationsFilters';
-import { TransactionType } from 'graphql-service/types';
+// import { useOperationsFilters } from 'hooks/useOperationsFilters';
+// import { TransactionType } from 'graphql-service/types';
 
 type Props = {
   onClick: () => void;
 };
 
 const OperationPlaceholder = ({ onClick }: Props) => {
-  const { currentTransactionType } = useOperationsFilters();
+  // const { currentTransactionType } = useOperationsFilters();
+
   return (
     <Row cursorHover onClick={onClick} alignItems="center">
       <Cell width="80px">
@@ -23,11 +24,11 @@ const OperationPlaceholder = ({ onClick }: Props) => {
       <Cell flex="1">
         <CellPlaceholder />
       </Cell>
-      {currentTransactionType === TransactionType.CreditCard && (
+      {/* {currentTransactionType === TransactionType.CreditCard && (
         <Cell width="200px">
           <CellPlaceholder />
         </Cell>
-      )}
+      )} */}
       <Cell width="200px">
         <CellPlaceholder />
       </Cell>

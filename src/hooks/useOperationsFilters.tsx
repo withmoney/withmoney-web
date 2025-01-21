@@ -27,7 +27,7 @@ const OperationsFiltersContext = createContext<OperationsFiltersContext>({
 export default function OperationsFiltersProvider({ children }: Props) {
   const [currentDateTime, setCurrentDateTime] = useState<DateTime>(DateTime.local());
   const [currentTransactionType, setCurrentTransactionType] = useState<TransactionType>(
-    TransactionType.Deposit,
+    TransactionType.Income,
   );
   const [categoryId, setCategoryId] = useState<string | null>(null);
 

@@ -11,23 +11,30 @@ import Button from 'components/Button';
 import Select from 'components/Select';
 import LoadingSpinner from 'components/LoadingSpinner';
 import Alert from 'components/Alert';
-import { operationType } from 'constants/Transactions';
-import { useUniqueCategory, useUpdateCategory } from 'hooks/useCategories';
+import { transactionType } from 'constants/Transactions';
+import { useUniqueCategory } from 'hooks/useCategories';
 import { checkCategories } from 'schema/checkField';
+import { FilterCategoriesDocument, useUpdateCategoryMutation } from 'graphql-service/hooks';
+import { z } from 'zod';
+import { TransactionType } from 'graphql-service/types';
 
 type Category = {
   id: string;
   name: string;
   type: string;
+  operationType: string;
 };
 
-const initialValues = { id: '', name: '', type: '' };
+const initialValues = { id: '', name: '', type: '', operationType: '' };
 
 const UpdateCategory = () => {
   const history = useHistory();
   const { id } = useParams<{ id: string }>();
   const { data, loading, error } = useUniqueCategory(id);
-  const { updateCategory, loading: loadingUpdate } = useUpdateCategory();
+  const [updateCategory, { loading: loadingUpdate }] = useUpdateCategoryMutation({
+    refetchQueries: [{ query: FilterCategoriesDocument }],
+  });
+
   const [form, setForm] = useState<Category>(initialValues);
   const [formErrors, setFormErrors] = useState(initialValues);
   const [formValidate, setFormValidate] = useState(false);
@@ -38,6 +45,7 @@ const UpdateCategory = () => {
         id: id,
         name: data?.findUniqueCategory.name,
         type: data?.findUniqueCategory.type,
+        operationType: data?.findUniqueCategory.operationType,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -52,14 +60,18 @@ const UpdateCategory = () => {
   };
 
   const handleBlur = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name } = event.target;
+    const { name, value } = event.target;
+
     try {
-      await checkCategories.validateAt(name, form);
+      const fieldSchema = checkCategories.shape[name as keyof typeof checkCategories.shape];
+      fieldSchema.parse(value);
+
       setFormErrors({ ...formErrors, [name]: '' });
-      setFormValidate(await checkCategories.isValid(form));
+      setFormValidate(checkCategories.safeParse(form).success);
     } catch (err) {
-      if (err instanceof Error) {
-        setFormErrors({ ...formErrors, [name]: err.message });
+      if (err instanceof z.ZodError) {
+        const fieldError = err.errors.find((e) => e.path[0] === name)?.message || 'Invalid value';
+        setFormErrors({ ...formErrors, [name]: fieldError });
       }
     }
   };
@@ -70,8 +82,10 @@ const UpdateCategory = () => {
       await updateCategory({
         variables: {
           id,
-          name: form.name,
-          type: form.type,
+          input: {
+            name: form.name,
+            type: form.type as TransactionType,
+          },
         },
       });
       toast.success(`Category ${data.findUniqueCategory.name} was been updated to ${form.name}!`, {
@@ -115,7 +129,7 @@ const UpdateCategory = () => {
                   name="type"
                 >
                   <option value="">Select category type</option>
-                  {operationType.map((operation) => (
+                  {transactionType.map((operation) => (
                     <option key={operation.toString()} value={operation}>
                       {operation}
                     </option>

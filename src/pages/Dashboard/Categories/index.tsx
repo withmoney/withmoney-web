@@ -6,25 +6,25 @@ import Text from 'components/Text';
 import Input from 'components/Input';
 import { Page, PageHeader } from 'pages/Dashboard/style/SubPages.style';
 import { Row, Cell, PageBodyColumns, PageBody } from 'pages/Dashboard/style/SubPages.style';
-import { useCategories } from 'hooks/useCategories';
 import { useDeleteCategory, useRestoreCategory } from 'hooks/useCategories';
 import LoadingData from 'components/LoadingData';
 import Button from 'components/Button';
 import ButtonLink from 'components/ButtonLink';
 import ConfirmModal from 'modals/ConfirmModal';
-import { Category } from 'models';
 import Pagination from 'components/Pagination';
+import { useFilterCategoriesQuery } from 'graphql-service/hooks';
+import { CategoryFieldsFragment } from 'graphql-service/types';
 
 const initialValues = {
   filterName: '',
 };
 
-const ItemsPerPage = 5;
+const ItemsPerPage = 10;
 
 const Categories = () => {
   const [currentPage, setCurrentPage] = useState(0);
   const [filter, setFilter] = useState(initialValues);
-  const { data, loading, refetch } = useCategories({
+  const { data, loading, refetch } = useFilterCategoriesQuery({
     variables: { name: filter.filterName, skip: currentPage * ItemsPerPage, take: ItemsPerPage },
     fetchPolicy: 'network-only',
   });
@@ -32,7 +32,7 @@ const Categories = () => {
   const { deleteCategory, loading: loadingDelete } = useDeleteCategory();
   const { restoreCategory } = useRestoreCategory();
   const [openModal, setOpenModal] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<Category | undefined>();
+  const [selectedCategory, setSelectedCategory] = useState<CategoryFieldsFragment | undefined>();
 
   const handleChangeFilter = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -79,7 +79,7 @@ const Categories = () => {
     }
   };
 
-  const toggleDeleteCategory = (category: Category) => {
+  const toggleDeleteCategory = (category: CategoryFieldsFragment) => {
     setSelectedCategory(category);
     setOpenModal(true);
   };
@@ -120,6 +120,9 @@ const Categories = () => {
             <Text>Type</Text>
           </Cell>
           <Cell>
+            <Text>Operation Type</Text>
+          </Cell>
+          <Cell>
             <Text>Action</Text>
           </Cell>
         </Row>
@@ -127,7 +130,8 @@ const Categories = () => {
           <LoadingData repeat={ItemsPerPage} />
         ) : (
           data?.categories.data &&
-          data.categories.data.map((category: Category) => {
+          data.categories.data.map((category) => {
+            if (!category) return null;
             return (
               <Row key={category.id}>
                 <Cell>
@@ -162,7 +166,7 @@ const Categories = () => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
           itemsPerPage={ItemsPerPage}
-          totalItems={data.categories.pagination.totalItems}
+          totalItems={data.categories.pagination?.totalItems ?? 0}
         />
       )}
     </Page>

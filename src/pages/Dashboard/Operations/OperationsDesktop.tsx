@@ -53,9 +53,9 @@ export const OperationsDesktop = ({
           <CellHeader width="130px">{t('date')}</CellHeader>
           <CellHeader flex="1">{t('name')}</CellHeader>
           <CellHeader flex="1">{t('category')}</CellHeader>
-          {currentTransactionType === TransactionType.CreditCard && (
+          {/* {currentTransactionType === TransactionType.CreditCard && (
             <CellHeader width="200px">{t('creditCard')}</CellHeader>
-          )}
+          )} */}
           <CellHeader width="200px">{t('value')}</CellHeader>
           <CellHeader width="56px">{t('action')}</CellHeader>
         </RowHeader>
@@ -73,7 +73,7 @@ export const OperationsDesktop = ({
         <ButtonContent>
           <OperationButton
             variation="primary"
-            color={currentTransactionType || 'Deposit'}
+            color={currentTransactionType || 'Income'}
             disabled={loadingCreate}
             onClick={handleCreateOperation}
             type="button"
@@ -81,14 +81,14 @@ export const OperationsDesktop = ({
           >
             {loadingCreate ? (
               <LoadingSpinner inButton size="20px" />
-            ) : currentTransactionType === 'Deposit' ? (
+            ) : currentTransactionType === 'Income' ? (
               <PlusCircle />
             ) : (
               <MinusCircle />
             )}
             <span>
               <Text variation="white">
-                {t(addOperationText[currentTransactionType || 'Deposit'])}
+                {t(addOperationText[currentTransactionType || 'Income'])}
               </Text>
             </span>
           </OperationButton>

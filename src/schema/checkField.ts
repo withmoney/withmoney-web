@@ -1,12 +1,27 @@
+import { z } from 'zod';
 import * as yup from 'yup';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 /* @ts-ignore */
 import isStrongPassword from 'validator/lib/isStrongPassword';
+import { TransactionType } from 'graphql-service/types';
 
-export const checkCategories = yup.object().shape({
-  name: yup.string().required('Required'),
-  type: yup.string().required('Required'),
+export const checkCategories = z.object({
+  name: z.string().nonempty('Required'),
+  type: z
+    .nativeEnum(TransactionType)
+    .refine((val) => Object.values(TransactionType).includes(val), {
+      message: 'Invalid Operation Type',
+    }),
 });
+
+// export const checkCategories = yup.object().shape({
+//   name: yup.string().required('Required'),
+//   type: yup.string().required('Required'),
+//   operationType: yup
+//     .string()
+//     .required('Required')
+//     .oneOf(operationType.flat(), 'Invalid Operation Type'),
+// });
 
 export const checkAccounts = yup.object().shape({
   name: yup.string().required('Required'),

@@ -3,6 +3,15 @@ import { gql } from '@apollo/client';
 // query
 
 export const ALL_CATEGORY = gql`
+  fragment CategoryFields on Category {
+    id
+    name
+    type
+    createdAt
+    updatedAt
+    deletedAt
+  }
+
   query filterCategories($name: String, $skip: Int, $take: Int, $type: TransactionType) {
     categories: findManyCategory(
       skip: $skip
@@ -11,10 +20,7 @@ export const ALL_CATEGORY = gql`
       orderBy: [{ name: asc }]
     ) {
       data {
-        id
-        name
-        type
-        deletedAt
+        ...CategoryFields
       }
       pagination {
         totalItems
@@ -35,8 +41,8 @@ export const GET_ONE_CATEGORY = gql`
 
 // mutations
 export const CREATE_CATEGORY = gql`
-  mutation createCategory($name: String!, $type: TransactionType!) {
-    createOneCategory(data: { name: $name, type: $type }) {
+  mutation CreateCategory($input: CategoryCreateInput!) {
+    createOneCategory(data: $input) {
       id
       name
     }
@@ -63,8 +69,8 @@ export const RESTORE_CATEGORY = gql`
 `;
 
 export const UPDATE_CATEGORY = gql`
-  mutation updateCategory($id: ID!, $name: String!, $type: TransactionType!) {
-    updateOneCategory(where: { id: $id }, data: { name: $name, type: $type }) {
+  mutation UpdateCategory($id: ID!, $input: CategoryUpdateInput!) {
+    updateOneCategory(where: { id: $id }, data: $input) {
       id
       name
     }

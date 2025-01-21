@@ -1,17 +1,17 @@
-import { useTranslation } from 'react-i18next';
-import { PlusCircle, MinusCircle } from '@styled-icons/boxicons-regular';
-import { Tabs } from 'components/Tabs';
-import DataPlaceholder from './Operation/DataPlaceholder';
-import OperationItem from './Operation/OperationItem';
-import FooterContainer from './Operation/FooterContainer';
-import OperationPlaceholder from './Operation/OperationPlaceholder';
-import { Container, OperationContainer, ButtonContent } from './style/Operations.style';
-import { OperationButton } from './style/Operations.style';
-import { RowHeader, CellHeader } from './Operation/style/OperationSettings';
-import { addOperationText } from 'constants/Transactions';
-import LoadingSpinner from 'components/LoadingSpinner';
-import Text from 'components/Text';
-import OperationFilter from './OperationFilter';
+// import { useTranslation } from 'react-i18next';
+// import { PlusCircle, MinusCircle } from '@styled-icons/boxicons-regular';
+// import { Tabs } from 'components/Tabs';
+// import DataPlaceholder from './Operation/DataPlaceholder';
+// import OperationItem from './Operation/OperationItem';
+// import FooterContainer from './Operation/FooterContainer';
+// import OperationPlaceholder from './Operation/OperationPlaceholder';
+// import { Container, OperationContainer, ButtonContent } from './style/Operations.style';
+// import { OperationButton } from './style/Operations.style';
+// import { RowHeader, CellHeader } from './Operation/style/OperationSettings';
+// import { addOperationText } from 'constants/Transactions';
+// import LoadingSpinner from 'components/LoadingSpinner';
+// import Text from 'components/Text';
+// import OperationFilter from './OperationFilter';
 import { OperationFieldsFragment, TransactionType } from 'graphql-service/types';
 
 type OperationsMobileProps = {
@@ -28,18 +28,18 @@ type OperationsMobileProps = {
 };
 
 export const OperationsMobile = ({
-  filterVisibility,
-  toggleFilterVisibility,
-  currentTransactionType,
-  onChangeCategoryFilter,
+  // filterVisibility,
+  // toggleFilterVisibility,
+  // currentTransactionType,
+  // onChangeCategoryFilter,
   operations,
-  loading,
-  setModalIsOpen,
-  setSelectOperation,
-  loadingCreate,
-  handleCreateOperation,
+  // loading,
+  // setModalIsOpen,
+  // setSelectOperation,
+  // loadingCreate,
+  // handleCreateOperation,
 }: OperationsMobileProps) => {
-  const { t } = useTranslation('operations');
+  // const { t } = useTranslation('operations');
 
   return (
     <div>

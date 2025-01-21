@@ -9,14 +9,13 @@ import CheckBox from 'components/Checkbox';
 import DatePicker from 'components/DatePicker';
 import InputOperations from './InputOptions';
 import CategorySelect from './CategorySelect';
-import CreditCardSelect from './CreditCardSelect';
 import InputCurrency from 'components/InputCurrency';
 import { Operation } from 'models';
 import { TrashFill } from '@styled-icons/bootstrap';
 import { Row, Cell } from 'pages/Dashboard/Operations/Operation/style/OperationSettings';
 import { useAccountFilters } from 'hooks/useAccountFilters';
 import LoadingData from 'components/LoadingData';
-import { OperationFieldsFragment, TransactionType } from 'graphql-service/types';
+import { OperationFieldsFragment } from 'graphql-service/types';
 
 type OperationItemProps = {
   operation: OperationFieldsFragment;
@@ -97,11 +96,11 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
         <Cell flex="1">
           <CategorySelect operation={operation} CategoryId={operation.categoryId ?? null} />
         </Cell>
-        {operation.type === TransactionType.CreditCard && (
+        {/* {operation.type === TransactionType.CreditCard && (
           <Cell width="200px">
             <CreditCardSelect operation={operation} />
           </Cell>
-        )}
+        )} */}
         <Cell width="200px">
           <InputCurrency
             onChange={toggleInputCurrency}

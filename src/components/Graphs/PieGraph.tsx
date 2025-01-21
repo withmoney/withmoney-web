@@ -1,13 +1,12 @@
 import { EChartsOption } from 'echarts';
 import ReactECharts from 'echarts-for-react';
 import { filterCategories } from 'utils/FilterOperations';
-import { Category } from 'models';
-import { OperationFieldsFragment } from 'graphql-service/types';
+import { CategoryFieldsFragment, OperationFieldsFragment } from 'graphql-service/types';
 
 type Props = {
   type: 'incomes' | 'expenses';
   operations?: OperationFieldsFragment[];
-  categories?: Category[];
+  categories?: CategoryFieldsFragment[];
 };
 
 const PieGraph = ({ type, operations, categories }: Props) => {

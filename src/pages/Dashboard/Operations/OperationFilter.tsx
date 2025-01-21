@@ -21,7 +21,7 @@ const OperationFilter = ({ type, onChange }: Props) => {
         <CellHeader flex="1">
           <CategorySearch type={type} onChange={onChange} />
         </CellHeader>
-        {type === TransactionType.CreditCard && <CellHeader width="200px"></CellHeader>}
+        {/* {type === TransactionType.CreditCard && <CellHeader width="200px"></CellHeader>} */}
         <CellHeader width="200px"></CellHeader>
         <CellHeader width="56px"></CellHeader>
       </RowHeader>

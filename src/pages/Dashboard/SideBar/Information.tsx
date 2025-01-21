@@ -13,20 +13,20 @@ const Information = () => {
 
   const [totalPaidDeposit, totalDeposit] = getCalcOperationsByType(
     operations,
-    TransactionType.Deposit,
+    TransactionType.Income,
   );
-  const [totalPaidCreditCard, totalCreditCard] = getCalcOperationsByType(
-    operations,
-    TransactionType.CreditCard,
-  );
+  // const [totalPaidCreditCard, totalCreditCard] = getCalcOperationsByType(
+  //   operations,
+  //   TransactionType.CreditCard,
+  // );
   const [totalPaidFixedExpense, totalFixedExpense] = getCalcOperationsByType(
     operations,
-    TransactionType.FixedExpense,
+    TransactionType.Expense,
   );
-  const [totalPaidVariableExpense, totalVariableExpense] = getCalcOperationsByType(
-    operations,
-    TransactionType.VariableExpense,
-  );
+  // const [totalPaidVariableExpense, totalVariableExpense] = getCalcOperationsByType(
+  //   operations,
+  //   TransactionType.VariableExpense,
+  // );
 
   return (
     <InformationContainer>
@@ -38,21 +38,9 @@ const Information = () => {
       />
       <Info
         variation="FixedExpense"
-        name={t('recurrentExpenses')}
+        name={t('expenses')}
         current={totalPaidFixedExpense}
         desired={totalFixedExpense}
-      />
-      <Info
-        variation="VariableExpense"
-        name={t('otherExpenses')}
-        current={totalPaidVariableExpense}
-        desired={totalVariableExpense}
-      />
-      <Info
-        variation="CreditCard"
-        name="Credit Card Expenses"
-        current={totalPaidCreditCard}
-        desired={totalCreditCard}
       />
     </InformationContainer>
   );

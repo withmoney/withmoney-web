@@ -11,9 +11,10 @@ import LoadingSpinner from 'components/LoadingSpinner';
 import InputControl from 'components/InputControl';
 import Select from 'components/Select';
 import { PageHeader, Page, PageBody } from 'pages/Dashboard/style/SubPages.style';
-import { operationType } from 'constants/Transactions';
+import { transactionType } from 'constants/Transactions';
 import { checkCategories } from 'schema/checkField';
 import { useCreateCategory } from 'hooks/useCategories';
+import { z } from 'zod';
 
 const initialValues = {
   name: '',
@@ -36,20 +37,25 @@ const AddCategory = () => {
   };
 
   const handleBlur = async (event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name } = event.target;
+    const { name, value } = event.target;
+
     try {
-      await checkCategories.validateAt(name, form);
+      const fieldSchema = checkCategories.shape[name as keyof typeof checkCategories.shape];
+      fieldSchema.parse(value);
+
       setFormErrors({ ...formErrors, [name]: '' });
+      setFormValidate(checkCategories.safeParse(form).success);
     } catch (err) {
-      if (err instanceof Error) {
-        setFormErrors({ ...formErrors, [name]: err.message });
+      if (err instanceof z.ZodError) {
+        const fieldError = err.errors.find((e) => e.path[0] === name)?.message || 'Invalid value';
+        setFormErrors({ ...formErrors, [name]: fieldError });
       }
     }
   };
 
   useEffect(() => {
     const checkForm = async () => {
-      setFormValidate(await checkCategories.isValid(form));
+      setFormValidate(checkCategories.safeParse(form).success);
     };
     checkForm();
   });
@@ -97,7 +103,7 @@ const AddCategory = () => {
                 style={{ width: '100%' }}
               >
                 <option value="">Select operation type</option>
-                {operationType.map((operation) => (
+                {transactionType.map((operation) => (
                   <option key={operation.toString()} value={operation}>
                     {operation}
                   </option>
