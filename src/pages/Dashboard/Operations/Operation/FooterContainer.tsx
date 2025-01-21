@@ -7,7 +7,6 @@ import { PlannedBalance, getTotalOperations } from 'utils/calcOperations';
 import { getTotalPaidExpenses /*, getTotalCreditCardExpenses*/ } from 'utils/calcOperations';
 import { InfoContainer, InfoWrapper, Info } from './style/FooterContainer.style';
 import { IncomesIcons, PaidExpenses, PendingExpensesIcons } from './style/FooterContainer.style';
-import { CreditCardExpenses } from './style/FooterContainer.style';
 import { InfoTitle, InfoValue } from './style/FooterContainer.style';
 import { useAccountFilters } from 'hooks/useAccountFilters';
 import { useUserLanguage } from 'hooks/useUser';
@@ -57,10 +56,6 @@ const FooterContainer = () => {
             <Text>
               {t('allExpenses')}
               <PendingExpensesIcons />
-            </Text>
-            <Text>
-              {t('allCreditCardExpenses')}
-              <CreditCardExpenses />
             </Text>
           </InfoTitle>
           {currentAccount && language && (

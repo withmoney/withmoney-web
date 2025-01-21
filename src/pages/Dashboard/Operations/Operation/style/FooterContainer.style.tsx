@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import Text from 'components/Text';
 import { ArrowCircleDown, ArrowCircleUp, Check } from '@styled-icons/fa-solid/';
-import { CreditCard } from '@styled-icons/boxicons-regular';
 
 export const InfoContainer = styled.div`
   display: flex;
@@ -52,11 +51,5 @@ export const PaidExpenses = styled(Check)`
 export const PendingExpensesIcons = styled(ArrowCircleUp)`
   width: 20px;
   color: var(--dashboard-progress-bar-FixedExpense);
-  margin-left: 10px;
-`;
-
-export const CreditCardExpenses = styled(CreditCard)`
-  width: 20px;
-  color: var(--dashboard-progress-bar-CreditCard);
   margin-left: 10px;
 `;

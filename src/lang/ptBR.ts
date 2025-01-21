@@ -36,7 +36,6 @@ export default {
     allIncomes: 'Total entradas',
     pendingExpenses: 'Despesas pendentes',
     paidExpenses: 'Despesas pagas',
-    allCreditCardExpenses: 'Total cartões de crédito',
     allExpenses: 'Total despesas',
     plannedMonthBalance: 'Saldo planejado do mês',
     hide: 'Fechar',

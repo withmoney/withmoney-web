@@ -36,7 +36,6 @@ export default {
     allIncomes: 'Total Incomes',
     pendingExpenses: 'Pending Expenses',
     paidExpenses: 'Paid Expenses',
-    allCreditCardExpenses: 'Total Credit Card',
     allExpenses: 'Total Expenses',
     plannedMonthBalance: 'Planned Month Balance',
     hide: 'Hide',
