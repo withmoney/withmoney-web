@@ -25,6 +25,10 @@ const Settings = () => {
         <CreditCard />
         <Text>{t('creditCards')}</Text>
       </MenuButton>
+      <MenuButton open={pathname === '/payment-methods'} to="/payment-methods">
+        <CreditCard />
+        <Text>{t('paymentMethods')}</Text>
+      </MenuButton>
     </MenuSettings>
   );
 };

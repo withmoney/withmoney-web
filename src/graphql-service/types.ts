@@ -220,6 +220,7 @@ export type DateTimeFilter = {
   gte?: InputMaybe<Scalars['DateTime']['input']>;
   lt?: InputMaybe<Scalars['DateTime']['input']>;
   lte?: InputMaybe<Scalars['DateTime']['input']>;
+  not?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type FilterString = {
@@ -249,6 +250,10 @@ export type Mutation = {
   deleteOneCreditCard?: Maybe<CreditCard>;
   deleteOneOperation?: Maybe<Operation>;
   login?: Maybe<AuthPayloada>;
+  paymentMethodCreateOne: PaymentMethodSingleResult;
+  paymentMethodDeleteOne?: Maybe<PaymentMethodSingleResult>;
+  paymentMethodRestoreOne?: Maybe<PaymentMethodSingleResult>;
+  paymentMethodUpdateOne: PaymentMethodSingleResult;
   register?: Maybe<Scalars['String']['output']>;
   requestChangePassword?: Maybe<Scalars['String']['output']>;
   restoreOneAccount?: Maybe<Account>;
@@ -313,6 +318,23 @@ export type MutationLoginArgs = {
   password: Scalars['String']['input'];
 };
 
+export type MutationPaymentMethodCreateOneArgs = {
+  input: PaymentMethodCreateInput;
+};
+
+export type MutationPaymentMethodDeleteOneArgs = {
+  where: PaymentMethodWhereUniqueInput;
+};
+
+export type MutationPaymentMethodRestoreOneArgs = {
+  where: PaymentMethodWhereUniqueInput;
+};
+
+export type MutationPaymentMethodUpdateOneArgs = {
+  id: Scalars['String']['input'];
+  input: PaymentMethodUpdateInput;
+};
+
 export type MutationRegisterArgs = {
   user: RegisterInput;
 };
@@ -375,6 +397,8 @@ export type Operation = {
   isPaid: Scalars['Boolean']['output'];
   name: Scalars['String']['output'];
   paidAt?: Maybe<Scalars['DateTime']['output']>;
+  paymentMethod?: Maybe<PaymentMethodSingleResult>;
+  paymentMethodId?: Maybe<Scalars['String']['output']>;
   type: TransactionType;
   updatedAt: Scalars['DateTime']['output'];
   user: User;
@@ -389,6 +413,7 @@ export type OperationCreateInput = {
   isPaid: Scalars['Boolean']['input'];
   name: Scalars['String']['input'];
   paidAt?: InputMaybe<Scalars['DateTime']['input']>;
+  paymentMethodId?: InputMaybe<Scalars['String']['input']>;
   type: TransactionType;
   value: Scalars['Float']['input'];
 };
@@ -408,6 +433,7 @@ export type OperationUpdateInput = {
   isPaid: Scalars['Boolean']['input'];
   name: Scalars['String']['input'];
   paidAt?: InputMaybe<Scalars['DateTime']['input']>;
+  paymentMethodId?: InputMaybe<Scalars['String']['input']>;
   type: TransactionType;
   value: Scalars['Float']['input'];
 };
@@ -431,6 +457,55 @@ export type Pagination = {
   totalItems?: Maybe<Scalars['Int']['output']>;
 };
 
+export type PaymentMethod = {
+  __typename?: 'PaymentMethod';
+  accountId: Scalars['String']['output'];
+  createdAt: Scalars['DateTime']['output'];
+  deletedAt?: Maybe<Scalars['DateTime']['output']>;
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+  updatedAt: Scalars['DateTime']['output'];
+  userId: Scalars['String']['output'];
+};
+
+export type PaymentMethodCreateInput = {
+  accountId: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+};
+
+export type PaymentMethodListResult = {
+  __typename?: 'PaymentMethodListResult';
+  data: Array<PaymentMethod>;
+  pagination?: Maybe<Pagination>;
+};
+
+export type PaymentMethodOrderByInput = {
+  createdAt?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SortOrder>;
+};
+
+export type PaymentMethodSingleResult = {
+  __typename?: 'PaymentMethodSingleResult';
+  data?: Maybe<PaymentMethod>;
+};
+
+export type PaymentMethodUpdateInput = {
+  accountId: Scalars['String']['input'];
+  name: Scalars['String']['input'];
+};
+
+export type PaymentMethodWhereInput = {
+  accountId?: InputMaybe<IdFilter>;
+  createdAt?: InputMaybe<DateTimeFilter>;
+  deletedAt?: InputMaybe<DateTimeFilter>;
+  name?: InputMaybe<StringFilter>;
+  updatedAt?: InputMaybe<DateTimeFilter>;
+};
+
+export type PaymentMethodWhereUniqueInput = {
+  id: Scalars['String']['input'];
+};
+
 export type Query = {
   __typename?: 'Query';
   calcManyCreditCardLimit: Array<CalcCreditCardsLimitResults>;
@@ -444,6 +519,8 @@ export type Query = {
   findUniqueCategory?: Maybe<Category>;
   findUniqueCreditCard?: Maybe<CreditCard>;
   me?: Maybe<User>;
+  paymentMethod?: Maybe<PaymentMethodSingleResult>;
+  paymentMethods?: Maybe<PaymentMethodListResult>;
 };
 
 export type QueryCalcManyCreditCardLimitArgs = {
@@ -502,6 +579,18 @@ export type QueryFindUniqueCreditCardArgs = {
   where?: InputMaybe<CreditCardWhereUniqueInput>;
 };
 
+export type QueryPaymentMethodArgs = {
+  where?: InputMaybe<PaymentMethodWhereUniqueInput>;
+};
+
+export type QueryPaymentMethodsArgs = {
+  cursor?: InputMaybe<PaymentMethodWhereUniqueInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<PaymentMethodOrderByInput>>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+  where?: InputMaybe<PaymentMethodWhereInput>;
+};
+
 export type RegisterInput = {
   currency?: InputMaybe<Currency>;
   email: Scalars['String']['input'];
@@ -520,6 +609,7 @@ export type StringFilter = {
   contains?: InputMaybe<Scalars['String']['input']>;
   endsWith?: InputMaybe<Scalars['String']['input']>;
   equals?: InputMaybe<Scalars['String']['input']>;
+  not?: InputMaybe<Scalars['String']['input']>;
   startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -903,6 +993,20 @@ export type OperationFieldsFragment = {
   accountId: string;
   categoryId?: string | null;
   creditCardId?: string | null;
+  paymentMethodId?: string | null;
+  paymentMethod?: {
+    __typename?: 'PaymentMethodSingleResult';
+    data?: {
+      __typename?: 'PaymentMethod';
+      id: string;
+      userId: string;
+      accountId: string;
+      name: string;
+      updatedAt: string;
+      deletedAt?: string | null;
+      createdAt: string;
+    } | null;
+  } | null;
 };
 
 export type GetOperationsQueryVariables = Exact<{
@@ -926,6 +1030,20 @@ export type GetOperationsQuery = {
     accountId: string;
     categoryId?: string | null;
     creditCardId?: string | null;
+    paymentMethodId?: string | null;
+    paymentMethod?: {
+      __typename?: 'PaymentMethodSingleResult';
+      data?: {
+        __typename?: 'PaymentMethod';
+        id: string;
+        userId: string;
+        accountId: string;
+        name: string;
+        updatedAt: string;
+        deletedAt?: string | null;
+        createdAt: string;
+      } | null;
+    } | null;
   }>;
   balance: { __typename?: 'CalcPreviousBalanceResult'; amount?: number | null };
 };
@@ -985,6 +1103,151 @@ export type CreateOperationMutationVariables = Exact<{
 export type CreateOperationMutation = {
   __typename?: 'Mutation';
   createOneOperation: { __typename?: 'Operation'; id: string; name: string };
+};
+
+export type PaymentMethodFieldsFragment = {
+  __typename?: 'PaymentMethod';
+  id: string;
+  userId: string;
+  accountId: string;
+  name: string;
+  updatedAt: string;
+  deletedAt?: string | null;
+  createdAt: string;
+};
+
+export type PaymentMethodsQueryVariables = Exact<{
+  where?: InputMaybe<PaymentMethodWhereInput>;
+  orderBy?: InputMaybe<
+    Array<InputMaybe<PaymentMethodOrderByInput>> | InputMaybe<PaymentMethodOrderByInput>
+  >;
+  cursor?: InputMaybe<PaymentMethodWhereUniqueInput>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+export type PaymentMethodsQuery = {
+  __typename?: 'Query';
+  paymentMethods?: {
+    __typename?: 'PaymentMethodListResult';
+    data: Array<{
+      __typename?: 'PaymentMethod';
+      id: string;
+      userId: string;
+      accountId: string;
+      name: string;
+      updatedAt: string;
+      deletedAt?: string | null;
+      createdAt: string;
+    }>;
+    pagination?: { __typename?: 'Pagination'; totalItems?: number | null } | null;
+  } | null;
+};
+
+export type PaymentMethodQueryVariables = Exact<{
+  where?: InputMaybe<PaymentMethodWhereUniqueInput>;
+}>;
+
+export type PaymentMethodQuery = {
+  __typename?: 'Query';
+  paymentMethod?: {
+    __typename?: 'PaymentMethodSingleResult';
+    data?: {
+      __typename?: 'PaymentMethod';
+      id: string;
+      userId: string;
+      accountId: string;
+      name: string;
+      updatedAt: string;
+      deletedAt?: string | null;
+      createdAt: string;
+    } | null;
+  } | null;
+};
+
+export type PaymentMethodDeleteOneMutationVariables = Exact<{
+  where: PaymentMethodWhereUniqueInput;
+}>;
+
+export type PaymentMethodDeleteOneMutation = {
+  __typename?: 'Mutation';
+  paymentMethodDeleteOne?: {
+    __typename?: 'PaymentMethodSingleResult';
+    data?: {
+      __typename?: 'PaymentMethod';
+      id: string;
+      userId: string;
+      accountId: string;
+      name: string;
+      updatedAt: string;
+      deletedAt?: string | null;
+      createdAt: string;
+    } | null;
+  } | null;
+};
+
+export type PaymentMethodRestoreOneMutationVariables = Exact<{
+  where: PaymentMethodWhereUniqueInput;
+}>;
+
+export type PaymentMethodRestoreOneMutation = {
+  __typename?: 'Mutation';
+  paymentMethodRestoreOne?: {
+    __typename?: 'PaymentMethodSingleResult';
+    data?: {
+      __typename?: 'PaymentMethod';
+      id: string;
+      userId: string;
+      accountId: string;
+      name: string;
+      updatedAt: string;
+      deletedAt?: string | null;
+      createdAt: string;
+    } | null;
+  } | null;
+};
+
+export type PaymentMethodCreateOneMutationVariables = Exact<{
+  input: PaymentMethodCreateInput;
+}>;
+
+export type PaymentMethodCreateOneMutation = {
+  __typename?: 'Mutation';
+  paymentMethodCreateOne: {
+    __typename?: 'PaymentMethodSingleResult';
+    data?: {
+      __typename?: 'PaymentMethod';
+      id: string;
+      userId: string;
+      accountId: string;
+      name: string;
+      updatedAt: string;
+      deletedAt?: string | null;
+      createdAt: string;
+    } | null;
+  };
+};
+
+export type PaymentMethodUpdateOneMutationVariables = Exact<{
+  input: PaymentMethodUpdateInput;
+  paymentMethodUpdateOneId: Scalars['String']['input'];
+}>;
+
+export type PaymentMethodUpdateOneMutation = {
+  __typename?: 'Mutation';
+  paymentMethodUpdateOne: {
+    __typename?: 'PaymentMethodSingleResult';
+    data?: {
+      __typename?: 'PaymentMethod';
+      id: string;
+      userId: string;
+      accountId: string;
+      name: string;
+      updatedAt: string;
+      deletedAt?: string | null;
+      createdAt: string;
+    } | null;
+  };
 };
 
 export type UpdateUserMutationVariables = Exact<{

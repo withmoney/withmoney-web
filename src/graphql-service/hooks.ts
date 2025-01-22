@@ -25,6 +25,29 @@ export const OperationFieldsFragmentDoc = gql`
     accountId
     categoryId
     creditCardId
+    paymentMethodId
+    paymentMethod {
+      data {
+        id
+        userId
+        accountId
+        name
+        updatedAt
+        deletedAt
+        createdAt
+      }
+    }
+  }
+`;
+export const PaymentMethodFieldsFragmentDoc = gql`
+  fragment PaymentMethodFields on PaymentMethod {
+    id
+    userId
+    accountId
+    name
+    updatedAt
+    deletedAt
+    createdAt
   }
 `;
 export const GetAccountsDocument = gql`
@@ -1811,6 +1834,380 @@ export type CreateOperationMutationResult = Apollo.MutationResult<Types.CreateOp
 export type CreateOperationMutationOptions = Apollo.BaseMutationOptions<
   Types.CreateOperationMutation,
   Types.CreateOperationMutationVariables
+>;
+export const PaymentMethodsDocument = gql`
+  query PaymentMethods(
+    $where: PaymentMethodWhereInput
+    $orderBy: [PaymentMethodOrderByInput]
+    $cursor: PaymentMethodWhereUniqueInput
+    $skip: Int
+    $take: Int
+  ) {
+    paymentMethods(where: $where, orderBy: $orderBy, cursor: $cursor, skip: $skip, take: $take) {
+      data {
+        ...PaymentMethodFields
+      }
+      pagination {
+        totalItems
+      }
+    }
+  }
+  ${PaymentMethodFieldsFragmentDoc}
+`;
+
+/**
+ * __usePaymentMethodsQuery__
+ *
+ * To run a query within a React component, call `usePaymentMethodsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePaymentMethodsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePaymentMethodsQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      cursor: // value for 'cursor'
+ *      skip: // value for 'skip'
+ *      take: // value for 'take'
+ *   },
+ * });
+ */
+export function usePaymentMethodsQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    Types.PaymentMethodsQuery,
+    Types.PaymentMethodsQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<Types.PaymentMethodsQuery, Types.PaymentMethodsQueryVariables>(
+    PaymentMethodsDocument,
+    options,
+  );
+}
+export function usePaymentMethodsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    Types.PaymentMethodsQuery,
+    Types.PaymentMethodsQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<Types.PaymentMethodsQuery, Types.PaymentMethodsQueryVariables>(
+    PaymentMethodsDocument,
+    options,
+  );
+}
+export function usePaymentMethodsSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        Types.PaymentMethodsQuery,
+        Types.PaymentMethodsQueryVariables
+      >,
+) {
+  const options =
+    baseOptions === Apollo.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<Types.PaymentMethodsQuery, Types.PaymentMethodsQueryVariables>(
+    PaymentMethodsDocument,
+    options,
+  );
+}
+export type PaymentMethodsQueryHookResult = ReturnType<typeof usePaymentMethodsQuery>;
+export type PaymentMethodsLazyQueryHookResult = ReturnType<typeof usePaymentMethodsLazyQuery>;
+export type PaymentMethodsSuspenseQueryHookResult = ReturnType<
+  typeof usePaymentMethodsSuspenseQuery
+>;
+export type PaymentMethodsQueryResult = Apollo.QueryResult<
+  Types.PaymentMethodsQuery,
+  Types.PaymentMethodsQueryVariables
+>;
+export const PaymentMethodDocument = gql`
+  query PaymentMethod($where: PaymentMethodWhereUniqueInput) {
+    paymentMethod(where: $where) {
+      data {
+        ...PaymentMethodFields
+      }
+    }
+  }
+  ${PaymentMethodFieldsFragmentDoc}
+`;
+
+/**
+ * __usePaymentMethodQuery__
+ *
+ * To run a query within a React component, call `usePaymentMethodQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePaymentMethodQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePaymentMethodQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function usePaymentMethodQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    Types.PaymentMethodQuery,
+    Types.PaymentMethodQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<Types.PaymentMethodQuery, Types.PaymentMethodQueryVariables>(
+    PaymentMethodDocument,
+    options,
+  );
+}
+export function usePaymentMethodLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    Types.PaymentMethodQuery,
+    Types.PaymentMethodQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<Types.PaymentMethodQuery, Types.PaymentMethodQueryVariables>(
+    PaymentMethodDocument,
+    options,
+  );
+}
+export function usePaymentMethodSuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<Types.PaymentMethodQuery, Types.PaymentMethodQueryVariables>,
+) {
+  const options =
+    baseOptions === Apollo.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<Types.PaymentMethodQuery, Types.PaymentMethodQueryVariables>(
+    PaymentMethodDocument,
+    options,
+  );
+}
+export type PaymentMethodQueryHookResult = ReturnType<typeof usePaymentMethodQuery>;
+export type PaymentMethodLazyQueryHookResult = ReturnType<typeof usePaymentMethodLazyQuery>;
+export type PaymentMethodSuspenseQueryHookResult = ReturnType<typeof usePaymentMethodSuspenseQuery>;
+export type PaymentMethodQueryResult = Apollo.QueryResult<
+  Types.PaymentMethodQuery,
+  Types.PaymentMethodQueryVariables
+>;
+export const PaymentMethodDeleteOneDocument = gql`
+  mutation PaymentMethodDeleteOne($where: PaymentMethodWhereUniqueInput!) {
+    paymentMethodDeleteOne(where: $where) {
+      data {
+        ...PaymentMethodFields
+      }
+    }
+  }
+  ${PaymentMethodFieldsFragmentDoc}
+`;
+export type PaymentMethodDeleteOneMutationFn = Apollo.MutationFunction<
+  Types.PaymentMethodDeleteOneMutation,
+  Types.PaymentMethodDeleteOneMutationVariables
+>;
+
+/**
+ * __usePaymentMethodDeleteOneMutation__
+ *
+ * To run a mutation, you first call `usePaymentMethodDeleteOneMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePaymentMethodDeleteOneMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [paymentMethodDeleteOneMutation, { data, loading, error }] = usePaymentMethodDeleteOneMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function usePaymentMethodDeleteOneMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.PaymentMethodDeleteOneMutation,
+    Types.PaymentMethodDeleteOneMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    Types.PaymentMethodDeleteOneMutation,
+    Types.PaymentMethodDeleteOneMutationVariables
+  >(PaymentMethodDeleteOneDocument, options);
+}
+export type PaymentMethodDeleteOneMutationHookResult = ReturnType<
+  typeof usePaymentMethodDeleteOneMutation
+>;
+export type PaymentMethodDeleteOneMutationResult =
+  Apollo.MutationResult<Types.PaymentMethodDeleteOneMutation>;
+export type PaymentMethodDeleteOneMutationOptions = Apollo.BaseMutationOptions<
+  Types.PaymentMethodDeleteOneMutation,
+  Types.PaymentMethodDeleteOneMutationVariables
+>;
+export const PaymentMethodRestoreOneDocument = gql`
+  mutation PaymentMethodRestoreOne($where: PaymentMethodWhereUniqueInput!) {
+    paymentMethodRestoreOne(where: $where) {
+      data {
+        ...PaymentMethodFields
+      }
+    }
+  }
+  ${PaymentMethodFieldsFragmentDoc}
+`;
+export type PaymentMethodRestoreOneMutationFn = Apollo.MutationFunction<
+  Types.PaymentMethodRestoreOneMutation,
+  Types.PaymentMethodRestoreOneMutationVariables
+>;
+
+/**
+ * __usePaymentMethodRestoreOneMutation__
+ *
+ * To run a mutation, you first call `usePaymentMethodRestoreOneMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePaymentMethodRestoreOneMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [paymentMethodRestoreOneMutation, { data, loading, error }] = usePaymentMethodRestoreOneMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function usePaymentMethodRestoreOneMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.PaymentMethodRestoreOneMutation,
+    Types.PaymentMethodRestoreOneMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    Types.PaymentMethodRestoreOneMutation,
+    Types.PaymentMethodRestoreOneMutationVariables
+  >(PaymentMethodRestoreOneDocument, options);
+}
+export type PaymentMethodRestoreOneMutationHookResult = ReturnType<
+  typeof usePaymentMethodRestoreOneMutation
+>;
+export type PaymentMethodRestoreOneMutationResult =
+  Apollo.MutationResult<Types.PaymentMethodRestoreOneMutation>;
+export type PaymentMethodRestoreOneMutationOptions = Apollo.BaseMutationOptions<
+  Types.PaymentMethodRestoreOneMutation,
+  Types.PaymentMethodRestoreOneMutationVariables
+>;
+export const PaymentMethodCreateOneDocument = gql`
+  mutation PaymentMethodCreateOne($input: PaymentMethodCreateInput!) {
+    paymentMethodCreateOne(input: $input) {
+      data {
+        ...PaymentMethodFields
+      }
+    }
+  }
+  ${PaymentMethodFieldsFragmentDoc}
+`;
+export type PaymentMethodCreateOneMutationFn = Apollo.MutationFunction<
+  Types.PaymentMethodCreateOneMutation,
+  Types.PaymentMethodCreateOneMutationVariables
+>;
+
+/**
+ * __usePaymentMethodCreateOneMutation__
+ *
+ * To run a mutation, you first call `usePaymentMethodCreateOneMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePaymentMethodCreateOneMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [paymentMethodCreateOneMutation, { data, loading, error }] = usePaymentMethodCreateOneMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function usePaymentMethodCreateOneMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.PaymentMethodCreateOneMutation,
+    Types.PaymentMethodCreateOneMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    Types.PaymentMethodCreateOneMutation,
+    Types.PaymentMethodCreateOneMutationVariables
+  >(PaymentMethodCreateOneDocument, options);
+}
+export type PaymentMethodCreateOneMutationHookResult = ReturnType<
+  typeof usePaymentMethodCreateOneMutation
+>;
+export type PaymentMethodCreateOneMutationResult =
+  Apollo.MutationResult<Types.PaymentMethodCreateOneMutation>;
+export type PaymentMethodCreateOneMutationOptions = Apollo.BaseMutationOptions<
+  Types.PaymentMethodCreateOneMutation,
+  Types.PaymentMethodCreateOneMutationVariables
+>;
+export const PaymentMethodUpdateOneDocument = gql`
+  mutation PaymentMethodUpdateOne(
+    $input: PaymentMethodUpdateInput!
+    $paymentMethodUpdateOneId: String!
+  ) {
+    paymentMethodUpdateOne(input: $input, id: $paymentMethodUpdateOneId) {
+      data {
+        ...PaymentMethodFields
+      }
+    }
+  }
+  ${PaymentMethodFieldsFragmentDoc}
+`;
+export type PaymentMethodUpdateOneMutationFn = Apollo.MutationFunction<
+  Types.PaymentMethodUpdateOneMutation,
+  Types.PaymentMethodUpdateOneMutationVariables
+>;
+
+/**
+ * __usePaymentMethodUpdateOneMutation__
+ *
+ * To run a mutation, you first call `usePaymentMethodUpdateOneMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePaymentMethodUpdateOneMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [paymentMethodUpdateOneMutation, { data, loading, error }] = usePaymentMethodUpdateOneMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *      paymentMethodUpdateOneId: // value for 'paymentMethodUpdateOneId'
+ *   },
+ * });
+ */
+export function usePaymentMethodUpdateOneMutation(
+  baseOptions?: Apollo.MutationHookOptions<
+    Types.PaymentMethodUpdateOneMutation,
+    Types.PaymentMethodUpdateOneMutationVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useMutation<
+    Types.PaymentMethodUpdateOneMutation,
+    Types.PaymentMethodUpdateOneMutationVariables
+  >(PaymentMethodUpdateOneDocument, options);
+}
+export type PaymentMethodUpdateOneMutationHookResult = ReturnType<
+  typeof usePaymentMethodUpdateOneMutation
+>;
+export type PaymentMethodUpdateOneMutationResult =
+  Apollo.MutationResult<Types.PaymentMethodUpdateOneMutation>;
+export type PaymentMethodUpdateOneMutationOptions = Apollo.BaseMutationOptions<
+  Types.PaymentMethodUpdateOneMutation,
+  Types.PaymentMethodUpdateOneMutationVariables
 >;
 export const UpdateUserDocument = gql`
   mutation updateUser($firstName: String!, $lastName: String!, $email: String!, $language: Locale) {

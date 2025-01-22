@@ -1,4 +1,5 @@
 import React from 'react';
+import { classNames } from 'utils/classNames';
 
 export const Content = ({ children }: { children: React.ReactNode }) => (
   <div className="flex items-center">{children}</div>
@@ -23,13 +24,17 @@ export const Row = ({ children }: { children: React.ReactNode }) => (
 type CellProps = {
   align?: 'center' | 'flex-start' | 'flex-end' | 'space-between' | 'space-around';
   children: React.ReactNode;
+  className?: string;
 };
 
-export const Cell = ({ align = 'center', children }: CellProps) => (
+export const Cell = ({ align = 'center', children, className }: CellProps) => (
   <span
-    className={`flex justify-${align} ${
-      align ? 'p-1' : 'p-0'
-    } min-w-[150px] first:justify-start first:w-full`}
+    className={classNames(
+      `flex justify-${align} ${
+        align ? 'p-1' : 'p-0'
+      } min-w-[150px] first:justify-start first:w-full`,
+      className,
+    )}
   >
     {children}
   </span>

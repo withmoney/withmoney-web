@@ -2,20 +2,21 @@ import styled from 'styled-components';
 import { StyledIconBase } from '@styled-icons/styled-icon';
 import Button from 'components/Button';
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0 15px;
-  min-width: 900px;
-`;
+export const Container = ({ children }: { children: React.ReactNode }) => {
+  return <div className="flex flex-col">{children}</div>;
+};
 
-export const OperationContainer = styled.div`
-  display: flex;
-  margin-bottom: 15px;
-  flex-direction: column;
-  padding: 30px;
-  background-color: #ffff;
-`;
+// export const OperationContainer = styled.div`
+//   display: flex;
+//   margin-bottom: 15px;
+//   flex-direction: column;
+//   padding: 30px;
+//   background-color: #ffff;
+// `;
+
+export const OperationContainer = ({ children }: { children: React.ReactNode }) => {
+  return <div className="w-full bg-white p-4">{children}</div>;
+};
 
 export const ButtonContent = styled.div`
   display: flex;

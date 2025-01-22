@@ -16,6 +16,7 @@ import { Row, Cell } from 'pages/Dashboard/Operations/Operation/style/OperationS
 import { useAccountFilters } from 'hooks/useAccountFilters';
 import LoadingData from 'components/LoadingData';
 import { OperationFieldsFragment } from 'graphql-service/types';
+import { PaymentMethodSelect } from './PaymentMethodSelect';
 
 type OperationItemProps = {
   operation: OperationFieldsFragment;
@@ -76,7 +77,7 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
   return language && operation ? (
     <>
       <Row key={operation.id} alignItems="center">
-        <Cell width="80px">
+        <Cell width="50px" justifyContent="center">
           <CheckBox onChange={toggleInputIsPaid} checked={operation.isPaid} />
         </Cell>
         <Cell width="130px">
@@ -86,22 +87,23 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
             onDateChange={handleDateChange}
           />
         </Cell>
-        <Cell flex="1">
+        <Cell className="flex-1">
           <InputOperations
             placeholder={t('name')}
             onChange={handleInputName}
             value={operation.name}
           />
         </Cell>
-        <Cell flex="1">
+        <Cell className="w-[180px]">
           <CategorySelect operation={operation} CategoryId={operation.categoryId ?? null} />
         </Cell>
-        {/* {operation.type === TransactionType.CreditCard && (
-          <Cell width="200px">
-            <CreditCardSelect operation={operation} />
-          </Cell>
-        )} */}
-        <Cell width="200px">
+        <Cell className="w-[180px]">
+          <PaymentMethodSelect
+            operation={operation}
+            paymentMethodId={operation.paymentMethodId ?? null}
+          />
+        </Cell>
+        <Cell width="150px">
           <InputCurrency
             onChange={toggleInputCurrency}
             value={operation.value}

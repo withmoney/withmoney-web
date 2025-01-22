@@ -14,14 +14,13 @@ export const checkCategories = z.object({
     }),
 });
 
-// export const checkCategories = yup.object().shape({
-//   name: yup.string().required('Required'),
-//   type: yup.string().required('Required'),
-//   operationType: yup
-//     .string()
-//     .required('Required')
-//     .oneOf(operationType.flat(), 'Invalid Operation Type'),
-// });
+export const checkPaymentMethod = z.object({
+  name: z
+    .string({
+      required_error: 'Required',
+    })
+    .nonempty('Required'),
+});
 
 export const checkAccounts = yup.object().shape({
   name: yup.string().required('Required'),

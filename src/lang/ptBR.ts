@@ -18,8 +18,9 @@ export default {
     },
   },
   operations: {
+    paymentMethod: 'Método de Pagamento',
     incomes: 'Entradas',
-    expenses: 'Recorrentes',
+    expenses: 'Despesas',
     message: {
       operationDeleted: 'Operação Excluída. Clique aqui para restaurar!',
     },
@@ -81,5 +82,42 @@ export default {
     accounts: 'Contas',
     categories: 'Categories',
     creditCards: 'Cartão de créditos',
+    paymentMethods: 'Métodos de Pagamento',
+  },
+  paymentMethods: {
+    title: 'Métodos de pagamentos',
+    add: 'Adicionar',
+    filterPaymentMethod: 'Filtrar método de pagamento',
+    name: 'Nome',
+    actions: 'Ações',
+    deleteConfirmation: 'Tem certeza que deseja excluir esse método de pagamento?',
+    deleteSuccess: 'Método de pagamento excluído com sucesso!, Click aqui para restaurar',
+    restoreSuccess: 'Método de pagamento restaurado com sucesso!',
+  },
+  paymentMethodAdd: {
+    title: 'Adicionar Método de Pagamento',
+    form: {
+      name: 'Nome',
+      action: 'Adicionar',
+    },
+    message: {
+      success: 'Método de pagamento {{name}} adicionado com sucesso!',
+    },
+  },
+  paymentMethodEdit: {
+    title: 'Editar Método de Pagamento',
+    form: {
+      name: 'Nome',
+      action: 'Salvar',
+    },
+    message: {
+      success: 'Método de pagamento {{name}} editado com sucesso!',
+    },
+  },
+  pagination: {
+    firstPage: 'Primeira Página',
+    previous: 'Anterior',
+    next: 'Próxima',
+    lastPage: 'Última Página',
   },
 };

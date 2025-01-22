@@ -11,6 +11,7 @@ export const CellHeader = styled.div<Props>`
   flex: ${({ flex }) => (flex ? flex : null)};
   padding-left: 5px;
   padding-right: 5px;
+  font-size: 14px;
 `;
 
 export const RowHeader = styled.div`
@@ -33,14 +34,7 @@ export const Cell = styled(Flex)<Props>`
   padding-left: 5px;
   padding-right: 5px;
   margin: 0;
-
-  &:first-child {
-    padding-left: 17px;
-  }
-
-  &:last-child {
-    padding-left: 8px;
-  }
+  font-size: 14px;
 
   & + & {
     margin-top: 0;

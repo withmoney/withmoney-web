@@ -13,6 +13,18 @@ export const GET_OPERATIONS = gql`
     accountId
     categoryId
     creditCardId
+    paymentMethodId
+    paymentMethod {
+      data {
+        id
+        userId
+        accountId
+        name
+        updatedAt
+        deletedAt
+        createdAt
+      }
+    }
   }
 
   query getOperations(

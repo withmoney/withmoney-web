@@ -22,6 +22,9 @@ import UpdateCategory from './Categories/UpdateCategory';
 import CreditCards from './CreditCards';
 import AddCreditCard from './CreditCards/AddCreditCard';
 import UpdateCreditCard from './CreditCards/UpdateCreditCard';
+import { PaymentMethodsPage } from './PaymentMethods';
+import { AddPaymentMethodPage } from './PaymentMethods/AddPaymentMethod';
+import { PaymentMethodEditPage } from './PaymentMethods/UpdatePaymentMethod';
 
 const Dashboard = () => {
   const { isSidebarOpen } = useSidebarCollapse();
@@ -48,6 +51,9 @@ const Dashboard = () => {
             <Route path="/accounts-edit/:id" component={UpdateAccount} />
             <Route path="/category-edit/:id" component={UpdateCategory} />
             <Route path="/credit-cards-edit/:id" component={UpdateCreditCard} />
+            <Route path="/payment-methods" component={PaymentMethodsPage} />
+            <Route path="/payment-method-new" component={AddPaymentMethodPage} />
+            <Route path="/payment-method-edit/:id" component={PaymentMethodEditPage} />
           </Switch>
         </Content>
       </Wrapper>

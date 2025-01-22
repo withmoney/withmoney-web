@@ -82,4 +82,7 @@ export default {
     categories: 'Categories',
     creditCards: 'Credit Cards',
   },
+  paymentMethods: {
+    title: 'Métodos de pagamentos',
+  },
 };

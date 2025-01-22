@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Button from './Button';
 import Flex from './Flex';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   totalItems: number;
@@ -10,6 +11,7 @@ type Props = {
 };
 
 const Pagination = ({ itemsPerPage, totalItems, currentPage, setCurrentPage }: Props) => {
+  const { t } = useTranslation('pagination');
   const PageNumbers = Math.ceil(totalItems / itemsPerPage);
 
   const handleGoToFirstPage = () => {
@@ -31,10 +33,10 @@ const Pagination = ({ itemsPerPage, totalItems, currentPage, setCurrentPage }: P
   return (
     <Nav justifyContent="center">
       <NavButton type="button" disabled={currentPage <= 0} onClick={() => handleGoToFirstPage()}>
-        {'First Page'}
+        {t('firstPage')}
       </NavButton>
       <NavButton type="button" disabled={currentPage <= 0} onClick={() => handleGoToPreviousPage()}>
-        {'Previous'}
+        {t('previous')}
       </NavButton>
       {PageNumbers === 0 ? (
         <NavButton disabled>1 / 1</NavButton>
@@ -48,14 +50,14 @@ const Pagination = ({ itemsPerPage, totalItems, currentPage, setCurrentPage }: P
         disabled={currentPage >= PageNumbers - 1}
         onClick={() => handleGoToNextPage()}
       >
-        {'Next'}
+        {t('next')}
       </NavButton>
       <NavButton
         type="button"
         disabled={currentPage >= PageNumbers - 1}
         onClick={() => handleGoToLastPage()}
       >
-        {'Last Page'}
+        {t('lastPage')}
       </NavButton>
     </Nav>
   );

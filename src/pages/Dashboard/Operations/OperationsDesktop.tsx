@@ -49,14 +49,12 @@ export const OperationsDesktop = ({
           <OperationFilter type={currentTransactionType} onChange={onChangeCategoryFilter} />
         )}
         <RowHeader>
-          <CellHeader width="80px">{t('isPaid')}</CellHeader>
+          <CellHeader width="50px">{t('isPaid')}</CellHeader>
           <CellHeader width="130px">{t('date')}</CellHeader>
           <CellHeader flex="1">{t('name')}</CellHeader>
-          <CellHeader flex="1">{t('category')}</CellHeader>
-          {/* {currentTransactionType === TransactionType.CreditCard && (
-            <CellHeader width="200px">{t('creditCard')}</CellHeader>
-          )} */}
-          <CellHeader width="200px">{t('value')}</CellHeader>
+          <CellHeader className="w-[180px]">{t('category')}</CellHeader>
+          <CellHeader className="w-[180px]">{t('paymentMethod')}</CellHeader>
+          <CellHeader width="150px">{t('value')}</CellHeader>
           <CellHeader width="56px">{t('action')}</CellHeader>
         </RowHeader>
         <DataPlaceholder isLoading={loading} />
@@ -69,6 +67,7 @@ export const OperationsDesktop = ({
               operation={operation}
             />
           ))}
+
         {!loading && !operations.length && <OperationPlaceholder onClick={handleCreateOperation} />}
         <ButtonContent>
           <OperationButton
