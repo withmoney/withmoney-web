@@ -50,7 +50,7 @@ export const OperationsDesktop = ({
         )}
         <RowHeader>
           <CellHeader width="50px">{t('isPaid')}</CellHeader>
-          <CellHeader width="130px">{t('date')}</CellHeader>
+          <CellHeader width="108px">{t('date')}</CellHeader>
           <CellHeader flex="1">{t('name')}</CellHeader>
           <CellHeader className="w-[180px]">{t('category')}</CellHeader>
           <CellHeader className="w-[180px]">{t('paymentMethod')}</CellHeader>

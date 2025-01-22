@@ -1,8 +1,7 @@
 .DateInput_input {
-  font-size: var(--font-default);
-  border: solid 2px var(--input-border-color);
-  border-radius: 4px;
-  height: 42px;
+  font-size: 14px;
+  border: solid 1px var(--input-border-color);
+  @apply h-[42px] rounded text-sm px-2 py-2;
 }
 
 .DateInput_input:focus {

@@ -6,7 +6,7 @@ const Checkbox = styled.input.attrs({ type: 'checkbox' })`
   width: var(--check-box-size);
   height: var(--check-box-size);
   background: var(--check-box-inactive-color);
-  border: 2px solid var(--check-box-border-color);
+  border: 1px solid var(--check-box-border-color);
   border-radius: var(--check-box-border-radius);
   margin: 0;
   outline: 0;

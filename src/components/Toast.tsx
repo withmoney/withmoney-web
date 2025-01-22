@@ -16,6 +16,8 @@ const StyledToastContainer = styled(ToastContainer).attrs({
 
   .Toastify__toast--success {
     background-color: var(--button-primary-background-color);
+    color: #fff;
+
     &:hover {
       background-color: var(--button-primary-background-color-hover);
     }
@@ -31,6 +33,7 @@ const StyledToastContainer = styled(ToastContainer).attrs({
 
   .Toastify__toast--error {
     background-color: var(--button-danger-background-color);
+    color: #fff;
     &:hover {
       background-color: var(--button-danger-background-color-hover);
     }

@@ -1,20 +1,10 @@
 import styled from 'styled-components';
+import { classNames } from 'utils/classNames';
 
-type Props = {
-  isInvalid?: boolean;
-};
-
-const Input = styled.input<Props>`
-  font-size: var(--font-default);
-  width: 100%;
-  height: 42px;
-  border-radius: var(--input-border-radius);
-  border: 2px solid
+const InputStyled = styled.input<Props>`
+  border: 1px solid
     ${({ isInvalid }) =>
       isInvalid ? `var(--input-border-color-danger)` : `var(--input-border-color)`};
-  padding: var(--input-padding-vertical) var(--input-padding-horizontal);
-  margin-bottom: var(--input-margin-bottom);
-  outline: none;
 
   &:hover {
     border-color: var(--input-border-color-hover);
@@ -34,5 +24,19 @@ const Input = styled.input<Props>`
     background-color: var(--input-disabled-background-color);
   }
 `;
+
+type Props = React.InputHTMLAttributes<HTMLInputElement> & {
+  isInvalid?: boolean;
+};
+
+const Input: React.FC<Props> = ({ isInvalid, className, ...props }) => {
+  return (
+    <InputStyled
+      className={classNames('text-sm w-full h-[42px] outline-none p-2 rounded', className)}
+      {...props}
+      isInvalid={isInvalid}
+    />
+  );
+};
 
 export default Input;

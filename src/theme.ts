@@ -123,9 +123,9 @@ const GlobalStyle = createGlobalStyle`
     --text-area-box-shadow-focus: rgba(50, 115, 220, 0.25);
 
     /* Input */
-    --input-border-radius: 5px;
-    --input-padding-horizontal: 12px;
-    --input-padding-vertical: 10px;
+    --input-border-radius: 4px;
+    --input-padding-horizontal: 8px;
+    --input-padding-vertical: 8px;
     --input-margin-bottom: 0;
     
     --input-disabled-color: #ececec;

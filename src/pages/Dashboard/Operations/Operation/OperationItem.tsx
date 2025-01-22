@@ -76,11 +76,11 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
 
   return language && operation ? (
     <>
-      <Row key={operation.id} alignItems="center">
-        <Cell width="50px" justifyContent="center">
+      <Row key={operation.id} alignItems="stretch">
+        <Cell width="50px" justifyContent="center" alignItems="center">
           <CheckBox onChange={toggleInputIsPaid} checked={operation.isPaid} />
         </Cell>
-        <Cell width="130px">
+        <Cell width="108px">
           <DatePicker
             id={operation.id}
             defaultValue={operation.paidAt ?? ''}
@@ -111,13 +111,13 @@ const OperationItem = ({ operation, modalIsOpen, deleteOperation }: OperationIte
             lang={language}
           />
         </Cell>
-        <Cell width="56px">
+        <Cell width="56px" alignItems="stretch">
           <ButtonIcon
             type="button"
             variation="danger"
             onClick={() => toggleDeleteOperation(operation)}
           >
-            <TrashFill />
+            <TrashFill className="w-4 h-4 inline-flex text-base" />
           </ButtonIcon>
         </Cell>
       </Row>

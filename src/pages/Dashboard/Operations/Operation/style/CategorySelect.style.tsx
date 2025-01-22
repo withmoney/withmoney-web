@@ -16,9 +16,9 @@ const customStyles = {
     minWidth: '100px',
     borderRadius: 'var(--input-border-radius)',
     border: state.isFocused
-      ? '2px solid var(--input-border-color-focus)'
-      : '2px solid var(--input-border-color)',
-    fontSize: 'var(--font-default)',
+      ? '1px solid var(--input-border-color-focus)'
+      : '1px solid var(--input-border-color)',
+    fontSize: 14,
     boxShadow: state.isFocused ? '0 0 0 2px var(--input-box-shadow)' : '',
   }),
   control: (provided: CSSProperties) => ({
