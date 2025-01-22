@@ -34,7 +34,7 @@ export const PaymentMethodSelect = ({ paymentMethodId, operation }: Props) => {
       take: 1000,
       orderBy: { name: SortOrder.Asc },
     },
-    fetchPolicy: 'cache-and-network',
+    // fetchPolicy: 'cache-and-network',
   });
   const [paymentMethodCreate] = usePaymentMethodCreateOneMutation();
   const { updateOperation } = useUpdateOperation();

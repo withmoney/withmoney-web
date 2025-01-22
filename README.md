@@ -2,7 +2,7 @@
 
 ## Installation
 
-1. `yarn`
+1. `pnpm install`
 
 ## How to use
 
@@ -10,12 +10,7 @@
 
 ### Development
 
-1. `yarn dev`
-
-### Production
-
-1. `yarn build`
-2. `yarn start`
+1. `pnpm dev`
 
 ## Contributors ✨
 

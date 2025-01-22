@@ -15,7 +15,7 @@ import './lang';
 import 'react-toastify/dist/ReactToastify.css';
 import './nprogress.css';
 import './index.css';
-
+console.log({ config });
 const httpLink = createHttpLink({
   uri: config.APOLLO_SERVER_API,
 });
