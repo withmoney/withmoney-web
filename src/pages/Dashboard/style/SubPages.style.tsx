@@ -47,7 +47,7 @@ export const PageBodyColumns = ({
   children: React.ReactNode;
   style?: React.CSSProperties;
 }) => (
-  <div className="p-[35px] bg-white" {...props}>
+  <div className="p-[35px] bg-white text-left" {...props}>
     {React.Children.map(children, (child, index) => (
       <div className={index % 2 === 1 ? 'bg-[rgb(244,244,244)]' : undefined}>{child}</div>
     ))}

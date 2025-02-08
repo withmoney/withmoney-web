@@ -1,8 +1,7 @@
 import { gql } from '@apollo/client';
 
 // query
-
-export const ALL_CATEGORY = gql`
+const CATEGORY_FRAGMENT = gql`
   fragment CategoryFields on Category {
     id
     name
@@ -11,7 +10,9 @@ export const ALL_CATEGORY = gql`
     updatedAt
     deletedAt
   }
+`;
 
+export const ALL_CATEGORY = gql`
   query filterCategories($name: String, $skip: Int, $take: Int, $type: TransactionType) {
     categories: findManyCategory(
       skip: $skip
@@ -27,6 +28,28 @@ export const ALL_CATEGORY = gql`
       }
     }
   }
+
+  ${CATEGORY_FRAGMENT}
+`;
+
+export const SEARCH_CATEGORY = gql`
+  query SearchCategory(
+    $where: CategoryWhereInput
+    $orderBy: [CategoryOrderByInput]
+    $skip: Int
+    $take: Int
+  ) {
+    findManyCategory(take: $take, skip: $skip, orderBy: $orderBy, where: $where) {
+      data {
+        ...CategoryFields
+      }
+      pagination {
+        totalItems
+      }
+    }
+  }
+
+  ${CATEGORY_FRAGMENT}
 `;
 
 export const GET_ONE_CATEGORY = gql`

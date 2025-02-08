@@ -25,6 +25,7 @@ import UpdateCreditCard from './CreditCards/UpdateCreditCard';
 import { PaymentMethodsPage } from './PaymentMethods';
 import { AddPaymentMethodPage } from './PaymentMethods/AddPaymentMethod';
 import { PaymentMethodEditPage } from './PaymentMethods/UpdatePaymentMethod';
+import { Import } from './Import';
 
 const Dashboard = () => {
   const { isSidebarOpen } = useSidebarCollapse();
@@ -36,6 +37,7 @@ const Dashboard = () => {
         <Content isSidebarOpen={isSidebarOpen}>
           <Switch>
             <Route path="/dashboard" component={Operations} />
+            <Route path="/import" component={Import} />
             <Route path="/reports" component={Reports} />
             <Route path="/reports-day" component={ReportsDay} />
             <Route path="/reports-month" component={ReportsMonth} />

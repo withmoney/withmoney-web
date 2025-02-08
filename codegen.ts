@@ -1,8 +1,12 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
+if (!process.env.VITE_APOLLO_SERVER_API) {
+  throw new Error('VITE_APOLLO_SERVER_API is not set');
+}
+
 const config: CodegenConfig = {
   overwrite: true,
-  schema: 'http://localhost:5000/graphql',
+  schema: process.env.VITE_APOLLO_SERVER_API,
   documents: ['src/graphql-service/gqls/**/*.(tsx|ts)'],
   hooks: { afterAllFileWrite: ['prettier --write'] },
   generates: {

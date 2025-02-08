@@ -819,6 +819,30 @@ export type FilterCategoriesQuery = {
   };
 };
 
+export type SearchCategoryQueryVariables = Exact<{
+  where?: InputMaybe<CategoryWhereInput>;
+  orderBy?: InputMaybe<Array<InputMaybe<CategoryOrderByInput>> | InputMaybe<CategoryOrderByInput>>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  take?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+export type SearchCategoryQuery = {
+  __typename?: 'Query';
+  findManyCategory: {
+    __typename?: 'CategoriesResult';
+    data: Array<{
+      __typename?: 'Category';
+      id: string;
+      name: string;
+      type: TransactionType;
+      createdAt: string;
+      updatedAt: string;
+      deletedAt?: string | null;
+    }>;
+    pagination?: { __typename?: 'Pagination'; totalItems?: number | null } | null;
+  };
+};
+
 export type GetUniqueCategoryQueryVariables = Exact<{
   id: Scalars['ID']['input'];
 }>;

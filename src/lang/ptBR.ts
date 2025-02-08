@@ -83,6 +83,7 @@ export default {
     categories: 'Categories',
     creditCards: 'Cartão de créditos',
     paymentMethods: 'Métodos de Pagamento',
+    import: 'Importar',
   },
   paymentMethods: {
     title: 'Métodos de pagamentos',

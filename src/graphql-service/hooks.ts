@@ -782,6 +782,92 @@ export type FilterCategoriesQueryResult = Apollo.QueryResult<
   Types.FilterCategoriesQuery,
   Types.FilterCategoriesQueryVariables
 >;
+export const SearchCategoryDocument = gql`
+  query SearchCategory(
+    $where: CategoryWhereInput
+    $orderBy: [CategoryOrderByInput]
+    $skip: Int
+    $take: Int
+  ) {
+    findManyCategory(take: $take, skip: $skip, orderBy: $orderBy, where: $where) {
+      data {
+        ...CategoryFields
+      }
+      pagination {
+        totalItems
+      }
+    }
+  }
+  ${CategoryFieldsFragmentDoc}
+`;
+
+/**
+ * __useSearchCategoryQuery__
+ *
+ * To run a query within a React component, call `useSearchCategoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchCategoryQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *      orderBy: // value for 'orderBy'
+ *      skip: // value for 'skip'
+ *      take: // value for 'take'
+ *   },
+ * });
+ */
+export function useSearchCategoryQuery(
+  baseOptions?: Apollo.QueryHookOptions<
+    Types.SearchCategoryQuery,
+    Types.SearchCategoryQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<Types.SearchCategoryQuery, Types.SearchCategoryQueryVariables>(
+    SearchCategoryDocument,
+    options,
+  );
+}
+export function useSearchCategoryLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<
+    Types.SearchCategoryQuery,
+    Types.SearchCategoryQueryVariables
+  >,
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<Types.SearchCategoryQuery, Types.SearchCategoryQueryVariables>(
+    SearchCategoryDocument,
+    options,
+  );
+}
+export function useSearchCategorySuspenseQuery(
+  baseOptions?:
+    | Apollo.SkipToken
+    | Apollo.SuspenseQueryHookOptions<
+        Types.SearchCategoryQuery,
+        Types.SearchCategoryQueryVariables
+      >,
+) {
+  const options =
+    baseOptions === Apollo.skipToken ? baseOptions : { ...defaultOptions, ...baseOptions };
+  return Apollo.useSuspenseQuery<Types.SearchCategoryQuery, Types.SearchCategoryQueryVariables>(
+    SearchCategoryDocument,
+    options,
+  );
+}
+export type SearchCategoryQueryHookResult = ReturnType<typeof useSearchCategoryQuery>;
+export type SearchCategoryLazyQueryHookResult = ReturnType<typeof useSearchCategoryLazyQuery>;
+export type SearchCategorySuspenseQueryHookResult = ReturnType<
+  typeof useSearchCategorySuspenseQuery
+>;
+export type SearchCategoryQueryResult = Apollo.QueryResult<
+  Types.SearchCategoryQuery,
+  Types.SearchCategoryQueryVariables
+>;
 export const GetUniqueCategoryDocument = gql`
   query getUniqueCategory($id: ID!) {
     findUniqueCategory(where: { id: $id }) {
